@@ -1,6 +1,23 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
+  <!-- Meta Pixel Code -->
+  <script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '1184246869368178');
+  fbq('track', 'PageView');
+  </script>
+  <noscript><img height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=1184246869368178&ev=PageView&noscript=1"
+  /></noscript>
+  <!-- End Meta Pixel Code -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Click Leads – Chega de Correr Atrás de Cliente</title>
@@ -679,27 +696,37 @@
   </footer>
 
   <script>
-    // Autoplay do vídeo quando visível na tela
     document.addEventListener('DOMContentLoaded', function() {
+      // Autoplay do vídeo quando visível na tela
       const video = document.getElementById('videoFamilia');
       
-      if (!video) return;
-      
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            video.play().catch(() => {
-              // Autoplay blocked by browser policy - user can start manually
-            });
-          } else {
-            video.pause();
+      if (video) {
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              video.play().catch(() => {
+                // Autoplay blocked by browser policy - user can start manually
+              });
+            } else {
+              video.pause();
+            }
+          });
+        }, {
+          threshold: 0.5 // Inicia quando 50% do vídeo estiver visível
+        });
+        
+        observer.observe(video);
+      }
+
+      // Meta Pixel Lead event - dispara quando usuário clica nos botões CTA
+      const ctaButtons = document.querySelectorAll('.hero-cta');
+      ctaButtons.forEach(function(button) {
+        button.addEventListener('click', function() {
+          if (typeof fbq !== 'undefined') {
+            fbq('track', 'Lead');
           }
         });
-      }, {
-        threshold: 0.5 // Inicia quando 50% do vídeo estiver visível
       });
-      
-      observer.observe(video);
     });
   </script>
 </body>
