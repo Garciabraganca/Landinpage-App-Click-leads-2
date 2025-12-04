@@ -491,7 +491,11 @@
         <div class="hero-video-thumb">
           <!-- Vídeo animado da família Click Leads -->
           <video
+            id="videoFamilia"
             controls
+            loop
+            muted
+            playsinline
             poster="familia-andrezinho.png"
           >
             <source src="Vídeo_Animado_Família_Click_Leads_Futurista.mp4" type="video/mp4">
@@ -673,5 +677,30 @@
       </div>
     </div>
   </footer>
+
+  <script>
+    // Autoplay do vídeo quando visível na tela
+    document.addEventListener('DOMContentLoaded', function() {
+      const video = document.getElementById('videoFamilia');
+      
+      if (!video) return;
+      
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            video.play().catch(() => {
+              // Autoplay blocked by browser policy - user can start manually
+            });
+          } else {
+            video.pause();
+          }
+        });
+      }, {
+        threshold: 0.5 // Inicia quando 50% do vídeo estiver visível
+      });
+      
+      observer.observe(video);
+    });
+  </script>
 </body>
 </html>
