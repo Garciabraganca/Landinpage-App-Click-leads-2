@@ -135,6 +135,13 @@
       background: #020617;
     }
 
+    .hero-video-thumb video {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 14px;
+    }
+
     .hero-video-thumb img {
       width: 100%;
       height: auto;
@@ -172,6 +179,67 @@
       border-top: 10px solid transparent;
       border-bottom: 10px solid transparent;
       margin-left: 4px;
+    }
+
+    /* Fachada Section */
+    .fachada-section {
+      background: #f9fafb;
+      padding: 40px 0;
+    }
+
+    .fachada-section img {
+      width: 100%;
+      max-width: 900px;
+      margin: 0 auto;
+      border-radius: 18px;
+      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.1);
+    }
+
+    /* Projeto Valorize Section */
+    .valorize-section {
+      background: linear-gradient(135deg, #1e3a5f 0%, #0b1120 100%);
+      color: #fff;
+      padding: 60px 0;
+    }
+
+    .valorize-header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .valorize-logo {
+      max-width: 280px;
+      margin: 0 auto 20px;
+    }
+
+    .valorize-title {
+      font-size: 1.8rem;
+      margin: 0 0 16px;
+      color: #fff;
+    }
+
+    .valorize-description {
+      font-size: 1rem;
+      color: #cbd5f5;
+      max-width: 700px;
+      margin: 0 auto 30px;
+      line-height: 1.7;
+    }
+
+    .valorize-table-container {
+      text-align: center;
+    }
+
+    .valorize-table-container img {
+      max-width: 100%;
+      border-radius: 16px;
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+    }
+
+    .valorize-table-title {
+      font-size: 1.2rem;
+      margin-bottom: 20px;
+      color: #fbbf24;
     }
 
     .hero-video-caption {
@@ -443,21 +511,16 @@
 
         <div>
           <div class="hero-video-card">
-            <a
-              href="#"
-              class="hero-video-thumb"
-            >
-              <!-- Thumbnail do vídeo do Andrezinho na cadeira turbo -->
-              <img
-                src="familia-andrezinho.png"
-                alt="Assista a velocidade da Click Leads em ação"
-              />
-              <div class="play-button">
-                <div class="play-circle">
-                  <div class="play-triangle"></div>
-                </div>
-              </div>
-            </a>
+            <div class="hero-video-thumb">
+              <!-- Vídeo animado da família Click Leads -->
+              <video
+                controls
+                poster="familia-andrezinho.png"
+              >
+                <source src="Vídeo_Animado_Família_Click_Leads_Futurista.mp4" type="video/mp4">
+                Seu navegador não suporta vídeos HTML5.
+              </video>
+            </div>
             <div class="hero-video-caption">
               ASSISTA: a velocidade do Click Leads na rotina da nossa família.
             </div>
@@ -466,6 +529,13 @@
       </div>
     </div>
   </header>
+
+  <!-- FACHADA GRUPO GARCIA -->
+  <section class="fachada-section">
+    <div class="container">
+      <img src="fachada.png" alt="Fachada do Grupo Garcia - Nossa estrutura física" />
+    </div>
+  </section>
 
   <main>
     <!-- STORYTELLING -->
@@ -554,6 +624,26 @@
               Somos corretora, somos tráfego e somos tecnologia. Falamos a sua língua e ajustamos as campanhas com base na sua realidade, não em teoria.
             </p>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJETO VALORIZE -->
+    <section class="valorize-section">
+      <div class="container">
+        <div class="valorize-header">
+          <img src="projeto valorize logo.png" alt="Projeto Valorize" class="valorize-logo" />
+          <h2 class="valorize-title">Reconhecimento e Comissionamento para Parceiros</h2>
+          <p class="valorize-description">
+            O Projeto Valorize é o nosso programa exclusivo de reconhecimento e comissionamento para parceiros. 
+            Valorizamos quem está ao nosso lado, oferecendo comissões atrativas e benefícios que crescem junto com você. 
+            Quanto mais você vende, mais você ganha — simples assim. É a nossa forma de dizer obrigado e incentivar 
+            o seu sucesso contínuo.
+          </p>
+        </div>
+        <div class="valorize-table-container">
+          <h3 class="valorize-table-title">📊 Tabela de Comissionamento</h3>
+          <img src="tabela-comissionamento.png" alt="Tabela de Comissionamento do Projeto Valorize" />
         </div>
       </div>
     </section>
