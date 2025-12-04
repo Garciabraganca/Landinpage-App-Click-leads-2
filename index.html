@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Click Leads – Chega de Correr Atrás de Cliente</title>
+
+  <style>
+    :root {
+      --primary: #0f172a;
+      --accent: #f97316;
+      --accent-soft: #fbbf24;
+      --bg: #f3f4f6;
+      --text: #111827;
+      --muted: #6b7280;
+      --card: #ffffff;
+      --border: #e5e7eb;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.6;
+    }
+
+    img { max-width: 100%; display: block; }
+
+    .container {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 16px;
+    }
+
+    header {
+      background: #0b1120;
+      color: #fff;
+    }
+
+    .hero-inner {
+      padding: 32px 0 40px;
+    }
+
+    .hero-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .hero-logos {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .hero-logos img {
+      height: 50px;
+      object-fit: contain;
+      border-radius: 10px;
+    }
+
+    .hero-logos-text {
+      font-size: 0.85rem;
+      color: #e5e7eb;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+      gap: 32px;
+      align-items: center;
+    }
+
+    .hero-title {
+      font-size: 2rem;
+      line-height: 1.2;
+      margin: 0 0 12px;
+    }
+
+    .hero-subtitle {
+      font-size: 1rem;
+      color: #cbd5f5;
+      margin-bottom: 20px;
+      max-width: 460px;
+    }
+
+    .hero-cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 14px 30px;
+      border-radius: 999px;
+      border: none;
+      cursor: pointer;
+      background: linear-gradient(to right, #f59e0b, #f97316);
+      color: #111827;
+      font-weight: 700;
+      font-size: 0.98rem;
+      text-decoration: none;
+      box-shadow: 0 14px 30px rgba(0, 0, 0, 0.35);
+      transition: transform 0.15s ease, box-shadow 0.15s ease,
+        filter 0.15s ease;
+    }
+
+    .hero-cta:hover {
+      transform: translateY(-1px);
+      filter: brightness(1.02);
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.5);
+    }
+
+    .hero-note {
+      font-size: 0.8rem;
+      color: #9ca3af;
+      margin-top: 10px;
+    }
+
+    .hero-video-card {
+      background: radial-gradient(circle at top, #1e293b, #020617);
+      border-radius: 18px;
+      padding: 18px;
+      border: 1px solid rgba(148, 163, 184, 0.45);
+      box-shadow: 0 18px 45px rgba(15, 23, 42, 0.9);
+    }
+
+    .hero-video-thumb {
+      position: relative;
+      border-radius: 14px;
+      overflow: hidden;
+      background: #020617;
+    }
+
+    .hero-video-thumb img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .play-button {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: radial-gradient(
+        circle,
+        rgba(15, 23, 42, 0) 0,
+        rgba(15, 23, 42, 0.7) 60%
+      );
+    }
+
+    .play-circle {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      background: rgba(248, 250, 252, 0.94);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.8);
+    }
+
+    .play-triangle {
+      width: 0;
+      height: 0;
+      border-left: 16px solid #f97316;
+      border-top: 10px solid transparent;
+      border-bottom: 10px solid transparent;
+      margin-left: 4px;
+    }
+
+    .hero-video-caption {
+      margin-top: 10px;
+      font-size: 0.86rem;
+      color: #e5e7eb;
+      text-align: center;
+    }
+
+    main { background: #f9fafb; }
+
+    section { padding: 48px 0; }
+
+    .section-title {
+      text-align: center;
+      font-size: 1.5rem;
+      margin-bottom: 24px;
+    }
+
+    .story-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 20px;
+    }
+
+    .card {
+      background: var(--card);
+      border-radius: 16px;
+      padding: 18px;
+      border: 1px solid var(--border);
+      box-shadow: 0 10px 18px rgba(15, 23, 42, 0.04);
+      height: 100%;
+    }
+
+    .card h3 {
+      margin-top: 0;
+      font-size: 1.05rem;
+      margin-bottom: 6px;
+    }
+
+    .card p {
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    .card-emoji {
+      font-size: 1.4rem;
+      margin-bottom: 6px;
+    }
+
+    .problem-solution {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: 20px;
+      margin-top: 32px;
+    }
+
+    .problem-solution .card {
+      border-style: solid;
+      border-width: 2px;
+    }
+
+    .problem { border-color: #fecaca; }
+
+    .solution { border-color: #bbf7d0; }
+
+    .bad-good {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 8px;
+      font-size: 0.9rem;
+    }
+
+    .benefits-strip {
+      background: #eef2ff;
+      padding: 40px 0;
+    }
+
+    .benefit-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 20px;
+    }
+
+    .benefit-card {
+      background: #ffffff;
+      border-radius: 16px;
+      padding: 18px;
+      border: 1px solid #e5e7eb;
+      box-shadow: 0 10px 18px rgba(15, 23, 42, 0.05);
+    }
+
+    .benefit-icon {
+      width: 38px;
+      height: 38px;
+      border-radius: 999px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 8px;
+      font-size: 1.2rem;
+      background: #eff6ff;
+      color: #1d4ed8;
+    }
+
+    .benefit-card h3 {
+      margin: 0 0 6px;
+      font-size: 1rem;
+    }
+
+    .benefit-card p {
+      margin: 0;
+      font-size: 0.9rem;
+      color: #4b5563;
+    }
+
+    .validation-strip {
+      background: #fff7ed;
+      padding: 30px 0;
+      border-top: 1px solid #fed7aa;
+      border-bottom: 1px solid #fed7aa;
+    }
+
+    .validation-inner {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .validation-text {
+      flex: 1 1 260px;
+    }
+
+    .validation-text p {
+      margin: 0;
+      font-size: 0.92rem;
+      color: #7c2d12;
+    }
+
+    .validation-image {
+      flex: 0 0 260px;
+    }
+
+    .cta-section {
+      background: #1d4ed8;
+      color: #eef2ff;
+      padding: 52px 0 48px;
+    }
+
+    .cta-inner {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+      gap: 28px;
+      align-items: center;
+    }
+
+    .cta-title {
+      font-size: 1.6rem;
+      margin: 0 0 10px;
+    }
+
+    .cta-text {
+      font-size: 0.95rem;
+      max-width: 460px;
+      color: #e5e7eb;
+      margin-bottom: 18px;
+    }
+
+    .cta-badge {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.25);
+      font-size: 0.75rem;
+      margin-bottom: 8px;
+    }
+
+    .cta-family {
+      max-width: 360px;
+      margin-left: auto;
+    }
+
+    footer {
+      background: #020617;
+      color: #9ca3af;
+      font-size: 0.78rem;
+      padding: 18px 0 20px;
+    }
+
+    footer .footer-inner {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    footer a {
+      color: #e5e7eb;
+      text-decoration: none;
+    }
+
+    footer a:hover { text-decoration: underline; }
+
+    @media (max-width: 900px) {
+      .hero-grid,
+      .problem-solution,
+      .benefit-grid,
+      .cta-inner {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .cta-family { margin: 0 auto; }
+    }
+
+    @media (max-width: 720px) {
+      .story-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .benefit-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .hero-title { font-size: 1.6rem; }
+    }
+  </style>
+</head>
+<body>
+  <!-- HERO -->
+  <header>
+    <div class="container hero-inner">
+      <div class="hero-top">
+        <div class="hero-logos">
+          <!-- Capa/ilustração em frente ao Grupo Garcia -->
+          <img src="img/capa-landing.jpeg" alt="Grupo Garcia - Vendas e Marketing Digital" />
+          <div class="hero-logos-text">
+            Plataforma de leads exclusiva do <strong>Grupo Garcia</strong>
+          </div>
+        </div>
+        <div>
+          <!-- Logo Click Leads -->
+          <img src="img/logo-clickleads.png" alt="Click Leads" />
+        </div>
+      </div>
+
+      <div class="hero-grid">
+        <div>
+          <h1 class="hero-title">
+            Chega de correr atrás do vento.<br />
+            Deixe o cliente vir até você.
+          </h1>
+          <p class="hero-subtitle">
+            A mesma tecnologia que nossa família usa para turbinar as vendas agora está disponível para você. Leads qualificados, entregues no seu celular, sem complicação.
+          </p>
+
+          <a
+            href="https://clickleads.grupogarciaseguradoras.com.br/login"
+            class="hero-cta"
+          >
+            QUERO ME CADASTRAR GRÁTIS
+          </a>
+
+          <div class="hero-note">
+            Acesso via navegador. Sem instalação, sem pegadinha. Você testa e vê os resultados.
+          </div>
+        </div>
+
+        <div>
+          <div class="hero-video-card">
+            <a
+              href="#"
+              class="hero-video-thumb"
+            >
+              <!-- Thumbnail do vídeo do Andrezinho na cadeira turbo -->
+              <img
+                src="img/familia-andrezinho.png"
+                alt="Assista a velocidade da Click Leads em ação"
+              />
+              <div class="play-button">
+                <div class="play-circle">
+                  <div class="play-triangle"></div>
+                </div>
+              </div>
+            </a>
+            <div class="hero-video-caption">
+              ASSISTA: a velocidade do Click Leads na rotina da nossa família.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- STORYTELLING -->
+    <section>
+      <div class="container">
+        <h2 class="section-title">Você não precisa vender sozinho.</h2>
+
+        <div class="story-grid">
+          <div class="card">
+            <div class="card-emoji">😩</div>
+            <h3>A luta solitária</h3>
+            <p>
+              Ligações frias, planilhas confusas, leads que não atendem e a sensação de que você está sempre atrasado em relação aos concorrentes.
+            </p>
+          </div>
+
+          <div class="card">
+            <div class="card-emoji">👨‍👩‍👦</div>
+            <h3>A solução em família</h3>
+            <p>
+              Aqui em casa, nós decidimos parar de correr atrás de qualquer contato. Criamos um sistema para deixar os <strong>leads certos</strong> virem até nós.
+            </p>
+          </div>
+
+          <div class="card">
+            <div class="card-emoji">🧠</div>
+            <h3>Do caos à rotina</h3>
+            <p>
+              O que era improviso virou rotina: campanhas rodando, leads filtrados pela IA e uma plataforma que mostra exatamente quem vale a pena abordar.
+            </p>
+          </div>
+        </div>
+
+        <div class="problem-solution">
+          <div class="card problem">
+            <h3>Problema</h3>
+            <p>
+              Sem método, cada dia parece uma guerra nova: você não sabe de onde vem o lead, se ele realmente tem interesse nem quanto precisa investir para bater a meta.
+            </p>
+            <div class="bad-good">
+              <span>Mais esforço 😓</span>
+              <span>Menos resultado 👎</span>
+            </div>
+          </div>
+
+          <div class="card solution">
+            <h3>Solução</h3>
+            <p>
+              O Click Leads organiza a bagunça: captura, qualifica e entrega o lead pronto para você falar. Você foca no que sabe fazer melhor – conversar e fechar negócio.
+            </p>
+            <div class="bad-good">
+              <span>Menos esforço 😌</span>
+              <span>Mais resultado 🚀</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- BENEFÍCIOS -->
+    <section class="benefits-strip">
+      <div class="container">
+        <h2 class="section-title">O que muda na prática para você</h2>
+
+        <div class="benefit-grid">
+          <div class="benefit-card">
+            <div class="benefit-icon">🧠</div>
+            <h3>Inteligência que vende</h3>
+            <p>
+              A qualificação de leads acontece antes de chegar em você. A IA separa curiosos de potenciais clientes, para sua agenda ficar mais leve e produtiva.
+            </p>
+          </div>
+
+          <div class="benefit-card">
+            <div class="benefit-icon">📲</div>
+            <h3>Acesso web instantâneo</h3>
+            <p>
+              Nada de instalar app, pedir senha ou depender de planilha. Você acessa a plataforma pelo navegador, do computador ou do celular, quando quiser.
+            </p>
+          </div>
+
+          <div class="benefit-card">
+            <div class="benefit-icon">🤝</div>
+            <h3>Suporte de quem entende</h3>
+            <p>
+              Somos corretora, somos tráfego e somos tecnologia. Falamos a sua língua e ajustamos as campanhas com base na sua realidade, não em teoria.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- VALIDAÇÃO -->
+    <section class="validation-strip">
+      <div class="container validation-inner">
+        <div class="validation-text">
+          <strong>Uma solução validada no campo de batalha.</strong>
+          <p>
+            O Click Leads nasceu dentro do Grupo Garcia, sendo usado dia após dia pela nossa própria equipe. Antes de chegar até você, essa ferramenta já ajudou a transformar ligações frias em contratos assinados.
+          </p>
+        </div>
+        <div class="validation-image">
+          <!-- Usa imagem interna da família / escritório -->
+          <img src="img/familia-1.png" alt="Estrutura real do Grupo Garcia por trás do Click Leads" />
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA FINAL (SEM FORMULÁRIO) -->
+    <section class="cta-section">
+      <div class="container cta-inner">
+        <div>
+          <div class="cta-badge">Nova rotina de vendas</div>
+          <h2 class="cta-title">Mais tempo com a família, menos tempo apagando incêndio.</h2>
+          <p class="cta-text">
+            Se você está cansado de depender de planilha, indicação ou sorte, é hora de testar um fluxo de leads que já funciona aqui em casa. Entre na plataforma, veja os leads chegando e sinta a diferença na sua semana.
+          </p>
+
+          <a
+            href="https://clickleads.grupogarciaseguradoras.com.br/login"
+            class="hero-cta"
+          >
+            QUERO ME CADASTRAR GRÁTIS
+          </a>
+
+          <div class="hero-note" style="color:#c7d2fe; margin-top:10px;">
+            Cadastro simples, sem cartão de crédito. Você entra, conhece e decide se continua acelerando com a gente.
+          </div>
+        </div>
+
+        <div class="cta-family">
+          <!-- Ilustração da família com Andrezinho na cadeira turbo -->
+          <img src="img/familia-andrezinho.png" alt="Família Click Leads mostrando o resultado" />
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- RODAPÉ -->
+  <footer>
+    <div class="container footer-inner">
+      <div>Copyright &copy; Grupo Garcia – Click Leads.</div>
+      <div>
+        <a href="#">Termos de Uso</a> ·
+        <a href="#">Política de Privacidade</a> ·
+        <a href="#">Contato de Suporte</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
