@@ -321,8 +321,14 @@
 
     .benefit-grid {
       display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
+      grid-template-columns: repeat(4, minmax(0, 1fr));
       gap: 20px;
+    }
+
+    @media (max-width: 1000px) {
+      .benefit-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
     }
 
     .benefit-card {
@@ -467,6 +473,140 @@
 
       .hero-title { font-size: 1.6rem; }
     }
+
+    /* Pacote Experimental Badge */
+    .package-highlight {
+      background: linear-gradient(135deg, rgba(251, 191, 36, 0.15) 0%, rgba(249, 115, 22, 0.15) 100%);
+      border: 2px solid var(--accent);
+      border-radius: 12px;
+      padding: 16px 20px;
+      margin: 20px auto;
+      max-width: 540px;
+      text-align: center;
+    }
+
+    .package-highlight-dark {
+      background: linear-gradient(135deg, rgba(251, 191, 36, 0.2) 0%, rgba(249, 115, 22, 0.2) 100%);
+      border: 2px solid var(--accent);
+    }
+
+    .package-badge {
+      display: inline-block;
+      background: linear-gradient(to right, #f59e0b, #f97316);
+      color: #111827;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 999px;
+      margin-bottom: 8px;
+      letter-spacing: 0.5px;
+    }
+
+    .package-text {
+      font-size: 0.95rem;
+      color: #e5e7eb;
+      margin: 0;
+      line-height: 1.5;
+    }
+
+    .package-text strong {
+      color: #fbbf24;
+    }
+
+    .package-text-light {
+      color: #374151;
+    }
+
+    .package-text-light strong {
+      color: #ea580c;
+    }
+
+    /* Como Funciona Section */
+    .how-it-works {
+      background: #fff;
+      padding: 48px 0;
+    }
+
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 24px;
+      margin-top: 32px;
+    }
+
+    .step-card {
+      background: #f9fafb;
+      border-radius: 16px;
+      padding: 24px 20px;
+      text-align: center;
+      border: 1px solid #e5e7eb;
+      position: relative;
+    }
+
+    .step-number {
+      width: 40px;
+      height: 40px;
+      background: linear-gradient(to right, #f59e0b, #f97316);
+      color: #111827;
+      font-weight: 700;
+      font-size: 1.1rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 16px;
+    }
+
+    .step-card h3 {
+      margin: 0 0 10px;
+      font-size: 1.05rem;
+      color: #111827;
+    }
+
+    .step-card p {
+      margin: 0;
+      font-size: 0.9rem;
+      color: #4b5563;
+      line-height: 1.6;
+    }
+
+    .step-card p strong {
+      color: #ea580c;
+    }
+
+    @media (max-width: 720px) {
+      .steps-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .package-highlight {
+        margin: 16px 12px;
+        padding: 14px 16px;
+      }
+
+      .package-text {
+        font-size: 0.88rem;
+      }
+    }
+
+    @media (max-width: 320px) {
+      .package-highlight {
+        padding: 12px 14px;
+      }
+
+      .package-text {
+        font-size: 0.82rem;
+      }
+
+      .step-card {
+        padding: 18px 14px;
+      }
+
+      .step-card p {
+        font-size: 0.85rem;
+      }
+    }
   </style>
 </head>
 <body>
@@ -487,6 +627,13 @@
       <p class="hero-subtitle">
         A mesma tecnologia que nossa família usa para turbinar as vendas agora está disponível para você. Leads qualificados, entregues no seu celular, sem complicação.
       </p>
+
+      <div class="package-highlight package-highlight-dark">
+        <span class="package-badge">Oferta Especial</span>
+        <p class="package-text">
+          Comece testando com o <strong>Pacote Experimental: 10 leads qualificados por R$ 600, em 2x de R$ 300 sem juros no cartão.</strong>
+        </p>
+      </div>
 
       <a
         href="https://clickleads.grupogarciaseguradoras.com.br/login"
@@ -521,6 +668,33 @@
         </div>
         <div class="hero-video-caption">
           ASSISTA: a velocidade do Click Leads na rotina da nossa família.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMO FUNCIONA -->
+  <section class="how-it-works">
+    <div class="container">
+      <h2 class="section-title">Como Funciona</h2>
+
+      <div class="steps-grid">
+        <div class="step-card">
+          <div class="step-number">1</div>
+          <h3>Cadastre-se grátis</h3>
+          <p>Você se cadastra grátis na plataforma. Sem burocracia, sem pegadinha.</p>
+        </div>
+
+        <div class="step-card">
+          <div class="step-number">2</div>
+          <h3>Ative o Pacote Experimental</h3>
+          <p>Depois do cadastro, você pode ativar o <strong>Pacote Experimental de 10 leads por R$ 600 (2x de R$ 300 sem juros)</strong> direto no painel.</p>
+        </div>
+
+        <div class="step-card">
+          <div class="step-number">3</div>
+          <h3>Receba seus leads</h3>
+          <p>Após a ativação, começamos a entregar os leads qualificados no seu WhatsApp, de acordo com o pacote escolhido.</p>
         </div>
       </div>
     </div>
@@ -613,6 +787,14 @@
               Somos corretora, somos tráfego e somos tecnologia. Falamos a sua língua e ajustamos as campanhas com base na sua realidade, não em teoria.
             </p>
           </div>
+
+          <div class="benefit-card">
+            <div class="benefit-icon">🎯</div>
+            <h3>Comece pequeno</h3>
+            <p>
+              Teste com um pacote de <strong style="color: #ea580c;">10 leads por R$ 600</strong> (2x de R$ 300 sem juros) antes de aumentar o volume.
+            </p>
+          </div>
         </div>
       </div>
     </section>
@@ -661,6 +843,10 @@
           <h2 class="cta-title">Mais tempo com a família, menos tempo apagando incêndio.</h2>
           <p class="cta-text">
             Se você está cansado de depender de planilha, indicação ou sorte, é hora de testar um fluxo de leads que já funciona aqui em casa. Entre na plataforma, veja os leads chegando e decida se quer acelerar com a gente.
+          </p>
+
+          <p class="cta-text" style="margin-bottom: 20px; color: #fbbf24;">
+            Cadastre-se grátis e, depois do login, você terá acesso ao <strong>Pacote Experimental de 10 leads</strong> para testar a plataforma com segurança.
           </p>
 
           <a
