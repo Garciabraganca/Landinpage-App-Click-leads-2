@@ -1015,20 +1015,13 @@
     }
 
     .store-card-front {
-      transform: rotateY(0deg);
-    }
-
-    .store-card-back {
-      transform: rotateY(180deg);
-    }
-
-    .store-card-front {
       background: linear-gradient(180deg, rgba(15, 23, 42, 0.25) 0%, rgba(15, 23, 42, 0.9) 75%),
         linear-gradient(150deg, #334155 0%, #111827 100%);
       align-items: flex-end;
       padding: 18px;
       box-shadow: 0 12px 26px rgba(2, 6, 23, 0.45);
       position: relative;
+      transform: rotateY(0deg);
     }
 
     .store-card-front::before {
@@ -1097,6 +1090,9 @@
       flex-direction: column;
       box-shadow: 0 12px 26px rgba(249, 115, 22, 0.15), 0 6px 16px rgba(2, 6, 23, 0.5);
       justify-content: flex-start;
+      align-items: stretch;
+      transform: rotateY(180deg);
+      overflow: auto;
     }
 
     .store-card-back h3 {
@@ -1106,6 +1102,7 @@
       color: #fbbf24;
       text-transform: uppercase;
       letter-spacing: 0.5px;
+      word-wrap: break-word;
     }
 
     .store-card-back ul {
@@ -1113,6 +1110,7 @@
       padding: 0;
       margin: 0 0 16px 0;
       flex: 1;
+      overflow-y: auto;
     }
 
     .store-card-back li {
@@ -1122,6 +1120,7 @@
       color: #cbd5e1;
       padding-left: 16px;
       position: relative;
+      word-wrap: break-word;
     }
 
     .store-card-back li::before {
@@ -1130,6 +1129,7 @@
       left: 0;
       color: #f97316;
       font-weight: bold;
+      flex-shrink: 0;
     }
 
     .store-card-back .highlight {
@@ -1141,6 +1141,8 @@
       border-radius: 4px;
       font-style: italic;
       line-height: 1.5;
+      word-wrap: break-word;
+      flex-shrink: 0;
     }
 
     @media (min-width: 1024px) {
