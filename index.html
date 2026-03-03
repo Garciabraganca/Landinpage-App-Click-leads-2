@@ -979,7 +979,7 @@
       }
     }
 
-    /* ==================== STORES 3D FLIP CARDS ==================== */
+    /* ==================== STORES 3D FLIP CARDS (CSS-only, padrão dashboard-lia) ==================== */
     .store-card-3d {
       perspective: 1200px;
       height: 100%;
@@ -987,6 +987,14 @@
       cursor: pointer;
       user-select: none;
       position: relative;
+      display: block; /* label */
+    }
+
+    /* hidden checkbox drives the flip */
+    .store-card-3d input[type="checkbox"] {
+      position: absolute;
+      opacity: 0;
+      pointer-events: none;
     }
 
     .store-card-inner {
@@ -994,11 +1002,15 @@
       width: 100%;
       height: 100%;
       transform-style: preserve-3d;
-      transition: transform 0.85s cubic-bezier(0.2, 0.8, 0.2, 1);
+      transition: transform 0.6s ease;
     }
 
-    .store-card-3d.is-flipped .store-card-inner {
-      transform: rotateY(180deg);
+    /* CSS-only flip via :checked */
+    .store-card-3d input:checked ~ .store-card-inner .store-card-back {
+      transform: rotateY(0deg);
+    }
+    .store-card-3d input:checked ~ .store-card-inner .store-card-front {
+      transform: rotateY(-180deg);
     }
 
     .store-card-face {
@@ -1012,6 +1024,7 @@
       display: flex;
       flex-direction: column;
       border: 1px solid rgba(148, 163, 184, 0.35);
+      transition: transform 0.6s ease;
     }
 
     .store-card-front {
@@ -1090,16 +1103,18 @@
       border-color: rgba(251, 191, 36, 0.8);
     }
 
+    /* ---- BACK FACE ---- */
     .store-card-back {
       background: linear-gradient(160deg, #0f172a 0%, #1e293b 60%, #0f172a 100%);
-      padding: 20px 20px 16px;
+      padding: 18px 18px 14px;
       display: flex;
       flex-direction: column;
       gap: 6px;
-      overflow-y: auto;
       overflow-x: hidden;
+      overflow-y: auto;
       justify-content: flex-start;
       box-shadow: 0 12px 26px rgba(249, 115, 22, 0.15), 0 6px 16px rgba(2, 6, 23, 0.5);
+      color: #cbd5e1;
     }
 
     /* laranja accent bar no topo */
@@ -1109,12 +1124,14 @@
       height: 3px;
       background: linear-gradient(90deg, #f97316, #fbbf24);
       border-radius: 2px;
-      margin-bottom: 6px;
+      margin-bottom: 4px;
       flex-shrink: 0;
     }
 
     .store-card-back .back-header {
       flex-shrink: 0;
+      position: relative;
+      z-index: 1;
     }
 
     .store-card-back h3 {
@@ -1127,22 +1144,27 @@
       line-height: 1.2;
     }
 
-    .store-card-back .back-promessa {
+    .store-card-back .back-subtitle {
       margin: 0;
       font-size: 0.78rem;
       font-weight: 600;
       color: #fb923c;
-      text-transform: uppercase;
-      letter-spacing: 0.4px;
+      letter-spacing: 0.3px;
     }
 
-    .store-card-back .back-subtitulo {
-      margin: 0;
-      font-size: 0.82rem;
-      color: #94a3b8;
-      line-height: 1.45;
-      font-style: italic;
+    .store-card-back .back-badge {
+      display: inline-block;
+      background: rgba(249, 115, 22, 0.18);
+      border: 1px solid rgba(249, 115, 22, 0.5);
+      color: #fbbf24;
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 20px;
+      align-self: flex-start;
       flex-shrink: 0;
+      position: relative;
+      z-index: 1;
     }
 
     .store-card-back ul {
@@ -1151,42 +1173,51 @@
       margin: 0;
       flex: 1;
       min-height: 0;
+      position: relative;
+      z-index: 1;
     }
 
     .store-card-back li {
-      margin: 5px 0;
-      font-size: 0.83rem;
+      margin: 4px 0;
+      font-size: 0.8rem;
       line-height: 1.35;
       color: #cbd5e1;
+      padding-left: 14px;
+      position: relative;
     }
 
-    .store-card-back .back-badge {
-      display: inline-block;
-      background: rgba(249, 115, 22, 0.15);
-      border: 1px solid rgba(249, 115, 22, 0.45);
-      color: #fb923c;
-      font-size: 0.75rem;
-      font-weight: 700;
-      padding: 4px 10px;
-      border-radius: 20px;
-      align-self: flex-start;
+    .store-card-back li::before {
+      content: '•';
+      position: absolute;
+      left: 0;
+      color: #f97316;
+      font-weight: bold;
+    }
+
+    .store-card-back .back-note {
+      margin: 0;
+      font-size: 0.68rem;
+      color: #64748b;
+      font-style: italic;
       flex-shrink: 0;
     }
 
     .store-card-back .back-cta {
       display: block;
       margin-top: auto;
-      padding: 9px 14px;
+      padding: 8px 12px;
       background: linear-gradient(90deg, #f97316, #fb923c);
       color: #0f172a;
       font-weight: 800;
-      font-size: 0.82rem;
+      font-size: 0.8rem;
       text-align: center;
       border-radius: 8px;
       text-decoration: none;
       letter-spacing: 0.3px;
       flex-shrink: 0;
       transition: opacity 0.2s;
+      position: relative;
+      z-index: 1;
     }
 
     .store-card-back .back-cta:hover {
@@ -1195,12 +1226,12 @@
 
     @media (max-width: 480px) {
       .store-card-back {
-        padding: 14px 16px 12px;
-        gap: 4px;
+        padding: 12px 14px 10px;
+        gap: 3px;
       }
-      .store-card-back h3 { font-size: 0.9rem; }
-      .store-card-back li { font-size: 0.79rem; }
-      .store-card-back .back-cta { font-size: 0.78rem; padding: 8px 10px; }
+      .store-card-back h3 { font-size: 0.88rem; }
+      .store-card-back li { font-size: 0.75rem; }
+      .store-card-back .back-cta { font-size: 0.76rem; padding: 7px 10px; }
     }
 
     @media (min-width: 1024px) {
@@ -2124,21 +2155,40 @@
 
     const COVERFLOW_STORES = [
       {
+        nome: 'Diplan',
+        imageSrc: 'Fachada Diplan.png',
+        loginUrl: null,
+        dataStore: 'diplan',
+        back: {
+          subtitle: 'Boutique • acesso sob convite',
+          badge: 'Operação seletiva',
+          bullets: [
+            'Entrada por convite (perfil aprovado)',
+            'Curadoria de corretores e carteira',
+            'Fluxo enxuto, foco em qualidade',
+            'Atendimento sob demanda (sem escala pública)'
+          ],
+          ctaLabel: 'Quero acesso',
+          note: null
+        }
+      },
+      {
         nome: 'Zentrix',
         imageSrc: 'Fachada Zentrix.png',
         loginUrl: 'https://zentrix.grupogarciaseguradoras.com.br/login',
         dataStore: 'zentrix',
-        diferenciais: {
-          titulo: 'Zentrix',
-          promessa: 'Grade de comissão agressiva',
-          subtitulo: 'Modelo por time — quanto mais escala, mais sobe de faixa.',
+        back: {
+          subtitle: 'Grade + regras claras',
+          badge: 'Pagamento semanal (quinta)',
           bullets: [
-            '💰 Tabelas PME/Odonto acima do padrão do mercado',
-            '⚡ Pagamento toda quinta-feira, sem atraso',
-            '🎯 Grade por performance: produz mais, ganha mais'
+            'Quinta-feira • mínimo R$ 50',
+            'Taxa de implantação descontada na comissão',
+            'IOF 2,38% deduzido quando aplicável',
+            'Sem comissão: beneficiário ativo / cancel <30 dias',
+            'Estornos conforme regras da operadora'
           ],
-          badge: '🔥 Sobe de grade com consistência',
-          highlight: 'Alta comissão + recorrência rápida = fluxo constante.'
+          ctaLabel: 'Ver condições',
+          note: 'Mínimo para saque: R$ 50'
         }
       },
       {
@@ -2146,35 +2196,17 @@
         imageSrc: 'Fachada serra.png',
         loginUrl: 'https://serra.grupogarciaseguradoras.com.br/login',
         dataStore: 'serra',
-        diferenciais: {
-          titulo: 'Serra',
-          promessa: 'Direto ao ponto, comissão alta',
-          subtitulo: 'Ótimo para rodar volume com discurso curto e objetivo.',
+        back: {
+          subtitle: 'Tabela direta',
+          badge: '270% nas principais',
           bullets: [
-            '💰 Comissão base alta em grandes operadoras',
-            '⚡ Processo enxuto: mais tempo vendendo, menos burocracia',
-            '🎯 Ideal para alta cadência e abordagem rápida'
+            'Amil: 270%',
+            'Porto: 270%',
+            'SulAmérica: 270%',
+            'Objetivo: repasse simples e rápido'
           ],
-          badge: '🔥 Alta base + operação enxuta',
-          highlight: 'Base alta + processo rápido = giro constante.'
-        }
-      },
-      {
-        nome: 'Diplan',
-        imageSrc: 'Fachada Diplan.png',
-        loginUrl: 'https://diplan.grupogarciaseguradoras.com.br/login',
-        dataStore: 'diplan',
-        diferenciais: {
-          titulo: 'Diplan',
-          promessa: 'Operação boutique — acesso por convite',
-          subtitulo: 'Quem entra aqui é selecionado. Não é pra todo mundo.',
-          bullets: [
-            '🏆 Perfil curado: sem concorrência interna excessiva',
-            '💰 Suporte estratégico próximo, consultoria ativa',
-            '🎯 Foco em qualidade de conversão, não só volume'
-          ],
-          badge: '✨ Acesso exclusivo = diferencial real',
-          highlight: 'Aqui, você é escolhido. E isso tem valor de mercado.'
+          ctaLabel: 'Saiba mais',
+          note: null
         }
       },
       {
@@ -2182,71 +2214,17 @@
         imageSrc: 'Fachada Bliss.jpeg',
         loginUrl: 'http://bliss.grupogarciaseguradoras.com.br/login',
         dataStore: 'bliss',
-        diferenciais: {
-          titulo: 'Bliss',
-          promessa: 'Tabela especial — você pode mais',
-          subtitulo: 'Escada de comissão: desempenho sobe, faixa sobe junto.',
+        back: {
+          subtitle: 'Tabela Especial',
+          badge: 'Você pode mais',
           bullets: [
-            '💰 Tabela com faixas acima da média do mercado',
-            '⚡ Progressão real: produção cresce, comissão escala',
-            '🎯 Operadoras estratégicas com máximas diferenciadas'
+            'Amil/SulAm/Porto: 270% • 285% • 300%',
+            'GNDI: 310% • 330% • 350%',
+            'Bradesco: 330% • 370% • 400%',
+            '3 níveis: Padrão / Intermediária / Máxima'
           ],
-          badge: '🔥 Quem produz mais, ganha mais',
-          highlight: 'Para quem não quer ficar travado em comissão padrão.'
-        }
-      },
-      {
-        nome: 'Alleman',
-        imageSrc: 'Fachada Alleman.jpeg',
-        loginUrl: 'https://alleman.grupogarciaseguradoras.com.br/login',
-        dataStore: 'alleman',
-        diferenciais: {
-          titulo: 'Alleman',
-          promessa: 'Portfólio que destrava propostas',
-          subtitulo: 'Operadoras difíceis de achar — nunca perca uma venda.',
-          bullets: [
-            '💰 Mix de operadoras estratégicas e nichos específicos',
-            '⚡ Opções alternativas quando a principal não fecha preço',
-            '🎯 Sempre tem plano B e C na manga'
-          ],
-          badge: '🔥 Nunca perca venda por falta de opção',
-          highlight: 'Crescimento organizado com alternativas reais de portfólio.'
-        }
-      },
-      {
-        nome: 'Affinity',
-        imageSrc: 'Fachada Affinity.jpeg',
-        loginUrl: 'http://affinity.grupogarciaseguradoras.com.br/login',
-        dataStore: 'affinity',
-        diferenciais: {
-          titulo: 'Affinity',
-          promessa: 'Mesa completa — produto pra cada perfil',
-          subtitulo: 'Carteira ampla com flexibilidade por operadora e faixa.',
-          bullets: [
-            '💰 Múltiplas operadoras com tabelas fortes por faixas',
-            '⚡ Volume + flexibilidade para qualquer perfil de cliente',
-            '🎯 Posicionamento premium com portfólio abrangente'
-          ],
-          badge: '🔥 Mais produto = mais oportunidade',
-          highlight: 'Venda com posicionamento premium e portfólio completo.'
-        }
-      },
-      {
-        nome: 'Valorize',
-        imageSrc: 'Fachada Valorize.jpeg',
-        loginUrl: 'https://valorize.grupogarciaseguradoras.com.br/login',
-        dataStore: 'valorize',
-        diferenciais: {
-          titulo: 'Valorize',
-          promessa: 'Chega de comissão com desconto',
-          subtitulo: 'Sem retenção. Mais margem. Pagamento frequente.',
-          bullets: [
-            '💰 Sem retenção de comissão — 100% cai pra você',
-            '⚡ Pagamento 2× por semana — sem esperar 30 dias',
-            '🗂️ Backoffice pronto para emissão rápida, sem burocracia'
-          ],
-          badge: '🔥 Receba mais vezes, perca menos',
-          highlight: 'Comissão limpa. Sem retenção. Mais margem no seu bolso.'
+          ctaLabel: 'Ver tabela',
+          note: null
         }
       },
       {
@@ -2254,20 +2232,81 @@
         imageSrc: 'fachada-assury.jpeg',
         loginUrl: 'https://assury.grupogarciaseguradoras.com.br/login',
         dataStore: 'assury',
-        diferenciais: {
-          titulo: 'Assury',
-          promessa: 'Ticket alto + estrutura que funciona',
-          subtitulo: 'Portfólio para carteira madura e nichos de alto valor.',
+        back: {
+          subtitle: 'Grade completa',
+          badge: 'Pagamento semanal',
           bullets: [
-            '💰 Forte em produtos sênior e nichos de ticket alto',
-            '⚡ Estrutura comercial ativa: suporte real, não só ferramenta',
-            '🎯 Recorrência: carteira que paga mês após mês'
+            'Comissões pagas semanalmente',
+            'Taxa de implantação descontada na comissão',
+            'Subcódigos conforme regras da operadora',
+            'Sem comissão: beneficiário ativo / regra da operadora',
+            'Estornos conforme seguradora/operadora'
           ],
-          badge: '🔥 Carteira madura = comissão estável',
-          highlight: 'Estrutura pronta para escalar com consistência.'
+          ctaLabel: 'Entender regras',
+          note: null
+        }
+      },
+      {
+        nome: 'Valorize',
+        imageSrc: 'Fachada Valorize.jpeg',
+        loginUrl: 'https://valorize.grupogarciaseguradoras.com.br/login',
+        dataStore: 'valorize',
+        back: {
+          subtitle: 'Comissão antecipada vs parcelada',
+          badge: 'Sem 10% retenção',
+          bullets: [
+            'Receba 2 vezes na semana',
+            'Backoffice + canal para emissão imediata',
+            'Antecipada: Amil/Porto/SulAm 250%',
+            'Parcelada: Amil/Porto/SulAm/Omint/Alice 260%',
+            'Destaques: Seg Unimed 330% (parcelada) • Bradesco 320/330 • Hapvida 300/310'
+          ],
+          ctaLabel: 'Saiba mais',
+          note: null
+        }
+      },
+      {
+        nome: 'Alleman',
+        imageSrc: 'Fachada Alleman.jpeg',
+        loginUrl: 'https://alleman.grupogarciaseguradoras.com.br/login',
+        dataStore: 'alleman',
+        back: {
+          subtitle: 'Metas + repasse por performance',
+          badge: 'Até 180%',
+          bullets: [
+            'Metas: 150% • 160% • 170% • 180%',
+            'PJ: repasse 30% (categoria menor)',
+            'Pagamento máx. 100% no mês (saldo nos próximos)',
+            'Prazo: 10–30 dias PME • 30–50 dias PF',
+            'Alguns PME tratados como PF (comissão baixa)'
+          ],
+          ctaLabel: 'Ver metas',
+          note: 'Pagamento máximo 100% no mês'
+        }
+      },
+      {
+        nome: 'Affinity',
+        imageSrc: 'Fachada Affinity.jpeg',
+        loginUrl: 'http://affinity.grupogarciaseguradoras.com.br/login',
+        dataStore: 'affinity',
+        back: {
+          subtitle: 'Grade ampla (Saúde + Odonto)',
+          badge: 'PME • Adesão • PF',
+          bullets: [
+            'Vigência: Setembro/2025',
+            'Exemplos: Bradesco PME 300%',
+            'Exemplos: SulAmérica PME 240%',
+            'Exemplos: Porto PME 240%',
+            'Regras: pagamento mínimo e condições por operadora'
+          ],
+          ctaLabel: 'Ver grade',
+          note: null
         }
       }
     ];
+
+    // Expose globally for DevTools diagnostics
+    window.COVERFLOW_STORES = COVERFLOW_STORES;
 
 
     document.addEventListener('DOMContentLoaded', function() {
@@ -2357,52 +2396,64 @@
       const wrapper = document.getElementById('storesSwiperWrapper');
       if (!wrapper) return;
 
-      COVERFLOW_STORES.forEach(store => {
+      COVERFLOW_STORES.forEach((store, idx) => {
         const slide = document.createElement('div');
         slide.className = 'swiper-slide store-slide';
-        
-        const card3d = document.createElement('div');
+
+        // CSS-only flip: <label> wraps hidden <input checkbox>
+        const card3d = document.createElement('label');
         card3d.className = 'store-card-3d';
         card3d.setAttribute('data-store', store.dataStore);
-        
+
+        const checkbox = document.createElement('input');
+        checkbox.type = 'checkbox';
+        checkbox.id = `flip-${store.dataStore}`;
+        card3d.appendChild(checkbox);
+
         const inner = document.createElement('div');
         inner.className = 'store-card-inner';
-        
-        // Front face
+
+        // Front face (untouched)
         const front = document.createElement('div');
         front.className = 'store-card-face store-card-front';
         front.style.backgroundImage = `url('${store.imageSrc}')`;
         front.style.backgroundSize = 'cover';
         front.style.backgroundPosition = 'center';
+        const loginHref = store.loginUrl || '#';
         front.innerHTML = `
           <div class="store-content">
             <h3>${store.nome}</h3>
-            <a href="${store.loginUrl}" target="_blank" rel="noopener noreferrer" class="enter-btn">Entrar</a>
+            <a href="${loginHref}" target="_blank" rel="noopener noreferrer" class="enter-btn"
+               onclick="event.stopPropagation()">Entrar</a>
           </div>
         `;
-        
-        // Back face
+
+        // Back face — structured from store.back
+        const b = store.back;
         const back = document.createElement('div');
         back.className = 'store-card-face store-card-back';
-        const d = store.diferenciais;
+
+        const noteHTML = b.note ? `<p class="back-note">${b.note}</p>` : '';
+
         back.innerHTML = `
           <div class="back-header">
-            <h3>${d.titulo}</h3>
-            <p class="back-promessa">${d.promessa}</p>
+            <h3>${store.nome}</h3>
+            <span class="back-subtitle">${b.subtitle}</span>
           </div>
-          <p class="back-subtitulo">${d.subtitulo}</p>
+          <div class="back-badge">${b.badge}</div>
           <ul>
-            ${d.bullets.map(b => `<li>${b}</li>`).join('')}
+            ${b.bullets.map(t => `<li>${t}</li>`).join('')}
           </ul>
-          <div class="back-badge">${d.badge}</div>
-          <a href="${store.loginUrl}" target="_blank" rel="noopener noreferrer" class="back-cta">→ Entrar na ${store.nome}</a>
+          ${noteHTML}
+          <a href="${loginHref}" target="_blank" rel="noopener noreferrer" class="back-cta"
+             onclick="event.stopPropagation()">${b.ctaLabel}</a>
         `;
-        
+
         inner.appendChild(front);
         inner.appendChild(back);
         card3d.appendChild(inner);
         slide.appendChild(card3d);
-        
+
         wrapper.appendChild(slide);
       });
     }
@@ -2492,53 +2543,8 @@
       });
     }
 
-    // ==================== STORE CARDS 3D FLIP LOGIC ====================
-    function initStoreCardsFlip() {
-      const cards = document.querySelectorAll('.store-card-3d');
-      
-      cards.forEach(card => {
-        let startX = 0;
-        let startY = 0;
-        let startTime = 0;
-        let isMoving = false;
-
-        card.addEventListener('pointerdown', (e) => {
-          startX = e.clientX;
-          startY = e.clientY;
-          startTime = Date.now();
-          isMoving = false;
-        });
-
-        card.addEventListener('pointermove', (e) => {
-          const distX = Math.abs(e.clientX - startX);
-          const distY = Math.abs(e.clientY - startY);
-          
-          if (distX > 8 || distY > 8) {
-            isMoving = true;
-          }
-        });
-
-        card.addEventListener('pointerup', (e) => {
-          if (e.target.tagName === 'A' || e.target.closest('a')) return;
-          if (!isMoving) {
-            card.classList.toggle('is-flipped');
-          }
-        });
-
-        // Prevent flip on link clicks
-        card.addEventListener('click', (e) => {
-          if (e.target.tagName === 'A' || e.target.closest('a')) {
-            e.stopPropagation();
-          }
-        });
-      });
-    }
-
-    document.addEventListener('DOMContentLoaded', () => {
-      setTimeout(() => {
-        initStoreCardsFlip();
-      }, 500);
-    });
+    // Flip is now CSS-only (label + checkbox :checked). No JS handler needed.
+    // CTA links use onclick="event.stopPropagation()" to prevent reflip.
   </script>
 </body>
 </html>
