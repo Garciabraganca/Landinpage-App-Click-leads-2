@@ -994,7 +994,10 @@
     .store-card-3d input[type="checkbox"] {
       position: absolute;
       opacity: 0;
-      pointer-events: none;
+      width: 100%;
+      height: 100%;
+      cursor: pointer;
+      z-index: 10;
     }
 
     .store-card-inner {
@@ -1096,6 +1099,8 @@
       cursor: pointer;
       transition: all 0.2s ease;
       text-decoration: none;
+      position: relative;
+      z-index: 20;
     }
 
     .store-card-front .enter-btn:hover {
@@ -1217,7 +1222,7 @@
       flex-shrink: 0;
       transition: opacity 0.2s;
       position: relative;
-      z-index: 1;
+      z-index: 20;
     }
 
     .store-card-back .back-cta:hover {
