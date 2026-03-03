@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
+  <meta charset="UTF-8" />
   <!-- Meta Pixel Code -->
   <script>
   !function(f,b,e,v,n,t,s)
@@ -27,9 +28,9 @@
 
     gtag('config', 'G-H4RPMD8731');
   </script>
-  <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Click Leads – Chega de Correr Atrás de Cliente</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 
   <style>
     :root {
@@ -62,157 +63,309 @@
       padding: 0 16px;
     }
 
-    header {
-      background: #f9fafb;
-    }
-
-    .fachada-header {
-      padding: 40px 0;
-    }
-
-    .fachada-header img {
-      width: 100%;
-      max-width: 900px;
-      margin: 0 auto;
-      border-radius: 18px;
-      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.1);
-    }
-
-    /* CTA Hero Section */
-    .cta-hero-section {
-      background: #0b1120;
-      color: #fff;
-      padding: 48px 0;
-    }
-
-    .cta-hero-inner {
-      text-align: center;
-      max-width: 700px;
-      margin: 0 auto;
-    }
-
-    /* Video Section */
-    .video-section {
-      background: #0b1120;
-      padding: 0 0 48px;
-    }
-
-    .video-section-inner {
-      max-width: 600px;
-      margin: 0 auto;
-    }
-
-    .hero-title {
-      font-size: 2rem;
-      line-height: 1.2;
-      margin: 0 0 12px;
-    }
-
-    .hero-subtitle {
-      font-size: 1rem;
-      color: #cbd5f5;
-      margin: 0 auto 20px;
-    }
-
-    .hero-cta {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      padding: 14px 30px;
-      border-radius: 999px;
-      border: none;
-      cursor: pointer;
-      background: linear-gradient(to right, #f59e0b, #f97316);
-      color: #111827;
-      font-weight: 700;
-      font-size: 0.98rem;
-      text-decoration: none;
-      box-shadow: 0 14px 30px rgba(0, 0, 0, 0.35);
-      transition: transform 0.15s ease, box-shadow 0.15s ease,
-        filter 0.15s ease;
-    }
-
-    .hero-cta:hover {
-      transform: translateY(-1px);
-      filter: brightness(1.02);
-      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.5);
-    }
-
-    .hero-note {
-      font-size: 0.8rem;
-      color: #9ca3af;
-      margin-top: 10px;
-    }
-
-    .hero-video-card {
-      background: radial-gradient(circle at top, #1e293b, #020617);
-      border-radius: 18px;
-      padding: 18px;
-      border: 1px solid rgba(148, 163, 184, 0.45);
-      box-shadow: 0 18px 45px rgba(15, 23, 42, 0.9);
-    }
-
-    .hero-video-thumb {
+    /* ==================== NOVA HERO SECTION COM VÍDEO ==================== */
+    .hero-fold {
       position: relative;
-      border-radius: 14px;
+      min-height: 100vh;
       overflow: hidden;
-      background: #020617;
-    }
-
-    .hero-video-thumb video {
-      width: 100%;
-      height: auto;
-      display: block;
-      border-radius: 14px;
-    }
-
-    .hero-video-thumb img {
-      width: 100%;
-      height: auto;
-      display: block;
-    }
-
-    .play-button {
-      position: absolute;
-      inset: 0;
       display: flex;
       align-items: center;
       justify-content: center;
-      background: radial-gradient(
-        circle,
-        rgba(15, 23, 42, 0) 0,
-        rgba(15, 23, 42, 0.7) 60%
+    }
+
+    .hero-fold-video {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+    }
+
+    .hero-fold-video video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+    }
+
+    .hero-fold-overlay {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      background: linear-gradient(
+        180deg,
+        rgba(0, 0, 0, 0.4) 0%,
+        rgba(15, 23, 42, 0.6) 50%,
+        rgba(0, 0, 0, 0.7) 100%
       );
     }
 
-    .play-circle {
-      width: 72px;
-      height: 72px;
-      border-radius: 50%;
-      background: rgba(248, 250, 252, 0.94);
+    .hero-fold-overlay::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(
+        circle at top right,
+        rgba(251, 191, 36, 0.08) 0%,
+        transparent 40%
+      );
+      pointer-events: none;
+    }
+
+    .hero-fold-content {
+      position: relative;
+      z-index: 2;
+      max-width: 720px;
+      text-align: center;
+      color: #fff;
+      padding: 40px 20px;
+    }
+
+    .hero-fold-content h1 {
+      font-size: clamp(1.8rem, 5vw, 3.2rem);
+      font-weight: 800;
+      line-height: 1.15;
+      margin: 0 0 20px;
+      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+    }
+
+    .hero-fold-content p {
+      font-size: clamp(1rem, 2.5vw, 1.25rem);
+      color: #e0e7ff;
+      margin: 0 0 30px;
+      line-height: 1.5;
+      text-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
+    }
+
+    .hero-fold-ctas {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      justify-content: center;
+      margin-bottom: 30px;
+    }
+
+    .hero-fold-cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 14px 32px;
+      border-radius: 999px;
+      border: none;
+      cursor: pointer;
+      font-weight: 700;
+      font-size: 1rem;
+      text-decoration: none;
+      transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease;
+      box-shadow: 0 14px 30px rgba(0, 0, 0, 0.35);
+    }
+
+    .hero-fold-cta-primary {
+      background: linear-gradient(to right, #f59e0b, #f97316);
+      color: #111827;
+    }
+
+    .hero-fold-cta-primary:hover {
+      transform: translateY(-2px);
+      filter: brightness(1.05);
+      box-shadow: 0 18px 40px rgba(249, 115, 22, 0.5);
+    }
+
+    .hero-fold-cta-secondary {
+      background: rgba(248, 250, 252, 0.12);
+      color: #fff;
+      border: 2px solid rgba(251, 191, 36, 0.3);
+    }
+
+    .hero-fold-cta-secondary:hover {
+      background: rgba(248, 250, 252, 0.2);
+      border-color: rgba(251, 191, 36, 0.6);
+      transform: translateY(-2px);
+      box-shadow: 0 18px 40px rgba(251, 191, 36, 0.15);
+    }
+
+    .hero-fold-support {
+      font-size: 0.9rem;
+      color: #fbbf24;
+      font-weight: 600;
+      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+    }
+
+    @media (max-width: 640px) {
+      .hero-fold-ctas {
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .hero-fold-cta {
+        width: 100%;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .hero-fold-video video {
+        display: none;
+      }
+
+      .hero-fold {
+        background: url('capa-landing.jpeg') center / cover no-repeat;
+      }
+    }
+
+    /* ==================== SEÇÃO LOJAS ==================== */
+    .lojas-section {
+      padding: 80px 0;
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+    }
+
+    .lojas-header {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+
+    .lojas-header h2 {
+      font-size: clamp(2rem, 5vw, 2.8rem);
+      color: #fff;
+      margin: 0 0 16px;
+      font-weight: 800;
+    }
+
+    .lojas-header p {
+      font-size: 1.15rem;
+      color: #cbd5e1;
+      margin: 0;
+    }
+
+    .lojas-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 30px;
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    @media (min-width: 768px) {
+      .lojas-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .lojas-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 35px;
+      }
+    }
+
+    .loja-card {
+      background: rgba(30, 41, 59, 0.5);
+      border: 1px solid rgba(148, 163, 184, 0.3);
+      border-radius: 16px;
+      overflow: hidden;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .loja-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(251, 191, 36, 0.5);
+      box-shadow: 0 8px 30px rgba(251, 191, 36, 0.15), 0 4px 20px rgba(0, 0, 0, 0.4);
+    }
+
+    .loja-card-image {
+      width: 100%;
+      height: 180px;
+      background: linear-gradient(135deg, #1e293b, #334155);
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.8);
+      border-bottom: 1px solid rgba(148, 163, 184, 0.2);
+      position: relative;
+      overflow: hidden;
     }
 
-    .play-triangle {
-      width: 0;
-      height: 0;
-      border-left: 16px solid #f97316;
-      border-top: 10px solid transparent;
-      border-bottom: 10px solid transparent;
-      margin-left: 4px;
+    .loja-card-image img {
+      max-width: 80%;
+      max-height: 80%;
+      object-fit: contain;
     }
 
+    .loja-card-badge {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      background: linear-gradient(135deg, #f59e0b, #d97706);
+      color: #000;
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 6px 12px;
+      border-radius: 999px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
 
+    .loja-card-content {
+      padding: 28px 24px;
+    }
 
-    .hero-video-caption {
-      margin-top: 10px;
-      font-size: 0.86rem;
-      color: #e5e7eb;
+    .loja-card-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #fff;
+      margin: 0 0 20px;
       text-align: center;
     }
+
+    .loja-card-features {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 28px;
+    }
+
+    .loja-card-features li {
+      color: #cbd5e1;
+      font-size: 0.95rem;
+      line-height: 1.6;
+      margin-bottom: 10px;
+      padding-left: 24px;
+      position: relative;
+    }
+
+    .loja-card-features li::before {
+      content: '●';
+      position: absolute;
+      left: 0;
+      color: #fbbf24;
+      font-weight: bold;
+    }
+
+    .loja-card-cta {
+      display: block;
+      width: 100%;
+      padding: 14px 24px;
+      border-radius: 8px;
+      border: none;
+      font-weight: 700;
+      font-size: 1rem;
+      text-align: center;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .loja-card-cta-primary {
+      background: linear-gradient(to right, #f59e0b, #f97316);
+      color: #111827;
+      box-shadow: 0 4px 12px rgba(249, 115, 22, 0.3);
+    }
+
+    .loja-card-cta-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(249, 115, 22, 0.5);
+      filter: brightness(1.05);
+    }
+
+
 
     main { background: #f9fafb; }
 
@@ -461,231 +614,1079 @@
       .hero-title { font-size: 1.6rem; }
     }
 
-    /* Pacote Experimental Badge */
-    .package-highlight {
-      background: linear-gradient(135deg, rgba(251, 191, 36, 0.15) 0%, rgba(249, 115, 22, 0.15) 100%);
-      border: 2px solid var(--accent);
+    /* ==================== CARROSSEL DIFERENCIAIS ==================== */
+    .diferenciais-section {
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+      padding: 80px 20px;
+      color: #fff;
+    }
+
+    .diferenciais-container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .diferenciais-header {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+
+    .diferenciais-header h2 {
+      font-size: 2.2rem;
+      font-weight: 700;
+      margin: 0 0 12px;
+      color: #fff;
+    }
+
+    .diferenciais-header p {
+      font-size: 1.1rem;
+      color: #cbd5e1;
+      margin: 0;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .carousel-wrapper {
+      position: relative;
+      margin-bottom: 30px;
+    }
+
+    .diferenciais-carousel {
+      display: flex;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scroll-behavior: smooth;
+      gap: 20px;
+      padding: 10px 0;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .diferenciais-carousel::-webkit-scrollbar {
+      height: 6px;
+    }
+
+    .diferenciais-carousel::-webkit-scrollbar-track {
+      background: rgba(148, 163, 184, 0.1);
+      border-radius: 999px;
+    }
+
+    .diferenciais-carousel::-webkit-scrollbar-thumb {
+      background: rgba(249, 115, 22, 0.4);
+      border-radius: 999px;
+    }
+
+    .diferenciais-carousel::-webkit-scrollbar-thumb:hover {
+      background: rgba(249, 115, 22, 0.6);
+    }
+
+    .diferencial-card {
+      flex: 0 0 auto;
+      width: 100%;
+      scroll-snap-align: start;
+      scroll-snap-stop: always;
+    }
+
+    @media (min-width: 768px) {
+      .diferencial-card {
+        width: calc(50% - 10px);
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .diferencial-card {
+        width: calc(50% - 10px);
+      }
+    }
+
+    .diferencial-card-inner {
+      background: rgba(30, 41, 59, 0.6);
+      border: 1px solid rgba(148, 163, 184, 0.2);
       border-radius: 12px;
-      padding: 16px 20px;
-      margin: 20px auto;
-      max-width: 540px;
+      padding: 28px 24px;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      backdrop-filter: blur(10px);
+      transition: all 0.3s ease;
+    }
+
+    .diferencial-card-inner:hover {
+      border-color: rgba(249, 115, 22, 0.3);
+      background: rgba(30, 41, 59, 0.8);
+      box-shadow: 0 8px 24px rgba(249, 115, 22, 0.1);
+    }
+
+    .diferencial-card-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #fff;
+      margin: 0 0 18px;
       text-align: center;
     }
 
-    .package-highlight-dark {
-      background: linear-gradient(135deg, rgba(251, 191, 36, 0.2) 0%, rgba(249, 115, 22, 0.2) 100%);
-      border: 2px solid var(--accent);
+    .diferencial-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 20px;
+      justify-content: center;
     }
 
-    .package-badge {
+    .diferencial-chip {
+      background: rgba(249, 115, 22, 0.15);
+      border: 1px solid rgba(249, 115, 22, 0.3);
+      color: #fed7aa;
+      padding: 6px 12px;
+      border-radius: 999px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-align: center;
+    }
+
+    .diferencial-list {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 20px;
+      flex: 1;
+    }
+
+    .diferencial-list li {
+      padding: 8px 0;
+      color: #cbd5e1;
+      font-size: 0.95rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+    }
+
+    .diferencial-list li:before {
+      content: "✓";
+      color: #f97316;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .diferencial-cta {
       display: inline-block;
+      padding: 10px 20px;
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      text-align: center;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      border: none;
+      width: 100%;
+    }
+
+    .diferencial-cta-primary {
       background: linear-gradient(to right, #f59e0b, #f97316);
       color: #111827;
-      font-size: 0.7rem;
+      box-shadow: 0 4px 12px rgba(249, 115, 22, 0.3);
+    }
+
+    .diferencial-cta-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(249, 115, 22, 0.5);
+      filter: brightness(1.05);
+    }
+
+    .diferencial-cta-disabled {
+      background: rgba(100, 116, 139, 0.3);
+      color: #94a3b8;
+      cursor: not-allowed;
+      border: 1px solid rgba(148, 163, 184, 0.3);
+    }
+
+    .diferencial-badge {
+      position: absolute;
+      top: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: linear-gradient(135deg, #f59e0b, #d97706);
+      color: #000;
+      font-size: 0.75rem;
       font-weight: 700;
-      text-transform: uppercase;
-      padding: 4px 10px;
+      padding: 5px 12px;
       border-radius: 999px;
-      margin-bottom: 8px;
+      text-transform: uppercase;
       letter-spacing: 0.5px;
     }
 
-    .package-text {
-      font-size: 0.95rem;
-      color: #e5e7eb;
-      margin: 0;
-      line-height: 1.5;
+    .carousel-controls {
+      display: none;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 30px;
     }
 
-    .package-text strong {
-      color: #fbbf24;
+    @media (min-width: 768px) {
+      .carousel-controls {
+        display: flex;
+      }
     }
 
-    .package-text-light {
-      color: #374151;
+    .carousel-nav-btn {
+      width: 44px;
+      height: 44px;
+      border: 2px solid rgba(249, 115, 22, 0.4);
+      background: rgba(249, 115, 22, 0.1);
+      color: #fff;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 1.2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s ease;
     }
 
-    .package-text-light strong {
-      color: #ea580c;
+    .carousel-nav-btn:hover {
+      background: rgba(249, 115, 22, 0.25);
+      border-color: rgba(249, 115, 22, 0.6);
+      transform: scale(1.05);
     }
 
-    /* Como Funciona Section */
-    .how-it-works {
-      background: #fff;
-      padding: 48px 0;
+    .carousel-nav-btn:disabled {
+      opacity: 0.3;
+      cursor: not-allowed;
     }
 
-    .steps-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 24px;
-      margin-top: 32px;
+    .carousel-dots {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 20px;
     }
 
-    .step-card {
-      background: #f9fafb;
-      border-radius: 16px;
-      padding: 24px 20px;
+    @media (min-width: 768px) {
+      .carousel-dots {
+        display: none;
+      }
+    }
+
+    .carousel-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: rgba(148, 163, 184, 0.4);
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .carousel-dot.active {
+      background: #f97316;
+      width: 28px;
+      border-radius: 999px;
+    }
+
+    /* ==================== STORES SWIPER COVERFLOW ==================== */
+    .stores-swiper-section {
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+      padding: 80px 20px;
+      color: #fff;
+    }
+
+    .stores-swiper-container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .stores-swiper-header {
       text-align: center;
-      border: 1px solid #e5e7eb;
-      position: relative;
+      margin-bottom: 34px;
     }
 
-    .step-number {
-      width: 40px;
-      height: 40px;
-      background: linear-gradient(to right, #f59e0b, #f97316);
-      color: #111827;
+    .stores-swiper-header h2 {
+      margin: 0 0 12px;
+      font-size: clamp(1.9rem, 4vw, 2.4rem);
+      font-weight: 800;
+      color: #fff;
+    }
+
+    .stores-swiper-header p {
+      margin: 0;
+      color: #cbd5e1;
+      font-size: 1.05rem;
+    }
+
+    .stores-swiper.swiper {
+      width: min(1120px, 100%);
+      margin: 0 auto;
+      padding: 16px 6px 56px;
+    }
+
+    .stores-swiper .swiper-slide {
+      height: 360px;
+      border-radius: 20px;
+      overflow: hidden;
+      transition: transform 0.35s ease, filter 0.35s ease, opacity 0.35s ease;
+      opacity: 0.56;
+      filter: grayscale(0.6) saturate(0.8);
+      transform: scale(0.88);
+      background: linear-gradient(160deg, #1e293b 0%, #0f172a 100%);
+      box-shadow: 0 12px 26px rgba(2, 6, 23, 0.45);
+    }
+
+    .stores-swiper .swiper-slide-active {
+      opacity: 1;
+      filter: grayscale(0) saturate(1);
+      transform: scale(1);
+      box-shadow: 0 16px 36px rgba(249, 115, 22, 0.25), 0 8px 24px rgba(2, 6, 23, 0.5);
+    }
+
+    .store-slide__link {
+      position: relative;
+      display: flex;
+      width: 100%;
+      height: 100%;
+      align-items: flex-end;
+      text-decoration: none;
+      color: #fff;
+      border: 1px solid rgba(148, 163, 184, 0.35);
+      border-radius: 20px;
+      overflow: hidden;
+      background: linear-gradient(180deg, rgba(15, 23, 42, 0.25) 0%, rgba(15, 23, 42, 0.9) 75%),
+        linear-gradient(150deg, #334155 0%, #111827 100%);
+    }
+
+    .store-slide__link::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: var(--bg);
+      background-size: cover;
+      background-position: center;
+      opacity: 0.92;
+      z-index: 0;
+    }
+
+    .store-slide__link::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(2, 6, 23, 0.15) 0%, rgba(2, 6, 23, 0.82) 78%);
+      z-index: 1;
+    }
+
+    .store-slide__content {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      padding: 18px;
+    }
+
+    .store-slide__content h3 {
+      margin: 0;
+      font-size: 1.2rem;
       font-weight: 700;
+      text-align: center;
+      flex: 1;
+    }
+
+    .store-slide__content span {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 999px;
+      border: 1px solid rgba(251, 191, 36, 0.5);
+      background: rgba(249, 115, 22, 0.2);
+      color: #fff;
+      padding: 6px 12px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    .stores-swiper .swiper-pagination-bullet {
+      width: 9px;
+      height: 9px;
+      background: rgba(148, 163, 184, 0.55);
+      opacity: 1;
+    }
+
+    .stores-swiper .swiper-pagination-bullet-active {
+      width: 22px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #f59e0b, #f97316);
+    }
+
+    @media (min-width: 1024px) {
+      .stores-swiper .swiper-slide {
+        height: 420px;
+      }
+
+      .store-slide__content h3 {
+        font-size: 1.35rem;
+      }
+    }
+
+    /* ==================== COMO FUNCIONA SECTION ==================== */
+    .como-funciona-section {
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+      padding: 80px 20px;
+      color: #fff;
+    }
+
+    .como-funciona-container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+
+    .section-header h2 {
+      font-size: 2.2rem;
+      font-weight: 700;
+      margin: 0 0 12px;
+      color: #fff;
+    }
+
+    .section-header p {
       font-size: 1.1rem;
+      color: #cbd5e1;
+      margin: 0;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .funciona-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+      margin-bottom: 0;
+    }
+
+    .funciona-card {
+      background: rgba(30, 41, 59, 0.6);
+      border: 1px solid rgba(148, 163, 184, 0.2);
+      border-radius: 12px;
+      padding: 32px 24px;
+      position: relative;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(10px);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .funciona-card:hover {
+      border-color: rgba(249, 115, 22, 0.3);
+      background: rgba(30, 41, 59, 0.8);
+      box-shadow: 0 8px 24px rgba(249, 115, 22, 0.1);
+      transform: translateY(-4px);
+    }
+
+    .funciona-number {
+      position: absolute;
+      top: -16px;
+      left: 24px;
+      width: 44px;
+      height: 44px;
+      background: linear-gradient(135deg, #f59e0b, #f97316);
+      color: #000;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      margin: 0 auto 16px;
+      font-size: 1.5rem;
+      font-weight: 700;
     }
 
-    .step-card h3 {
-      margin: 0 0 10px;
-      font-size: 1.05rem;
-      color: #111827;
+    .funciona-card h3 {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: #fff;
+      margin: 12px 0 16px;
     }
 
-    .step-card p {
-      margin: 0;
-      font-size: 0.9rem;
-      color: #4b5563;
+    .funciona-card p {
+      color: #cbd5e1;
+      font-size: 0.95rem;
       line-height: 1.6;
+      margin: 0;
     }
 
-    .step-card p strong {
-      color: #ea580c;
+    /* ==================== FAQ SECTION ==================== */
+    .faq-section {
+      background: #0f172a;
+      padding: 80px 20px;
+      color: #fff;
     }
 
-    @media (max-width: 720px) {
-      .steps-grid {
-        grid-template-columns: minmax(0, 1fr);
+    .faq-container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .faq-header h2 {
+      text-align: center;
+      font-size: 2.2rem;
+      margin: 0 0 60px;
+      color: #fff;
+    }
+
+    .faq-item {
+      margin-bottom: 16px;
+      border: 1px solid rgba(148, 163, 184, 0.2);
+      border-radius: 8px;
+      overflow: hidden;
+      background: rgba(30, 41, 59, 0.4);
+    }
+
+    .faq-item details {
+      cursor: pointer;
+    }
+
+    .faq-item summary {
+      padding: 20px;
+      background: rgba(30, 41, 59, 0.6);
+      color: #fff;
+      font-weight: 600;
+      font-size: 1rem;
+      transition: all 0.2s ease;
+      user-select: none;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .faq-item summary:hover {
+      background: rgba(249, 115, 22, 0.1);
+      border-left: 3px solid #f97316;
+      padding-left: 17px;
+    }
+
+    .faq-item summary::marker {
+      color: #f97316;
+    }
+
+    .faq-item[open] summary {
+      background: rgba(249, 115, 22, 0.15);
+      border-bottom: 1px solid rgba(249, 115, 22, 0.2);
+    }
+
+    .faq-item p {
+      padding: 20px;
+      color: #cbd5e1;
+      margin: 0;
+      font-size: 0.95rem;
+      line-height: 1.6;
+      background: rgba(15, 23, 42, 0.5);
+    }
+
+    /* ==================== CTA FINAL SECTION ==================== */
+    .cta-final-section {
+      background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+      padding: 80px 20px;
+      color: #fff;
+    }
+
+    .cta-final-container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .cta-final-header {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+
+    .cta-final-header h2 {
+      font-size: 2.2rem;
+      font-weight: 700;
+      margin: 0 0 12px;
+      color: #fff;
+    }
+
+    .cta-final-header p {
+      font-size: 1.1rem;
+      color: #cbd5e1;
+      margin: 0 0 30px;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .cta-buttons-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+      margin-bottom: 40px;
+    }
+
+    .cta-button-item {
+      position: relative;
+    }
+
+    .cta-button-item.boutique {
+      grid-column: 1 / -1;
+      max-width: 200px;
+      margin: 0 auto;
+    }
+
+    .cta-button-item.boutique::before {
+      content: 'BOUTIQUE';
+      position: absolute;
+      top: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: linear-gradient(135deg, #f59e0b, #d97706);
+      color: #000;
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 999px;
+      letter-spacing: 0.5px;
+    }
+
+    .cta-btn {
+      display: inline-block;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+      border: none;
+      text-align: center;
+      transition: all 0.2s ease;
+      width: 100%;
+      font-size: 0.95rem;
+    }
+
+    .cta-btn-primary {
+      background: linear-gradient(to right, #f59e0b, #f97316);
+      color: #111827;
+      box-shadow: 0 4px 12px rgba(249, 115, 22, 0.3);
+    }
+
+    .cta-btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(249, 115, 22, 0.5);
+      filter: brightness(1.05);
+    }
+
+    .cta-btn-disabled {
+      background: rgba(100, 116, 139, 0.3);
+      color: #94a3b8;
+      cursor: not-allowed;
+      border: 1px solid rgba(148, 163, 184, 0.3);
+    }
+
+    .cta-main-btn {
+      display: block;
+      max-width: 300px;
+      margin: 0 auto;
+      padding: 14px 28px;
+      background: linear-gradient(135deg, #f59e0b, #f97316);
+      color: #111827;
+      border-radius: 8px;
+      font-weight: 700;
+      text-decoration: none;
+      text-align: center;
+      box-shadow: 0 6px 20px rgba(249, 115, 22, 0.3);
+      transition: all 0.2s ease;
+    }
+
+    .cta-main-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 30px rgba(249, 115, 22, 0.5);
+      filter: brightness(1.08);
+    }
+
+    @media (max-width: 768px) {
+      .funciona-grid {
+        grid-template-columns: 1fr;
       }
 
-      .package-highlight {
-        margin: 16px 12px;
-        padding: 14px 16px;
-      }
-
-      .package-text {
-        font-size: 0.88rem;
+      .cta-button-item.boutique {
+        max-width: 100%;
       }
     }
 
-    @media (max-width: 320px) {
-      .package-highlight {
-        padding: 12px 14px;
-      }
-
-      .package-text {
-        font-size: 0.82rem;
-      }
-
-      .step-card {
-        padding: 18px 14px;
-      }
-
-      .step-card p {
-        font-size: 0.85rem;
-      }
-    }
   </style>
 </head>
 <body>
-  <!-- HERO - Fachada do Grupo Garcia -->
-  <header>
-    <div class="container fachada-header">
-      <img src="fachada.png" alt="Fachada do Grupo Garcia - Nossa estrutura física" />
-    </div>
-  </header>
-
-  <!-- CTA PRINCIPAL -->
-  <section class="cta-hero-section">
-    <div class="container cta-hero-inner">
-      <h1 class="hero-title">
-        Chega de correr atrás do vento.<br />
-        Deixe o cliente vir até você.
-      </h1>
-      <p class="hero-subtitle">
-        A mesma tecnologia que nossa família usa para turbinar as vendas agora está disponível para você. Leads qualificados, entregues no seu celular, sem complicação.
-      </p>
-
-      <div class="package-highlight package-highlight-dark">
-        <span class="package-badge">Oferta Especial</span>
-        <p class="package-text">
-          Comece testando com o <strong>Pacote Experimental: 10 leads qualificados por R$ 600, em 2x de R$ 300 sem juros no cartão.</strong>
-        </p>
-      </div>
-
-      <a
-        href="https://clickleads.grupogarciaseguradoras.com.br/login"
-        class="hero-cta"
+  <!-- HERO FOLD - PRIMEIRA DOBRA COM VÍDEO 9:16 -->
+  <section class="hero-fold" id="topo">
+    <div class="hero-fold-video">
+      <video
+        autoplay
+        muted
+        loop
+        playsinline
+        preload="metadata"
+        poster="capa-landing.jpeg"
       >
-        QUERO ME CADASTRAR GRÁTIS
-      </a>
-
-      <div class="hero-note">
-        Acesso via navegador. Sem instalação, sem pegadinha. Você testa e vê os resultados.
+        <source src="bem-vindo ao shopping das plataformas.mp4" type="video/mp4">
+      </video>
+    </div>
+    
+    <div class="hero-fold-overlay"></div>
+    
+    <div class="hero-fold-content">
+      <h1>O Shopping das Plataformas que conecta as maiores consultorias empresariais do Brasil.</h1>
+      <p>Um ecossistema onde tecnologia, marketing e escala trabalham juntos.</p>
+      
+      <div class="hero-fold-ctas">
+        <a href="#contato" class="hero-fold-cta hero-fold-cta-primary">Quero fazer parte</a>
+        <a href="#lojas" class="hero-fold-cta hero-fold-cta-secondary">Conhecer as empresas</a>
+      </div>
+      
+      <div class="hero-fold-support">
+        Tecnologia própria • Integração com WhatsApp • Operação pronta para escala
       </div>
     </div>
   </section>
 
-  <!-- VÍDEO DA FAMÍLIA -->
-  <section class="video-section">
-    <div class="container video-section-inner">
-      <div class="hero-video-card">
-        <div class="hero-video-thumb">
-          <!-- Vídeo animado da família Click Leads -->
-          <video
-            id="videoFamilia"
-            controls
-            loop
-            muted
-            playsinline
-            poster="familia-andrezinho.png"
-          >
-            <source src="Vídeo_Animado_Família_Click_Leads_Futurista.mp4" type="video/mp4">
-            Seu navegador não suporta vídeos HTML5.
-          </video>
+  <!-- LOJAS -->
+  <section class="lojas-section" id="lojas">
+    <div class="lojas-header">
+      <h2>Lojas</h2>
+      <p>Conheça as lojas que fazem parte do nosso ecossistema.</p>
+    </div>
+
+    <div class="lojas-grid">
+      <!-- ZENTRIX -->
+      <div class="loja-card">
+        <div class="loja-card-image">
+          <img src="Fachada Zentrix.png" alt="Zentrix - Plataforma de Gestão Empresarial">
         </div>
-        <div class="hero-video-caption">
-          ASSISTA: a velocidade do Click Leads na rotina da nossa família.
+        <div class="loja-card-content">
+          <h3 class="loja-card-title">Zentrix</h3>
+          <ul class="loja-card-features">
+            <li>Gestão centralizada de múltiplas operações</li>
+            <li>Dashboard em tempo real com métricas avançadas</li>
+            <li>Integração nativa com sistemas externos</li>
+            <li>Automação de processos empresariais</li>
+            <li>Relatórios e análises preditivas</li>
+          </ul>
+          <a 
+            href="https://zentrix.grupogarciaseguradoras.com.br/login" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            class="loja-card-cta loja-card-cta-primary"
+          >
+            Ativar e entrar
+          </a>
         </div>
       </div>
+
+      <!-- SERRA -->
+      <div class="loja-card">
+        <div class="loja-card-image">
+          <img src="Fachada serra.png" alt="Serra - Consultoria Estratégica">
+        </div>
+        <div class="loja-card-content">
+          <h3 class="loja-card-title">Serra</h3>
+          <ul class="loja-card-features">
+            <li>Consultoria estratégica personalizada</li>
+            <li>Planejamento e execução de campanhas</li>
+            <li>Análise de mercado e concorrência</li>
+            <li>Otimização de processos comerciais</li>
+            <li>Suporte especializado contínuo</li>
+          </ul>
+          <a 
+            href="https://serra.grupogarciaseguradoras.com.br/login" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            class="loja-card-cta loja-card-cta-primary"
+          >
+            Ativar e entrar
+          </a>
+        </div>
+      </div>
+      <div class="loja-card">
+        <div class="loja-card-image">
+          <img src="Fachada Bliss.jpeg" alt="Bliss - Plataforma de Gestão Integrada">
+        </div>
+        <div class="loja-card-content">
+          <h3 class="loja-card-title">Bliss</h3>
+          <ul class="loja-card-features">
+            <li>Gestão centralizada de múltiplas operações</li>
+            <li>Dashboard em tempo real com métricas avançadas</li>
+            <li>Integração nativa com sistemas externos</li>
+            <li>Automação de processos empresariais</li>
+            <li>Relatórios e análises preditivas</li>
+          </ul>
+          <a 
+            href="http://bliss.grupogarciaseguradoras.com.br/login" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            class="loja-card-cta loja-card-cta-primary"
+          >
+            Ativar e entrar
+          </a>
+        </div>
+      </div>
+
+      <!-- ALLEMAN -->
+      <div class="loja-card">
+        <div class="loja-card-image">
+          <img src="Fachada Alleman.jpeg" alt="Alleman - Consultoria Estratégica">
+        </div>
+        <div class="loja-card-content">
+          <h3 class="loja-card-title">Alleman</h3>
+          <ul class="loja-card-features">
+            <li>Consultoria estratégica personalizada</li>
+            <li>Planejamento e execução de campanhas</li>
+            <li>Análise de mercado e concorrência</li>
+            <li>Otimização de processos comerciais</li>
+            <li>Suporte especializado contínuo</li>
+          </ul>
+          <a 
+            href="https://alleman.grupogarciaseguradoras.com.br/login" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            class="loja-card-cta loja-card-cta-primary"
+          >
+            Ativar e entrar
+          </a>
+        </div>
+      </div>
+
+      <!-- AFFINITY -->
+      <div class="loja-card">
+        <div class="loja-card-image">
+          <img src="Fachada Affinity.jpeg" alt="Affinity - Plataforma de Afinidade">
+        </div>
+        <div class="loja-card-content">
+          <h3 class="loja-card-title">Affinity</h3>
+          <ul class="loja-card-features">
+            <li>Conexão e rede de profissionais</li>
+            <li>Oportunidades de negócio qualificadas</li>
+            <li>Ferramentas colaborativas avançadas</li>
+            <li>Acompanhamento de projetos em tempo real</li>
+            <li>Comunidade ativa de especialistas</li>
+          </ul>
+          <a 
+            href="http://affinity.grupogarciaseguradoras.com.br/login" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            class="loja-card-cta loja-card-cta-primary"
+          >
+            Ativar e entrar
+          </a>
+        </div>
+      </div>
+
+      <!-- VALORIZE -->
+      <div class="loja-card">
+        <div class="loja-card-image">
+          <img src="Fachada Valorize.jpeg" alt="Valorize - Programa de Reconhecimento">
+        </div>
+        <div class="loja-card-content">
+          <h3 class="loja-card-title">Valorize</h3>
+          <ul class="loja-card-features">
+            <li>Programa exclusivo de reconhecimento</li>
+            <li>Comissões atrativas e competitivas</li>
+            <li>Benefícios que crescem com seu sucesso</li>
+            <li>Maior controle e autonomia comercial</li>
+            <li>Suporte dedicado para maximizar resultados</li>
+          </ul>
+          <a 
+            href="https://valorize.grupogarciaseguradoras.com.br/login" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            class="loja-card-cta loja-card-cta-primary"
+          >
+            Ativar e entrar
+          </a>
+        </div>
+      </div>
+
+      <!-- ASSURY -->
+      <div class="loja-card">
+        <div class="loja-card-image">
+          <img src="Fachada Assury.jpeg" alt="Assury - Segurança e Compliance">
+        </div>
+        <div class="loja-card-content">
+          <h3 class="loja-card-title">Assury</h3>
+          <ul class="loja-card-features">
+            <li>Segurança e cobertura completa</li>
+            <li>Segurança integrada e automatizada</li>
+            <li>Monitoramento 24/7 em tempo real</li>
+            <li>Relatórios de compliance regulatório</li>
+            <li>Suporte especializado em segurança</li>
+          </ul>
+          <a 
+            href="https://assury.grupogarciaseguradoras.com.br/login" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            class="loja-card-cta loja-card-cta-primary"
+          >
+            Ativar e entrar
+          </a>
+        </div>
+      </div>
+      <div class="loja-card">
+        <div class="loja-card-image">
+          <span class="loja-card-badge">Boutique</span>
+          <img src="Fachada Diplan.png" alt="Diplan - Boutique Exclusiva">
+        </div>
+        <div class="loja-card-content">
+          <h3 class="loja-card-title">Diplan</h3>
+          <ul class="loja-card-features">
+            <li>Atendimento VIP com dedicação exclusiva</li>
+            <li>Estratégias customizadas para alto padrão</li>
+            <li>Acesso antecipado a novos recursos</li>
+            <li>Consultoria estratégica premium</li>
+            <li>Gerente de contas dedicado</li>
+          </ul>
+          <button 
+            class="loja-card-cta loja-card-cta-disabled"
+            disabled
+          >
+            Acesso sob convite
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="stores-swiper-section" id="shopping-tour">
+    <div class="stores-swiper-container">
+      <div class="stores-swiper-header">
+        <h2>Dê uma volta no Shopping</h2>
+        <p>Arraste para o lado e conheça as lojas.</p>
+      </div>
+      <div class="stores-swiper swiper" id="storesSwiper">
+        <div class="swiper-wrapper" id="storesSwiperWrapper"></div>
+        <div class="swiper-pagination"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TERCEIRA DOBRA - CARROSSEL DIFERENCIAIS -->
+  <section class="diferenciais-section" id="diferenciais">
+    <div class="diferenciais-container">
+      <div class="diferenciais-header">
+        <h2>O diferencial de cada loja</h2>
+        <p>Compare rapidamente e escolha onde você quer atuar.</p>
+      </div>
+
+      <div class="carousel-wrapper">
+        <div class="diferenciais-carousel" id="carousel">
+          <!-- Cards renderizados dinamicamente via JavaScript -->
+        </div>
+      </div>
+
+      <div class="carousel-controls">
+        <button class="carousel-nav-btn" id="prevBtn" aria-label="Slide anterior">←</button>
+        <button class="carousel-nav-btn" id="nextBtn" aria-label="Próximo slide">→</button>
+      </div>
+
+      <div class="carousel-dots" id="dotsContainer"></div>
     </div>
   </section>
 
   <!-- COMO FUNCIONA -->
-  <section class="how-it-works">
-    <div class="container">
-      <h2 class="section-title">Como Funciona</h2>
-
-      <div class="steps-grid">
-        <div class="step-card">
-          <div class="step-number">1</div>
-          <h3>Cadastre-se grátis</h3>
-          <p>Você se cadastra grátis na plataforma. Sem burocracia, sem pegadinha.</p>
+  <section class="como-funciona-section" id="como-funciona">
+    <div class="como-funciona-container">
+      <div class="section-header">
+        <h2>Como funciona</h2>
+        <p>Em poucos passos, você escolhe uma loja e começa a trabalhar.</p>
+      </div>
+      <div class="funciona-grid">
+        <div class="funciona-card">
+          <div class="funciona-number">1</div>
+          <h3>Escolha uma loja</h3>
+          <p>Compare os diferenciais e selecione a operação que combina com seu perfil.</p>
         </div>
-
-        <div class="step-card">
-          <div class="step-number">2</div>
-          <h3>Ative o Pacote Experimental</h3>
-          <p>Depois do cadastro, você pode ativar o <strong>Pacote Experimental de 10 leads por R$ 600 (2x de R$ 300 sem juros)</strong> direto no painel.</p>
+        <div class="funciona-card">
+          <div class="funciona-number">2</div>
+          <h3>Ative e entre</h3>
+          <p>Acesse o ambiente da loja e tenha tudo organizado para executar com consistência.</p>
         </div>
-
-        <div class="step-card">
-          <div class="step-number">3</div>
-          <h3>Entre no Plantão</h3>
-          <p>Após a ativação, entre no plantão e comece a receber os leads qualificados diretamente no app.</p>
+        <div class="funciona-card">
+          <div class="funciona-number">3</div>
+          <h3>Comece a atuar</h3>
+          <p>Entre com foco no atendimento e no ritmo diário para avançar rápido.</p>
         </div>
       </div>
     </div>
   </section>
+
+  <!-- FAQ -->
+  <section class="faq-section" id="faq">
+    <div class="faq-container">
+      <div class="faq-header">
+        <h2>Perguntas frequentes</h2>
+      </div>
+      <div class="faq-content">
+        <div class="faq-item">
+          <details>
+            <summary>Preciso instalar algo?</summary>
+            <p>Não. O acesso é direto pelo navegador.</p>
+          </details>
+        </div>
+        <div class="faq-item">
+          <details>
+            <summary>Como eu escolho a melhor loja?</summary>
+            <p>Compare os diferenciais e selecione a operação que faz mais sentido para seu momento.</p>
+          </details>
+        </div>
+        <div class="faq-item">
+          <details>
+            <summary>Posso entrar em mais de uma loja?</summary>
+            <p>Sim, você pode acessar outras lojas conforme sua estratégia e disponibilidade.</p>
+          </details>
+        </div>
+        <div class="faq-item">
+          <details>
+            <summary>Os acessos são imediatos?</summary>
+            <p>Para as lojas abertas, sim — é só entrar e começar.</p>
+          </details>
+        </div>
+        <div class="faq-item">
+          <details>
+            <summary>Como funciona a Diplan Boutique?</summary>
+            <p>A Diplan é uma operação boutique com acesso sob convite.</p>
+          </details>
+        </div>
+        <div class="faq-item">
+          <details>
+            <summary>Consigo falar com suporte?</summary>
+            <p>Sim. Cada loja possui canais e rotinas de acompanhamento.</p>
+          </details>
+        </div>
+        <div class="faq-item">
+          <details>
+            <summary>Posso acessar pelo celular?</summary>
+            <p>Sim. A experiência é pensada para mobile.</p>
+          </details>
+        </div>
+        <div class="faq-item">
+          <details>
+            <summary>Meu acesso fica salvo?</summary>
+            <p>Sim, você acessa com seu login e mantém continuidade no ambiente.</p>
+          </details>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA FINAL -->
+  <section class="cta-final-section" id="entrar">
+    <div class="cta-final-container">
+      <div class="cta-final-header">
+        <h2>Pronto para escolher sua loja?</h2>
+        <p>Entre agora e comece a atuar com uma estrutura organizada.</p>
+      </div>
+      <div class="cta-buttons-grid" id="ctaButtonsGrid"></div>
+      <a href="#lojas" class="cta-main-btn">Ver lojas</a>
+    </div>
+  </section>
+
 
   <main>
     <!-- STORYTELLING -->
@@ -838,6 +1839,16 @@
     </section>
   </main>
 
+  <!-- FAZER PARTE -->
+  <section class="section-placeholder" id="contato">
+    <div class="container">
+      <h2>Fazer Parte</h2>
+      <p style="color: #6b7280; margin-top: 10px; font-size: 1.1rem;">
+        Junte-se ao nosso ecossistema e faça parte de uma comunidade de consultorias que crescem juntas.
+      </p>
+    </div>
+  </section>
+
   <!-- RODAPÉ -->
   <footer>
     <div class="container footer-inner">
@@ -850,31 +1861,230 @@
     </div>
   </footer>
 
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
   <script>
+    // ==================== DATASET DE LOJAS (SINGLE SOURCE OF TRUTH) ====================
+    const STORES = [
+      {
+        slug: 'zentrix',
+        nome: 'Zentrix',
+        imageSrc: 'Fachada Zentrix.png',
+        loginUrl: 'https://zentrix.grupogarciaseguradoras.com.br/login',
+        isBoutique: false,
+        chips: ['Gestão', 'Dashboard', 'Integração'],
+        diferenciais: [
+          'Gestão centralizada de múltiplas operações',
+          'Dashboard em tempo real com métricas avançadas',
+          'Automação de processos empresariais'
+        ]
+      },
+      {
+        slug: 'serra',
+        nome: 'Serra',
+        imageSrc: 'Fachada serra.png',
+        loginUrl: 'https://serra.grupogarciaseguradoras.com.br/login',
+        isBoutique: false,
+        chips: ['Consultoria', 'Estratégia', 'Análise'],
+        diferenciais: [
+          'Consultoria estratégica personalizada',
+          'Planejamento e execução de campanhas',
+          'Análise de mercado e concorrência'
+        ]
+      },
+      {
+        slug: 'bliss',
+        nome: 'Bliss',
+        imageSrc: 'Fachada Bliss.jpeg',
+        loginUrl: 'http://bliss.grupogarciaseguradoras.com.br/login',
+        isBoutique: false,
+        chips: ['Gestão', 'Integrada', 'Automação'],
+        diferenciais: [
+          'Gestão centralizada de múltiplas operações',
+          'Dashboard em tempo real com métricas avançadas',
+          'Automação de processos empresariais'
+        ]
+      },
+      {
+        slug: 'alleman',
+        nome: 'Alleman',
+        imageSrc: 'Fachada Alleman.jpeg',
+        loginUrl: 'https://alleman.grupogarciaseguradoras.com.br/login',
+        isBoutique: false,
+        chips: ['Consultoria', 'Campanhas', 'Mercado'],
+        diferenciais: [
+          'Consultoria estratégica personalizada',
+          'Planejamento e execução de campanhas',
+          'Otimização de processos comerciais'
+        ]
+      },
+      {
+        slug: 'affinity',
+        nome: 'Affinity',
+        imageSrc: 'Fachada Affinity.jpeg',
+        loginUrl: 'http://affinity.grupogarciaseguradoras.com.br/login',
+        isBoutique: false,
+        chips: ['Conexão', 'Oportunidades', 'Comunidade'],
+        diferenciais: [
+          'Conexão e rede de profissionais',
+          'Oportunidades de negócio qualificadas',
+          'Comunidade ativa de especialistas'
+        ]
+      },
+      {
+        slug: 'valorize',
+        nome: 'Valorize',
+        imageSrc: 'Fachada Valorize.jpeg',
+        loginUrl: 'https://valorize.grupogarciaseguradoras.com.br/login',
+        isBoutique: false,
+        chips: ['Reconhecimento', 'Comissões', 'Benefícios'],
+        diferenciais: [
+          'Programa exclusivo de reconhecimento',
+          'Comissões atrativas e competitivas',
+          'Benefícios que crescem com seu sucesso'
+        ]
+      },
+      {
+        slug: 'assury',
+        nome: 'Assury',
+        imageSrc: 'Fachada Assury.jpeg',
+        loginUrl: 'https://assury.grupogarciaseguradoras.com.br/login',
+        isBoutique: false,
+        chips: ['Segurança', 'Compliance', 'Monitoramento'],
+        diferenciais: [
+          'Segurança e cobertura completa',
+          'Segurança integrada e automatizada',
+          'Monitoramento 24/7 em tempo real'
+        ]
+      },
+      {
+        slug: 'diplan',
+        nome: 'Diplan',
+        imageSrc: 'Fachada Diplan.png',
+        loginUrl: null,
+        isBoutique: true,
+        chips: ['VIP', 'Premium', 'Exclusivo'],
+        diferenciais: [
+          'Atendimento VIP com dedicação exclusiva',
+          'Estratégias customizadas para alto padrão',
+          'Consultoria estratégica premium'
+        ]
+      }
+    ];
+
+    const COVERFLOW_STORES = [
+      {
+        nome: 'Zentrix',
+        imageSrc: 'Fachada Zentrix.png',
+        loginUrl: 'https://zentrix.grupogarciaseguradoras.com.br/login'
+      },
+      {
+        nome: 'Serra',
+        imageSrc: 'Fachada serra.png',
+        loginUrl: 'https://serra.grupogarciaseguradoras.com.br/login'
+      },
+      {
+        nome: 'Diplan',
+        imageSrc: 'Fachada Diplan.png',
+        loginUrl: 'https://diplan.grupogarciaseguradoras.com.br/login'
+      },
+      {
+        nome: 'Bliss',
+        imageSrc: 'Fachada Bliss.jpeg',
+        loginUrl: 'http://bliss.grupogarciaseguradoras.com.br/login'
+      },
+      {
+        nome: 'Alleman',
+        imageSrc: 'Fachada Alleman.jpeg',
+        loginUrl: 'https://alleman.grupogarciaseguradoras.com.br/login'
+      },
+      {
+        nome: 'Affinity',
+        imageSrc: 'Fachada Affinity.jpeg',
+        loginUrl: 'http://affinity.grupogarciaseguradoras.com.br/login'
+      },
+      {
+        nome: 'Valorize',
+        imageSrc: 'Fachada Valorize.jpeg',
+        loginUrl: 'https://valorize.grupogarciaseguradoras.com.br/login'
+      },
+      {
+        nome: 'Assury',
+        imageSrc: '/public/stores/assury.png',
+        loginUrl: 'https://assury.grupogarciaseguradoras.com.br/login'
+      }
+    ];
+
+
     document.addEventListener('DOMContentLoaded', function() {
-      // Autoplay do vídeo quando visível na tela
-      const video = document.getElementById('videoFamilia');
-      
-      if (video) {
-        const observer = new IntersectionObserver((entries) => {
-          entries.forEach(entry => {
-            if (entry.isIntersecting) {
-              video.play().catch(() => {
-                // Autoplay blocked by browser policy - user can start manually
-              });
-            } else {
-              video.pause();
-            }
-          });
-        }, {
-          threshold: 0.5 // Inicia quando 50% do vídeo estiver visível
+      renderCoverflowSlides();
+
+      // ==================== RENDERIZAR CARROSSEL DE DIFERENCIAIS ====================
+      const carousel = document.getElementById('carousel');
+      if (carousel && typeof STORES !== 'undefined') {
+        STORES.forEach(store => {
+          const card = document.createElement('div');
+          card.className = 'diferencial-card';
+          
+          const chipsHTML = store.chips.map(chip => 
+            `<span class="diferencial-chip">${chip}</span>`
+          ).join('');
+          
+          const diferenciaisHTML = store.diferenciais.map(dif => 
+            `<li>${dif}</li>`
+          ).join('');
+          
+          if (store.isBoutique) {
+            card.innerHTML = `
+              <div class="diferencial-card-inner" style="position: relative; margin-top: 12px;">
+                <div class="diferencial-badge">Boutique</div>
+                <h3 class="diferencial-card-title">${store.nome}</h3>
+                <div class="diferencial-chips">${chipsHTML}</div>
+                <ul class="diferencial-list">${diferenciaisHTML}</ul>
+                <button class="diferencial-cta diferencial-cta-disabled" disabled>Acesso sob convite</button>
+              </div>
+            `;
+          } else {
+            card.innerHTML = `
+              <div class="diferencial-card-inner">
+                <h3 class="diferencial-card-title">${store.nome}</h3>
+                <div class="diferencial-chips">${chipsHTML}</div>
+                <ul class="diferencial-list">${diferenciaisHTML}</ul>
+                <a href="${store.loginUrl}" target="_blank" rel="noopener noreferrer" class="diferencial-cta diferencial-cta-primary">Ativar e entrar</a>
+              </div>
+            `;
+          }
+          
+          carousel.appendChild(card);
         });
-        
-        observer.observe(video);
       }
 
-      // Meta Pixel Lead event - dispara quando usuário clica nos botões CTA
-      const ctaButtons = document.querySelectorAll('.hero-cta');
+      // ==================== RENDERIZAR CTA FINAL ====================
+      const ctaButtonsGrid = document.getElementById('ctaButtonsGrid');
+      if (ctaButtonsGrid && typeof STORES !== 'undefined') {
+        STORES.forEach(store => {
+          const buttonDiv = document.createElement('div');
+          buttonDiv.className = `cta-button-item ${store.isBoutique ? 'boutique' : ''}`;
+          
+          if (store.isBoutique) {
+            buttonDiv.innerHTML = `
+              <button class="cta-btn cta-btn-disabled" disabled>
+                Acesso sob convite
+              </button>
+            `;
+          } else {
+            buttonDiv.innerHTML = `
+              <a href="${store.loginUrl}" target="_blank" rel="noopener noreferrer" class="cta-btn cta-btn-primary">
+                Entrar em ${store.nome}
+              </a>
+            `;
+          }
+          
+          ctaButtonsGrid.appendChild(buttonDiv);
+        });
+      }
+
+      // Meta Pixel Lead event - dispara quando usuário clica nos botões CTA das lojas
+      const ctaButtons = document.querySelectorAll('.loja-card-cta-primary, .cta-btn-primary, .diferencial-cta-primary');
       ctaButtons.forEach(function(button) {
         button.addEventListener('click', function() {
           if (typeof fbq !== 'undefined') {
@@ -882,7 +2092,117 @@
           }
         });
       });
+
+      // ==================== INICIALIZAR CARROSSEL NAVIGATION ====================
+      initCarousel();
+      initStoresSwiper();
     });
+
+    function renderCoverflowSlides() {
+      const wrapper = document.getElementById('storesSwiperWrapper');
+      if (!wrapper) return;
+
+      COVERFLOW_STORES.forEach(store => {
+        const slide = document.createElement('div');
+        slide.className = 'swiper-slide store-slide';
+        slide.style.setProperty('--bg', `url('${store.imageSrc}')`);
+        slide.innerHTML = `
+          <a class="store-slide__link" href="${store.loginUrl}" target="_blank" rel="noopener noreferrer">
+            <div class="store-slide__content">
+              <h3>${store.nome}</h3>
+              <span>Entrar</span>
+            </div>
+          </a>
+        `;
+
+        wrapper.appendChild(slide);
+      });
+    }
+
+    function initStoresSwiper() {
+      if (typeof Swiper === 'undefined') return;
+
+      new Swiper('#storesSwiper', {
+        effect: 'coverflow',
+        grabCursor: true,
+        centeredSlides: true,
+        slidesPerView: 2.2,
+        loop: true,
+        speed: 600,
+        coverflowEffect: {
+          rotate: 10,
+          stretch: 0,
+          depth: 120,
+          modifier: 3,
+          slideShadows: true
+        },
+        pagination: {
+          el: '#storesSwiper .swiper-pagination',
+          clickable: true
+        },
+        breakpoints: {
+          1024: {
+            slidesPerView: 2.75
+          }
+        }
+      });
+    }
+
+    // Carousel Navigation Script
+    function initCarousel() {
+      const carousel = document.getElementById('carousel');
+      const prevBtn = document.getElementById('prevBtn');
+      const nextBtn = document.getElementById('nextBtn');
+      const dotsContainer = document.getElementById('dotsContainer');
+      const cards = document.querySelectorAll('.diferencial-card');
+      
+      if (!carousel || cards.length === 0) return;
+      
+      const cardWidth = cards[0]?.offsetWidth || 0;
+      const gapWidth = 20;
+
+      // Initialize dots
+      cards.forEach((_, index) => {
+        const dot = document.createElement('div');
+        dot.className = 'carousel-dot';
+        if (index === 0) dot.classList.add('active');
+        dot.addEventListener('click', () => scrollToCard(index));
+        dotsContainer.appendChild(dot);
+      });
+
+      const dots = document.querySelectorAll('.carousel-dot');
+
+      function scrollToCard(index) {
+        const scrollAmount = index * (cardWidth + gapWidth);
+        carousel.scrollLeft = scrollAmount;
+        updateDots(index);
+      }
+
+      function updateDots(index) {
+        dots.forEach((dot, i) => {
+          dot.classList.toggle('active', i === index);
+        });
+      }
+
+      if (prevBtn && nextBtn) {
+        prevBtn.addEventListener('click', () => {
+          const currentIndex = Math.round(carousel.scrollLeft / (cardWidth + gapWidth));
+          scrollToCard(Math.max(0, currentIndex - 1));
+        });
+
+        nextBtn.addEventListener('click', () => {
+          const currentIndex = Math.round(carousel.scrollLeft / (cardWidth + gapWidth));
+          const maxIndex = cards.length - 2;
+          scrollToCard(Math.min(maxIndex, currentIndex + 1));
+        });
+      }
+
+      // Update dots on scroll
+      carousel.addEventListener('scroll', () => {
+        const currentIndex = Math.round(carousel.scrollLeft / (cardWidth + gapWidth));
+        updateDots(currentIndex);
+      });
+    }
   </script>
 </body>
 </html>
