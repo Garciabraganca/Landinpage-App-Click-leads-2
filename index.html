@@ -347,7 +347,7 @@
       margin-left: -40px;
       margin-right: 24px;
       border-radius: 20px;
-      object-fit: cover;
+      object-fit: contain;
       box-shadow: 0 40px 30px rgba(0, 0, 0, 0.12);
       flex-shrink: 0;
       transition: border-radius 0.3s;
@@ -813,6 +813,7 @@
         margin-left: auto;
         margin-right: auto;
         border-radius: 20px;
+        object-fit: contain;
       }
 
       .loja-card-content h2 {
@@ -1029,6 +1030,7 @@
         border: 10px solid var(--card-bg);
         box-shadow: none;
         margin: -70px auto 16px;
+        object-fit: contain;
       }
 
       .hero-fold-content h1 {
@@ -1174,8 +1176,9 @@
       position: absolute;
       inset: 0;
       background-image: var(--bg);
-      background-size: cover;
+      background-size: contain;
       background-position: center;
+      background-repeat: no-repeat;
       opacity: 0.92;
       z-index: 0;
     }
