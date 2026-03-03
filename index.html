@@ -1091,56 +1091,116 @@
     }
 
     .store-card-back {
-      background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
-      padding: 32px 24px;
+      background: linear-gradient(160deg, #0f172a 0%, #1e293b 60%, #0f172a 100%);
+      padding: 20px 20px 16px;
       display: flex;
       flex-direction: column;
-      box-shadow: 0 12px 26px rgba(249, 115, 22, 0.15), 0 6px 16px rgba(2, 6, 23, 0.5);
+      gap: 6px;
+      overflow-y: auto;
+      overflow-x: hidden;
       justify-content: flex-start;
+      box-shadow: 0 12px 26px rgba(249, 115, 22, 0.15), 0 6px 16px rgba(2, 6, 23, 0.5);
+    }
+
+    /* laranja accent bar no topo */
+    .store-card-back::before {
+      content: '';
+      display: block;
+      height: 3px;
+      background: linear-gradient(90deg, #f97316, #fbbf24);
+      border-radius: 2px;
+      margin-bottom: 6px;
+      flex-shrink: 0;
+    }
+
+    .store-card-back .back-header {
+      flex-shrink: 0;
     }
 
     .store-card-back h3 {
-      margin: 0 0 16px 0;
-      font-size: 1.1rem;
+      margin: 0 0 2px 0;
+      font-size: 1rem;
       font-weight: 800;
       color: #fbbf24;
       text-transform: uppercase;
-      letter-spacing: 0.5px;
+      letter-spacing: 0.6px;
+      line-height: 1.2;
+    }
+
+    .store-card-back .back-promessa {
+      margin: 0;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: #fb923c;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+    }
+
+    .store-card-back .back-subtitulo {
+      margin: 0;
+      font-size: 0.82rem;
+      color: #94a3b8;
+      line-height: 1.45;
+      font-style: italic;
+      flex-shrink: 0;
     }
 
     .store-card-back ul {
       list-style: none;
       padding: 0;
-      margin: 0 0 16px 0;
+      margin: 0;
       flex: 1;
+      min-height: 0;
     }
 
     .store-card-back li {
-      margin: 8px 0;
-      font-size: 0.9rem;
-      line-height: 1.4;
+      margin: 5px 0;
+      font-size: 0.83rem;
+      line-height: 1.35;
       color: #cbd5e1;
-      padding-left: 16px;
-      position: relative;
     }
 
-    .store-card-back li::before {
-      content: "•";
-      position: absolute;
-      left: 0;
-      color: #f97316;
-      font-weight: bold;
+    .store-card-back .back-badge {
+      display: inline-block;
+      background: rgba(249, 115, 22, 0.15);
+      border: 1px solid rgba(249, 115, 22, 0.45);
+      color: #fb923c;
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 20px;
+      align-self: flex-start;
+      flex-shrink: 0;
     }
 
-    .store-card-back .highlight {
-      padding: 12px;
-      border-top: 2px solid #fbbf24;
-      font-size: 0.95rem;
-      font-weight: 600;
-      color: #fbbf24;
-      border-radius: 4px;
-      font-style: italic;
-      line-height: 1.5;
+    .store-card-back .back-cta {
+      display: block;
+      margin-top: auto;
+      padding: 9px 14px;
+      background: linear-gradient(90deg, #f97316, #fb923c);
+      color: #0f172a;
+      font-weight: 800;
+      font-size: 0.82rem;
+      text-align: center;
+      border-radius: 8px;
+      text-decoration: none;
+      letter-spacing: 0.3px;
+      flex-shrink: 0;
+      transition: opacity 0.2s;
+    }
+
+    .store-card-back .back-cta:hover {
+      opacity: 0.88;
+    }
+
+    @media (max-width: 480px) {
+      .store-card-back {
+        padding: 14px 16px 12px;
+        gap: 4px;
+      }
+      .store-card-back h3 { font-size: 0.9rem; }
+      .store-card-back li { font-size: 0.79rem; }
+      .store-card-back .back-cta { font-size: 0.78rem; padding: 8px 10px; }
     }
 
     @media (min-width: 1024px) {
@@ -2069,14 +2129,15 @@
         loginUrl: 'https://zentrix.grupogarciaseguradoras.com.br/login',
         dataStore: 'zentrix',
         diferenciais: {
-          titulo: 'ZENTRIX PRIME',
+          titulo: 'Zentrix',
+          promessa: 'Grade de comissão agressiva',
+          subtitulo: 'Modelo por time — quanto mais escala, mais sobe de faixa.',
           bullets: [
-            'Comissões agressivas em PME e Odonto',
-            'Pagamento toda quinta-feira',
-            'Grade diferenciada por performance',
-            'Mínimo baixo para saque',
-            'Estrutura focada em produção real'
+            '💰 Tabelas PME/Odonto acima do padrão do mercado',
+            '⚡ Pagamento toda quinta-feira, sem atraso',
+            '🎯 Grade por performance: produz mais, ganha mais'
           ],
+          badge: '🔥 Sobe de grade com consistência',
           highlight: 'Alta comissão + recorrência rápida = fluxo constante.'
         }
       },
@@ -2086,15 +2147,16 @@
         loginUrl: 'https://serra.grupogarciaseguradoras.com.br/login',
         dataStore: 'serra',
         diferenciais: {
-          titulo: 'SERRA',
+          titulo: 'Serra',
+          promessa: 'Direto ao ponto, comissão alta',
+          subtitulo: 'Ótimo para rodar volume com discurso curto e objetivo.',
           bullets: [
-            'Base alta em grandes operadoras',
-            'Processo simples e direto',
-            'Comissão consistente',
-            'Foco em volume e velocidade',
-            'Operação objetiva'
+            '💰 Comissão base alta em grandes operadoras',
+            '⚡ Processo enxuto: mais tempo vendendo, menos burocracia',
+            '🎯 Ideal para alta cadência e abordagem rápida'
           ],
-          highlight: 'Alta base fixa para giro rápido.'
+          badge: '🔥 Alta base + operação enxuta',
+          highlight: 'Base alta + processo rápido = giro constante.'
         }
       },
       {
@@ -2103,15 +2165,16 @@
         loginUrl: 'https://diplan.grupogarciaseguradoras.com.br/login',
         dataStore: 'diplan',
         diferenciais: {
-          titulo: 'DIPLAN',
+          titulo: 'Diplan',
+          promessa: 'Operação boutique — acesso por convite',
+          subtitulo: 'Quem entra aqui é selecionado. Não é pra todo mundo.',
           bullets: [
-            'Estrutura consolidada',
-            'Presença forte no mercado',
-            'Gestão ativa de produção',
-            'Carteira estratégica',
-            'Crescimento contínuo'
+            '🏆 Perfil curado: sem concorrência interna excessiva',
+            '💰 Suporte estratégico próximo, consultoria ativa',
+            '🎯 Foco em qualidade de conversão, não só volume'
           ],
-          highlight: 'Base forte para produção consistente.'
+          badge: '✨ Acesso exclusivo = diferencial real',
+          highlight: 'Aqui, você é escolhido. E isso tem valor de mercado.'
         }
       },
       {
@@ -2120,15 +2183,16 @@
         loginUrl: 'http://bliss.grupogarciaseguradoras.com.br/login',
         dataStore: 'bliss',
         diferenciais: {
-          titulo: 'BLISS',
+          titulo: 'Bliss',
+          promessa: 'Tabela especial — você pode mais',
+          subtitulo: 'Escada de comissão: desempenho sobe, faixa sobe junto.',
           bullets: [
-            'Tabela especial acima do mercado',
-            'Escalonamento por produção',
-            'Operadoras estratégicas com alta máxima',
-            'Modelo meritocrático',
-            'Foco em crescimento acelerado'
+            '💰 Tabela com faixas acima da média do mercado',
+            '⚡ Progressão real: produção cresce, comissão escala',
+            '🎯 Operadoras estratégicas com máximas diferenciadas'
           ],
-          highlight: 'Aqui quem produz mais, ganha mais.'
+          badge: '🔥 Quem produz mais, ganha mais',
+          highlight: 'Para quem não quer ficar travado em comissão padrão.'
         }
       },
       {
@@ -2137,15 +2201,16 @@
         loginUrl: 'https://alleman.grupogarciaseguradoras.com.br/login',
         dataStore: 'alleman',
         diferenciais: {
-          titulo: 'ALLEMAN',
+          titulo: 'Alleman',
+          promessa: 'Portfólio que destrava propostas',
+          subtitulo: 'Operadoras difíceis de achar — nunca perca uma venda.',
           bullets: [
-            'Crescimento organizado',
-            'Suporte para propostas complexas',
-            'Perfil empresarial',
-            'Processos sólidos',
-            'Modelo estratégico de escala'
+            '💰 Mix de operadoras estratégicas e nichos específicos',
+            '⚡ Opções alternativas quando a principal não fecha preço',
+            '🎯 Sempre tem plano B e C na manga'
           ],
-          highlight: 'Para quem quer crescer com organização.'
+          badge: '🔥 Nunca perca venda por falta de opção',
+          highlight: 'Crescimento organizado com alternativas reais de portfólio.'
         }
       },
       {
@@ -2154,15 +2219,16 @@
         loginUrl: 'http://affinity.grupogarciaseguradoras.com.br/login',
         dataStore: 'affinity',
         diferenciais: {
-          titulo: 'AFFINITY',
+          titulo: 'Affinity',
+          promessa: 'Mesa completa — produto pra cada perfil',
+          subtitulo: 'Carteira ampla com flexibilidade por operadora e faixa.',
           bullets: [
-            'Operadoras premium',
-            'Modelo consultivo (ticket maior)',
-            'Suporte próximo ao corretor',
-            'Carteira qualificada',
-            'Produção com posicionamento forte'
+            '💰 Múltiplas operadoras com tabelas fortes por faixas',
+            '⚡ Volume + flexibilidade para qualquer perfil de cliente',
+            '🎯 Posicionamento premium com portfólio abrangente'
           ],
-          highlight: 'Venda com posicionamento premium.'
+          badge: '🔥 Mais produto = mais oportunidade',
+          highlight: 'Venda com posicionamento premium e portfólio completo.'
         }
       },
       {
@@ -2171,14 +2237,15 @@
         loginUrl: 'https://valorize.grupogarciaseguradoras.com.br/login',
         dataStore: 'valorize',
         diferenciais: {
-          titulo: 'VALORIZE SEGUROS',
+          titulo: 'Valorize',
+          promessa: 'Chega de comissão com desconto',
+          subtitulo: 'Sem retenção. Mais margem. Pagamento frequente.',
           bullets: [
-            'Comissão antecipada forte',
-            'Comissão parcelada acima do padrão',
-            'Sem retenção (margem limpa)',
-            'Receba mais de 1x na semana',
-            'Backoffice para emissão rápida'
+            '💰 Sem retenção de comissão — 100% cai pra você',
+            '⚡ Pagamento 2× por semana — sem esperar 30 dias',
+            '🗂️ Backoffice pronto para emissão rápida, sem burocracia'
           ],
+          badge: '🔥 Receba mais vezes, perca menos',
           highlight: 'Comissão limpa. Sem retenção. Mais margem no seu bolso.'
         }
       },
@@ -2188,15 +2255,16 @@
         loginUrl: 'https://assury.grupogarciaseguradoras.com.br/login',
         dataStore: 'assury',
         diferenciais: {
-          titulo: 'ASSURY',
+          titulo: 'Assury',
+          promessa: 'Ticket alto + estrutura que funciona',
+          subtitulo: 'Portfólio para carteira madura e nichos de alto valor.',
           bullets: [
-            'Operação estruturada',
-            'Foco total em performance',
-            'Estrutura comercial ativa',
-            'Modelo escalável',
-            'Direcionamento estratégico'
+            '💰 Forte em produtos sênior e nichos de ticket alto',
+            '⚡ Estrutura comercial ativa: suporte real, não só ferramenta',
+            '🎯 Recorrência: carteira que paga mês após mês'
           ],
-          highlight: 'Estrutura pronta para escalar.'
+          badge: '🔥 Carteira madura = comissão estável',
+          highlight: 'Estrutura pronta para escalar com consistência.'
         }
       }
     ];
@@ -2316,12 +2384,18 @@
         // Back face
         const back = document.createElement('div');
         back.className = 'store-card-face store-card-back';
+        const d = store.diferenciais;
         back.innerHTML = `
-          <h3>${store.diferenciais.titulo}</h3>
+          <div class="back-header">
+            <h3>${d.titulo}</h3>
+            <p class="back-promessa">${d.promessa}</p>
+          </div>
+          <p class="back-subtitulo">${d.subtitulo}</p>
           <ul>
-            ${store.diferenciais.bullets.map(bullet => `<li>${bullet}</li>`).join('')}
+            ${d.bullets.map(b => `<li>${b}</li>`).join('')}
           </ul>
-          <div class="highlight">${store.diferenciais.highlight}</div>
+          <div class="back-badge">${d.badge}</div>
+          <a href="${store.loginUrl}" target="_blank" rel="noopener noreferrer" class="back-cta">→ Entrar na ${store.nome}</a>
         `;
         
         inner.appendChild(front);
@@ -2445,6 +2519,7 @@
         });
 
         card.addEventListener('pointerup', (e) => {
+          if (e.target.tagName === 'A' || e.target.closest('a')) return;
           if (!isMoving) {
             card.classList.toggle('is-flipped');
           }
