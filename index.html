@@ -2397,8 +2397,8 @@
         const front = document.createElement('div');
         front.className = 'flip-face flip-front';
         front.style.backgroundImage = `url('${store.imageSrc}')`;
-        front.style.backgroundSize = 'cover';
-        front.style.backgroundPosition = 'center 35%';
+        front.style.backgroundSize = 'contain';
+        front.style.backgroundPosition = 'center';
         front.style.backgroundRepeat = 'no-repeat';
         const loginHref = store.loginUrl || '#';
         front.innerHTML = `
