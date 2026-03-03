@@ -205,52 +205,7 @@
       margin-left: 4px;
     }
 
-    /* Projeto Valorize Section */
-    .valorize-section {
-      background: linear-gradient(135deg, #1e3a5f 0%, #0b1120 100%);
-      color: #fff;
-      padding: 60px 0;
-    }
 
-    .valorize-header {
-      text-align: center;
-      margin-bottom: 40px;
-    }
-
-    .valorize-logo {
-      max-width: 280px;
-      margin: 0 auto 20px;
-    }
-
-    .valorize-title {
-      font-size: 1.8rem;
-      margin: 0 0 16px;
-      color: #fff;
-    }
-
-    .valorize-description {
-      font-size: 1rem;
-      color: #cbd5f5;
-      max-width: 700px;
-      margin: 0 auto 30px;
-      line-height: 1.7;
-    }
-
-    .valorize-table-container {
-      text-align: center;
-    }
-
-    .valorize-table-container img {
-      max-width: 100%;
-      border-radius: 16px;
-      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
-    }
-
-    .valorize-table-title {
-      font-size: 1.2rem;
-      margin-bottom: 20px;
-      color: #fbbf24;
-    }
 
     .hero-video-caption {
       margin-top: 10px;
@@ -400,6 +355,20 @@
       flex: 0 0 260px;
     }
 
+    .validation-image img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 12px;
+    }
+
+    .cta-family img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 12px;
+    }
+
     .cta-section {
       background: #1d4ed8;
       color: #eef2ff;
@@ -478,6 +447,15 @@
 
       .benefit-grid {
         grid-template-columns: minmax(0, 1fr);
+      }
+
+      .validation-inner {
+        flex-direction: column;
+      }
+
+      .validation-image {
+        flex: 0 0 100%;
+        max-width: 100%;
       }
 
       .hero-title { font-size: 1.6rem; }
@@ -808,25 +786,7 @@
       </div>
     </section>
 
-    <!-- PROJETO VALORIZE -->
-    <section class="valorize-section">
-      <div class="container">
-        <div class="valorize-header">
-          <img src="projeto valorize logo.png" alt="Projeto Valorize" class="valorize-logo" />
-          <h2 class="valorize-title">Reconhecimento e Comissionamento para Parceiros</h2>
-          <p class="valorize-description">
-            O Projeto Valorize é o nosso programa exclusivo de reconhecimento e comissionamento para parceiros. 
-            Valorizamos quem está ao nosso lado, oferecendo comissões atrativas e benefícios que crescem junto com você. 
-            Quanto mais você vende, mais você ganha — simples assim. É a nossa forma de dizer obrigado e incentivar 
-            o seu sucesso contínuo.
-          </p>
-        </div>
-        <div class="valorize-table-container">
-          <h3 class="valorize-table-title">📊 Tabela de Comissionamento</h3>
-          <img src="tabela-comissionamento.png" alt="Tabela detalhada de comissionamento do Projeto Valorize com diferentes operadoras e percentuais de comissão antecipada e parcelada" />
-        </div>
-      </div>
-    </section>
+
 
     <!-- VALIDAÇÃO -->
     <section class="validation-strip">
