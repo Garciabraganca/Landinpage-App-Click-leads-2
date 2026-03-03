@@ -749,8 +749,6 @@
 
     .store-slide .flip-front {
       transform: rotateY(0deg);
-      background: linear-gradient(180deg, rgba(15, 23, 42, 0.25) 0%, rgba(15, 23, 42, 0.9) 75%),
-        linear-gradient(150deg, #334155 0%, #111827 100%);
       background-size: cover;
       background-position: center 35%;
       background-repeat: no-repeat;
@@ -776,19 +774,17 @@
       content: "";
       position: absolute;
       inset: 0;
-      background-size: cover;
-      background-position: center 35%;
-      background-repeat: no-repeat;
-      opacity: 0.92;
-      z-index: 0;
+      background: none;
+      z-index: -1;
     }
 
     .store-slide .flip-front::after {
       content: "";
       position: absolute;
       inset: 0;
-      background: linear-gradient(180deg, rgba(2, 6, 23, 0.15) 0%, rgba(2, 6, 23, 0.82) 78%);
+      background: linear-gradient(180deg, rgba(2, 6, 23, 0.3) 0%, rgba(2, 6, 23, 0.88) 75%);
       z-index: 1;
+      pointer-events: none;
     }
 
     .store-slide .flip-front .store-content {
