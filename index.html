@@ -46,6 +46,15 @@
 
     * { box-sizing: border-box; }
 
+    html, body {
+      overflow-x: hidden;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
       margin: 0;
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
@@ -67,6 +76,7 @@
     .hero-fold {
       position: relative;
       min-height: 100vh;
+      min-height: 100dvh;
       overflow: hidden;
       display: flex;
       align-items: center;
@@ -124,17 +134,17 @@
     }
 
     .hero-fold-content h1 {
-      font-size: clamp(1.8rem, 5vw, 3.2rem);
+      font-size: clamp(1.5rem, 5vw, 3.2rem);
       font-weight: 800;
       line-height: 1.15;
-      margin: 0 0 20px;
+      margin: 0 0 16px;
       text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
     }
 
     .hero-fold-content p {
-      font-size: clamp(1rem, 2.5vw, 1.25rem);
+      font-size: clamp(0.95rem, 2.5vw, 1.25rem);
       color: #e0e7ff;
-      margin: 0 0 30px;
+      margin: 0 0 24px;
       line-height: 1.5;
       text-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
     }
@@ -160,6 +170,8 @@
       text-decoration: none;
       transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease;
       box-shadow: 0 14px 30px rgba(0, 0, 0, 0.35);
+      -webkit-tap-highlight-color: transparent;
+      touch-action: manipulation;
     }
 
     .hero-fold-cta-primary {
@@ -193,6 +205,39 @@
       text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
     }
 
+    /* Scroll indicator - guia visual para o usuário vindo do Instagram */
+    .hero-scroll-hint {
+      position: absolute;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      color: rgba(255, 255, 255, 0.6);
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      animation: scrollBounce 2s ease-in-out infinite;
+    }
+
+    .hero-scroll-hint::after {
+      content: '';
+      width: 20px;
+      height: 20px;
+      border-right: 2px solid rgba(251, 191, 36, 0.6);
+      border-bottom: 2px solid rgba(251, 191, 36, 0.6);
+      transform: rotate(45deg);
+    }
+
+    @keyframes scrollBounce {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(8px); }
+    }
+
     @media (max-width: 640px) {
       .hero-fold-ctas {
         flex-direction: column;
@@ -201,16 +246,6 @@
 
       .hero-fold-cta {
         width: 100%;
-      }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      .hero-fold-video video {
-        display: none;
-      }
-
-      .hero-fold {
-        background: #ffffff;
       }
     }
 
@@ -407,36 +442,390 @@
       white-space: nowrap;
     }
 
-    /* Card responsivo */
-    @media (max-width: 600px) {
+    /* Card responsivo - handled by main mobile media queries below */
+
+    /* ==================== MODAL DIFERENCIAIS ==================== */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      background: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      animation: modalFadeIn 0.25s ease;
+    }
+
+    .modal-overlay.active {
+      display: flex;
+    }
+
+    @keyframes modalFadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes modalSlideUp {
+      from { opacity: 0; transform: translateY(30px) scale(0.95); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    .modal-content {
+      background: #1e1d1c;
+      border-radius: 24px;
+      max-width: 520px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      padding: 36px 32px;
+      position: relative;
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6);
+      border: 1px solid rgba(251, 191, 36, 0.15);
+      animation: modalSlideUp 0.3s ease;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 14px;
+      right: 16px;
+      background: rgba(255, 255, 255, 0.08);
+      border: none;
+      color: #f8f8f8;
+      font-size: 1.3rem;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: grid;
+      place-items: center;
+      transition: background 0.2s;
+    }
+
+    .modal-close:hover {
+      background: rgba(249, 115, 22, 0.3);
+    }
+
+    .modal-store-name {
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: #fbbf24;
+      margin: 0 0 4px;
+    }
+
+    .modal-store-role {
+      font-size: 0.9rem;
+      color: #94a3b8;
+      margin: 0 0 20px;
+    }
+
+    .modal-diferenciais-title {
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #f97316;
+      margin: 0 0 12px;
+    }
+
+    .modal-diferenciais-list {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 28px;
+    }
+
+    .modal-diferenciais-list li {
+      color: #e2e8f0;
+      font-size: 0.9rem;
+      line-height: 1.5;
+      padding: 8px 0 8px 20px;
+      position: relative;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .modal-diferenciais-list li::before {
+      content: '\2713';
+      position: absolute;
+      left: 0;
+      color: #fbbf24;
+      font-weight: bold;
+    }
+
+    .modal-diferenciais-list li:last-child {
+      border-bottom: none;
+    }
+
+    .modal-divider {
+      border: none;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      margin: 24px 0;
+    }
+
+    .modal-form-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #f8f8f8;
+      margin: 0 0 16px;
+    }
+
+    .modal-form {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .modal-form input,
+    .modal-form select {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 10px;
+      padding: 12px 14px;
+      color: #f8f8f8;
+      font-size: 0.9rem;
+      font-family: inherit;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .modal-form input::placeholder {
+      color: #6b7280;
+    }
+
+    .modal-form input:focus,
+    .modal-form select:focus {
+      border-color: #f97316;
+      box-shadow: 0 0 0 2px rgba(249, 115, 22, 0.15);
+    }
+
+    .modal-form select {
+      cursor: pointer;
+      appearance: auto;
+    }
+
+    .modal-form select option {
+      background: #1e1d1c;
+      color: #f8f8f8;
+    }
+
+    .modal-form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    @media (max-width: 480px) {
+      .modal-form-row {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .modal-submit {
+      background: linear-gradient(to right, #f59e0b, #f97316);
+      color: #111827;
+      border: none;
+      border-radius: 10px;
+      padding: 14px;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform 0.15s, box-shadow 0.15s, filter 0.15s;
+      box-shadow: 0 8px 20px rgba(249, 115, 22, 0.3);
+      margin-top: 4px;
+    }
+
+    .modal-submit:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 30px rgba(249, 115, 22, 0.5);
+      filter: brightness(1.05);
+    }
+
+    .modal-submit:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .modal-success {
+      text-align: center;
+      padding: 20px 0;
+    }
+
+    .modal-success-icon {
+      font-size: 3rem;
+      margin-bottom: 12px;
+    }
+
+    .modal-success h3 {
+      color: #fbbf24;
+      font-size: 1.3rem;
+      margin: 0 0 8px;
+    }
+
+    .modal-success p {
+      color: #94a3b8;
+      font-size: 0.9rem;
+      margin: 0;
+    }
+
+    /* Notificação toast */
+    .toast-container {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 10001;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .toast {
+      background: #1e293b;
+      color: #f8f8f8;
+      padding: 14px 20px;
+      border-radius: 12px;
+      font-size: 0.85rem;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+      border-left: 4px solid #fbbf24;
+      animation: toastIn 0.3s ease, toastOut 0.3s ease 4.7s forwards;
+      max-width: 360px;
+    }
+
+    .toast-title {
+      font-weight: 700;
+      margin-bottom: 4px;
+      color: #fbbf24;
+    }
+
+    @keyframes toastIn {
+      from { opacity: 0; transform: translateX(100px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+
+    @keyframes toastOut {
+      from { opacity: 1; }
+      to { opacity: 0; transform: translateY(-10px); }
+    }
+
+    /* Indicador hover/tap no card */
+    .loja-card {
+      cursor: pointer;
+      position: relative;
+      -webkit-tap-highlight-color: transparent;
+      touch-action: manipulation;
+    }
+
+    .loja-card::after {
+      content: 'Ver diferenciais \2192';
+      position: absolute;
+      bottom: 10px;
+      right: 16px;
+      font-size: 0.7rem;
+      color: #fbbf24;
+      opacity: 0;
+      transition: opacity 0.3s;
+      font-weight: 600;
+    }
+
+    .loja-card:hover::after {
+      opacity: 1;
+    }
+
+    /* ==================== MOBILE-FIRST / INSTAGRAM FLOW ==================== */
+    @media (max-width: 768px) {
+      /* Hero mobile - continuidade do anuncio Instagram */
+      .hero-fold {
+        min-height: 100vh;
+        min-height: 100dvh;
+      }
+
+      .hero-fold-content {
+        padding: 24px 16px;
+        max-width: 100%;
+      }
+
+      .hero-fold-content h1 {
+        font-size: 1.6rem;
+        line-height: 1.2;
+        margin-bottom: 12px;
+      }
+
+      .hero-fold-content p {
+        font-size: 0.95rem;
+        margin-bottom: 20px;
+      }
+
+      .hero-fold-cta {
+        padding: 16px 28px;
+        font-size: 1rem;
+        width: 100%;
+      }
+
+      .hero-fold-support {
+        font-size: 0.8rem;
+      }
+
+      /* Lojas section mobile */
+      .lojas-section {
+        padding: 50px 0;
+      }
+
+      .lojas-header {
+        margin-bottom: 40px;
+        padding: 0 16px;
+      }
+
+      .lojas-header h2 {
+        font-size: 1.8rem;
+      }
+
+      .lojas-header p {
+        font-size: 0.95rem;
+      }
+
       .lojas-grid {
         grid-template-columns: 1fr;
-        padding: 0 20px;
+        gap: 24px;
+        padding: 0 16px;
+      }
+
+      /* Card sempre mostra indicador em mobile (tap) */
+      .loja-card::after {
+        content: 'Toque para ver diferenciais \2192';
+        opacity: 0.7;
+        bottom: 8px;
+        right: 12px;
+        font-size: 0.65rem;
       }
 
       .loja-card {
-        margin: 0;
-        padding: 0 30px 40px;
-        width: 100%;
-        text-align: center;
+        padding: 0 20px 44px;
         flex-direction: column;
+        text-align: center;
+      }
+
+      .loja-card img {
+        margin: -40px auto 16px;
+        width: 100%;
+        max-width: 280px;
+        height: 180px;
+        margin-left: auto;
+        margin-right: auto;
+        border-radius: 20px;
       }
 
       .loja-card-content h2 {
         font-size: 1.3rem;
       }
 
-      .loja-card img {
-        margin: -60px 0 20px;
-        width: 100%;
-        max-width: 100%;
-        height: 200px;
-        margin-left: 0;
-        margin-right: 0;
+      .loja-card-content h3 {
+        font-size: 0.8rem;
       }
 
       .loja-card-content p {
-        max-width: 360px;
+        font-size: 0.8rem;
+        max-width: 300px;
         margin-left: auto;
         margin-right: auto;
       }
@@ -444,20 +833,255 @@
       .loja-card-socials {
         justify-content: center;
       }
+
+      .loja-card-socials a span {
+        width: 40px;
+        height: 40px;
+        font-size: 0.7rem;
+      }
+
+      .loja-card-socials a:first-child::before {
+        width: 44px;
+        height: 44px;
+      }
+
+      /* Modal fullscreen mobile */
+      .modal-overlay {
+        padding: 0;
+        align-items: flex-end;
+      }
+
+      .modal-content {
+        max-width: 100%;
+        max-height: 95vh;
+        max-height: 95dvh;
+        border-radius: 24px 24px 0 0;
+        padding: 28px 20px 32px;
+        animation: modalSlideUpMobile 0.3s ease;
+      }
+
+      @keyframes modalSlideUpMobile {
+        from { transform: translateY(100%); }
+        to { transform: translateY(0); }
+      }
+
+      .modal-store-name {
+        font-size: 1.3rem;
+      }
+
+      .modal-diferenciais-list li {
+        font-size: 0.85rem;
+        padding: 6px 0 6px 18px;
+      }
+
+      .modal-form input,
+      .modal-form select {
+        padding: 14px 14px;
+        font-size: 1rem;
+      }
+
+      .modal-form-row {
+        grid-template-columns: 1fr;
+      }
+
+      .modal-submit {
+        padding: 16px;
+        font-size: 1.05rem;
+      }
+
+      /* Toast mobile */
+      .toast-container {
+        top: auto;
+        bottom: 20px;
+        right: 12px;
+        left: 12px;
+      }
+
+      .toast {
+        max-width: 100%;
+        font-size: 0.8rem;
+      }
+
+      /* Demais seções mobile */
+      .funciona-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .story-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .problem-solution {
+        grid-template-columns: 1fr;
+      }
+
+      .benefit-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .validation-inner {
+        flex-direction: column;
+      }
+
+      .validation-image {
+        flex: 0 0 100%;
+        max-width: 100%;
+      }
+
+      .cta-button-item.boutique {
+        max-width: 100%;
+      }
+
+      /* Stores Swiper Section mobile */
+      .stores-swiper-section {
+        padding: 50px 12px;
+      }
+
+      .stores-swiper-header h2 {
+        font-size: 1.6rem;
+      }
+
+      .stores-swiper-header p {
+        font-size: 0.9rem;
+      }
+
+      .stores-swiper .swiper-slide {
+        height: 280px;
+      }
+
+      .store-slide .flip-back {
+        padding: 20px 16px 14px;
+      }
+
+      .store-slide .flip-back .back-header h3 {
+        font-size: 18px;
+      }
+
+      .store-slide .flip-back .back-list li {
+        font-size: 14px;
+        margin: 8px 0;
+      }
+
+      /* Como Funciona mobile */
+      .como-funciona-section {
+        padding: 50px 16px;
+      }
+
+      .section-header h2 {
+        font-size: 1.6rem;
+      }
+
+      .section-header p {
+        font-size: 0.95rem;
+      }
+
+      .funciona-card {
+        padding: 28px 20px;
+      }
+
+      .funciona-card h3 {
+        font-size: 1.1rem;
+      }
+
+      /* FAQ mobile */
+      .faq-section {
+        padding: 50px 16px;
+      }
+
+      .faq-header h2 {
+        font-size: 1.6rem;
+        margin-bottom: 36px;
+      }
+
+      .faq-item summary {
+        font-size: 0.9rem;
+        padding: 16px;
+      }
+
+      .faq-item p {
+        font-size: 0.85rem;
+        padding: 16px;
+      }
+
+      /* CTA Final mobile */
+      .cta-final-section {
+        padding: 50px 16px;
+      }
+
+      .cta-final-header h2 {
+        font-size: 1.6rem;
+      }
+
+      .cta-final-header p {
+        font-size: 0.95rem;
+      }
+
+      .cta-buttons-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
+
+      /* Main sections mobile */
+      section {
+        padding: 36px 0;
+      }
+
+      .section-title {
+        font-size: 1.25rem;
+      }
+
+      .benefits-strip {
+        padding: 30px 0;
+      }
+
+      .validation-strip {
+        padding: 24px 0;
+      }
+
+      /* Footer mobile */
+      footer .footer-inner {
+        flex-direction: column;
+        text-align: center;
+        gap: 12px;
+      }
+
+      /* Section placeholder mobile */
+      .section-placeholder {
+        padding: 40px 16px;
+      }
     }
 
     @media (max-width: 440px) {
       .loja-card img {
-        width: 50vw;
-        height: 50vw;
+        width: 55vw;
+        height: 55vw;
+        max-width: 180px;
+        max-height: 180px;
         border-radius: 50%;
-        border: 12px solid var(--card-bg);
+        border: 10px solid var(--card-bg);
         box-shadow: none;
-        margin: -100px auto 20px;
+        margin: -70px auto 16px;
+      }
+
+      .hero-fold-content h1 {
+        font-size: 1.35rem;
+      }
+
+      .modal-content {
+        padding: 24px 16px 28px;
       }
     }
 
+    /* Safe area para dispositivos com notch */
+    @supports (padding-bottom: env(safe-area-inset-bottom)) {
+      .modal-content {
+        padding-bottom: calc(32px + env(safe-area-inset-bottom));
+      }
 
+      footer {
+        padding-bottom: calc(20px + env(safe-area-inset-bottom));
+      }
+    }
 
     main { background: #f9fafb; }
 
@@ -631,31 +1255,14 @@
 
     footer a:hover { text-decoration: underline; }
 
-    @media (max-width: 900px) {
-      .problem-solution,
-      .benefit-grid,
-
-    }
-
-    @media (max-width: 720px) {
-      .story-grid {
-        grid-template-columns: minmax(0, 1fr);
+    @media (max-width: 768px) {
+      .funciona-grid {
+        grid-template-columns: 1fr;
       }
 
-      .benefit-grid {
-        grid-template-columns: minmax(0, 1fr);
-      }
-
-      .validation-inner {
-        flex-direction: column;
-      }
-
-      .validation-image {
-        flex: 0 0 100%;
+      .cta-button-item.boutique {
         max-width: 100%;
       }
-
-      .hero-title { font-size: 1.6rem; }
     }
 
     /* ==================== STORES SWIPER COVERFLOW ==================== */
@@ -1307,12 +1914,8 @@
     }
 
     @media (max-width: 768px) {
-      .funciona-grid {
+      .cta-buttons-grid {
         grid-template-columns: 1fr;
-      }
-
-      .cta-button-item.boutique {
-        max-width: 100%;
       }
     }
 
@@ -1350,6 +1953,7 @@
         Tecnologia própria • Integração com WhatsApp • Operação pronta para escala
       </div>
     </div>
+    <div class="hero-scroll-hint">Role para baixo</div>
   </section>
 
   <!-- LOJAS -->
@@ -1360,22 +1964,22 @@
         muted
         loop
         playsinline
-        preload="auto"
+        preload="none"
         disablepictureinpicture
         disableremoteplayback
+        data-lazy-src="video_entrada.mp4"
       >
-        <source src="video_entrada.mp4" type="video/mp4">
       </video>
     </div>
     <div class="lojas-section-overlay"></div>
     <div class="lojas-header">
       <h2>Lojas</h2>
-      <p>Conheça as lojas que fazem parte do nosso ecossistema.</p>
+      <p>Conheça as lojas que fazem parte do nosso ecossistema e seus diferenciais.</p>
     </div>
 
     <div class="lojas-grid">
       <!-- ZENTRIX -->
-      <div class="loja-card">
+      <div class="loja-card" data-store="zentrix">
         <img src="Fachada Zentrix.png" alt="Zentrix">
         <div class="loja-card-content">
           <h2>Zentrix</h2>
@@ -1389,7 +1993,7 @@
       </div>
 
       <!-- SERRA -->
-      <div class="loja-card">
+      <div class="loja-card" data-store="serra">
         <img src="Fachada serra.png" alt="Serra">
         <div class="loja-card-content">
           <h2>Serra</h2>
@@ -1403,7 +2007,7 @@
       </div>
 
       <!-- BLISS -->
-      <div class="loja-card">
+      <div class="loja-card" data-store="bliss">
         <img src="Fachada Bliss.jpeg" alt="Bliss">
         <div class="loja-card-content">
           <h2>Bliss</h2>
@@ -1417,7 +2021,7 @@
       </div>
 
       <!-- ALLEMAN -->
-      <div class="loja-card">
+      <div class="loja-card" data-store="alleman">
         <img src="Fachada Alleman.jpeg" alt="Alleman">
         <div class="loja-card-content">
           <h2>Alleman</h2>
@@ -1431,7 +2035,7 @@
       </div>
 
       <!-- AFFINITY -->
-      <div class="loja-card">
+      <div class="loja-card" data-store="affinity">
         <img src="Fachada Affinity.jpeg" alt="Affinity">
         <div class="loja-card-content">
           <h2>Affinity</h2>
@@ -1445,7 +2049,7 @@
       </div>
 
       <!-- VALORIZE -->
-      <div class="loja-card">
+      <div class="loja-card" data-store="valorize">
         <img src="Fachada Valorize.jpeg" alt="Valorize">
         <div class="loja-card-content">
           <h2>Valorize</h2>
@@ -1459,7 +2063,7 @@
       </div>
 
       <!-- ASSURY -->
-      <div class="loja-card">
+      <div class="loja-card" data-store="assury">
         <img src="fachada-assury.jpeg" alt="Assury">
         <div class="loja-card-content">
           <h2>Assury</h2>
@@ -1473,7 +2077,7 @@
       </div>
 
       <!-- DIPLAN -->
-      <div class="loja-card">
+      <div class="loja-card" data-store="diplan">
         <img src="Fachada Diplan.png" alt="Diplan">
         <div class="loja-card-content">
           <span class="loja-card-badge">Boutique</span>
@@ -1731,6 +2335,44 @@
     </div>
   </section>
 
+  <!-- MODAL DIFERENCIAIS -->
+  <div class="modal-overlay" id="modalDiferenciais">
+    <div class="modal-content">
+      <button class="modal-close" id="modalClose" type="button" aria-label="Fechar">&times;</button>
+      <h2 class="modal-store-name" id="modalStoreName"></h2>
+      <p class="modal-store-role" id="modalStoreRole"></p>
+      <p class="modal-diferenciais-title">Diferenciais</p>
+      <ul class="modal-diferenciais-list" id="modalDiferenciaisList"></ul>
+      <hr class="modal-divider">
+      <h3 class="modal-form-title">Tenho interesse — quero saber mais</h3>
+      <form class="modal-form" id="modalForm">
+        <input type="hidden" id="formStoreName" name="loja" value="">
+        <input type="text" id="formNome" name="nome" placeholder="Seu nome completo" required>
+        <div class="modal-form-row">
+          <input type="tel" id="formTelefone" name="telefone" placeholder="Telefone (DDD)" required>
+          <input type="email" id="formEmail" name="email" placeholder="E-mail" required>
+        </div>
+        <input type="text" id="formCorretora" name="corretora" placeholder="Corretora em que trabalha (se houver)">
+        <select id="formAutonomo" name="autonomo" required>
+          <option value="" disabled selected>Você é autônomo?</option>
+          <option value="sim">Sim, sou autônomo</option>
+          <option value="nao">Não, tenho vínculo com corretora</option>
+        </select>
+        <button type="submit" class="modal-submit" id="formSubmitBtn">
+          Enviar interesse
+        </button>
+      </form>
+      <div class="modal-success" id="modalSuccess" style="display:none;">
+        <div class="modal-success-icon">✅</div>
+        <h3>Interesse registrado!</h3>
+        <p>A filial foi notificada. Em breve um supervisor entrará em contato.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST CONTAINER -->
+  <div class="toast-container" id="toastContainer"></div>
+
   <!-- RODAPÉ -->
   <footer>
     <div class="container footer-inner">
@@ -1980,6 +2622,44 @@
     document.addEventListener('DOMContentLoaded', function() {
       renderCoverflowSlides();
 
+      // ==================== LAZY-LOAD VÍDEO DA SEGUNDA DOBRA ====================
+      const lazyVideos = document.querySelectorAll('video[data-lazy-src]');
+      if ('IntersectionObserver' in window) {
+        const videoObserver = new IntersectionObserver(function(entries) {
+          entries.forEach(function(entry) {
+            if (entry.isIntersecting) {
+              const video = entry.target;
+              const src = video.getAttribute('data-lazy-src');
+              if (src) {
+                const source = document.createElement('source');
+                source.src = src;
+                source.type = 'video/mp4';
+                video.appendChild(source);
+                video.load();
+                video.removeAttribute('data-lazy-src');
+              }
+              videoObserver.unobserve(video);
+            }
+          });
+        }, { rootMargin: '200px 0px' }); // Start loading 200px before visible
+
+        lazyVideos.forEach(function(video) {
+          videoObserver.observe(video);
+        });
+      } else {
+        // Fallback: load immediately
+        lazyVideos.forEach(function(video) {
+          const src = video.getAttribute('data-lazy-src');
+          if (src) {
+            const source = document.createElement('source');
+            source.src = src;
+            source.type = 'video/mp4';
+            video.appendChild(source);
+            video.load();
+          }
+        });
+      }
+
       // ==================== RENDERIZAR CTA FINAL ====================
       const ctaButtonsGrid = document.getElementById('ctaButtonsGrid');
       if (ctaButtonsGrid && typeof STORES !== 'undefined') {
@@ -2086,7 +2766,7 @@
         effect: 'coverflow',
         grabCursor: true,
         centeredSlides: true,
-        slidesPerView: 2.2,
+        slidesPerView: 1.3,
         loop: true,
         speed: 600,
         coverflowEffect: {
@@ -2101,6 +2781,15 @@
           clickable: true
         },
         breakpoints: {
+          480: {
+            slidesPerView: 1.5
+          },
+          640: {
+            slidesPerView: 1.8
+          },
+          768: {
+            slidesPerView: 2.2
+          },
           1024: {
             slidesPerView: 2.75
           }
@@ -2113,6 +2802,212 @@
         });
       });
     }
+
+    // ==================== MODAL + FORMULÁRIO + NOTIFICAÇÃO ====================
+
+    // Mapa de lojas com diferenciais completos (merge STORES + COVERFLOW_STORES)
+    function getStoreData(slug) {
+      const store = STORES.find(s => s.slug === slug);
+      const coverflow = COVERFLOW_STORES.find(s => s.dataStore === slug);
+      if (!store) return null;
+      return {
+        nome: store.nome,
+        slug: store.slug,
+        role: getRoleBySlug(slug),
+        diferenciais: store.diferenciais || [],
+        bullets: coverflow ? coverflow.back.bullets : [],
+        loginUrl: store.loginUrl,
+        isBoutique: store.isBoutique
+      };
+    }
+
+    function getRoleBySlug(slug) {
+      const roles = {
+        zentrix: 'Plataforma de Gestão Empresarial',
+        serra: 'Consultoria Estratégica',
+        bliss: 'Gestão Integrada',
+        alleman: 'Consultoria Estratégica',
+        affinity: 'Rede de Profissionais',
+        valorize: 'Programa de Reconhecimento',
+        assury: 'Segurança e Compliance',
+        diplan: 'Boutique Exclusiva'
+      };
+      return roles[slug] || '';
+    }
+
+    // Abre modal com diferenciais da loja
+    function openModal(slug) {
+      const data = getStoreData(slug);
+      if (!data) return;
+
+      document.getElementById('modalStoreName').textContent = data.nome;
+      document.getElementById('modalStoreRole').textContent = data.role;
+      document.getElementById('formStoreName').value = data.nome;
+
+      // Mescla diferenciais + bullets (sem duplicatas)
+      const allItems = [...new Set([...data.diferenciais, ...data.bullets])];
+      const list = document.getElementById('modalDiferenciaisList');
+      list.innerHTML = allItems.map(item => `<li>${item}</li>`).join('');
+
+      // Reset form
+      document.getElementById('modalForm').style.display = '';
+      document.getElementById('modalSuccess').style.display = 'none';
+      document.getElementById('modalForm').reset();
+      document.getElementById('formStoreName').value = data.nome;
+      document.getElementById('formSubmitBtn').disabled = false;
+      document.getElementById('formSubmitBtn').textContent = 'Enviar interesse';
+
+      document.getElementById('modalDiferenciais').classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+      document.getElementById('modalDiferenciais').classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    // Fecha modal ao clicar fora ou no X
+    document.getElementById('modalClose').addEventListener('click', closeModal);
+    document.getElementById('modalDiferenciais').addEventListener('click', function(e) {
+      if (e.target === this) closeModal();
+    });
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') closeModal();
+    });
+
+    // Toast de notificação
+    function showToast(title, message) {
+      const container = document.getElementById('toastContainer');
+      const toast = document.createElement('div');
+      toast.className = 'toast';
+      toast.innerHTML = `<div class="toast-title">${title}</div><div>${message}</div>`;
+      container.appendChild(toast);
+      setTimeout(() => { if (toast.parentNode) toast.remove(); }, 5000);
+    }
+
+    // ==================== API DE NOTIFICAÇÃO (SIMULADA) ====================
+    /**
+     * NotificationAPI - Simula envio de notificação para:
+     *   1. Admin da filial
+     *   2. Supervisor da filial
+     * Em produção, substituir por fetch() real para endpoint do backend.
+     */
+    const NotificationAPI = {
+      endpoint: 'https://api.clickleads.com.br/notifications', // Endpoint de produção (simulado)
+
+      async notifyBranch(payload) {
+        console.log('[NotificationAPI] Enviando notificação...', payload);
+
+        // Simula chamada de rede (700ms)
+        return new Promise((resolve) => {
+          setTimeout(() => {
+            const response = {
+              success: true,
+              timestamp: new Date().toISOString(),
+              notificationsSent: [
+                {
+                  recipient: 'admin@filial.clickleads.com.br',
+                  role: 'Administrador da Filial',
+                  channel: 'email+whatsapp',
+                  status: 'delivered'
+                },
+                {
+                  recipient: 'supervisor@filial.clickleads.com.br',
+                  role: 'Supervisor',
+                  channel: 'email+whatsapp',
+                  status: 'delivered'
+                }
+              ],
+              corretor: payload
+            };
+            console.log('[NotificationAPI] Resposta:', response);
+            resolve(response);
+          }, 700);
+        });
+      }
+    };
+
+    // Form submit
+    document.getElementById('modalForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+
+      const btn = document.getElementById('formSubmitBtn');
+      btn.disabled = true;
+      btn.textContent = 'Enviando...';
+
+      const payload = {
+        loja: document.getElementById('formStoreName').value,
+        nome: document.getElementById('formNome').value.trim(),
+        telefone: document.getElementById('formTelefone').value.trim(),
+        email: document.getElementById('formEmail').value.trim(),
+        corretora: document.getElementById('formCorretora').value.trim() || 'Não informada',
+        autonomo: document.getElementById('formAutonomo').value,
+        dataEnvio: new Date().toISOString()
+      };
+
+      try {
+        const result = await NotificationAPI.notifyBranch(payload);
+
+        if (result.success) {
+          // Mostra sucesso no modal
+          document.getElementById('modalForm').style.display = 'none';
+          document.getElementById('modalSuccess').style.display = '';
+
+          // Toast para admin
+          showToast(
+            '📩 Notificação enviada',
+            `Admin e Supervisor da filial foram avisados sobre o interesse de ${payload.nome} na loja ${payload.loja}.`
+          );
+
+          // Toast detalhes
+          result.notificationsSent.forEach(n => {
+            showToast(
+              `✅ ${n.role}`,
+              `Canal: ${n.channel} • Status: ${n.status}`
+            );
+          });
+
+          // Meta Pixel
+          if (typeof fbq !== 'undefined') {
+            fbq('track', 'Lead', { content_name: payload.loja });
+          }
+
+          // GA4
+          if (typeof gtag !== 'undefined') {
+            gtag('event', 'generate_lead', {
+              event_category: 'formulario',
+              event_label: payload.loja
+            });
+          }
+        }
+      } catch (err) {
+        console.error('[NotificationAPI] Erro:', err);
+        btn.disabled = false;
+        btn.textContent = 'Enviar interesse';
+        showToast('⚠️ Erro', 'Não foi possível enviar. Tente novamente.');
+      }
+    });
+
+    // Conectar cards ao modal (hover com delay para não ser acidental)
+    document.querySelectorAll('.loja-card[data-store]').forEach(card => {
+      let hoverTimer = null;
+
+      card.addEventListener('mouseenter', () => {
+        hoverTimer = setTimeout(() => {
+          openModal(card.getAttribute('data-store'));
+        }, 600); // 600ms de hover para abrir
+      });
+
+      card.addEventListener('mouseleave', () => {
+        if (hoverTimer) clearTimeout(hoverTimer);
+      });
+
+      // Também abre no click para mobile
+      card.addEventListener('click', (e) => {
+        if (e.target.closest('.loja-card-socials')) return;
+        openModal(card.getAttribute('data-store'));
+      });
+    });
 
     function initCoverflowFlipCards() {
       const cards = document.querySelectorAll('.flip-card');
