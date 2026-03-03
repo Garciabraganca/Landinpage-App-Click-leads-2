@@ -1027,6 +1027,176 @@
       }
     }
 
+    /* ==================== STORES 3D FLIP CARDS ==================== */
+    .store-card-3d {
+      perspective: 1200px;
+      height: 100%;
+      border-radius: 20px;
+      cursor: pointer;
+      user-select: none;
+      position: relative;
+    }
+
+    .store-card-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transform-style: preserve-3d;
+      transition: transform 0.85s cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+
+    .store-card-3d.is-flipped .store-card-inner {
+      transform: rotateY(180deg);
+    }
+
+    .store-card-face {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+      border-radius: 20px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      border: 1px solid rgba(148, 163, 184, 0.35);
+    }
+
+    .store-card-front {
+      transform: rotateY(0deg);
+    }
+
+    .store-card-back {
+      transform: rotateY(180deg);
+    }
+
+    .store-card-front {
+      background: linear-gradient(180deg, rgba(15, 23, 42, 0.25) 0%, rgba(15, 23, 42, 0.9) 75%),
+        linear-gradient(150deg, #334155 0%, #111827 100%);
+      align-items: flex-end;
+      padding: 18px;
+      box-shadow: 0 12px 26px rgba(2, 6, 23, 0.45);
+      position: relative;
+    }
+
+    .store-card-front::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      opacity: 0.92;
+      z-index: 0;
+    }
+
+    .store-card-front::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(2, 6, 23, 0.15) 0%, rgba(2, 6, 23, 0.82) 78%);
+      z-index: 1;
+    }
+
+    .store-card-front .store-content {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .store-card-front h3 {
+      margin: 0;
+      font-size: 1.2rem;
+      font-weight: 700;
+      text-align: center;
+      flex: 1;
+      color: #fff;
+    }
+
+    .store-card-front .enter-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 999px;
+      border: 1px solid rgba(251, 191, 36, 0.5);
+      background: rgba(249, 115, 22, 0.2);
+      color: #fff;
+      padding: 8px 16px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      white-space: nowrap;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      text-decoration: none;
+    }
+
+    .store-card-front .enter-btn:hover {
+      background: rgba(249, 115, 22, 0.35);
+      border-color: rgba(251, 191, 36, 0.8);
+    }
+
+    .store-card-back {
+      background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+      padding: 32px 24px;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 12px 26px rgba(249, 115, 22, 0.15), 0 6px 16px rgba(2, 6, 23, 0.5);
+      justify-content: flex-start;
+    }
+
+    .store-card-back h3 {
+      margin: 0 0 16px 0;
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: #fbbf24;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .store-card-back ul {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 16px 0;
+      flex: 1;
+    }
+
+    .store-card-back li {
+      margin: 8px 0;
+      font-size: 0.9rem;
+      line-height: 1.4;
+      color: #cbd5e1;
+      padding-left: 16px;
+      position: relative;
+    }
+
+    .store-card-back li::before {
+      content: "•";
+      position: absolute;
+      left: 0;
+      color: #f97316;
+      font-weight: bold;
+    }
+
+    .store-card-back .highlight {
+      padding: 12px;
+      border-top: 2px solid #fbbf24;
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: #fbbf24;
+      border-radius: 4px;
+      font-style: italic;
+      line-height: 1.5;
+    }
+
+    @media (min-width: 1024px) {
+      .store-card-front h3 {
+        font-size: 1.35rem;
+      }
+    }
+
     /* ==================== COMO FUNCIONA SECTION ==================== */
     .como-funciona-section {
       background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
@@ -1975,42 +2145,138 @@
       {
         nome: 'Zentrix',
         imageSrc: 'Fachada Zentrix.png',
-        loginUrl: 'https://zentrix.grupogarciaseguradoras.com.br/login'
+        loginUrl: 'https://zentrix.grupogarciaseguradoras.com.br/login',
+        dataStore: 'zentrix',
+        diferenciais: {
+          titulo: 'ZENTRIX PRIME',
+          bullets: [
+            'Comissões agressivas em PME e Odonto',
+            'Pagamento toda quinta-feira',
+            'Grade diferenciada por performance',
+            'Mínimo baixo para saque',
+            'Estrutura focada em produção real'
+          ],
+          highlight: 'Alta comissão + recorrência rápida = fluxo constante.'
+        }
       },
       {
         nome: 'Serra',
         imageSrc: 'Fachada serra.png',
-        loginUrl: 'https://serra.grupogarciaseguradoras.com.br/login'
+        loginUrl: 'https://serra.grupogarciaseguradoras.com.br/login',
+        dataStore: 'serra',
+        diferenciais: {
+          titulo: 'SERRA',
+          bullets: [
+            'Base alta em grandes operadoras',
+            'Processo simples e direto',
+            'Comissão consistente',
+            'Foco em volume e velocidade',
+            'Operação objetiva'
+          ],
+          highlight: 'Alta base fixa para giro rápido.'
+        }
       },
       {
         nome: 'Diplan',
         imageSrc: 'Fachada Diplan.png',
-        loginUrl: 'https://diplan.grupogarciaseguradoras.com.br/login'
+        loginUrl: 'https://diplan.grupogarciaseguradoras.com.br/login',
+        dataStore: 'diplan',
+        diferenciais: {
+          titulo: 'DIPLAN',
+          bullets: [
+            'Estrutura consolidada',
+            'Presença forte no mercado',
+            'Gestão ativa de produção',
+            'Carteira estratégica',
+            'Crescimento contínuo'
+          ],
+          highlight: 'Base forte para produção consistente.'
+        }
       },
       {
         nome: 'Bliss',
         imageSrc: 'Fachada Bliss.jpeg',
-        loginUrl: 'http://bliss.grupogarciaseguradoras.com.br/login'
+        loginUrl: 'http://bliss.grupogarciaseguradoras.com.br/login',
+        dataStore: 'bliss',
+        diferenciais: {
+          titulo: 'BLISS',
+          bullets: [
+            'Tabela especial acima do mercado',
+            'Escalonamento por produção',
+            'Operadoras estratégicas com alta máxima',
+            'Modelo meritocrático',
+            'Foco em crescimento acelerado'
+          ],
+          highlight: 'Aqui quem produz mais, ganha mais.'
+        }
       },
       {
         nome: 'Alleman',
         imageSrc: 'Fachada Alleman.jpeg',
-        loginUrl: 'https://alleman.grupogarciaseguradoras.com.br/login'
+        loginUrl: 'https://alleman.grupogarciaseguradoras.com.br/login',
+        dataStore: 'alleman',
+        diferenciais: {
+          titulo: 'ALLEMAN',
+          bullets: [
+            'Crescimento organizado',
+            'Suporte para propostas complexas',
+            'Perfil empresarial',
+            'Processos sólidos',
+            'Modelo estratégico de escala'
+          ],
+          highlight: 'Para quem quer crescer com organização.'
+        }
       },
       {
         nome: 'Affinity',
         imageSrc: 'Fachada Affinity.jpeg',
-        loginUrl: 'http://affinity.grupogarciaseguradoras.com.br/login'
+        loginUrl: 'http://affinity.grupogarciaseguradoras.com.br/login',
+        dataStore: 'affinity',
+        diferenciais: {
+          titulo: 'AFFINITY',
+          bullets: [
+            'Operadoras premium',
+            'Modelo consultivo (ticket maior)',
+            'Suporte próximo ao corretor',
+            'Carteira qualificada',
+            'Produção com posicionamento forte'
+          ],
+          highlight: 'Venda com posicionamento premium.'
+        }
       },
       {
         nome: 'Valorize',
         imageSrc: 'Fachada Valorize.jpeg',
-        loginUrl: 'https://valorize.grupogarciaseguradoras.com.br/login'
+        loginUrl: 'https://valorize.grupogarciaseguradoras.com.br/login',
+        dataStore: 'valorize',
+        diferenciais: {
+          titulo: 'VALORIZE SEGUROS',
+          bullets: [
+            'Comissão antecipada forte',
+            'Comissão parcelada acima do padrão',
+            'Sem retenção (margem limpa)',
+            'Receba mais de 1x na semana',
+            'Backoffice para emissão rápida'
+          ],
+          highlight: 'Comissão limpa. Sem retenção. Mais margem no seu bolso.'
+        }
       },
       {
         nome: 'Assury',
-        imageSrc: '/public/stores/assury.png',
-        loginUrl: 'https://assury.grupogarciaseguradoras.com.br/login'
+        imageSrc: 'fachada-assury.jpeg',
+        loginUrl: 'https://assury.grupogarciaseguradoras.com.br/login',
+        dataStore: 'assury',
+        diferenciais: {
+          titulo: 'ASSURY',
+          bullets: [
+            'Operação estruturada',
+            'Foco total em performance',
+            'Estrutura comercial ativa',
+            'Modelo escalável',
+            'Direcionamento estratégico'
+          ],
+          highlight: 'Estrutura pronta para escalar.'
+        }
       }
     ];
 
@@ -2105,16 +2371,43 @@
       COVERFLOW_STORES.forEach(store => {
         const slide = document.createElement('div');
         slide.className = 'swiper-slide store-slide';
-        slide.style.setProperty('--bg', `url('${store.imageSrc}')`);
-        slide.innerHTML = `
-          <a class="store-slide__link" href="${store.loginUrl}" target="_blank" rel="noopener noreferrer">
-            <div class="store-slide__content">
-              <h3>${store.nome}</h3>
-              <span>Entrar</span>
-            </div>
-          </a>
+        
+        const card3d = document.createElement('div');
+        card3d.className = 'store-card-3d';
+        card3d.setAttribute('data-store', store.dataStore);
+        
+        const inner = document.createElement('div');
+        inner.className = 'store-card-inner';
+        
+        // Front face
+        const front = document.createElement('div');
+        front.className = 'store-card-face store-card-front';
+        front.style.backgroundImage = `url('${store.imageSrc}')`;
+        front.style.backgroundSize = 'cover';
+        front.style.backgroundPosition = 'center';
+        front.innerHTML = `
+          <div class="store-content">
+            <h3>${store.nome}</h3>
+            <a href="${store.loginUrl}" target="_blank" rel="noopener noreferrer" class="enter-btn">Entrar</a>
+          </div>
         `;
-
+        
+        // Back face
+        const back = document.createElement('div');
+        back.className = 'store-card-face store-card-back';
+        back.innerHTML = `
+          <h3>${store.diferenciais.titulo}</h3>
+          <ul>
+            ${store.diferenciais.bullets.map(bullet => `<li>${bullet}</li>`).join('')}
+          </ul>
+          <div class="highlight">${store.diferenciais.highlight}</div>
+        `;
+        
+        inner.appendChild(front);
+        inner.appendChild(back);
+        card3d.appendChild(inner);
+        slide.appendChild(card3d);
+        
         wrapper.appendChild(slide);
       });
     }
@@ -2203,6 +2496,53 @@
         updateDots(currentIndex);
       });
     }
+
+    // ==================== STORE CARDS 3D FLIP LOGIC ====================
+    function initStoreCardsFlip() {
+      const cards = document.querySelectorAll('.store-card-3d');
+      
+      cards.forEach(card => {
+        let startX = 0;
+        let startY = 0;
+        let startTime = 0;
+        let isMoving = false;
+
+        card.addEventListener('pointerdown', (e) => {
+          startX = e.clientX;
+          startY = e.clientY;
+          startTime = Date.now();
+          isMoving = false;
+        });
+
+        card.addEventListener('pointermove', (e) => {
+          const distX = Math.abs(e.clientX - startX);
+          const distY = Math.abs(e.clientY - startY);
+          
+          if (distX > 8 || distY > 8) {
+            isMoving = true;
+          }
+        });
+
+        card.addEventListener('pointerup', (e) => {
+          if (!isMoving) {
+            card.classList.toggle('is-flipped');
+          }
+        });
+
+        // Prevent flip on link clicks
+        card.addEventListener('click', (e) => {
+          if (e.target.tagName === 'A' || e.target.closest('a')) {
+            e.stopPropagation();
+          }
+        });
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      setTimeout(() => {
+        initStoreCardsFlip();
+      }, 500);
+    });
   </script>
 </body>
 </html>
