@@ -71,6 +71,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      background: #ffffff;
     }
 
     .hero-fold-video {
@@ -85,6 +86,8 @@
       object-fit: cover;
       object-position: center;
       display: block;
+      will-change: transform;
+      transform: translateZ(0);
     }
 
     .hero-fold-overlay {
@@ -207,17 +210,49 @@
       }
 
       .hero-fold {
-        background: url('capa-landing.jpeg') center / cover no-repeat;
+        background: #ffffff;
       }
     }
 
     /* ==================== SEÇÃO LOJAS ==================== */
     .lojas-section {
+      position: relative;
       padding: 80px 0;
-      background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+      overflow: hidden;
+      background: #0f172a;
+    }
+
+    .lojas-section-video {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+    }
+
+    .lojas-section-video video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+      will-change: transform;
+      transform: translateZ(0);
+    }
+
+    .lojas-section-overlay {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      background: linear-gradient(
+        180deg,
+        rgba(15, 23, 42, 0.85) 0%,
+        rgba(15, 23, 42, 0.7) 50%,
+        rgba(15, 23, 42, 0.85) 100%
+      );
     }
 
     .lojas-header {
+      position: relative;
+      z-index: 2;
       text-align: center;
       margin-bottom: 60px;
     }
@@ -236,6 +271,8 @@
     }
 
     .lojas-grid {
+      position: relative;
+      z-index: 2;
       display: grid;
       grid-template-columns: 1fr;
       gap: 30px;
@@ -250,119 +287,174 @@
       }
     }
 
-    @media (min-width: 1024px) {
-      .lojas-grid {
-        grid-template-columns: repeat(3, 1fr);
-        gap: 35px;
-      }
-    }
-
+    /* ==================== NOVO CARD STYLE ==================== */
     .loja-card {
-      background: rgba(30, 41, 59, 0.5);
-      border: 1px solid rgba(148, 163, 184, 0.3);
-      border-radius: 16px;
-      overflow: hidden;
-      transition: all 0.3s ease;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+      --card-bg: #272524;
+      display: flex;
+      align-items: center;
+      padding: 34px 24px 34px 16px;
+      background: var(--card-bg);
+      border-radius: 24px;
+      border: none;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.35);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      overflow: visible;
     }
 
     .loja-card:hover {
-      transform: translateY(-4px);
-      border-color: rgba(251, 191, 36, 0.5);
-      box-shadow: 0 8px 30px rgba(251, 191, 36, 0.15), 0 4px 20px rgba(0, 0, 0, 0.4);
+      transform: translateY(-6px);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), 0 0 30px rgba(251, 191, 36, 0.1);
     }
 
-    .loja-card-image {
-      width: 100%;
+    .loja-card img {
+      width: 160px;
       height: 180px;
-      background: linear-gradient(135deg, #1e293b, #334155);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-bottom: 1px solid rgba(148, 163, 184, 0.2);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .loja-card-image img {
-      max-width: 80%;
-      max-height: 80%;
-      object-fit: contain;
-    }
-
-    .loja-card-badge {
-      position: absolute;
-      top: 12px;
-      right: 12px;
-      background: linear-gradient(135deg, #f59e0b, #d97706);
-      color: #000;
-      font-size: 0.75rem;
-      font-weight: 700;
-      padding: 6px 12px;
-      border-radius: 999px;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
+      margin-left: -40px;
+      margin-right: 24px;
+      border-radius: 20px;
+      object-fit: cover;
+      box-shadow: 0 40px 30px rgba(0, 0, 0, 0.12);
+      flex-shrink: 0;
+      transition: border-radius 0.3s;
     }
 
     .loja-card-content {
-      padding: 28px 24px;
+      flex: 1;
+      min-width: 0;
     }
 
-    .loja-card-title {
-      font-size: 1.5rem;
+    .loja-card-content h2 {
+      margin: 0 0 6px;
+      font-size: 1.4rem;
       font-weight: 700;
-      color: #fff;
-      margin: 0 0 20px;
-      text-align: center;
+      color: #f8f8f8;
     }
 
-    .loja-card-features {
-      list-style: none;
-      padding: 0;
-      margin: 0 0 28px;
+    .loja-card-content h3 {
+      font-size: 0.85rem;
+      font-weight: 400;
+      margin: 0 0 10px;
+      color: #f8f8f8;
+      opacity: 0.75;
     }
 
-    .loja-card-features li {
-      color: #cbd5e1;
-      font-size: 0.95rem;
-      line-height: 1.6;
-      margin-bottom: 10px;
-      padding-left: 24px;
+    .loja-card-content p {
+      font-size: 0.8rem;
+      font-weight: 400;
+      margin: 0 0 18px;
+      color: #f8f8f8;
+      opacity: 0.5;
+      line-height: 1.5;
+    }
+
+    .loja-card-badge {
+      display: inline-block;
+      background: linear-gradient(135deg, #f59e0b, #d97706);
+      color: #000;
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 999px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 8px;
+    }
+
+    .loja-card-socials {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .loja-card-socials a {
       position: relative;
-    }
-
-    .loja-card-features li::before {
-      content: '●';
-      position: absolute;
-      left: 0;
-      color: #fbbf24;
-      font-weight: bold;
-    }
-
-    .loja-card-cta {
-      display: block;
-      width: 100%;
-      padding: 14px 24px;
-      border-radius: 8px;
-      border: none;
-      font-weight: 700;
-      font-size: 1rem;
-      text-align: center;
+      border: 0;
+      background: transparent;
+      color: #f8f8f8;
+      padding: 0;
       text-decoration: none;
-      cursor: pointer;
-      transition: all 0.2s ease;
+      display: inline-flex;
     }
 
-    .loja-card-cta-primary {
-      background: linear-gradient(to right, #f59e0b, #f97316);
-      color: #111827;
-      box-shadow: 0 4px 12px rgba(249, 115, 22, 0.3);
+    .loja-card-socials a:first-child::before {
+      content: "";
+      position: absolute;
+      z-index: 0;
+      top: 50%;
+      left: 50%;
+      width: 48px;
+      height: 48px;
+      translate: -50% -50%;
+      border-radius: 50%;
+      background: linear-gradient(45deg, #f97316, #fbbf24);
+      transition: 0.3s;
     }
 
-    .loja-card-cta-primary:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(249, 115, 22, 0.5);
-      filter: brightness(1.05);
+    .loja-card-socials a span {
+      position: relative;
+      z-index: 1;
+      border: 4px solid var(--card-bg);
+      background: #3f3b39;
+      display: grid;
+      place-items: center;
+      font-size: 0.75rem;
+      font-weight: 700;
+      width: 44px;
+      height: 44px;
+      border-radius: 40px;
+      color: #f8f8f8;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    /* Card responsivo */
+    @media (max-width: 600px) {
+      .lojas-grid {
+        grid-template-columns: 1fr;
+        padding: 0 20px;
+      }
+
+      .loja-card {
+        margin: 0;
+        padding: 0 30px 40px;
+        width: 100%;
+        text-align: center;
+        flex-direction: column;
+      }
+
+      .loja-card-content h2 {
+        font-size: 1.3rem;
+      }
+
+      .loja-card img {
+        margin: -60px 0 20px;
+        width: 100%;
+        max-width: 100%;
+        height: 200px;
+        margin-left: 0;
+        margin-right: 0;
+      }
+
+      .loja-card-content p {
+        max-width: 360px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .loja-card-socials {
+        justify-content: center;
+      }
+    }
+
+    @media (max-width: 440px) {
+      .loja-card img {
+        width: 50vw;
+        height: 50vw;
+        border-radius: 50%;
+        border: 12px solid var(--card-bg);
+        box-shadow: none;
+        margin: -100px auto 20px;
+      }
     }
 
 
@@ -1235,10 +1327,11 @@
         muted
         loop
         playsinline
-        preload="metadata"
-        poster="capa-landing.jpeg"
+        preload="auto"
+        disablepictureinpicture
+        disableremoteplayback
       >
-        <source src="hero-bg.mp4" type="video/mp4">
+        <source src="video_entrada.mp4" type="video/mp4">
       </video>
     </div>
     
@@ -1261,6 +1354,20 @@
 
   <!-- LOJAS -->
   <section class="lojas-section" id="lojas">
+    <div class="lojas-section-video">
+      <video
+        autoplay
+        muted
+        loop
+        playsinline
+        preload="auto"
+        disablepictureinpicture
+        disableremoteplayback
+      >
+        <source src="video_entrada.mp4" type="video/mp4">
+      </video>
+    </div>
+    <div class="lojas-section-overlay"></div>
     <div class="lojas-header">
       <h2>Lojas</h2>
       <p>Conheça as lojas que fazem parte do nosso ecossistema.</p>
@@ -1269,196 +1376,114 @@
     <div class="lojas-grid">
       <!-- ZENTRIX -->
       <div class="loja-card">
-        <div class="loja-card-image">
-          <img src="Fachada Zentrix.png" alt="Zentrix - Plataforma de Gestão Empresarial">
-        </div>
+        <img src="Fachada Zentrix.png" alt="Zentrix">
         <div class="loja-card-content">
-          <h3 class="loja-card-title">Zentrix</h3>
-          <ul class="loja-card-features">
-            <li>Gestão centralizada de múltiplas operações</li>
-            <li>Dashboard em tempo real com métricas avançadas</li>
-            <li>Integração nativa com sistemas externos</li>
-            <li>Automação de processos empresariais</li>
-            <li>Relatórios e análises preditivas</li>
-          </ul>
-          <a 
-            href="https://zentrix.grupogarciaseguradoras.com.br/login" 
-            target="_blank" 
-            rel="noopener noreferrer"
-            class="loja-card-cta loja-card-cta-primary"
-          >
-            Ativar e entrar
-          </a>
+          <h2>Zentrix</h2>
+          <h3>Plataforma de Gestão Empresarial</h3>
+          <p>Gestão centralizada, dashboard em tempo real, integração nativa e automação de processos.</p>
+          <div class="loja-card-socials">
+            <a href="https://zentrix.grupogarciaseguradoras.com.br/login" target="_blank" rel="noopener noreferrer"><span>Entrar</span></a>
+            <a href="#contato"><span>✉</span></a>
+          </div>
         </div>
       </div>
 
       <!-- SERRA -->
       <div class="loja-card">
-        <div class="loja-card-image">
-          <img src="Fachada serra.png" alt="Serra - Consultoria Estratégica">
-        </div>
+        <img src="Fachada serra.png" alt="Serra">
         <div class="loja-card-content">
-          <h3 class="loja-card-title">Serra</h3>
-          <ul class="loja-card-features">
-            <li>Consultoria estratégica personalizada</li>
-            <li>Planejamento e execução de campanhas</li>
-            <li>Análise de mercado e concorrência</li>
-            <li>Otimização de processos comerciais</li>
-            <li>Suporte especializado contínuo</li>
-          </ul>
-          <a 
-            href="https://serra.grupogarciaseguradoras.com.br/login" 
-            target="_blank" 
-            rel="noopener noreferrer"
-            class="loja-card-cta loja-card-cta-primary"
-          >
-            Ativar e entrar
-          </a>
+          <h2>Serra</h2>
+          <h3>Consultoria Estratégica</h3>
+          <p>Consultoria personalizada, campanhas, análise de mercado e suporte especializado contínuo.</p>
+          <div class="loja-card-socials">
+            <a href="https://serra.grupogarciaseguradoras.com.br/login" target="_blank" rel="noopener noreferrer"><span>Entrar</span></a>
+            <a href="#contato"><span>✉</span></a>
+          </div>
         </div>
       </div>
+
+      <!-- BLISS -->
       <div class="loja-card">
-        <div class="loja-card-image">
-          <img src="Fachada Bliss.jpeg" alt="Bliss - Plataforma de Gestão Integrada">
-        </div>
+        <img src="Fachada Bliss.jpeg" alt="Bliss">
         <div class="loja-card-content">
-          <h3 class="loja-card-title">Bliss</h3>
-          <ul class="loja-card-features">
-            <li>Gestão centralizada de múltiplas operações</li>
-            <li>Dashboard em tempo real com métricas avançadas</li>
-            <li>Integração nativa com sistemas externos</li>
-            <li>Automação de processos empresariais</li>
-            <li>Relatórios e análises preditivas</li>
-          </ul>
-          <a 
-            href="http://bliss.grupogarciaseguradoras.com.br/login" 
-            target="_blank" 
-            rel="noopener noreferrer"
-            class="loja-card-cta loja-card-cta-primary"
-          >
-            Ativar e entrar
-          </a>
+          <h2>Bliss</h2>
+          <h3>Gestão Integrada</h3>
+          <p>Múltiplas operações, métricas avançadas, integração com sistemas e análises preditivas.</p>
+          <div class="loja-card-socials">
+            <a href="http://bliss.grupogarciaseguradoras.com.br/login" target="_blank" rel="noopener noreferrer"><span>Entrar</span></a>
+            <a href="#contato"><span>✉</span></a>
+          </div>
         </div>
       </div>
 
       <!-- ALLEMAN -->
       <div class="loja-card">
-        <div class="loja-card-image">
-          <img src="Fachada Alleman.jpeg" alt="Alleman - Consultoria Estratégica">
-        </div>
+        <img src="Fachada Alleman.jpeg" alt="Alleman">
         <div class="loja-card-content">
-          <h3 class="loja-card-title">Alleman</h3>
-          <ul class="loja-card-features">
-            <li>Consultoria estratégica personalizada</li>
-            <li>Planejamento e execução de campanhas</li>
-            <li>Análise de mercado e concorrência</li>
-            <li>Otimização de processos comerciais</li>
-            <li>Suporte especializado contínuo</li>
-          </ul>
-          <a 
-            href="https://alleman.grupogarciaseguradoras.com.br/login" 
-            target="_blank" 
-            rel="noopener noreferrer"
-            class="loja-card-cta loja-card-cta-primary"
-          >
-            Ativar e entrar
-          </a>
+          <h2>Alleman</h2>
+          <h3>Consultoria Estratégica</h3>
+          <p>Planejamento de campanhas, análise de concorrência e otimização de processos comerciais.</p>
+          <div class="loja-card-socials">
+            <a href="https://alleman.grupogarciaseguradoras.com.br/login" target="_blank" rel="noopener noreferrer"><span>Entrar</span></a>
+            <a href="#contato"><span>✉</span></a>
+          </div>
         </div>
       </div>
 
       <!-- AFFINITY -->
       <div class="loja-card">
-        <div class="loja-card-image">
-          <img src="Fachada Affinity.jpeg" alt="Affinity - Plataforma de Afinidade">
-        </div>
+        <img src="Fachada Affinity.jpeg" alt="Affinity">
         <div class="loja-card-content">
-          <h3 class="loja-card-title">Affinity</h3>
-          <ul class="loja-card-features">
-            <li>Conexão e rede de profissionais</li>
-            <li>Oportunidades de negócio qualificadas</li>
-            <li>Ferramentas colaborativas avançadas</li>
-            <li>Acompanhamento de projetos em tempo real</li>
-            <li>Comunidade ativa de especialistas</li>
-          </ul>
-          <a 
-            href="http://affinity.grupogarciaseguradoras.com.br/login" 
-            target="_blank" 
-            rel="noopener noreferrer"
-            class="loja-card-cta loja-card-cta-primary"
-          >
-            Ativar e entrar
-          </a>
+          <h2>Affinity</h2>
+          <h3>Rede de Profissionais</h3>
+          <p>Oportunidades qualificadas, ferramentas colaborativas e comunidade ativa de especialistas.</p>
+          <div class="loja-card-socials">
+            <a href="http://affinity.grupogarciaseguradoras.com.br/login" target="_blank" rel="noopener noreferrer"><span>Entrar</span></a>
+            <a href="#contato"><span>✉</span></a>
+          </div>
         </div>
       </div>
 
       <!-- VALORIZE -->
       <div class="loja-card">
-        <div class="loja-card-image">
-          <img src="Fachada Valorize.jpeg" alt="Valorize - Programa de Reconhecimento">
-        </div>
+        <img src="Fachada Valorize.jpeg" alt="Valorize">
         <div class="loja-card-content">
-          <h3 class="loja-card-title">Valorize</h3>
-          <ul class="loja-card-features">
-            <li>Programa exclusivo de reconhecimento</li>
-            <li>Comissões atrativas e competitivas</li>
-            <li>Benefícios que crescem com seu sucesso</li>
-            <li>Maior controle e autonomia comercial</li>
-            <li>Suporte dedicado para maximizar resultados</li>
-          </ul>
-          <a 
-            href="https://valorize.grupogarciaseguradoras.com.br/login" 
-            target="_blank" 
-            rel="noopener noreferrer"
-            class="loja-card-cta loja-card-cta-primary"
-          >
-            Ativar e entrar
-          </a>
+          <h2>Valorize</h2>
+          <h3>Programa de Reconhecimento</h3>
+          <p>Comissões atrativas, benefícios que crescem com sucesso e suporte dedicado.</p>
+          <div class="loja-card-socials">
+            <a href="https://valorize.grupogarciaseguradoras.com.br/login" target="_blank" rel="noopener noreferrer"><span>Entrar</span></a>
+            <a href="#contato"><span>✉</span></a>
+          </div>
         </div>
       </div>
 
       <!-- ASSURY -->
       <div class="loja-card">
-        <div class="loja-card-image">
-          <img src="fachada-assury.jpeg" alt="Assury - Segurança e Compliance">
-        </div>
+        <img src="fachada-assury.jpeg" alt="Assury">
         <div class="loja-card-content">
-          <h3 class="loja-card-title">Assury</h3>
-          <ul class="loja-card-features">
-            <li>Segurança e cobertura completa</li>
-            <li>Segurança integrada e automatizada</li>
-            <li>Monitoramento 24/7 em tempo real</li>
-            <li>Relatórios de compliance regulatório</li>
-            <li>Suporte especializado em segurança</li>
-          </ul>
-          <a 
-            href="https://assury.grupogarciaseguradoras.com.br/login" 
-            target="_blank" 
-            rel="noopener noreferrer"
-            class="loja-card-cta loja-card-cta-primary"
-          >
-            Ativar e entrar
-          </a>
+          <h2>Assury</h2>
+          <h3>Segurança e Compliance</h3>
+          <p>Cobertura completa, monitoramento 24/7, compliance regulatório e suporte especializado.</p>
+          <div class="loja-card-socials">
+            <a href="https://assury.grupogarciaseguradoras.com.br/login" target="_blank" rel="noopener noreferrer"><span>Entrar</span></a>
+            <a href="#contato"><span>✉</span></a>
+          </div>
         </div>
       </div>
+
+      <!-- DIPLAN -->
       <div class="loja-card">
-        <div class="loja-card-image">
-          <span class="loja-card-badge">Boutique</span>
-          <img src="Fachada Diplan.png" alt="Diplan - Boutique Exclusiva">
-        </div>
+        <img src="Fachada Diplan.png" alt="Diplan">
         <div class="loja-card-content">
-          <h3 class="loja-card-title">Diplan</h3>
-          <ul class="loja-card-features">
-            <li>Atendimento VIP com dedicação exclusiva</li>
-            <li>Estratégias customizadas para alto padrão</li>
-            <li>Acesso antecipado a novos recursos</li>
-            <li>Consultoria estratégica premium</li>
-            <li>Gerente de contas dedicado</li>
-          </ul>
-          <button 
-            class="loja-card-cta loja-card-cta-disabled"
-            disabled
-          >
-            Acesso sob convite
-          </button>
+          <span class="loja-card-badge">Boutique</span>
+          <h2>Diplan</h2>
+          <h3>Boutique Exclusiva</h3>
+          <p>Atendimento VIP, estratégias para alto padrão, acesso antecipado e gerente dedicado.</p>
+          <div class="loja-card-socials">
+            <a href="#contato"><span>Convite</span></a>
+            <a href="#contato"><span>✉</span></a>
+          </div>
         </div>
       </div>
     </div>
