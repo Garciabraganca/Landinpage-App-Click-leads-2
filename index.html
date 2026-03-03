@@ -1014,6 +1014,12 @@
       border: 1px solid rgba(148, 163, 184, 0.35);
     }
 
+    /* Back face overrides the overflow so content is always scrollable */
+    .store-card-face.store-card-back {
+      overflow-x: hidden;
+      overflow-y: auto;
+    }
+
     .store-card-front {
       transform: rotateY(0deg);
     }
@@ -1096,10 +1102,12 @@
       display: flex;
       flex-direction: column;
       gap: 6px;
-      overflow-y: auto;
       overflow-x: hidden;
+      overflow-y: auto;
       justify-content: flex-start;
       box-shadow: 0 12px 26px rgba(249, 115, 22, 0.15), 0 6px 16px rgba(2, 6, 23, 0.5);
+      /* Ensure no pseudo-element overlay hides the content */
+      color: #cbd5e1;
     }
 
     /* laranja accent bar no topo */
@@ -1115,6 +1123,8 @@
 
     .store-card-back .back-header {
       flex-shrink: 0;
+      position: relative;
+      z-index: 1;
     }
 
     .store-card-back h3 {
@@ -1143,6 +1153,8 @@
       line-height: 1.45;
       font-style: italic;
       flex-shrink: 0;
+      position: relative;
+      z-index: 1;
     }
 
     .store-card-back ul {
@@ -1151,6 +1163,8 @@
       margin: 0;
       flex: 1;
       min-height: 0;
+      position: relative;
+      z-index: 1;
     }
 
     .store-card-back li {
@@ -1171,6 +1185,8 @@
       border-radius: 20px;
       align-self: flex-start;
       flex-shrink: 0;
+      position: relative;
+      z-index: 1;
     }
 
     .store-card-back .back-cta {
@@ -1187,6 +1203,8 @@
       letter-spacing: 0.3px;
       flex-shrink: 0;
       transition: opacity 0.2s;
+      position: relative;
+      z-index: 1;
     }
 
     .store-card-back .back-cta:hover {
@@ -2269,6 +2287,9 @@
       }
     ];
 
+    // Expose globally for DevTools diagnostics and other scripts
+    window.COVERFLOW_STORES = COVERFLOW_STORES;
+    window.STORES = COVERFLOW_STORES;
 
     document.addEventListener('DOMContentLoaded', function() {
       renderCoverflowSlides();
