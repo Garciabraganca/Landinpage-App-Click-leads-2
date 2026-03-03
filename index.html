@@ -566,274 +566,6 @@
       .hero-title { font-size: 1.6rem; }
     }
 
-    /* ==================== CARROSSEL DIFERENCIAIS ==================== */
-    .diferenciais-section {
-      background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-      padding: 80px 20px;
-      color: #fff;
-    }
-
-    .diferenciais-container {
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-
-    .diferenciais-header {
-      text-align: center;
-      margin-bottom: 50px;
-    }
-
-    .diferenciais-header h2 {
-      font-size: 2.2rem;
-      font-weight: 700;
-      margin: 0 0 12px;
-      color: #fff;
-    }
-
-    .diferenciais-header p {
-      font-size: 1.1rem;
-      color: #cbd5e1;
-      margin: 0;
-      max-width: 500px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-    .carousel-wrapper {
-      position: relative;
-      margin-bottom: 30px;
-    }
-
-    .diferenciais-carousel {
-      display: flex;
-      overflow-x: auto;
-      scroll-snap-type: x mandatory;
-      scroll-behavior: smooth;
-      gap: 20px;
-      padding: 10px 0;
-      -webkit-overflow-scrolling: touch;
-    }
-
-    .diferenciais-carousel::-webkit-scrollbar {
-      height: 6px;
-    }
-
-    .diferenciais-carousel::-webkit-scrollbar-track {
-      background: rgba(148, 163, 184, 0.1);
-      border-radius: 999px;
-    }
-
-    .diferenciais-carousel::-webkit-scrollbar-thumb {
-      background: rgba(249, 115, 22, 0.4);
-      border-radius: 999px;
-    }
-
-    .diferenciais-carousel::-webkit-scrollbar-thumb:hover {
-      background: rgba(249, 115, 22, 0.6);
-    }
-
-    .diferencial-card {
-      flex: 0 0 auto;
-      width: 100%;
-      scroll-snap-align: start;
-      scroll-snap-stop: always;
-    }
-
-    @media (min-width: 768px) {
-      .diferencial-card {
-        width: calc(50% - 10px);
-      }
-    }
-
-    @media (min-width: 1024px) {
-      .diferencial-card {
-        width: calc(50% - 10px);
-      }
-    }
-
-    .diferencial-card-inner {
-      background: rgba(30, 41, 59, 0.6);
-      border: 1px solid rgba(148, 163, 184, 0.2);
-      border-radius: 12px;
-      padding: 28px 24px;
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      backdrop-filter: blur(10px);
-      transition: all 0.3s ease;
-    }
-
-    .diferencial-card-inner:hover {
-      border-color: rgba(249, 115, 22, 0.3);
-      background: rgba(30, 41, 59, 0.8);
-      box-shadow: 0 8px 24px rgba(249, 115, 22, 0.1);
-    }
-
-    .diferencial-card-title {
-      font-size: 1.5rem;
-      font-weight: 700;
-      color: #fff;
-      margin: 0 0 18px;
-      text-align: center;
-    }
-
-    .diferencial-chips {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-bottom: 20px;
-      justify-content: center;
-    }
-
-    .diferencial-chip {
-      background: rgba(249, 115, 22, 0.15);
-      border: 1px solid rgba(249, 115, 22, 0.3);
-      color: #fed7aa;
-      padding: 6px 12px;
-      border-radius: 999px;
-      font-size: 0.85rem;
-      font-weight: 600;
-      text-align: center;
-    }
-
-    .diferencial-list {
-      list-style: none;
-      padding: 0;
-      margin: 0 0 20px;
-      flex: 1;
-    }
-
-    .diferencial-list li {
-      padding: 8px 0;
-      color: #cbd5e1;
-      font-size: 0.95rem;
-      display: flex;
-      align-items: flex-start;
-      gap: 10px;
-    }
-
-    .diferencial-list li:before {
-      content: "✓";
-      color: #f97316;
-      font-weight: 700;
-      flex-shrink: 0;
-    }
-
-    .diferencial-cta {
-      display: inline-block;
-      padding: 10px 20px;
-      border-radius: 6px;
-      font-weight: 600;
-      font-size: 0.95rem;
-      text-align: center;
-      text-decoration: none;
-      cursor: pointer;
-      transition: all 0.2s ease;
-      border: none;
-      width: 100%;
-    }
-
-    .diferencial-cta-primary {
-      background: linear-gradient(to right, #f59e0b, #f97316);
-      color: #111827;
-      box-shadow: 0 4px 12px rgba(249, 115, 22, 0.3);
-    }
-
-    .diferencial-cta-primary:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(249, 115, 22, 0.5);
-      filter: brightness(1.05);
-    }
-
-    .diferencial-cta-disabled {
-      background: rgba(100, 116, 139, 0.3);
-      color: #94a3b8;
-      cursor: not-allowed;
-      border: 1px solid rgba(148, 163, 184, 0.3);
-    }
-
-    .diferencial-badge {
-      position: absolute;
-      top: -12px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: linear-gradient(135deg, #f59e0b, #d97706);
-      color: #000;
-      font-size: 0.75rem;
-      font-weight: 700;
-      padding: 5px 12px;
-      border-radius: 999px;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-
-    .carousel-controls {
-      display: none;
-      justify-content: center;
-      gap: 12px;
-      margin-top: 30px;
-    }
-
-    @media (min-width: 768px) {
-      .carousel-controls {
-        display: flex;
-      }
-    }
-
-    .carousel-nav-btn {
-      width: 44px;
-      height: 44px;
-      border: 2px solid rgba(249, 115, 22, 0.4);
-      background: rgba(249, 115, 22, 0.1);
-      color: #fff;
-      border-radius: 50%;
-      cursor: pointer;
-      font-size: 1.2rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: all 0.2s ease;
-    }
-
-    .carousel-nav-btn:hover {
-      background: rgba(249, 115, 22, 0.25);
-      border-color: rgba(249, 115, 22, 0.6);
-      transform: scale(1.05);
-    }
-
-    .carousel-nav-btn:disabled {
-      opacity: 0.3;
-      cursor: not-allowed;
-    }
-
-    .carousel-dots {
-      display: flex;
-      justify-content: center;
-      gap: 8px;
-      margin-top: 20px;
-    }
-
-    @media (min-width: 768px) {
-      .carousel-dots {
-        display: none;
-      }
-    }
-
-    .carousel-dot {
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      background: rgba(148, 163, 184, 0.4);
-      cursor: pointer;
-      transition: all 0.2s ease;
-    }
-
-    .carousel-dot.active {
-      background: #f97316;
-      width: 28px;
-      border-radius: 999px;
-    }
-
     /* ==================== STORES SWIPER COVERFLOW ==================== */
     .stores-swiper-section {
       background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
@@ -979,66 +711,44 @@
       }
     }
 
-    /* ==================== STORES 3D FLIP CARDS (CSS-only, padrão dashboard-lia) ==================== */
-    .store-card-3d {
-      perspective: 1200px;
-      height: 100%;
-      border-radius: 20px;
-      cursor: pointer;
-      user-select: none;
+    /* ==================== STORES FLIP CARDS (COVERFLOW) ==================== */
+    .store-slide .flip-card {
       position: relative;
-      display: block; /* label */
-    }
-
-    /* hidden checkbox drives the flip */
-    .store-card-3d input[type="checkbox"] {
-      position: absolute;
-      opacity: 0;
       width: 100%;
       height: 100%;
+      border-radius: 20px;
+      perspective: 1000px;
       cursor: pointer;
-      z-index: 10;
+      user-select: none;
+      outline: none;
     }
 
-    .store-card-inner {
+    .store-slide .flip-inner {
       position: relative;
       width: 100%;
       height: 100%;
       transform-style: preserve-3d;
-      transition: transform 0.6s ease;
+      transition: transform 0.6s;
     }
 
-    /* CSS-only flip via :checked */
-    .store-card-3d input:checked ~ .store-card-inner .store-card-back {
-      transform: rotateY(0deg);
-    }
-    .store-card-3d input:checked ~ .store-card-inner .store-card-front {
-      transform: rotateY(-180deg);
+    .store-slide .flip-card.is-flipped .flip-inner {
+      transform: rotateY(180deg);
     }
 
-    .store-card-face {
+    .store-slide .flip-face {
       position: absolute;
-      width: 100%;
-      height: 100%;
+      inset: 0;
       backface-visibility: hidden;
       -webkit-backface-visibility: hidden;
-      border-radius: 20px;
+      border-radius: inherit;
       overflow: hidden;
       display: flex;
       flex-direction: column;
       border: 1px solid rgba(148, 163, 184, 0.35);
-      transition: transform 0.6s ease;
     }
 
-    .store-card-front {
+    .store-slide .flip-front {
       transform: rotateY(0deg);
-    }
-
-    .store-card-back {
-      transform: rotateY(180deg);
-    }
-
-    .store-card-front {
       background: linear-gradient(180deg, rgba(15, 23, 42, 0.25) 0%, rgba(15, 23, 42, 0.9) 75%),
         linear-gradient(150deg, #334155 0%, #111827 100%);
       align-items: flex-end;
@@ -1047,7 +757,18 @@
       position: relative;
     }
 
-    .store-card-front::before {
+    .store-slide .flip-back {
+      transform: rotateY(180deg);
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      padding: 22px 20px;
+      background: linear-gradient(160deg, #0f172a 0%, #1e293b 65%, #0f172a 100%);
+      color: #e2e8f0;
+      box-shadow: 0 12px 26px rgba(249, 115, 22, 0.12), 0 6px 16px rgba(2, 6, 23, 0.5);
+    }
+
+    .store-slide .flip-front::before {
       content: "";
       position: absolute;
       inset: 0;
@@ -1057,7 +778,7 @@
       z-index: 0;
     }
 
-    .store-card-front::after {
+    .store-slide .flip-front::after {
       content: "";
       position: absolute;
       inset: 0;
@@ -1065,7 +786,7 @@
       z-index: 1;
     }
 
-    .store-card-front .store-content {
+    .store-slide .flip-front .store-content {
       position: relative;
       z-index: 2;
       width: 100%;
@@ -1075,7 +796,7 @@
       gap: 10px;
     }
 
-    .store-card-front h3 {
+    .store-slide .flip-front h3 {
       margin: 0;
       font-size: 1.2rem;
       font-weight: 700;
@@ -1084,7 +805,7 @@
       color: #fff;
     }
 
-    .store-card-front .enter-btn {
+    .store-slide .flip-front .enter-btn {
       display: inline-flex;
       align-items: center;
       justify-content: center;
@@ -1100,98 +821,74 @@
       transition: all 0.2s ease;
       text-decoration: none;
       position: relative;
-      z-index: 20;
+      z-index: 3;
     }
 
-    .store-card-front .enter-btn:hover {
+    .store-slide .flip-front .enter-btn:hover {
       background: rgba(249, 115, 22, 0.35);
       border-color: rgba(251, 191, 36, 0.8);
     }
 
-    /* ---- BACK FACE ---- */
-    .store-card-back {
-      background: linear-gradient(160deg, #0f172a 0%, #1e293b 60%, #0f172a 100%);
-      padding: 18px 18px 14px;
+    .store-slide .flip-back .back-header {
       display: flex;
-      flex-direction: column;
-      gap: 6px;
-      overflow-x: hidden;
-      overflow-y: auto;
-      justify-content: flex-start;
-      box-shadow: 0 12px 26px rgba(249, 115, 22, 0.15), 0 6px 16px rgba(2, 6, 23, 0.5);
-      color: #cbd5e1;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 14px;
+      border-bottom: 1px solid rgba(148, 163, 184, 0.2);
+      padding-bottom: 10px;
+      cursor: pointer;
     }
 
-    /* laranja accent bar no topo */
-    .store-card-back::before {
-      content: '';
-      display: block;
-      height: 3px;
-      background: linear-gradient(90deg, #f97316, #fbbf24);
-      border-radius: 2px;
-      margin-bottom: 4px;
-      flex-shrink: 0;
-    }
-
-    .store-card-back .back-header {
-      flex-shrink: 0;
-      position: relative;
-      z-index: 1;
-    }
-
-    .store-card-back h3 {
-      margin: 0 0 2px 0;
-      font-size: 1rem;
+    .store-slide .flip-back .back-header h3 {
+      margin: 0;
+      font-size: 1.02rem;
       font-weight: 800;
       color: #fbbf24;
+      letter-spacing: 0.4px;
       text-transform: uppercase;
-      letter-spacing: 0.6px;
-      line-height: 1.2;
     }
 
-    .store-card-back .back-subtitle {
-      margin: 0;
-      font-size: 0.78rem;
-      font-weight: 600;
-      color: #fb923c;
-      letter-spacing: 0.3px;
-    }
-
-    .store-card-back .back-badge {
-      display: inline-block;
-      background: rgba(249, 115, 22, 0.18);
-      border: 1px solid rgba(249, 115, 22, 0.5);
-      color: #fbbf24;
-      font-size: 0.72rem;
-      font-weight: 700;
-      padding: 3px 10px;
-      border-radius: 20px;
-      align-self: flex-start;
+    .store-slide .flip-back .back-close {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 30px;
+      height: 30px;
+      border-radius: 999px;
+      border: 1px solid rgba(251, 191, 36, 0.45);
+      background: rgba(249, 115, 22, 0.16);
+      color: #fff;
+      cursor: pointer;
+      font-size: 1rem;
+      line-height: 1;
       flex-shrink: 0;
-      position: relative;
-      z-index: 1;
     }
 
-    .store-card-back ul {
+    .store-slide .flip-back .back-close:focus-visible,
+    .store-slide .flip-card:focus-visible {
+      outline: 2px solid #f59e0b;
+      outline-offset: 2px;
+    }
+
+    .store-slide .flip-back .back-list {
       list-style: none;
       padding: 0;
       margin: 0;
       flex: 1;
-      min-height: 0;
-      position: relative;
-      z-index: 1;
+      overflow-y: auto;
     }
 
-    .store-card-back li {
-      margin: 4px 0;
-      font-size: 0.8rem;
-      line-height: 1.35;
+    .store-slide .flip-back .back-list li {
+      margin: 7px 0;
+      font-size: 0.84rem;
+      line-height: 1.4;
       color: #cbd5e1;
       padding-left: 14px;
       position: relative;
     }
 
-    .store-card-back li::before {
+    .store-slide .flip-back .back-list li::before {
       content: '•';
       position: absolute;
       left: 0;
@@ -1199,48 +896,23 @@
       font-weight: bold;
     }
 
-    .store-card-back .back-note {
-      margin: 0;
-      font-size: 0.68rem;
-      color: #64748b;
-      font-style: italic;
-      flex-shrink: 0;
-    }
-
-    .store-card-back .back-cta {
-      display: block;
+    .store-slide .flip-back .back-close-row {
       margin-top: auto;
-      padding: 8px 12px;
-      background: linear-gradient(90deg, #f97316, #fb923c);
-      color: #0f172a;
-      font-weight: 800;
-      font-size: 0.8rem;
-      text-align: center;
-      border-radius: 8px;
-      text-decoration: none;
-      letter-spacing: 0.3px;
-      flex-shrink: 0;
-      transition: opacity 0.2s;
-      position: relative;
-      z-index: 20;
-    }
-
-    .store-card-back .back-cta:hover {
-      opacity: 0.88;
+      display: flex;
+      justify-content: flex-end;
+      padding-top: 10px;
     }
 
     @media (max-width: 480px) {
-      .store-card-back {
+      .store-slide .flip-back {
         padding: 12px 14px 10px;
-        gap: 3px;
       }
-      .store-card-back h3 { font-size: 0.88rem; }
-      .store-card-back li { font-size: 0.75rem; }
-      .store-card-back .back-cta { font-size: 0.76rem; padding: 7px 10px; }
+      .store-slide .flip-back .back-header h3 { font-size: 0.9rem; }
+      .store-slide .flip-back .back-list li { font-size: 0.76rem; }
     }
 
     @media (min-width: 1024px) {
-      .store-card-front h3 {
+      .store-slide .flip-front h3 {
         font-size: 1.35rem;
       }
     }
@@ -1784,29 +1456,6 @@
     </div>
   </section>
 
-  <!-- TERCEIRA DOBRA - CARROSSEL DIFERENCIAIS -->
-  <section class="diferenciais-section" id="diferenciais">
-    <div class="diferenciais-container">
-      <div class="diferenciais-header">
-        <h2>O diferencial de cada loja</h2>
-        <p>Compare rapidamente e escolha onde você quer atuar.</p>
-      </div>
-
-      <div class="carousel-wrapper">
-        <div class="diferenciais-carousel" id="carousel">
-          <!-- Cards renderizados dinamicamente via JavaScript -->
-        </div>
-      </div>
-
-      <div class="carousel-controls">
-        <button class="carousel-nav-btn" id="prevBtn" aria-label="Slide anterior">←</button>
-        <button class="carousel-nav-btn" id="nextBtn" aria-label="Próximo slide">→</button>
-      </div>
-
-      <div class="carousel-dots" id="dotsContainer"></div>
-    </div>
-  </section>
-
   <!-- COMO FUNCIONA -->
   <section class="como-funciona-section" id="como-funciona">
     <div class="como-funciona-container">
@@ -2165,16 +1814,12 @@
         loginUrl: null,
         dataStore: 'diplan',
         back: {
-          subtitle: 'Boutique • acesso sob convite',
-          badge: 'Operação seletiva',
           bullets: [
-            'Entrada por convite (perfil aprovado)',
-            'Curadoria de corretores e carteira',
-            'Fluxo enxuto, foco em qualidade',
-            'Atendimento sob demanda (sem escala pública)'
-          ],
-          ctaLabel: 'Quero acesso',
-          note: null
+            'Boutique: operação fechada e seletiva',
+            'Acesso sob convite (onboarding controlado)',
+            'Curadoria de corretores e produção',
+            'Vagas limitadas por região/capacidade'
+          ]
         }
       },
       {
@@ -2183,17 +1828,13 @@
         loginUrl: 'https://zentrix.grupogarciaseguradoras.com.br/login',
         dataStore: 'zentrix',
         back: {
-          subtitle: 'Grade + regras claras',
-          badge: 'Pagamento semanal (quinta)',
           bullets: [
-            'Quinta-feira • mínimo R$ 50',
-            'Taxa de implantação descontada na comissão',
-            'IOF 2,38% deduzido quando aplicável',
-            'Sem comissão: beneficiário ativo / cancel <30 dias',
-            'Estornos conforme regras da operadora'
-          ],
-          ctaLabel: 'Ver condições',
-          note: 'Mínimo para saque: R$ 50'
+            'Pagamento semanal (toda quinta-feira)',
+            'Corretor envia comprovante até 14h da terça-feira',
+            'Mínimo de R$ 50 por proposta elegível',
+            'IOF de 2,38% em antecipações aplicáveis',
+            'Regras claras de repasse + acompanhamento'
+          ]
         }
       },
       {
@@ -2202,16 +1843,12 @@
         loginUrl: 'https://serra.grupogarciaseguradoras.com.br/login',
         dataStore: 'serra',
         back: {
-          subtitle: 'Tabela direta',
-          badge: '270% nas principais',
           bullets: [
-            'Amil: 270%',
-            'Porto: 270%',
-            'SulAmérica: 270%',
-            'Objetivo: repasse simples e rápido'
-          ],
-          ctaLabel: 'Saiba mais',
-          note: null
+            '270% para Amil',
+            '270% para Porto Seguro',
+            '270% para SulAmérica',
+            'Operação focada em consistência e volume'
+          ]
         }
       },
       {
@@ -2220,16 +1857,12 @@
         loginUrl: 'http://bliss.grupogarciaseguradoras.com.br/login',
         dataStore: 'bliss',
         back: {
-          subtitle: 'Tabela Especial',
-          badge: 'Você pode mais',
           bullets: [
-            'Amil/SulAm/Porto: 270% • 285% • 300%',
-            'GNDI: 310% • 330% • 350%',
-            'Bradesco: 330% • 370% • 400%',
-            '3 níveis: Padrão / Intermediária / Máxima'
-          ],
-          ctaLabel: 'Ver tabela',
-          note: null
+            '3 níveis de comissionamento por performance',
+            '270% → 285% → 300% (progressivo)',
+            'Evolução por meta/resultado (sem ruído)',
+            'Bradesco pode chegar até 400%'
+          ]
         }
       },
       {
@@ -2238,17 +1871,13 @@
         loginUrl: 'https://assury.grupogarciaseguradoras.com.br/login',
         dataStore: 'assury',
         back: {
-          subtitle: 'Grade completa',
-          badge: 'Pagamento semanal',
           bullets: [
-            'Comissões pagas semanalmente',
-            'Taxa de implantação descontada na comissão',
-            'Subcódigos conforme regras da operadora',
-            'Sem comissão: beneficiário ativo / regra da operadora',
-            'Estornos conforme seguradora/operadora'
-          ],
-          ctaLabel: 'Entender regras',
-          note: null
+            'Pagamento semanal com previsibilidade',
+            'Subcódigos por corretor (rastreamento total)',
+            'Política de estornos controlada e transparente',
+            'Ajustes e validações com processo claro',
+            'Suporte rápido para correções e repasses'
+          ]
         }
       },
       {
@@ -2257,17 +1886,13 @@
         loginUrl: 'https://valorize.grupogarciaseguradoras.com.br/login',
         dataStore: 'valorize',
         back: {
-          subtitle: 'Comissão antecipada vs parcelada',
-          badge: 'Sem 10% retenção',
           bullets: [
-            'Receba 2 vezes na semana',
-            'Backoffice + canal para emissão imediata',
-            'Antecipada: Amil/Porto/SulAm 250%',
-            'Parcelada: Amil/Porto/SulAm/Omint/Alice 260%',
-            'Destaques: Seg Unimed 330% (parcelada) • Bradesco 320/330 • Hapvida 300/310'
-          ],
-          ctaLabel: 'Saiba mais',
-          note: null
+            'Sem retenção de 10% (modelo mais limpo)',
+            '250% de comissão antecipada',
+            'Estrutura pensada para escala de produção',
+            'Seguros Unimed chegando a 330%',
+            'Visibilidade e padronização de comissões'
+          ]
         }
       },
       {
@@ -2276,17 +1901,13 @@
         loginUrl: 'https://alleman.grupogarciaseguradoras.com.br/login',
         dataStore: 'alleman',
         back: {
-          subtitle: 'Metas + repasse por performance',
-          badge: 'Até 180%',
           bullets: [
-            'Metas: 150% • 160% • 170% • 180%',
-            'PJ: repasse 30% (categoria menor)',
-            'Pagamento máx. 100% no mês (saldo nos próximos)',
-            'Prazo: 10–30 dias PME • 30–50 dias PF',
-            'Alguns PME tratados como PF (comissão baixa)'
-          ],
-          ctaLabel: 'Ver metas',
-          note: 'Pagamento máximo 100% no mês'
+            'Metas progressivas: 150% → 180%',
+            'Incentivos por performance e consistência',
+            'PJ: 30% (modelo alinhado com operação)',
+            'Prazo de repasse entre 10 e 50 dias',
+            'Regras objetivas para metas e pagamento'
+          ]
         }
       },
       {
@@ -2295,17 +1916,13 @@
         loginUrl: 'http://affinity.grupogarciaseguradoras.com.br/login',
         dataStore: 'affinity',
         back: {
-          subtitle: 'Grade ampla (Saúde + Odonto)',
-          badge: 'PME • Adesão • PF',
           bullets: [
-            'Vigência: Setembro/2025',
-            'Exemplos: Bradesco PME 300%',
-            'Exemplos: SulAmérica PME 240%',
-            'Exemplos: Porto PME 240%',
-            'Regras: pagamento mínimo e condições por operadora'
-          ],
-          ctaLabel: 'Ver grade',
-          note: null
+            'Grade completa: PME / Adesão / PF',
+            'Estrutura comercial pronta para rodar',
+            'Bradesco: 300%',
+            'SulAmérica: 240%',
+            'Mix de produtos com suporte operacional'
+          ]
         }
       }
     ];
@@ -2316,46 +1933,6 @@
 
     document.addEventListener('DOMContentLoaded', function() {
       renderCoverflowSlides();
-
-      // ==================== RENDERIZAR CARROSSEL DE DIFERENCIAIS ====================
-      const carousel = document.getElementById('carousel');
-      if (carousel && typeof STORES !== 'undefined') {
-        STORES.forEach(store => {
-          const card = document.createElement('div');
-          card.className = 'diferencial-card';
-          
-          const chipsHTML = store.chips.map(chip => 
-            `<span class="diferencial-chip">${chip}</span>`
-          ).join('');
-          
-          const diferenciaisHTML = store.diferenciais.map(dif => 
-            `<li>${dif}</li>`
-          ).join('');
-          
-          if (store.isBoutique) {
-            card.innerHTML = `
-              <div class="diferencial-card-inner" style="position: relative; margin-top: 12px;">
-                <div class="diferencial-badge">Boutique</div>
-                <h3 class="diferencial-card-title">${store.nome}</h3>
-                <div class="diferencial-chips">${chipsHTML}</div>
-                <ul class="diferencial-list">${diferenciaisHTML}</ul>
-                <button class="diferencial-cta diferencial-cta-disabled" disabled>Acesso sob convite</button>
-              </div>
-            `;
-          } else {
-            card.innerHTML = `
-              <div class="diferencial-card-inner">
-                <h3 class="diferencial-card-title">${store.nome}</h3>
-                <div class="diferencial-chips">${chipsHTML}</div>
-                <ul class="diferencial-list">${diferenciaisHTML}</ul>
-                <a href="${store.loginUrl}" target="_blank" rel="noopener noreferrer" class="diferencial-cta diferencial-cta-primary">Ativar e entrar</a>
-              </div>
-            `;
-          }
-          
-          carousel.appendChild(card);
-        });
-      }
 
       // ==================== RENDERIZAR CTA FINAL ====================
       const ctaButtonsGrid = document.getElementById('ctaButtonsGrid');
@@ -2383,7 +1960,7 @@
       }
 
       // Meta Pixel Lead event - dispara quando usuário clica nos botões CTA das lojas
-      const ctaButtons = document.querySelectorAll('.loja-card-cta-primary, .cta-btn-primary, .diferencial-cta-primary');
+      const ctaButtons = document.querySelectorAll('.loja-card-cta-primary, .cta-btn-primary, .enter-btn');
       ctaButtons.forEach(function(button) {
         button.addEventListener('click', function() {
           if (typeof fbq !== 'undefined') {
@@ -2392,9 +1969,8 @@
         });
       });
 
-      // ==================== INICIALIZAR CARROSSEL NAVIGATION ====================
-      initCarousel();
       initStoresSwiper();
+      initCoverflowFlipCards();
     });
 
     function renderCoverflowSlides() {
@@ -2405,22 +1981,17 @@
         const slide = document.createElement('div');
         slide.className = 'swiper-slide store-slide';
 
-        // CSS-only flip: <label> wraps hidden <input checkbox>
-        const card3d = document.createElement('label');
-        card3d.className = 'store-card-3d';
+        const card3d = document.createElement('div');
+        card3d.className = 'store-card flip-card';
         card3d.setAttribute('data-store', store.dataStore);
-
-        const checkbox = document.createElement('input');
-        checkbox.type = 'checkbox';
-        checkbox.id = `flip-${store.dataStore}`;
-        card3d.appendChild(checkbox);
+        card3d.setAttribute('tabindex', '0');
 
         const inner = document.createElement('div');
-        inner.className = 'store-card-inner';
+        inner.className = 'flip-inner';
 
         // Front face (untouched)
         const front = document.createElement('div');
-        front.className = 'store-card-face store-card-front';
+        front.className = 'flip-face flip-front';
         front.style.backgroundImage = `url('${store.imageSrc}')`;
         front.style.backgroundSize = 'cover';
         front.style.backgroundPosition = 'center';
@@ -2433,25 +2004,23 @@
           </div>
         `;
 
-        // Back face — structured from store.back
+        // Back face
         const b = store.back;
         const back = document.createElement('div');
-        back.className = 'store-card-face store-card-back';
-
-        const noteHTML = b.note ? `<p class="back-note">${b.note}</p>` : '';
+        back.className = 'flip-face flip-back';
+        back.setAttribute('aria-hidden', 'true');
 
         back.innerHTML = `
           <div class="back-header">
-            <h3>${store.nome}</h3>
-            <span class="back-subtitle">${b.subtitle}</span>
+            <h3>Diferenciais</h3>
+            <button class="back-close" type="button" aria-label="Fechar">✕</button>
           </div>
-          <div class="back-badge">${b.badge}</div>
-          <ul>
+          <ul class="back-list">
             ${b.bullets.map(t => `<li>${t}</li>`).join('')}
           </ul>
-          ${noteHTML}
-          <a href="${loginHref}" target="_blank" rel="noopener noreferrer" class="back-cta"
-             onclick="event.stopPropagation()">${b.ctaLabel}</a>
+          <div class="back-close-row">
+            <button class="back-close" type="button" aria-label="Fechar">Fechar</button>
+          </div>
         `;
 
         inner.appendChild(front);
@@ -2466,7 +2035,7 @@
     function initStoresSwiper() {
       if (typeof Swiper === 'undefined') return;
 
-      new Swiper('#storesSwiper', {
+      const swiper = new Swiper('#storesSwiper', {
         effect: 'coverflow',
         grabCursor: true,
         centeredSlides: true,
@@ -2490,66 +2059,77 @@
           }
         }
       });
-    }
 
-    // Carousel Navigation Script
-    function initCarousel() {
-      const carousel = document.getElementById('carousel');
-      const prevBtn = document.getElementById('prevBtn');
-      const nextBtn = document.getElementById('nextBtn');
-      const dotsContainer = document.getElementById('dotsContainer');
-      const cards = document.querySelectorAll('.diferencial-card');
-      
-      if (!carousel || cards.length === 0) return;
-      
-      const cardWidth = cards[0]?.offsetWidth || 0;
-      const gapWidth = 20;
-
-      // Initialize dots
-      cards.forEach((_, index) => {
-        const dot = document.createElement('div');
-        dot.className = 'carousel-dot';
-        if (index === 0) dot.classList.add('active');
-        dot.addEventListener('click', () => scrollToCard(index));
-        dotsContainer.appendChild(dot);
-      });
-
-      const dots = document.querySelectorAll('.carousel-dot');
-
-      function scrollToCard(index) {
-        const scrollAmount = index * (cardWidth + gapWidth);
-        carousel.scrollLeft = scrollAmount;
-        updateDots(index);
-      }
-
-      function updateDots(index) {
-        dots.forEach((dot, i) => {
-          dot.classList.toggle('active', i === index);
+      swiper.on('slideChangeTransitionStart', () => {
+        document.querySelectorAll('.flip-card.is-flipped').forEach((card) => {
+          card.classList.remove('is-flipped');
         });
-      }
-
-      if (prevBtn && nextBtn) {
-        prevBtn.addEventListener('click', () => {
-          const currentIndex = Math.round(carousel.scrollLeft / (cardWidth + gapWidth));
-          scrollToCard(Math.max(0, currentIndex - 1));
-        });
-
-        nextBtn.addEventListener('click', () => {
-          const currentIndex = Math.round(carousel.scrollLeft / (cardWidth + gapWidth));
-          const maxIndex = cards.length - 2;
-          scrollToCard(Math.min(maxIndex, currentIndex + 1));
-        });
-      }
-
-      // Update dots on scroll
-      carousel.addEventListener('scroll', () => {
-        const currentIndex = Math.round(carousel.scrollLeft / (cardWidth + gapWidth));
-        updateDots(currentIndex);
       });
     }
 
-    // Flip is now CSS-only (label + checkbox :checked). No JS handler needed.
-    // CTA links use onclick="event.stopPropagation()" to prevent reflip.
+    function initCoverflowFlipCards() {
+      const cards = document.querySelectorAll('.flip-card');
+      const dragThreshold = 10;
+
+      cards.forEach((card) => {
+        let startX = 0;
+        let startY = 0;
+        let moved = false;
+
+        const onPointerDown = (event) => {
+          const point = event.touches ? event.touches[0] : event;
+          startX = point.clientX;
+          startY = point.clientY;
+          moved = false;
+        };
+
+        const onPointerMove = (event) => {
+          const point = event.touches ? event.touches[0] : event;
+          const dx = Math.abs(point.clientX - startX);
+          const dy = Math.abs(point.clientY - startY);
+          if (dx > dragThreshold || dy > dragThreshold) {
+            moved = true;
+          }
+        };
+
+        const onPointerUp = (event) => {
+          const target = event.target;
+          if (moved) return;
+          if (target.closest('.enter-btn') || target.closest('.back-close')) return;
+
+          if (target.closest('.back-header')) {
+            card.classList.remove('is-flipped');
+            return;
+          }
+
+          card.classList.toggle('is-flipped');
+        };
+
+        card.addEventListener('pointerdown', onPointerDown);
+        card.addEventListener('pointermove', onPointerMove);
+        card.addEventListener('pointerup', onPointerUp);
+
+        card.addEventListener('keydown', (event) => {
+          if (event.key === 'Enter' || event.key === ' ') {
+            event.preventDefault();
+            card.classList.toggle('is-flipped');
+          }
+        });
+
+        card.querySelectorAll('.enter-btn').forEach((btn) => {
+          btn.addEventListener('click', (event) => {
+            event.stopPropagation();
+          });
+        });
+
+        card.querySelectorAll('.back-close').forEach((btn) => {
+          btn.addEventListener('click', (event) => {
+            event.stopPropagation();
+            card.classList.remove('is-flipped');
+          });
+        });
+      });
+    }
   </script>
 </body>
 </html>
