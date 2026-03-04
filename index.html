@@ -576,6 +576,19 @@
       gap: 12px;
     }
 
+    .modal-form-helper {
+      margin: -4px 0 2px;
+      color: #94a3b8;
+      font-size: 0.82rem;
+      line-height: 1.45;
+    }
+
+    .modal-form-status {
+      min-height: 20px;
+      font-size: 0.84rem;
+      color: #fca5a5;
+    }
+
     .modal-form input,
     .modal-form select {
       background: rgba(255, 255, 255, 0.06);
@@ -2022,25 +2035,31 @@
       <h3 class="modal-form-title">Tenho interesse — quero saber mais</h3>
       <form class="modal-form" id="modalForm">
         <input type="hidden" id="formStoreName" name="loja" value="">
-        <input type="text" id="formNome" name="nome" placeholder="Seu nome completo" required>
-        <div class="modal-form-row">
-          <input type="tel" id="formTelefone" name="telefone" placeholder="Telefone (DDD)" required>
-          <input type="email" id="formEmail" name="email" placeholder="E-mail" required>
-        </div>
-        <input type="text" id="formCorretora" name="corretora" placeholder="Corretora em que trabalha (se houver)">
-        <select id="formAutonomo" name="autonomo" required>
-          <option value="" disabled selected>Você é autônomo?</option>
-          <option value="sim">Sim, sou autônomo</option>
-          <option value="nao">Não, tenho vínculo com corretora</option>
-        </select>
+        <input type="hidden" id="utmSource" name="utm_source" value="">
+        <input type="hidden" id="utmCampaign" name="utm_campaign" value="">
+        <input type="hidden" id="utmMedium" name="utm_medium" value="">
+        <input type="hidden" id="utmContent" name="utm_content" value="">
+        <input type="hidden" id="pageUrlField" name="page_url" value="">
+        <input
+          type="text"
+          id="formProfileUrl"
+          name="profileUrl"
+          placeholder="Cole o link do seu LinkedIn / Instagram / Facebook"
+          inputmode="url"
+          autocomplete="url"
+          required
+        >
+        <p class="modal-form-helper">
+          Usamos apenas dados públicos do perfil. Seu cadastro vai para análise do supervisor da filial.
+        </p>
+        <div class="modal-form-status" id="modalFormStatus" role="status" aria-live="polite"></div>
         <button type="submit" class="modal-submit" id="formSubmitBtn">
-          Enviar interesse
+          Enviar cadastro
         </button>
       </form>
       <div class="modal-success" id="modalSuccess" style="display:none;">
         <div class="modal-success-icon">✅</div>
-        <h3>Interesse registrado!</h3>
-        <p>A filial foi notificada. Em breve um supervisor entrará em contato.</p>
+        <h3>Cadastro enviado para análise. Você será contatado em breve.</h3>
       </div>
     </div>
   </div>
@@ -2293,6 +2312,12 @@
     // Expose globally for DevTools diagnostics
     window.COVERFLOW_STORES = COVERFLOW_STORES;
 
+    const BACKEND_BASE_URL = (
+      window.NEXT_PUBLIC_CRM_API_BASE_URL ||
+      window.CRM_API_BASE_URL ||
+      'http://localhost:3000'
+    ).replace(/\/$/, '');
+
 
     document.addEventListener('DOMContentLoaded', function() {
       renderCoverflowSlides();
@@ -2510,6 +2535,40 @@
       return roles[slug] || '';
     }
 
+    function getUrlParams() {
+      return new URLSearchParams(window.location.search);
+    }
+
+    function populateTrackingFields() {
+      const params = getUrlParams();
+      document.getElementById('utmSource').value = params.get('utm_source') || '';
+      document.getElementById('utmCampaign').value = params.get('utm_campaign') || '';
+      document.getElementById('utmMedium').value = params.get('utm_medium') || '';
+      document.getElementById('utmContent').value = params.get('utm_content') || '';
+      document.getElementById('pageUrlField').value = window.location.href;
+    }
+
+    function resolveTenantSlug() {
+      const knownSlugs = STORES.map(store => store.slug);
+      const segments = window.location.pathname
+        .split('/')
+        .map(part => part.trim().toLowerCase())
+        .filter(Boolean)
+        .filter(part => part !== 'index.html');
+
+      const routeSlug = segments.length ? segments[segments.length - 1] : '';
+      return knownSlugs.includes(routeSlug) ? routeSlug : 'default';
+    }
+
+    function isValidHttpUrl(value) {
+      try {
+        const parsed = new URL(value);
+        return parsed.protocol === 'http:' || parsed.protocol === 'https:';
+      } catch (_) {
+        return false;
+      }
+    }
+
     // Abre modal com diferenciais da loja
     function openModal(slug) {
       const data = getStoreData(slug);
@@ -2529,8 +2588,10 @@
       document.getElementById('modalSuccess').style.display = 'none';
       document.getElementById('modalForm').reset();
       document.getElementById('formStoreName').value = data.nome;
+      document.getElementById('modalFormStatus').textContent = '';
+      populateTrackingFields();
       document.getElementById('formSubmitBtn').disabled = false;
-      document.getElementById('formSubmitBtn').textContent = 'Enviar interesse';
+      document.getElementById('formSubmitBtn').textContent = 'Enviar cadastro';
 
       document.getElementById('modalDiferenciais').classList.add('active');
       document.body.style.overflow = 'hidden';
@@ -2560,106 +2621,76 @@
       setTimeout(() => { if (toast.parentNode) toast.remove(); }, 5000);
     }
 
-    // ==================== API DE NOTIFICAÇÃO (SIMULADA) ====================
-    /**
-     * NotificationAPI - Simula envio de notificação para:
-     *   1. Admin da filial
-     *   2. Supervisor da filial
-     * Em produção, substituir por fetch() real para endpoint do backend.
-     */
-    const NotificationAPI = {
-      endpoint: 'https://api.clickleads.com.br/notifications', // Endpoint de produção (simulado)
-
-      async notifyBranch(payload) {
-        console.log('[NotificationAPI] Enviando notificação...', payload);
-
-        // Simula chamada de rede (700ms)
-        return new Promise((resolve) => {
-          setTimeout(() => {
-            const response = {
-              success: true,
-              timestamp: new Date().toISOString(),
-              notificationsSent: [
-                {
-                  recipient: 'admin@filial.clickleads.com.br',
-                  role: 'Administrador da Filial',
-                  channel: 'email+whatsapp',
-                  status: 'delivered'
-                },
-                {
-                  recipient: 'supervisor@filial.clickleads.com.br',
-                  role: 'Supervisor',
-                  channel: 'email+whatsapp',
-                  status: 'delivered'
-                }
-              ],
-              corretor: payload
-            };
-            console.log('[NotificationAPI] Resposta:', response);
-            resolve(response);
-          }, 700);
-        });
-      }
-    };
-
     // Form submit
     document.getElementById('modalForm').addEventListener('submit', async function(e) {
       e.preventDefault();
 
       const btn = document.getElementById('formSubmitBtn');
+      const statusEl = document.getElementById('modalFormStatus');
+      const profileUrl = document.getElementById('formProfileUrl').value.trim();
+
+      if (!profileUrl) {
+        statusEl.textContent = 'Informe a URL do seu perfil para continuar.';
+        return;
+      }
+
+      if (!isValidHttpUrl(profileUrl)) {
+        statusEl.textContent = 'Use uma URL válida com http:// ou https://.';
+        return;
+      }
+
       btn.disabled = true;
       btn.textContent = 'Enviando...';
+      statusEl.textContent = '';
+
+      const utm = {
+        source: document.getElementById('utmSource').value || '',
+        campaign: document.getElementById('utmCampaign').value || '',
+        medium: document.getElementById('utmMedium').value || '',
+        content: document.getElementById('utmContent').value || ''
+      };
+
+      const pageUrl = document.getElementById('pageUrlField').value || window.location.href;
+      const tenantSlug = resolveTenantSlug();
 
       const payload = {
-        loja: document.getElementById('formStoreName').value,
-        nome: document.getElementById('formNome').value.trim(),
-        telefone: document.getElementById('formTelefone').value.trim(),
-        email: document.getElementById('formEmail').value.trim(),
-        corretora: document.getElementById('formCorretora').value.trim() || 'Não informada',
-        autonomo: document.getElementById('formAutonomo').value,
-        dataEnvio: new Date().toISOString()
+        profileUrl,
+        tenantSlug,
+        utm,
+        pageUrl
       };
 
       try {
-        const result = await NotificationAPI.notifyBranch(payload);
+        const response = await fetch(`${BACKEND_BASE_URL}/api/broker-applications`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(payload)
+        });
 
-        if (result.success) {
-          // Mostra sucesso no modal
-          document.getElementById('modalForm').style.display = 'none';
-          document.getElementById('modalSuccess').style.display = '';
+        if (!response.ok) {
+          throw new Error(`HTTP ${response.status}`);
+        }
 
-          // Toast para admin
-          showToast(
-            '📩 Notificação enviada',
-            `Admin e Supervisor da filial foram avisados sobre o interesse de ${payload.nome} na loja ${payload.loja}.`
-          );
+        document.getElementById('modalForm').style.display = 'none';
+        document.getElementById('modalSuccess').style.display = '';
 
-          // Toast detalhes
-          result.notificationsSent.forEach(n => {
-            showToast(
-              `✅ ${n.role}`,
-              `Canal: ${n.channel} • Status: ${n.status}`
-            );
+        if (typeof fbq !== 'undefined') {
+          fbq('track', 'Lead', { content_name: tenantSlug });
+        }
+
+        if (typeof gtag !== 'undefined') {
+          gtag('event', 'generate_lead', {
+            event_category: 'formulario',
+            event_label: tenantSlug
           });
-
-          // Meta Pixel
-          if (typeof fbq !== 'undefined') {
-            fbq('track', 'Lead', { content_name: payload.loja });
-          }
-
-          // GA4
-          if (typeof gtag !== 'undefined') {
-            gtag('event', 'generate_lead', {
-              event_category: 'formulario',
-              event_label: payload.loja
-            });
-          }
         }
       } catch (err) {
-        console.error('[NotificationAPI] Erro:', err);
+        console.error('[BrokerApplication] Erro:', err);
         btn.disabled = false;
-        btn.textContent = 'Enviar interesse';
-        showToast('⚠️ Erro', 'Não foi possível enviar. Tente novamente.');
+        btn.textContent = 'Enviar cadastro';
+        statusEl.textContent = 'Não foi possível enviar agora. Tente novamente em instantes.';
       }
     });
 
