@@ -20,3 +20,49 @@ Nenhum framework, nenhum build.
 
 ## 📂 Estrutura do Projeto
 
+```bash
+.
+├── index.html
+├── sections.html
+├── README.md
+└── .vscode/tasks.json
+```
+
+---
+
+## ⚙️ Configuração da API (cadastro por URL de perfil)
+
+Esta landing envia o cadastro para:
+
+`POST ${BACKEND_BASE_URL}/api/broker-applications`
+
+No `index.html`, a base da API é resolvida assim:
+
+1. `window.NEXT_PUBLIC_CRM_API_BASE_URL` (preferencial)
+2. `window.CRM_API_BASE_URL`
+3. fallback local: `http://localhost:3000`
+
+Exemplo para definir antes do script principal da landing:
+
+```html
+<script>
+	window.NEXT_PUBLIC_CRM_API_BASE_URL = 'https://seu-backend.com';
+</script>
+```
+
+Payload enviado:
+
+```json
+{
+	"profileUrl": "https://linkedin.com/in/exemplo",
+	"tenantSlug": "default",
+	"utm": {
+		"source": "",
+		"campaign": "",
+		"medium": "",
+		"content": ""
+	},
+	"pageUrl": "https://dominio-da-landing"
+}
+```
+
