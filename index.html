@@ -867,12 +867,13 @@
 
       .loja-card img {
         margin: 0 auto 16px;
-        width: 100%;
-        max-width: 280px;
-        height: 180px;
+        width: min(82vw, 320px);
+        max-width: 100%;
+        height: auto;
         margin-left: auto;
         margin-right: auto;
-        border-radius: 20px;
+        border-radius: 16px;
+        object-fit: contain;
       }
 
       .loja-card-content h2 {
@@ -1078,14 +1079,14 @@
 
     @media (max-width: 440px) {
       .loja-card img {
-        width: 55vw;
-        height: 55vw;
-        max-width: 180px;
-        max-height: 180px;
-        border-radius: 50%;
-        border: 10px solid var(--card-bg);
+        width: min(86vw, 300px);
+        height: auto;
+        max-width: 100%;
+        max-height: none;
+        border-radius: 14px;
+        border: none;
         box-shadow: none;
-        margin: -70px auto 16px;
+        margin: 0 auto 16px;
       }
 
       .hero-fold-content h1 {
