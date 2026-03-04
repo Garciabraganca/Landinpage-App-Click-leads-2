@@ -1104,11 +1104,39 @@
       background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
       padding: 80px 20px;
       color: #fff;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .stores-swiper-video {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .stores-swiper-video video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+      will-change: transform;
+      transform: translateZ(0);
+    }
+
+    .stores-swiper-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(15, 23, 42, 0.75) 0%, rgba(30, 41, 59, 0.75) 100%);
+      z-index: 1;
     }
 
     .stores-swiper-container {
       max-width: 1200px;
       margin: 0 auto;
+      position: relative;
+      z-index: 2;
     }
 
     .stores-swiper-header {
@@ -1723,6 +1751,20 @@
   </section>
 
   <section class="stores-swiper-section" id="shopping-tour">
+    <div class="stores-swiper-video">
+      <video
+        autoplay
+        muted
+        loop
+        playsinline
+        preload="none"
+        disablepictureinpicture
+        disableremoteplayback
+        data-lazy-src="video_entrada.mp4"
+      >
+      </video>
+    </div>
+    <div class="stores-swiper-overlay"></div>
     <div class="stores-swiper-container">
       <div class="stores-swiper-header">
         <h2>Dê uma volta no Shopping</h2>
