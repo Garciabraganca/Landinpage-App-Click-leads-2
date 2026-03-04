@@ -1383,6 +1383,188 @@
     }
 
     /* ==================== COMO FUNCIONA SECTION ==================== */
+    .como-entrar-section {
+      position: relative;
+      overflow: hidden;
+      min-height: 640px;
+      color: #fff;
+      padding: 84px 20px;
+      isolation: isolate;
+    }
+
+    .como-entrar-bg {
+      position: absolute;
+      inset: 0;
+      background: url('como_entrar.png') center center / cover no-repeat;
+      z-index: 0;
+    }
+
+    .como-entrar-overlay {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      background: rgba(2, 6, 23, 0.62);
+      backdrop-filter: blur(1.5px);
+      -webkit-backdrop-filter: blur(1.5px);
+    }
+
+    .como-entrar-container {
+      position: relative;
+      z-index: 2;
+      max-width: 1120px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 34px;
+      align-items: center;
+    }
+
+    .como-entrar-copy h2 {
+      margin: 0 0 12px;
+      font-size: clamp(1.95rem, 4vw, 2.6rem);
+      line-height: 1.15;
+      color: #fff;
+      text-shadow: 0 2px 12px rgba(0, 0, 0, 0.45);
+    }
+
+    .como-entrar-copy p {
+      margin: 0 0 20px;
+      font-size: 1.02rem;
+      color: #f1f5f9;
+    }
+
+    .como-entrar-steps {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      gap: 12px;
+    }
+
+    .como-entrar-steps li {
+      position: relative;
+      padding: 12px 14px 12px 42px;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      background: rgba(15, 23, 42, 0.46);
+      color: #f8fafc;
+      font-size: 0.94rem;
+      line-height: 1.5;
+    }
+
+    .como-entrar-steps li::before {
+      content: '✓';
+      position: absolute;
+      left: 14px;
+      top: 10px;
+      color: #fbbf24;
+      font-weight: 800;
+      font-size: 1rem;
+    }
+
+    .como-entrar-form-card {
+      background: rgba(15, 23, 42, 0.48);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      border-radius: 20px;
+      padding: 24px;
+      box-shadow: 0 18px 42px rgba(2, 6, 23, 0.42);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+
+    .como-entrar-form {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .como-entrar-form label {
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: #e2e8f0;
+    }
+
+    .como-entrar-form select,
+    .como-entrar-form input {
+      width: 100%;
+      border-radius: 10px;
+      border: 1px solid rgba(255, 255, 255, 0.24);
+      background: rgba(15, 23, 42, 0.76);
+      color: #f8fafc;
+      padding: 12px 14px;
+      font-size: 0.95rem;
+      outline: none;
+      font-family: inherit;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .como-entrar-form select:focus,
+    .como-entrar-form input:focus {
+      border-color: rgba(251, 191, 36, 0.88);
+      box-shadow: 0 0 0 3px rgba(251, 191, 36, 0.24);
+    }
+
+    .como-entrar-form select option {
+      color: #f8fafc;
+      background: #1f2937;
+    }
+
+    .como-entrar-form input::placeholder {
+      color: #94a3b8;
+    }
+
+    .como-entrar-submit {
+      border: none;
+      border-radius: 10px;
+      padding: 14px 16px;
+      font-size: 0.98rem;
+      font-weight: 700;
+      color: #111827;
+      cursor: pointer;
+      background: linear-gradient(135deg, #fbbf24, #f97316);
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+      box-shadow: 0 10px 24px rgba(249, 115, 22, 0.38);
+    }
+
+    .como-entrar-submit:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 14px 26px rgba(249, 115, 22, 0.48);
+    }
+
+    .como-entrar-submit:disabled {
+      opacity: 0.62;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+
+    .como-entrar-form-status {
+      min-height: 20px;
+      font-size: 0.85rem;
+      color: #fecaca;
+      margin: 0;
+    }
+
+    .como-entrar-form-status.success {
+      color: #bbf7d0;
+    }
+
+    @media (max-width: 960px) {
+      .como-entrar-container {
+        grid-template-columns: 1fr;
+        gap: 22px;
+      }
+
+      .como-entrar-section {
+        padding: 60px 16px;
+      }
+
+      .como-entrar-form-card {
+        padding: 20px;
+      }
+    }
+
+    /* ==================== COMO FUNCIONA SECTION ==================== */
     .como-funciona-section {
       background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
       padding: 80px 20px;
@@ -1683,7 +1865,7 @@
       <p>Um ecossistema onde tecnologia, marketing e escala trabalham juntos.</p>
 
       <div class="hero-fold-ctas">
-        <a href="#contato" class="hero-fold-cta hero-fold-cta-primary">Quero fazer parte</a>
+        <a href="#como-entrar" class="hero-fold-cta hero-fold-cta-primary">Quero fazer parte</a>
         <a href="#lojas" class="hero-fold-cta hero-fold-cta-secondary">Conhecer as empresas</a>
       </div>
 
@@ -1810,6 +1992,47 @@
     </div>
   </section>
 
+  <section class="como-entrar-section" id="como-entrar">
+    <div class="como-entrar-bg" aria-hidden="true"></div>
+    <div class="como-entrar-overlay" aria-hidden="true"></div>
+    <div class="como-entrar-container">
+      <div class="como-entrar-copy">
+        <h2>Como entrar</h2>
+        <p>Escolha sua loja e envie seu melhor perfil.</p>
+        <ul class="como-entrar-steps">
+          <li><strong>Escolha a loja</strong> onde você quer atuar.</li>
+          <li><strong>Cole o link</strong> do seu melhor perfil (LinkedIn, Instagram ou Facebook).</li>
+          <li><strong>O supervisor é avisado</strong> e faz a seleção com base no seu perfil.</li>
+        </ul>
+      </div>
+
+      <aside class="como-entrar-form-card">
+        <form class="como-entrar-form" id="comoEntrarForm">
+          <label for="comoEntrarStore">Loja</label>
+          <select id="comoEntrarStore" name="store_slug" required>
+            <option value="">Selecione uma loja</option>
+            <option value="diplan" data-store-name="Diplan">Diplan</option>
+            <option value="zentrix-prime" data-store-name="ZENTRIX PRIME">ZENTRIX PRIME</option>
+            <option value="as-sure" data-store-name="AS.SURE">AS.SURE</option>
+            <option value="bliss" data-store-name="Bliss">Bliss</option>
+            <option value="alleman" data-store-name="Alleman">Alleman</option>
+            <option value="affinity" data-store-name="Affinity">Affinity</option>
+            <option value="serra" data-store-name="Serra">Serra</option>
+            <option value="valorize" data-store-name="Valorize">Valorize</option>
+          </select>
+
+          <label for="comoEntrarProfileUrl">Link do perfil</label>
+          <input type="text" id="comoEntrarProfileUrl" name="profile_url"
+            placeholder="https://www.linkedin.com/in/seu-perfil" autocomplete="url" inputmode="url" required>
+
+          <p class="como-entrar-form-status" id="comoEntrarFormStatus" role="status" aria-live="polite"></p>
+
+          <button type="submit" class="como-entrar-submit" id="comoEntrarSubmitBtn">Enviar para análise</button>
+        </form>
+      </aside>
+    </div>
+  </section>
+
   <!-- COMO FUNCIONA -->
   <section class="como-funciona-section" id="como-funciona">
     <div class="como-funciona-container">
@@ -1924,6 +2147,7 @@
       <h3 class="modal-form-title">Tenho interesse — quero saber mais</h3>
       <form class="modal-form" id="modalForm">
         <input type="hidden" id="formStoreName" name="loja" value="">
+        <input type="hidden" id="formStoreSlug" name="store_slug" value="">
         <input type="hidden" id="utmSource" name="utm_source" value="">
         <input type="hidden" id="utmCampaign" name="utm_campaign" value="">
         <input type="hidden" id="utmMedium" name="utm_medium" value="">
@@ -2191,6 +2415,24 @@
       }
     ];
 
+    const BROKER_APPLICATION_STORES = [
+      { slug: 'diplan', name: 'Diplan' },
+      { slug: 'zentrix-prime', name: 'ZENTRIX PRIME' },
+      { slug: 'as-sure', name: 'AS.SURE' },
+      { slug: 'bliss', name: 'Bliss' },
+      { slug: 'alleman', name: 'Alleman' },
+      { slug: 'affinity', name: 'Affinity' },
+      { slug: 'serra', name: 'Serra' },
+      { slug: 'valorize', name: 'Valorize' }
+    ];
+
+    const ALLOWED_PROFILE_DOMAINS = [
+      'linkedin.com',
+      'instagram.com',
+      'facebook.com',
+      'fb.com'
+    ];
+
     // Expose globally for DevTools diagnostics
     window.COVERFLOW_STORES = COVERFLOW_STORES;
 
@@ -2203,6 +2445,7 @@
 
     document.addEventListener('DOMContentLoaded', function () {
       renderCoverflowSlides();
+      initComoEntrarForm();
 
       // ==================== FORÇAR PLAY DO VÍDEO HERO ====================
       var heroVideo = document.getElementById('heroVideo');
@@ -2479,6 +2722,112 @@
       }
     }
 
+    function normalizeProfileUrl(rawValue) {
+      const trimmed = (rawValue || '').trim();
+      if (!trimmed) {
+        return { ok: false, reason: 'empty' };
+      }
+
+      const prefixed = /^https?:\/\//i.test(trimmed) ? trimmed : `https://${trimmed}`;
+      if (!isValidHttpUrl(prefixed)) {
+        return { ok: false, reason: 'invalid_url' };
+      }
+
+      const parsed = new URL(prefixed);
+      const hostname = parsed.hostname.toLowerCase();
+      const isAllowedDomain = ALLOWED_PROFILE_DOMAINS.some(domain => hostname === domain || hostname.endsWith(`.${domain}`));
+
+      if (!isAllowedDomain) {
+        return { ok: false, reason: 'invalid_domain' };
+      }
+
+      return { ok: true, normalized: parsed.toString() };
+    }
+
+    function findBrokerStoreBySlug(slug) {
+      return BROKER_APPLICATION_STORES.find(store => store.slug === slug) || null;
+    }
+
+    function isAllowedStoreSlug(slug) {
+      return BROKER_APPLICATION_STORES.some(store => store.slug === slug)
+        || STORES.some(store => store.slug === slug);
+    }
+
+    async function sendBrokerApplication(payload) {
+      const response = await fetch(`${BACKEND_BASE_URL}/api/broker-applications`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(payload)
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP ${response.status}`);
+      }
+
+      return response;
+    }
+
+    function initComoEntrarForm() {
+      const form = document.getElementById('comoEntrarForm');
+      if (!form) return;
+
+      const storeField = document.getElementById('comoEntrarStore');
+      const profileField = document.getElementById('comoEntrarProfileUrl');
+      const submitBtn = document.getElementById('comoEntrarSubmitBtn');
+      const statusEl = document.getElementById('comoEntrarFormStatus');
+
+      form.addEventListener('submit', async function (e) {
+        e.preventDefault();
+        statusEl.classList.remove('success');
+        statusEl.textContent = '';
+
+        const selectedStore = findBrokerStoreBySlug(storeField.value);
+        if (!selectedStore) {
+          statusEl.textContent = 'Selecione uma loja para continuar.';
+          return;
+        }
+
+        const normalized = normalizeProfileUrl(profileField.value);
+        if (!normalized.ok) {
+          if (normalized.reason === 'invalid_domain') {
+            statusEl.textContent = 'Use um link de LinkedIn, Instagram, Facebook ou fb.com.';
+          } else {
+            statusEl.textContent = 'Informe um link de perfil válido.';
+          }
+          return;
+        }
+
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Enviando...';
+
+        const payload = {
+          event_type: 'broker_application',
+          store_slug: selectedStore.slug,
+          store_name: selectedStore.name,
+          profile_url: normalized.normalized,
+          submitted_at: new Date().toISOString(),
+          page: 'landing_dobra4_como_entrar',
+          tenantSlug: resolveTenantSlug(),
+          pageUrl: window.location.href
+        };
+
+        try {
+          await sendBrokerApplication(payload);
+          statusEl.classList.add('success');
+          statusEl.textContent = '✅ Perfil enviado. O supervisor da loja será notificado.';
+          form.reset();
+        } catch (err) {
+          console.error('[ComoEntrar] Erro:', err);
+          statusEl.textContent = 'Não foi possível enviar agora. Tente novamente em instantes.';
+        } finally {
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Enviar para análise';
+        }
+      });
+    }
+
     // Abre modal com diferenciais da loja
     function openModal(slug) {
       const data = getStoreData(slug);
@@ -2487,6 +2836,7 @@
       document.getElementById('modalStoreName').textContent = data.nome;
       document.getElementById('modalStoreRole').textContent = data.role;
       document.getElementById('formStoreName').value = data.nome;
+      document.getElementById('formStoreSlug').value = data.slug;
 
       // Mescla diferenciais + bullets (sem duplicatas)
       const allItems = [...new Set([...data.diferenciais, ...data.bullets])];
@@ -2498,6 +2848,7 @@
       document.getElementById('modalSuccess').style.display = 'none';
       document.getElementById('modalForm').reset();
       document.getElementById('formStoreName').value = data.nome;
+      document.getElementById('formStoreSlug').value = data.slug;
       document.getElementById('modalFormStatus').textContent = '';
       populateTrackingFields();
       document.getElementById('formSubmitBtn').disabled = false;
@@ -2537,15 +2888,26 @@
 
       const btn = document.getElementById('formSubmitBtn');
       const statusEl = document.getElementById('modalFormStatus');
-      const profileUrl = document.getElementById('formProfileUrl').value.trim();
+      const storeName = (document.getElementById('formStoreName').value || '').trim();
+      const storeSlug = (document.getElementById('formStoreSlug').value || '').trim();
+      const normalizedProfile = normalizeProfileUrl(document.getElementById('formProfileUrl').value);
 
-      if (!profileUrl) {
-        statusEl.textContent = 'Informe a URL do seu perfil para continuar.';
+      if (!isAllowedStoreSlug(storeSlug)) {
+        statusEl.textContent = 'Loja invalida. Reabra o card e tente novamente.';
         return;
       }
 
-      if (!isValidHttpUrl(profileUrl)) {
-        statusEl.textContent = 'Use uma URL válida com http:// ou https://.';
+      if (!normalizedProfile.ok) {
+        if (normalizedProfile.reason === 'invalid_domain') {
+          statusEl.textContent = 'Use um link de LinkedIn, Instagram, Facebook ou fb.com.';
+        } else {
+          statusEl.textContent = 'Informe um link de perfil válido.';
+        }
+        return;
+      }
+
+      if (!storeName || !storeSlug) {
+        statusEl.textContent = 'Selecione uma loja e tente novamente.';
         return;
       }
 
@@ -2564,24 +2926,20 @@
       const tenantSlug = resolveTenantSlug();
 
       const payload = {
-        profileUrl,
+        event_type: 'broker_application',
+        store_slug: storeSlug,
+        store_name: storeName,
+        profile_url: normalizedProfile.normalized,
+        submitted_at: new Date().toISOString(),
+        page: 'landing_modal_diferenciais',
+        profileUrl: normalizedProfile.normalized,
         tenantSlug,
         utm,
         pageUrl
       };
 
       try {
-        const response = await fetch(`${BACKEND_BASE_URL}/api/broker-applications`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(payload)
-        });
-
-        if (!response.ok) {
-          throw new Error(`HTTP ${response.status}`);
-        }
+        await sendBrokerApplication(payload);
 
         document.getElementById('modalForm').style.display = 'none';
         document.getElementById('modalSuccess').style.display = '';
