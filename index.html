@@ -1376,16 +1376,17 @@
       border-color: rgba(251, 191, 36, 0.8);
     }
 
-    /* Card front placeholder (clean front face) */
+    /* Card front image container (loads background image) */
     .store-slide .flip-front .card-front-media {
+      position: absolute;
+      inset: 0;
       width: 100%;
       height: 100%;
       background-size: cover;
-      background-position: center;
+      background-position: center 35%;
       background-repeat: no-repeat;
-      position: absolute;
-      inset: 0;
       pointer-events: none;
+      z-index: 0;
     }
 
     .store-slide .flip-back .back-header {
@@ -2430,13 +2431,34 @@
         // Front face (cleaned - no content, only placeholder)
         const front = document.createElement('div');
         front.className = 'flip-face flip-front';
-        front.style.backgroundImage = `url('${store.imageSrc}')`;
-        front.style.backgroundSize = 'cover';
-        front.style.backgroundPosition = 'center 35%';
-        front.style.backgroundRepeat = 'no-repeat';
+        front.setAttribute('data-front-image', store.imageSrc || '');
+        
+        // Warn if image source is missing
+        if (!store.imageSrc) {
+          console.warn(`[Carousel] Store "${store.nome}" (${store.dataStore}) has no image source (imageSrc).`);
+        } else {
+          console.log(`[Carousel] Loading image for "${store.nome}": ${store.imageSrc}`);
+        }
+        
         front.innerHTML = `
           <div class="card-front-media" aria-hidden="true"></div>
         `;
+        
+        // Set background image on the card-front-media element
+        const mediaEl = front.querySelector('.card-front-media');
+        if (mediaEl && store.imageSrc) {
+          mediaEl.style.backgroundImage = `url('${store.imageSrc}')`;
+          
+          // Validate image loading (non-blocking, logs to console)
+          const img = new Image();
+          img.onload = () => {
+            console.log(`[Carousel] ✓ Image loaded successfully: ${store.imageSrc}`);
+          };
+          img.onerror = () => {
+            console.warn(`[Carousel] ✗ Failed to load image: ${store.imageSrc}`);
+          };
+          img.src = store.imageSrc;
+        }
 
         // Back face
         const b = store.back;
