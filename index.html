@@ -1222,22 +1222,22 @@
     }
 
     .stores-swiper .swiper-slide {
-      height: 360px;
-      border-radius: 20px;
-      overflow: hidden;
+      height: auto;
+      border-radius: 0;
+      overflow: visible;
       transition: transform 0.35s ease, filter 0.35s ease, opacity 0.35s ease;
       opacity: 0.56;
       filter: grayscale(0.6) saturate(0.8);
       transform: scale(0.88);
-      background: linear-gradient(160deg, #1e293b 0%, #0f172a 100%);
-      box-shadow: 0 12px 26px rgba(2, 6, 23, 0.45);
+      background: transparent;
+      box-shadow: none;
     }
 
     .stores-swiper .swiper-slide-active {
       opacity: 1;
       filter: grayscale(0) saturate(1);
       transform: scale(1);
-      box-shadow: 0 16px 36px rgba(249, 115, 22, 0.25), 0 8px 24px rgba(2, 6, 23, 0.5);
+      box-shadow: none;
     }
 
     .store-slide__link {
@@ -1321,10 +1321,6 @@
     }
 
     @media (min-width: 1024px) {
-      .stores-swiper .swiper-slide {
-        height: 420px;
-      }
-
       .store-slide__content h3 {
         font-size: 1.35rem;
       }
