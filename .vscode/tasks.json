@@ -1,0 +1,24 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Landing: iniciar servidor (5500)",
+      "type": "shell",
+      "command": "python",
+      "args": ["-m", "http.server", "5500"],
+      "isBackground": true,
+      "problemMatcher": []
+    },
+    {
+      "label": "Landing: parar servidor",
+      "type": "shell",
+      "command": "powershell",
+      "args": [
+        "-NoProfile",
+        "-Command",
+        "$pid=(Get-NetTCPConnection -LocalPort 5500 -State Listen -ErrorAction SilentlyContinue | Select-Object -First 1 -ExpandProperty OwningProcess); if($pid){Stop-Process -Id $pid -Force}"
+      ],
+      "problemMatcher": []
+    }
+  ]
+}
