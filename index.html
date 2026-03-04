@@ -1376,6 +1376,18 @@
       border-color: rgba(251, 191, 36, 0.8);
     }
 
+    /* Card front placeholder (clean front face) */
+    .store-slide .flip-front .card-front-media {
+      width: 100%;
+      height: 100%;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+
     .store-slide .flip-back .back-header {
       display: flex;
       align-items: center;
@@ -2415,20 +2427,15 @@
         const inner = document.createElement('div');
         inner.className = 'flip-inner';
 
-        // Front face (untouched)
+        // Front face (cleaned - no content, only placeholder)
         const front = document.createElement('div');
         front.className = 'flip-face flip-front';
         front.style.backgroundImage = `url('${store.imageSrc}')`;
         front.style.backgroundSize = 'cover';
         front.style.backgroundPosition = 'center 35%';
         front.style.backgroundRepeat = 'no-repeat';
-        const loginHref = store.loginUrl || '#';
         front.innerHTML = `
-          <div class="store-content">
-            <h3>${store.nome}</h3>
-            <a href="${loginHref}" target="_blank" rel="noopener noreferrer" class="enter-btn"
-               onclick="event.stopPropagation()">Entrar</a>
-          </div>
+          <div class="card-front-media" aria-hidden="true"></div>
         `;
 
         // Back face
