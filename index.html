@@ -1681,69 +1681,187 @@
       margin-right: auto;
     }
 
+    /* Featured Diplan Card (Boutique) */
+    .cta-featured-card {
+      margin-bottom: 32px;
+      max-width: 640px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .cta-featured-btn {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 96px;
+      padding: 16px 28px;
+      border-radius: 20px;
+      text-decoration: none;
+      cursor: not-allowed;
+      border: 2px solid rgba(251, 191, 36, 0.5);
+      background: linear-gradient(135deg, rgba(23, 25, 35, 0.85), rgba(15, 23, 42, 0.9));
+      box-shadow: 0 8px 32px rgba(251, 191, 36, 0.15), 0 0 0 1px rgba(251, 191, 36, 0.1) inset;
+      transition: transform 220ms ease, box-shadow 220ms ease, border-color 220ms ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-featured-btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(251, 191, 36, 0.08), transparent);
+      transition: left 0.5s;
+    }
+
+    .cta-featured-btn:hover::before {
+      left: 100%;
+    }
+
+    .cta-featured-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 40px rgba(251, 191, 36, 0.25), 0 0 0 2px rgba(251, 191, 36, 0.2) inset;
+      border-color: rgba(251, 191, 36, 0.7);
+    }
+
+    .cta-featured-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      width: 100%;
+    }
+
+    .cta-featured-badge {
+      font-size: 0.65rem;
+      font-weight: 800;
+      color: #fbbf24;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+    }
+
+    .cta-featured-logo-wrap {
+      height: 44px;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .cta-featured-logo {
+      height: 100%;
+      max-width: 400px;
+      width: 100%;
+      object-fit: contain;
+      filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+    }
+
+    .cta-featured-subtitle {
+      font-size: 0.75rem;
+      color: #94a3b8;
+      font-weight: 500;
+      letter-spacing: 0.3px;
+    }
+
+    /* Regular Store Buttons Grid */
     .cta-buttons-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 16px;
-      margin-bottom: 40px;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 18px;
+      margin-bottom: 48px;
+      max-width: 1200px;
+      margin-left: auto;
+      margin-right: auto;
     }
 
     .cta-button-item {
       position: relative;
     }
 
-    .cta-button-item.boutique {
-      grid-column: 1 / -1;
-      max-width: 200px;
-      margin: 0 auto;
-    }
-
-    .cta-button-item.boutique::before {
-      content: 'BOUTIQUE';
-      position: absolute;
-      top: -12px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: linear-gradient(135deg, #f59e0b, #d97706);
-      color: #000;
-      font-size: 0.7rem;
-      font-weight: 700;
-      padding: 4px 10px;
-      border-radius: 999px;
-      letter-spacing: 0.5px;
-    }
-
     .cta-btn {
-      display: inline-block;
-      padding: 12px 24px;
-      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 72px;
+      min-height: 72px;
+      padding: 0 14px;
+      border-radius: 18px;
       font-weight: 600;
       text-decoration: none;
       cursor: pointer;
       border: none;
       text-align: center;
-      transition: all 0.2s ease;
+      transition: transform 200ms ease, box-shadow 200ms ease, border-color 200ms ease;
+      position: relative;
+      box-shadow: 0 6px 20px rgba(249, 115, 22, 0.15);
+      background: #ffffff;
+      border: 2px solid rgba(249, 115, 22, 0.08);
+    }
+
+    .cta-btn-logo-wrap {
+      height: 48px;
       width: 100%;
-      font-size: 0.95rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .cta-btn-logo {
+      height: 100%;
+      width: 100%;
+      max-width: 360px;
+      object-fit: contain;
+      display: block;
     }
 
     .cta-btn-primary {
-      background: linear-gradient(to right, #f59e0b, #f97316);
-      color: #111827;
-      box-shadow: 0 4px 12px rgba(249, 115, 22, 0.3);
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.98), rgba(255, 255, 255, 0.95));
+      border-color: rgba(249, 115, 22, 0.2);
+      box-shadow: 0 6px 20px rgba(249, 115, 22, 0.15);
     }
 
     .cta-btn-primary:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(249, 115, 22, 0.5);
-      filter: brightness(1.05);
+      transform: translateY(-1px);
+      box-shadow: 0 12px 32px rgba(249, 115, 22, 0.25);
+      border-color: rgba(249, 115, 22, 0.4);
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.99), rgba(255, 255, 255, 0.98));
+    }
+
+    .cta-btn-primary:active {
+      transform: translateY(0);
+      box-shadow: 0 4px 12px rgba(249, 115, 22, 0.15);
+      border-color: rgba(249, 115, 22, 0.3);
+    }
+
+    .cta-btn-primary:focus-visible {
+      outline: 2px solid #f97316;
+      outline-offset: 2px;
+      border-color: #f97316;
     }
 
     .cta-btn-disabled {
-      background: rgba(100, 116, 139, 0.3);
-      color: #94a3b8;
+      background: rgba(156, 163, 175, 0.08);
+      border-color: rgba(156, 163, 175, 0.25);
+      color: #9ca3af;
       cursor: not-allowed;
-      border: 1px solid rgba(148, 163, 184, 0.3);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      opacity: 0.6;
+    }
+
+    .cta-btn-disabled .cta-btn-logo {
+      opacity: 0.5;
+    }
+
+    .cta-btn-disabled:focus-visible {
+      outline: 2px solid #9ca3af;
+      outline-offset: 2px;
     }
 
     .cta-main-btn {
@@ -1768,8 +1886,47 @@
     }
 
     @media (max-width: 768px) {
+      .cta-featured-card {
+        margin-bottom: 24px;
+        max-width: 100%;
+      }
+
+      .cta-featured-btn {
+        height: 76px;
+        padding: 12px 20px;
+        border-radius: 16px;
+      }
+
+      .cta-featured-logo-wrap {
+        height: 36px;
+      }
+
+      .cta-featured-badge {
+        font-size: 0.6rem;
+      }
+
+      .cta-featured-subtitle {
+        font-size: 0.7rem;
+      }
+
       .cta-buttons-grid {
         grid-template-columns: 1fr;
+        gap: 16px;
+        margin-bottom: 40px;
+      }
+
+      .cta-btn {
+        height: 60px;
+        min-height: 60px;
+        padding: 0 12px;
+      }
+
+      .cta-btn-logo-wrap {
+        height: 40px;
+      }
+
+      .cta-btn-logo {
+        max-width: 280px;
       }
     }
 
@@ -2841,23 +2998,53 @@
       // ==================== RENDERIZAR CTA FINAL ====================
       const ctaButtonsGrid = document.getElementById('ctaButtonsGrid');
       if (ctaButtonsGrid && typeof STORES !== 'undefined') {
-        STORES.forEach(store => {
-          const buttonDiv = document.createElement('div');
-          buttonDiv.className = `cta-button-item ${store.isBoutique ? 'boutique' : ''}`;
+        // Mapa de slugs para nomes de logos de botões
+        const logoMap = {
+          'affinity': 'affinity',
+          'alleman': 'alleman',
+          'assury': 'assure',  // Logo file is named with 'assure' not 'assury'
+          'bliss': 'bliss',
+          'diplan': 'diplan',
+          'serra': 'serra',
+          'valorize': 'valorize',
+          'zentrix': 'zentrix'
+        };
 
-          if (store.isBoutique) {
-            buttonDiv.innerHTML = `
-              <button class="cta-btn cta-btn-disabled" disabled>
-                Acesso sob convite
-              </button>
-            `;
-          } else {
-            buttonDiv.innerHTML = `
-              <a href="${store.loginUrl}" target="_blank" rel="noopener noreferrer" class="cta-btn cta-btn-primary">
-                Entrar em ${store.nome}
-              </a>
-            `;
-          }
+        // Renderizar Diplan featured primeiro (separado do grid)
+        const diplanStore = STORES.find(store => store.slug === 'diplan');
+        if (diplanStore) {
+          const featuredCard = document.createElement('div');
+          featuredCard.className = 'cta-featured-card';
+          const logoName = logoMap[diplanStore.slug] || diplanStore.slug;
+          
+          featuredCard.innerHTML = `
+            <button class="cta-featured-btn" disabled aria-label="Entrar em ${diplanStore.nome} (Acesso sob convite)">
+              <div class="cta-featured-content">
+                <span class="cta-featured-badge">BOUTIQUE</span>
+                <div class="cta-featured-logo-wrap">
+                  <img src="./logo_botao_${logoName}.png" alt="${diplanStore.nome}" class="cta-featured-logo" />
+                </div>
+                <span class="cta-featured-subtitle">Acesso sob convite</span>
+              </div>
+            </button>
+          `;
+          
+          ctaButtonsGrid.parentElement.insertBefore(featuredCard, ctaButtonsGrid);
+        }
+
+        // Renderizar outras lojas no grid (exceto Diplan)
+        STORES.filter(store => !store.isBoutique).forEach(store => {
+          const buttonDiv = document.createElement('div');
+          buttonDiv.className = 'cta-button-item';
+          const logoName = logoMap[store.slug] || store.slug;
+
+          buttonDiv.innerHTML = `
+            <a href="${store.loginUrl}" target="_blank" rel="noopener noreferrer" class="cta-btn cta-btn-primary" aria-label="Entrar em ${store.nome}">
+              <div class="cta-btn-logo-wrap">
+                <img src="./logo_botao_${logoName}.png" alt="${store.nome}" class="cta-btn-logo" loading="lazy" />
+              </div>
+            </a>
+          `;
 
           ctaButtonsGrid.appendChild(buttonDiv);
         });
