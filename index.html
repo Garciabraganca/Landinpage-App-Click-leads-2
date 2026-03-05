@@ -2013,6 +2013,34 @@
       background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
       padding: 80px 20px;
       color: #fff;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-final-bg-video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+    }
+
+    .cta-final-bg-video video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    .cta-final-bg-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(15, 23, 42, 0.85);
+      z-index: 1;
     }
 
     .cta-final-container {
@@ -2272,6 +2300,32 @@
       color: #fff;
       position: relative;
       overflow: hidden;
+    }
+
+    .cs-bg-video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+    }
+
+    .cs-bg-video video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    .cs-bg-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(13, 17, 23, 0.85);
+      z-index: 1;
     }
 
     .campaign-showcase::before {
@@ -2866,7 +2920,13 @@
 
   <!-- VITRINE DE PROPAGANDAS (5ª DOBRA) -->
   <section class="campaign-showcase" id="campaign-showcase">
-    <div class="cs-container">
+    <div class="cs-bg-video">
+      <video autoplay muted loop playsinline webkit-playsinline preload="metadata">
+        <source src="video_shopping.mp4" type="video/mp4">
+      </video>
+    </div>
+    <div class="cs-bg-overlay"></div>
+    <div class="cs-container" style="position: relative; z-index: 2;">
       <div class="cs-layout">
         <div class="cs-text">
           <p class="cs-eyebrow">Campanhas reais</p>
@@ -2921,13 +2981,6 @@
               </div>
               <span class="cs-card__label">Vídeo</span>
             </div>
-            <div class="cs-card" tabindex="0" role="button" aria-label="Shopping das Plataformas – vídeo" data-cs-index="6">
-              <div class="cs-card__frame">
-                <video src="video_shopping.mp4" preload="metadata" muted playsinline autoplay loop></video>
-                <div class="cs-card__play"><div class="cs-card__play-icon"></div></div>
-              </div>
-              <span class="cs-card__label">Vídeo</span>
-            </div>
           </div>
         </div>
       </div>
@@ -2943,7 +2996,13 @@
 
   <!-- CTA FINAL -->
   <section class="cta-final-section" id="entrar">
-    <div class="cta-final-container">
+    <div class="cta-final-bg-video">
+      <video autoplay muted loop playsinline webkit-playsinline preload="metadata">
+        <source src="video_shopping.mp4" type="video/mp4">
+      </video>
+    </div>
+    <div class="cta-final-bg-overlay"></div>
+    <div class="cta-final-container" style="position: relative; z-index: 2;">
       <div class="cta-final-header">
         <h2>Pronto para escolher sua loja?</h2>
         <p>Entre agora e comece a atuar com uma estrutura organizada.</p>
