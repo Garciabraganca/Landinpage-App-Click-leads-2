@@ -1717,6 +1717,10 @@
       display: block;
     }
 
+    .brand-tile-featured-btn img.brand-tile-diplan-logo {
+      object-position: 43.8% 51.8%;
+    }
+
     .brand-tile-featured-btn::before {
       content: '';
       position: absolute;
@@ -2982,7 +2986,7 @@
           
           featuredCard.innerHTML = `
             <button class="brand-tile-featured-btn" disabled aria-label="Entrar em ${diplanStore.nome} (Acesso sob convite)">
-              <img src="./logo_botao_${logoName}.png" alt="${diplanStore.nome}" loading="lazy" />
+              <img src="./logo_botao_${logoName}.png" alt="${diplanStore.nome}" class="brand-tile-diplan-logo" loading="lazy" />
               <div class="brand-tile-featured-content">
                 <span class="brand-tile-featured-badge">BOUTIQUE</span>
                 <span class="brand-tile-featured-text">Acesso sob convite</span>
