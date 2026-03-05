@@ -4133,7 +4133,9 @@
         ? window.NEXT_PUBLIC_CRM_API_BASE_URL 
         : (typeof window.CRM_API_BASE_URL !== 'undefined' 
           ? window.CRM_API_BASE_URL 
-          : 'http://localhost:5500');
+          : (typeof window.NEXT_PUBLIC_SHOPPING_AGENT_API !== 'undefined'
+            ? window.NEXT_PUBLIC_SHOPPING_AGENT_API
+            : 'http://localhost:5501'));
 
       const API_ENDPOINT = API_BASE + '/api/shopping-agent';
 
