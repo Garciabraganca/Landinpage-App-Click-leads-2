@@ -17,12 +17,38 @@ load_dotenv()
 app = Flask(__name__)
 CORS(app, resources={r"/api/*": {"origins": "*"}})
 
+def _load_openai_key():
+    """Load OpenAI API key with fallback for legacy env var name."""
+    api_key = os.environ.get("OPENAI_API_KEY") or os.environ.get("OPENAI_KEY")
+    if api_key:
+        api_key = api_key.strip()
+    return api_key
+
+def _load_assistant_id():
+    """Load Assistant ID with fallback for common typos."""
+    assistant_id = (
+        os.environ.get("ASSISTANT_ID_OPENAI") or
+        os.environ.get("ASSISTENT_ID_OPENAI") or
+        os.environ.get("OPENAI_ASSISTANT_ID")
+    )
+    
+    # Log warning if typo variant is used
+    if not os.environ.get("ASSISTANT_ID_OPENAI") and os.environ.get("ASSISTENT_ID_OPENAI"):
+        app.logger.warning(
+            "[ASSISTANT_ID_TYPO] Using ASSISTENT_ID_OPENAI (typo). "
+            "Please rename to ASSISTANT_ID_OPENAI in environment."
+        )
+    
+    if assistant_id:
+        assistant_id = assistant_id.strip()
+    return assistant_id
+
 def _load_openai_client():
     """Return an OpenAI client only when OPENAI_API_KEY is valid."""
-    api_key = os.environ.get("OPENAI_API_KEY", "").strip()
+    api_key = _load_openai_key()
     if not api_key or api_key == "local-dev-placeholder":
         app.logger.error(
-            "OPENAI_API_KEY is missing or invalid. "
+            "[OPENAI_ENV_MISSING] OPENAI_API_KEY is missing or invalid. "
             "Set a real key via environment variable."
         )
         return None
@@ -31,6 +57,7 @@ def _load_openai_client():
 
 
 client = _load_openai_client()
+assistant_id = _load_assistant_id()
 
 # Configuration
 VECTOR_STORE_ID = os.environ.get(
@@ -65,6 +92,7 @@ def shopping_agent():
     """
     try:
         if client is None:
+            app.logger.error("[OPENAI_ENV_MISSING] Shopping Agent called without valid OpenAI client")
             return jsonify({
                 "success": False,
                 "error": "Shopping Agent indisponivel: OPENAI_API_KEY ausente ou invalida."
@@ -157,13 +185,10 @@ def shopping_agent():
         
         if not assistant_message:
             # Log the raw response for debugging
-            print(f"Warning: Could not extract assistant message from response:")
-            print(f"Response type: {type(response)}")
-            print(f"Response attributes: {dir(response)}")
-            if hasattr(response, "content"):
-                print(f"Response content: {response.content}")
-            if hasattr(response, "choices"):
-                print(f"Response choices: {response.choices}")
+            app.logger.error(
+                f"[OPENAI_RESPONSE_PARSE_FAILED] Could not extract assistant message. "
+                f"Response type: {type(response).__name__}"
+            )
             
             return jsonify({
                 "success": False,
@@ -176,7 +201,7 @@ def shopping_agent():
         }), 200
     
     except Exception as e:
-        print(f"Error in shopping_agent: {str(e)}")
+        app.logger.error(f"[OPENAI_CALL_FAILED] Error in shopping_agent: {str(e)}")
         return jsonify({
             "success": False,
             "error": "Desculpe, houve um erro ao processar sua mensagem. Tente novamente."
@@ -187,6 +212,25 @@ def shopping_agent():
 def health():
     """Health check endpoint"""
     return jsonify({"status": "ok"}), 200
+
+
+@app.route("/api/health/openai", methods=["GET"])
+def health_openai():
+    """OpenAI configuration health check endpoint"""
+    api_key = _load_openai_key()
+    assistant = _load_assistant_id()
+    
+    has_key = bool(api_key and api_key != "local-dev-placeholder")
+    has_assistant = bool(assistant)
+    
+    return jsonify({
+        "ok": has_key and client is not None,
+        "hasOpenAIKey": has_key,
+        "hasAssistantId": has_assistant,
+        "keyPrefix": api_key[:7] if has_key else None,
+        "assistantPrefix": assistant[:6] if has_assistant else None,
+        "runtime": "python-flask"
+    }), 200
 
 
 if __name__ == "__main__":
