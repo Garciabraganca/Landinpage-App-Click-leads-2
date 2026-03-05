@@ -6,7 +6,6 @@ Integrates with OpenAI's Assistants API using File Search
 """
 
 import os
-import json
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 from openai import OpenAI
@@ -18,15 +17,20 @@ load_dotenv()
 app = Flask(__name__)
 CORS(app, resources={r"/api/*": {"origins": "*"}})
 
-# Initialize OpenAI client
-api_key = os.environ.get("OPENAI_API_KEY")
-if not api_key:
-    raise ValueError(
-        "OPENAI_API_KEY environment variable is not set. "
-        "Ensure it's configured in Vercel or locally in .env file."
-    )
+def _load_openai_client():
+    """Return an OpenAI client only when OPENAI_API_KEY is valid."""
+    api_key = os.environ.get("OPENAI_API_KEY", "").strip()
+    if not api_key or api_key == "local-dev-placeholder":
+        app.logger.error(
+            "OPENAI_API_KEY is missing or invalid. "
+            "Set a real key via environment variable."
+        )
+        return None
 
-client = OpenAI(api_key=api_key)
+    return OpenAI(api_key=api_key)
+
+
+client = _load_openai_client()
 
 # Configuration
 VECTOR_STORE_ID = os.environ.get(
@@ -60,6 +64,12 @@ def shopping_agent():
     }
     """
     try:
+        if client is None:
+            return jsonify({
+                "success": False,
+                "error": "Shopping Agent indisponivel: OPENAI_API_KEY ausente ou invalida."
+            }), 500
+
         data = request.get_json()
         
         if not data:
