@@ -31,6 +31,19 @@
 
     gtag('config', 'G-H4RPMD8731');
   </script>
+  <script>
+    (function (a, b, c, d) {
+      try {
+        var e = b.head || b.getElementsByTagName("head")[0];
+        var f = b.createElement("script");
+        f.setAttribute("src", c);
+        f.setAttribute("charset", "UTF-8");
+        f.defer = true;
+        a.neuroleadId = d;
+        e.appendChild(f)
+      } catch (g) { }
+    })(window, document, "https://cdn.leadster.com.br/neurolead/neurolead.min.js", "YnVqHSt4zJJiNDbvehaSssyUY")
+  </script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Click Leads – Chega de Correr Atrás de Cliente</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
@@ -1022,26 +1035,6 @@
         font-size: 1.1rem;
       }
 
-      /* FAQ mobile */
-      .faq-section {
-        padding: 50px 16px;
-      }
-
-      .faq-header h2 {
-        font-size: 1.6rem;
-        margin-bottom: 36px;
-      }
-
-      .faq-item summary {
-        font-size: 0.9rem;
-        padding: 16px;
-      }
-
-      .faq-item p {
-        font-size: 0.85rem;
-        padding: 16px;
-      }
-
       /* CTA Final mobile */
       .cta-final-section {
         padding: 50px 16px;
@@ -1055,7 +1048,7 @@
         font-size: 0.95rem;
       }
 
-      .cta-buttons-grid {
+      .brand-tiles-grid {
         grid-template-columns: 1fr;
         gap: 12px;
       }
@@ -1070,10 +1063,8 @@
       }
 
       /* Footer mobile */
-      footer .footer-inner {
-        flex-direction: column;
-        text-align: center;
-        gap: 12px;
+      footer {
+        padding: 32px 0;
       }
     }
 
@@ -1095,6 +1086,71 @@
 
       .modal-content {
         padding: 24px 16px 28px;
+      }
+
+      /* Authority section mobile */
+      .authority-section {
+        padding: 40px 0;
+      }
+
+      .authority-header h2 {
+        font-size: 1.35rem;
+      }
+
+      .authority-header p {
+        font-size: 1rem;
+      }
+
+      .block-title {
+        font-size: 1.25rem;
+        margin-bottom: 24px;
+      }
+
+      .operadores-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+      }
+
+      .infrastructure-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .infra-card {
+        padding: 20px 16px;
+      }
+
+      .infra-icon {
+        font-size: 2rem;
+      }
+
+      .infra-card h4 {
+        font-size: 1rem;
+      }
+
+      .infra-card p {
+        font-size: 0.875rem;
+      }
+
+      .social-proof-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+
+      .proof-metric {
+        padding: 24px 16px;
+      }
+
+      .metric-number {
+        font-size: 2rem;
+      }
+
+      .metric-label {
+        font-size: 0.875rem;
+      }
+
+      .authority-cta-btn {
+        padding: 14px 32px;
+        font-size: 0.95rem;
       }
     }
 
@@ -1123,30 +1179,261 @@
       margin-bottom: 24px;
     }
 
-
-
-    footer {
-      background: #020617;
-      color: #9ca3af;
-      font-size: 0.78rem;
-      padding: 18px 0 20px;
+    /* AUTHORITY SECTION */
+    .authority-section {
+      position: relative;
+      padding: 80px 0;
+      overflow: hidden;
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+      color: white;
     }
 
-    footer .footer-inner {
+    .authority-bg-video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+    }
+
+    .authority-bg-video video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    .authority-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(15, 23, 42, 0.85);
+      z-index: 2;
+    }
+
+    .authority-content {
+      position: relative;
+      z-index: 3;
+    }
+
+    .authority-header {
+      text-align: center;
+      margin-bottom: 64px;
+    }
+
+    .authority-header h2 {
+      font-size: clamp(1.75rem, 4vw, 2.5rem);
+      margin-bottom: 16px;
+      font-weight: 700;
+      color: #ffffff;
+    }
+
+    .authority-header p {
+      font-size: 1.125rem;
+      color: #cbd5e1;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .authority-section-block {
+      margin-bottom: 72px;
+    }
+
+    .block-title {
+      font-size: 1.75rem;
+      font-weight: 600;
+      margin-bottom: 40px;
+      text-align: center;
+      color: #f1f5f9;
+    }
+
+    /* OPERADORES GRID */
+    .operadores-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 24px;
+      margin-bottom: 40px;
+    }
+
+    .operador-item {
+      aspect-ratio: 1 / 1;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
       display: flex;
-      flex-wrap: wrap;
       align-items: center;
-      justify-content: space-between;
-      gap: 8px;
+      justify-content: center;
+      padding: 20px;
+      transition: all 0.3s ease;
+      overflow: hidden;
     }
 
-    footer a {
-      color: #e5e7eb;
+    .operador-item:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(255, 255, 255, 0.2);
+      transform: translateY(-4px);
+    }
+
+    .operador-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      object-position: center;
+    }
+
+    /* INFRASTRUCTURE GRID */
+    .infrastructure-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+    }
+
+    .infra-card {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      padding: 32px 24px;
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+
+    .infra-card:hover {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(255, 255, 255, 0.2);
+      transform: translateY(-6px);
+    }
+
+    .infra-icon {
+      font-size: 2.5rem;
+      margin-bottom: 16px;
+    }
+
+    .infra-card h4 {
+      font-size: 1.125rem;
+      font-weight: 600;
+      color: #f1f5f9;
+      margin-bottom: 12px;
+    }
+
+    .infra-card p {
+      font-size: 0.9375rem;
+      color: #cbd5e1;
+      line-height: 1.6;
+    }
+
+    /* SOCIAL PROOF GRID */
+    .social-proof-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 32px;
+    }
+
+    .proof-metric {
+      text-align: center;
+      padding: 32px 24px;
+      background: rgba(255, 255, 255, 0.03);
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .metric-number {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: #f97316;
+      margin-bottom: 8px;
+    }
+
+    .metric-label {
+      font-size: 0.9375rem;
+      color: #cbd5e1;
+      font-weight: 500;
+    }
+
+    /* AUTHORITY CTA */
+    .authority-cta {
+      text-align: center;
+      margin-top: 64px;
+    }
+
+    .authority-cta-btn {
+      display: inline-block;
+      padding: 16px 48px;
+      background: #f97316;
+      color: white;
       text-decoration: none;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+      border: 2px solid #f97316;
     }
 
-    footer a:hover {
-      text-decoration: underline;
+    .authority-cta-btn:hover {
+      background: #ea580c;
+      border-color: #ea580c;
+      transform: translateY(-2px);
+      box-shadow: 0 12px 24px rgba(249, 115, 22, 0.3);
+    }
+
+    /* FOOTER STYLES */
+    footer {
+      background: #0f172a;
+      color: #cbd5e1;
+      padding: 48px 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .footer-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .footer-main {
+      display: flex;
+      justify-content: center;
+    }
+
+    .footer-column {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      text-align: center;
+    }
+
+    .footer-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #f1f5f9;
+      margin: 0;
+    }
+
+    .footer-links {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      font-size: 0.9375rem;
+    }
+
+    .footer-links li {
+      color: #cbd5e1;
+    }
+
+    .footer-address {
+      font-size: 0.875rem;
+      line-height: 1.6;
+      color: #94a3b8;
+    }
+
+    .footer-cnpj {
+      font-size: 0.8125rem;
+      color: #64748b;
     }
 
     @media (max-width: 768px) {
@@ -1156,6 +1443,38 @@
 
       .cta-button-item.boutique {
         max-width: 100%;
+      }
+
+      /* Authority section tablet */
+      .authority-section {
+        padding: 60px 0;
+      }
+
+      .authority-header {
+        margin-bottom: 48px;
+      }
+
+      .authority-header h2 {
+        font-size: 1.75rem;
+      }
+
+      .block-title {
+        font-size: 1.5rem;
+        margin-bottom: 32px;
+      }
+
+      .operadores-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 16px;
+      }
+
+      .infrastructure-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .social-proof-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 24px;
       }
     }
 
@@ -1655,79 +1974,39 @@
       margin: 0;
     }
 
-    /* ==================== FAQ SECTION ==================== */
-    .faq-section {
-      background: #0f172a;
-      padding: 80px 20px;
-      color: #fff;
-    }
-
-    .faq-container {
-      max-width: 800px;
-      margin: 0 auto;
-    }
-
-    .faq-header h2 {
-      text-align: center;
-      font-size: 2.2rem;
-      margin: 0 0 60px;
-      color: #fff;
-    }
-
-    .faq-item {
-      margin-bottom: 16px;
-      border: 1px solid rgba(148, 163, 184, 0.2);
-      border-radius: 8px;
-      overflow: hidden;
-      background: rgba(30, 41, 59, 0.4);
-    }
-
-    .faq-item details {
-      cursor: pointer;
-    }
-
-    .faq-item summary {
-      padding: 20px;
-      background: rgba(30, 41, 59, 0.6);
-      color: #fff;
-      font-weight: 600;
-      font-size: 1rem;
-      transition: all 0.2s ease;
-      user-select: none;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .faq-item summary:hover {
-      background: rgba(249, 115, 22, 0.1);
-      border-left: 3px solid #f97316;
-      padding-left: 17px;
-    }
-
-    .faq-item summary::marker {
-      color: #f97316;
-    }
-
-    .faq-item[open] summary {
-      background: rgba(249, 115, 22, 0.15);
-      border-bottom: 1px solid rgba(249, 115, 22, 0.2);
-    }
-
-    .faq-item p {
-      padding: 20px;
-      color: #cbd5e1;
-      margin: 0;
-      font-size: 0.95rem;
-      line-height: 1.6;
-      background: rgba(15, 23, 42, 0.5);
-    }
-
     /* ==================== CTA FINAL SECTION ==================== */
     .cta-final-section {
       background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
       padding: 80px 20px;
       color: #fff;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-final-bg-video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+    }
+
+    .cta-final-bg-video video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    .cta-final-bg-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(15, 23, 42, 0.85);
+      z-index: 1;
     }
 
     .cta-final-container {
@@ -1756,69 +2035,169 @@
       margin-right: auto;
     }
 
-    .cta-buttons-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 16px;
+    /* ==================== PREMIUM BRAND TILE BUTTONS SYSTEM ==================== */
+    
+    /* Featured Boutique Card */
+    .brand-tile-featured {
       margin-bottom: 40px;
+      max-width: 680px;
+      margin-left: auto;
+      margin-right: auto;
     }
 
-    .cta-button-item {
+    .brand-tile-featured-btn {
+      display: block;
+      width: 100%;
+      height: 140px;
+      border-radius: 24px;
+      text-decoration: none;
+      cursor: not-allowed;
+      border: 1.5px solid rgba(251, 191, 36, 0.6);
+      background: #000;
+      box-shadow: 0 24px 50px rgba(0, 0, 0, 0.40), inset 0 1px 0 rgba(251, 191, 36, 0.15);
+      transition: transform 220ms ease, box-shadow 220ms ease, border-color 220ms ease;
       position: relative;
+      overflow: hidden;
     }
 
-    .cta-button-item.boutique {
-      grid-column: 1 / -1;
-      max-width: 200px;
-      margin: 0 auto;
-    }
-
-    .cta-button-item.boutique::before {
-      content: 'BOUTIQUE';
+    .brand-tile-featured-btn img {
       position: absolute;
-      top: -12px;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+    }
+
+    .brand-tile-featured-btn img.brand-tile-diplan-logo {
+      object-position: 43.8% 51.8%;
+    }
+
+    .brand-tile-featured-btn::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.1) 100%);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .brand-tile-featured-btn:hover {
+      transform: translateY(-2px);
+      border-color: rgba(251, 191, 36, 0.8);
+      box-shadow: 0 28px 60px rgba(251, 191, 36, 0.20), inset 0 1px 0 rgba(251, 191, 36, 0.25);
+    }
+
+    .brand-tile-featured-btn:hover::before {
+      background: linear-gradient(180deg, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.05) 100%);
+    }
+
+    .brand-tile-featured-content {
+      position: absolute;
+      top: 12px;
       left: 50%;
       transform: translateX(-50%);
-      background: linear-gradient(135deg, #f59e0b, #d97706);
-      color: #000;
-      font-size: 0.7rem;
-      font-weight: 700;
-      padding: 4px 10px;
-      border-radius: 999px;
-      letter-spacing: 0.5px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      z-index: 2;
     }
 
-    .cta-btn {
-      display: inline-block;
-      padding: 12px 24px;
-      border-radius: 8px;
+    .brand-tile-featured-badge {
+      font-size: 0.7rem;
+      font-weight: 900;
+      color: #fbbf24;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      background: rgba(0, 0, 0, 0.6);
+      padding: 4px 12px;
+      border-radius: 12px;
+      backdrop-filter: blur(4px);
+    }
+
+    .brand-tile-featured-text {
+      font-size: 0.75rem;
+      color: #e5e7eb;
       font-weight: 600;
+      letter-spacing: 0.4px;
+      background: rgba(0, 0, 0, 0.6);
+      padding: 3px 10px;
+      border-radius: 10px;
+      backdrop-filter: blur(4px);
+    }
+
+    /* Store Buttons Grid */
+    .brand-tiles-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 20px;
+      margin-bottom: 48px;
+      max-width: 1200px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* Individual Brand Tile Button - Full Bleed Design */
+    .brand-tile-btn {
+      display: block;
+      width: 100%;
+      height: 100px;
+      border-radius: 20px;
       text-decoration: none;
       cursor: pointer;
-      border: none;
-      text-align: center;
-      transition: all 0.2s ease;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: #000;
+      box-shadow: 0 18px 45px rgba(0, 0, 0, 0.35);
+      transition: transform 200ms ease, box-shadow 200ms ease, border-color 200ms ease, filter 200ms ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .brand-tile-btn img {
+      position: absolute;
+      top: 0;
+      left: 0;
       width: 100%;
-      font-size: 0.95rem;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
     }
 
-    .cta-btn-primary {
-      background: linear-gradient(to right, #f59e0b, #f97316);
-      color: #111827;
-      box-shadow: 0 4px 12px rgba(249, 115, 22, 0.3);
+    /* Sutil overlay para legibilidade premium */
+    .brand-tile-btn::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(0, 0, 0, 0.15) 0%, rgba(0, 0, 0, 0.05) 100%);
+      pointer-events: none;
+      transition: opacity 200ms ease;
+      opacity: 1;
     }
 
-    .cta-btn-primary:hover {
+    .brand-tile-btn:hover {
       transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(249, 115, 22, 0.5);
+      border-color: rgba(255, 255, 255, 0.18);
+      box-shadow: 0 24px 55px rgba(0, 0, 0, 0.45);
       filter: brightness(1.05);
     }
 
-    .cta-btn-disabled {
-      background: rgba(100, 116, 139, 0.3);
-      color: #94a3b8;
-      cursor: not-allowed;
-      border: 1px solid rgba(148, 163, 184, 0.3);
+    .brand-tile-btn:hover::after {
+      opacity: 0.7;
+    }
+
+    .brand-tile-btn:active {
+      transform: translateY(0);
+      box-shadow: 0 14px 35px rgba(0, 0, 0, 0.30);
+    }
+
+    .brand-tile-btn:focus-visible {
+      outline: 2px solid #f97316;
+      outline-offset: 2px;
+      border-color: rgba(249, 115, 22, 0.6);
     }
 
     .cta-main-btn {
@@ -1843,10 +2222,480 @@
     }
 
     @media (max-width: 768px) {
-      .cta-buttons-grid {
+      .brand-tile-featured {
+        margin-bottom: 24px;
+        max-width: 100%;
+      }
+
+      .brand-tile-featured-btn {
+        height: 110px;
+        border-radius: 20px;
+      }
+
+      .brand-tile-featured-badge {
+        font-size: 0.6rem;
+      }
+
+      .brand-tile-featured-text {
+        font-size: 0.68rem;
+      }
+
+      .brand-tiles-grid {
         grid-template-columns: 1fr;
+        gap: 16px;
+        margin-bottom: 40px;
+      }
+
+      .brand-tile-btn {
+        height: 80px;
       }
     }
+
+    /* ==================== CAMPAIGN SHOWCASE (VITRINE DE PROPAGANDAS) ==================== */
+    body.cs-no-scroll { overflow: hidden; }
+
+    .campaign-showcase {
+      --cs-radius: 16px;
+      --cs-gap: 18px;
+      --cs-border: rgba(255,255,255,0.10);
+      --cs-bg: rgba(255,255,255,0.04);
+      --cs-shadow: 0 20px 50px rgba(0,0,0,0.35);
+      --cs-card-bg: rgba(15,20,30,0.6);
+      background: linear-gradient(180deg, #0d1117 0%, #161b22 50%, #0d1117 100%);
+      padding: 72px 0;
+      color: #fff;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cs-bg-video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+    }
+
+    .cs-bg-video video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    .cs-bg-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(13, 17, 23, 0.85);
+      z-index: 1;
+    }
+
+    .campaign-showcase::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at center, transparent 50%, rgba(0,0,0,0.4) 100%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .cs-container {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 16px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .cs-layout {
+      display: grid;
+      grid-template-columns: 40% 1fr;
+      gap: 48px;
+      align-items: start;
+    }
+
+    .cs-text {
+      position: sticky;
+      top: 120px;
+    }
+
+    .cs-eyebrow {
+      font-size: 0.78rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 2.5px;
+      color: #f97316;
+      margin: 0 0 12px;
+    }
+
+    .cs-headline {
+      font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+      font-weight: 800;
+      line-height: 1.15;
+      margin: 0 0 16px;
+      color: #fff;
+    }
+
+    .cs-sub {
+      font-size: 1rem;
+      line-height: 1.6;
+      color: #94a3b8;
+      margin: 0 0 24px;
+    }
+
+    .cs-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 28px;
+    }
+
+    .cs-badge {
+      display: inline-block;
+      padding: 5px 14px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      border-radius: 999px;
+      border: 1px solid rgba(251,191,36,0.25);
+      background: rgba(251,191,36,0.08);
+      color: #fbbf24;
+      letter-spacing: 0.3px;
+    }
+
+    .cs-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 10px 22px;
+      border-radius: 8px;
+      border: 1px solid rgba(251,191,36,0.3);
+      background: transparent;
+      color: #fbbf24;
+      font-size: 0.88rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: background 0.2s, border-color 0.2s;
+    }
+
+    .cs-cta:hover {
+      background: rgba(251,191,36,0.1);
+      border-color: rgba(251,191,36,0.5);
+    }
+
+    .cs-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: auto auto auto;
+      gap: var(--cs-gap);
+    }
+
+    .cs-card {
+      position: relative;
+      border-radius: var(--cs-radius);
+      border: 1px solid var(--cs-border);
+      background: var(--cs-card-bg);
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+      opacity: 0;
+      transform: translateY(10px);
+    }
+
+    .cs-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--cs-shadow);
+      border-color: rgba(255,255,255,0.18);
+    }
+
+    .cs-card:focus-visible {
+      outline: 2px solid #f97316;
+      outline-offset: 2px;
+    }
+
+    .cs-card--feature {
+      grid-column: 1 / 3;
+      grid-row: 1 / 3;
+    }
+
+    .cs-card__frame {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      min-height: 200px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #0a0e14;
+      padding: 6px;
+    }
+
+    .cs-card--feature .cs-card__frame {
+      min-height: 360px;
+    }
+
+    .cs-card__frame img,
+    .cs-card__frame video {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      border-radius: calc(var(--cs-radius) - 4px);
+    }
+
+    .cs-card__play {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0,0,0,0.25);
+      transition: background 0.2s;
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    .cs-card:hover .cs-card__play {
+      background: rgba(0,0,0,0.15);
+    }
+
+    .cs-card__play-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.92);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+      transition: transform 0.2s;
+    }
+
+    .cs-card:hover .cs-card__play-icon {
+      transform: scale(1.08);
+    }
+
+    .cs-card__play-icon::after {
+      content: '';
+      display: block;
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-width: 9px 0 9px 16px;
+      border-color: transparent transparent transparent #111;
+      margin-left: 3px;
+    }
+
+    .cs-card__label {
+      position: absolute;
+      bottom: 12px;
+      left: 12px;
+      z-index: 3;
+      padding: 4px 10px;
+      border-radius: 6px;
+      background: rgba(0,0,0,0.55);
+      backdrop-filter: blur(4px);
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: #e2e8f0;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .cs-card.cs-visible {
+      opacity: 1;
+      transform: translateY(0);
+      transition: opacity 0.55s ease, transform 0.55s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+    }
+
+    .cs-card:nth-child(1).cs-visible { transition-delay: 0s; }
+    .cs-card:nth-child(2).cs-visible { transition-delay: 0.07s; }
+    .cs-card:nth-child(3).cs-visible { transition-delay: 0.07s; }
+    .cs-card:nth-child(4).cs-visible { transition-delay: 0.14s; }
+    .cs-card:nth-child(5).cs-visible { transition-delay: 0.21s; }
+    .cs-card:nth-child(6).cs-visible { transition-delay: 0.28s; }
+
+    /* ==================== CAMPAIGN LIGHTBOX ==================== */
+    .cs-lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 10000;
+      background: rgba(0,0,0,0.75);
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    @supports (backdrop-filter: blur(6px)) {
+      .cs-lightbox {
+        backdrop-filter: blur(6px);
+        -webkit-backdrop-filter: blur(6px);
+      }
+    }
+
+    .cs-lightbox.active {
+      display: flex;
+      animation: csLbFadeIn 0.25s ease;
+    }
+
+    @keyframes csLbFadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .cs-lightbox__inner {
+      position: relative;
+      max-width: min(960px, 92vw);
+      max-height: 86vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .cs-lightbox__inner img,
+    .cs-lightbox__inner video {
+      display: block;
+      max-width: 100%;
+      max-height: 86vh;
+      object-fit: contain;
+      border-radius: 12px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+    }
+
+    .cs-lightbox__close {
+      position: absolute;
+      top: -40px;
+      right: 0;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: none;
+      background: rgba(255,255,255,0.12);
+      color: #fff;
+      font-size: 1.3rem;
+      cursor: pointer;
+      display: grid;
+      place-items: center;
+      transition: background 0.2s;
+      z-index: 2;
+    }
+
+    .cs-lightbox__close:hover {
+      background: rgba(249,115,22,0.4);
+    }
+
+    .cs-lightbox__close:focus-visible {
+      outline: 2px solid #f97316;
+      outline-offset: 2px;
+    }
+
+    /* ==================== CAMPAIGN SHOWCASE MOBILE ==================== */
+    @media (max-width: 768px) {
+      .campaign-showcase {
+        padding: 56px 0;
+        --cs-gap: 14px;
+      }
+
+      .cs-layout {
+        display: block;
+      }
+
+      .cs-text {
+        position: static;
+        margin-bottom: 32px;
+        padding: 0 4px;
+      }
+
+      .cs-headline {
+        font-size: 1.6rem;
+      }
+
+      .cs-sub {
+        font-size: 0.92rem;
+      }
+
+      .cs-grid {
+        display: flex;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        scroll-padding-left: 16px;
+        gap: var(--cs-gap);
+        padding: 0 16px 16px;
+        -webkit-overflow-scrolling: touch;
+      }
+
+      .cs-grid::-webkit-scrollbar {
+        display: none;
+      }
+
+      .cs-card {
+        flex: 0 0 80vw;
+        scroll-snap-align: start;
+      }
+
+      .cs-card--feature {
+        grid-column: auto;
+        grid-row: auto;
+        flex: 0 0 80vw;
+      }
+
+      .cs-card__frame {
+        aspect-ratio: 4 / 5;
+        min-height: unset;
+      }
+
+      .cs-card--feature .cs-card__frame {
+        min-height: unset;
+        aspect-ratio: 4 / 5;
+      }
+
+      .cs-grid-wrap {
+        position: relative;
+      }
+
+      .cs-grid-wrap::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 16px;
+        width: 40px;
+        background: linear-gradient(to right, transparent, rgba(13,17,23,0.8));
+        pointer-events: none;
+        z-index: 2;
+      }
+
+      .cs-lightbox__close {
+        top: -36px;
+        right: 4px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .cs-card {
+        opacity: 1;
+        transform: none;
+        transition: none !important;
+      }
+
+      .cs-card.cs-visible {
+        transition: none !important;
+      }
+
+      .cs-card:hover {
+        transform: none;
+      }
+
+      .cs-lightbox.active {
+        animation: none;
+      }
+    }
+
   </style>
 </head>
 
@@ -2092,16 +2941,22 @@
         </div>
       </div>
     </div>
-  </section>
+  </div>
 
   <!-- CTA FINAL -->
   <section class="cta-final-section" id="entrar">
-    <div class="cta-final-container">
+    <div class="cta-final-bg-video">
+      <video autoplay muted loop playsinline webkit-playsinline preload="metadata">
+        <source src="video_shopping.mp4" type="video/mp4">
+      </video>
+    </div>
+    <div class="cta-final-bg-overlay"></div>
+    <div class="cta-final-container" style="position: relative; z-index: 2;">
       <div class="cta-final-header">
         <h2>Pronto para escolher sua loja?</h2>
         <p>Entre agora e comece a atuar com uma estrutura organizada.</p>
       </div>
-      <div class="cta-buttons-grid" id="ctaButtonsGrid"></div>
+      <div class="brand-tiles-grid" id="ctaButtonsGrid"></div>
       <a href="#lojas" class="cta-main-btn">Ver lojas</a>
     </div>
   </section>
@@ -2148,14 +3003,119 @@
   <!-- TOAST CONTAINER -->
   <div class="toast-container" id="toastContainer"></div>
 
+  <!-- ECOSSISTEMA SECTION -->
+  <section class="authority-section" id="ecossistema">
+    <div class="authority-bg-video">
+      <video autoplay muted loop playsinline webkit-playsinline preload="metadata">
+        <source src="video_shopping.mp4" type="video/mp4">
+      </video>
+    </div>
+    <div class="authority-overlay"></div>
+    <div class="authority-content">
+      <div class="container">
+        <div class="authority-header">
+          <h2>O Ecossistema do Shopping das Plataformas</h2>
+          <p>Uma estrutura comercial completa para corretores que querem produzir mais.</p>
+        </div>
+        
+        <!-- BLOCO 1: OPERADORAS -->
+        <div class="authority-section-block">
+          <h3 class="block-title">Operadoras Parceiras</h3>
+          <div class="operadores-grid">
+            <div class="operador-item">
+              <img src="logo_amil.png" alt="Amil">
+            </div>
+            <div class="operador-item">
+              <img src="logo_bradesco.jpeg" alt="Bradesco">
+            </div>
+            <div class="operador-item">
+              <img src="logo_sulamerica.jpeg" alt="SulAmérica">
+            </div>
+            <div class="operador-item">
+              <img src="logo_hapvida.jpeg" alt="Hapvida">
+            </div>
+            <div class="operador-item">
+              <img src="logo_omint.jpeg" alt="Omint">
+            </div>
+            <div class="operador-item">
+              <img src="logo_unimed.jpeg" alt="Unimed">
+            </div>
+            <div class="operador-item">
+              <img src="logo_alice.jpeg" alt="Alice">
+            </div>
+          </div>
+        </div>
+        
+        <!-- BLOCO 2: INFRAESTRUTURA -->
+        <div class="authority-section-block">
+          <h3 class="block-title">Infraestrutura Profissional</h3>
+          <div class="infrastructure-grid">
+            <div class="infra-card">
+              <div class="infra-icon">📊</div>
+              <h4>Geração de Leads</h4>
+              <p>Sistema inteligente de captação e qualificação de leads em tempo real.</p>
+            </div>
+            <div class="infra-card">
+              <div class="infra-icon">🎯</div>
+              <h4>CRM Comercial</h4>
+              <p>Plataforma completa para gestão de relacionamento e pipeline comercial.</p>
+            </div>
+            <div class="infra-card">
+              <div class="infra-icon">👥</div>
+              <h4>Estrutura de Supervisão</h4>
+              <p>Supervisores especializados para acompanhamento e desenvolvimento de equipes.</p>
+            </div>
+            <div class="infra-card">
+              <div class="infra-icon">📈</div>
+              <h4>Operação Escalável</h4>
+              <p>Processos prontos para crescimento exponencial e replicação em novos mercados.</p>
+            </div>
+          </div>
+        </div>
+        
+        <!-- BLOCO 3: PROVA SOCIAL -->
+        <div class="authority-section-block">
+          <h3 class="block-title">Escala da Operação</h3>
+          <div class="social-proof-grid">
+            <div class="proof-metric">
+              <div class="metric-number">150K+</div>
+              <div class="metric-label">Leads Gerados</div>
+            </div>
+            <div class="proof-metric">
+              <div class="metric-number">8</div>
+              <div class="metric-label">Operações Ativas</div>
+            </div>
+            <div class="proof-metric">
+              <div class="metric-number">2000+</div>
+              <div class="metric-label">Corretores</div>
+            </div>
+            <div class="proof-metric">
+              <div class="metric-number">12K</div>
+              <div class="metric-label">Clientes Ativos</div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- CTA -->
+        <div class="authority-cta">
+          <a href="#lojas" class="authority-cta-btn">Conhecer as Lojas</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- RODAPÉ -->
   <footer>
-    <div class="container footer-inner">
-      <div>Copyright &copy; Grupo Garcia – Click Leads.</div>
-      <div>
-        <a href="#">Termos de Uso</a> ·
-        <a href="#">Política de Privacidade</a> ·
-        <a href="#">Contato de Suporte</a>
+    <div class="container footer-wrapper">
+      <div class="footer-main">
+        <div class="footer-column">
+          <h4 class="footer-title">Grupo Garcia</h4>
+          <ul class="footer-links">
+            <li>Click Leads</li>
+            <li class="footer-address">Avenida José Herculano<br>Caraguatatuba — SP<br>11666-000 • Brasil</li>
+            <li class="footer-cnpj">CNPJ: 53.050.940/0001-01</li>
+          </ul>
+        </div>
       </div>
     </div>
   </footer>
@@ -2307,9 +3267,9 @@
         dataStore: 'serra',
         back: {
           bullets: [
-            '270% para Amil',
-            '270% para Porto Seguro',
-            '270% para SulAmérica',
+            '260% para Amil',
+            '260% para Porto Seguro',
+            '260% para SulAmérica',
             'Operação focada em consistência e volume'
           ]
         }
@@ -2485,30 +3445,55 @@
       // ==================== RENDERIZAR CTA FINAL ====================
       const ctaButtonsGrid = document.getElementById('ctaButtonsGrid');
       if (ctaButtonsGrid && typeof STORES !== 'undefined') {
-        STORES.forEach(store => {
-          const buttonDiv = document.createElement('div');
-          buttonDiv.className = `cta-button-item ${store.isBoutique ? 'boutique' : ''}`;
+        // Mapa de slugs para nomes de logos de botões
+        const logoMap = {
+          'affinity': 'affinity',
+          'alleman': 'alleman',
+          'assury': 'assure',  // Logo file is named with 'assure' not 'assury'
+          'bliss': 'bliss',
+          'diplan': 'diplan',
+          'serra': 'serra',
+          'valorize': 'valorize',
+          'zentrix': 'zentrix'
+        };
 
-          if (store.isBoutique) {
-            buttonDiv.innerHTML = `
-              <button class="cta-btn cta-btn-disabled" disabled>
-                Acesso sob convite
-              </button>
-            `;
-          } else {
-            buttonDiv.innerHTML = `
-              <a href="${store.loginUrl}" target="_blank" rel="noopener noreferrer" class="cta-btn cta-btn-primary">
-                Entrar em ${store.nome}
-              </a>
-            `;
-          }
+        // Renderizar Diplan featured primeiro (separado do grid) - Full Bleed
+        const diplanStore = STORES.find(store => store.slug === 'diplan');
+        if (diplanStore) {
+          const featuredCard = document.createElement('div');
+          featuredCard.className = 'brand-tile-featured';
+          const logoName = logoMap[diplanStore.slug] || diplanStore.slug;
+          
+          featuredCard.innerHTML = `
+            <button class="brand-tile-featured-btn" disabled aria-label="Entrar em ${diplanStore.nome} (Acesso sob convite)">
+              <img src="./logo_botao_${logoName}.png" alt="${diplanStore.nome}" class="brand-tile-diplan-logo" loading="lazy" />
+            </button>
+          `;
+          
+          ctaButtonsGrid.parentElement.insertBefore(featuredCard, ctaButtonsGrid);
+        }
+
+        // Renderizar outras lojas no grid (exceto Diplan) - Full Bleed
+        STORES.filter(store => !store.isBoutique).forEach(store => {
+          const buttonDiv = document.createElement('a');
+          buttonDiv.href = store.loginUrl;
+          buttonDiv.target = '_blank';
+          buttonDiv.rel = 'noopener noreferrer';
+          buttonDiv.className = 'brand-tile-btn';
+          buttonDiv.setAttribute('aria-label', `Entrar em ${store.nome}`);
+          
+          const logoName = logoMap[store.slug] || store.slug;
+
+          buttonDiv.innerHTML = `
+            <img src="./logo_botao_${logoName}.png" alt="${store.nome}" loading="lazy" />
+          `;
 
           ctaButtonsGrid.appendChild(buttonDiv);
         });
       }
 
       // Meta Pixel Lead event - dispara quando usuário clica nos botões CTA das lojas
-      const ctaButtons = document.querySelectorAll('.loja-card-cta-primary, .cta-btn-primary, .enter-btn');
+      const ctaButtons = document.querySelectorAll('.loja-card-cta-primary, .cta-btn-primary, .brand-tile-btn, .enter-btn');
       ctaButtons.forEach(function (button) {
         button.addEventListener('click', function () {
           if (typeof fbq !== 'undefined') {
@@ -2521,7 +3506,7 @@
     });
 
     // ==================== BASE PATH FOR CAROUSEL CARD IMAGES ====================
-    const CAROUSEL_CARD_BASE_PATH = './';
+    const CAROUSEL_CARD_BASE_PATH = './card/';
 
     function renderCoverflowSlides() {
       const wrapper = document.getElementById('storesSwiperWrapper');
@@ -2962,6 +3947,234 @@
       });
     });
 
+    // ==================== CAMPAIGN SHOWCASE (VITRINE DE PROPAGANDAS) ====================
+    // Para adicionar novo asset, inclua no array abaixo
+    const CS_ITEMS = [
+      { src: 'propaganda_1.jpeg', type: 'image' },
+      { src: 'propaganda_2.jpeg', type: 'image' },
+      { src: 'propaganda_3.jpeg', type: 'image' },
+      { src: 'propaganda_4.mp4',  type: 'video' },
+      { src: 'propaganda_5.mp4',  type: 'video' },
+      { src: 'propaganda_6.mp4',  type: 'video' }
+    ];
+
+    (function initCampaignShowcase() {
+      var csCards = document.querySelectorAll('.cs-card');
+      var csGrid = document.querySelector('.cs-grid');
+      var csMobileQuery = window.matchMedia('(max-width: 768px)');
+      var csAutoRotateInterval = null;
+      var csResumeTimeout = null;
+
+      function normalizeCardVideos() {
+        csCards.forEach(function(card) {
+          var video = card.querySelector('video');
+          if (!video) return;
+          video.muted = true;
+          video.loop = true;
+          video.playsInline = true;
+          video.setAttribute('muted', '');
+          video.setAttribute('loop', '');
+          video.setAttribute('playsinline', '');
+          video.setAttribute('autoplay', '');
+        });
+      }
+
+      function getActiveCardIndex() {
+        if (!csGrid) return 0;
+        var cards = Array.prototype.slice.call(csCards);
+        var current = csGrid.scrollLeft;
+        var closestIndex = 0;
+        var minDiff = Number.POSITIVE_INFINITY;
+
+        cards.forEach(function(card, idx) {
+          var diff = Math.abs(card.offsetLeft - current);
+          if (diff < minDiff) {
+            minDiff = diff;
+            closestIndex = idx;
+          }
+        });
+
+        return closestIndex;
+      }
+
+      function syncMobileVideos() {
+        if (!csMobileQuery.matches || !csGrid) return;
+        var gridRect = csGrid.getBoundingClientRect();
+
+        csCards.forEach(function(card) {
+          var video = card.querySelector('video');
+          if (!video) return;
+
+          var rect = card.getBoundingClientRect();
+          var visibleWidth = Math.max(0, Math.min(rect.right, gridRect.right) - Math.max(rect.left, gridRect.left));
+          var visibleRatio = visibleWidth / Math.max(rect.width, 1);
+
+          if (visibleRatio >= 0.55) {
+            var playPromise = video.play();
+            if (playPromise && typeof playPromise.catch === 'function') {
+              playPromise.catch(function() {});
+            }
+          } else {
+            video.pause();
+          }
+        });
+      }
+
+      function startMobileAutoRotate() {
+        if (!csMobileQuery.matches || !csGrid || csAutoRotateInterval) return;
+
+        csAutoRotateInterval = window.setInterval(function() {
+          var cards = Array.prototype.slice.call(csCards);
+          if (!cards.length) return;
+
+          var currentIndex = getActiveCardIndex();
+          var nextIndex = (currentIndex + 1) % cards.length;
+          var nextCard = cards[nextIndex];
+
+          if (!nextCard) return;
+          csGrid.scrollTo({ left: nextCard.offsetLeft, behavior: 'smooth' });
+          window.setTimeout(syncMobileVideos, 300);
+        }, 4000);
+      }
+
+      function stopMobileAutoRotate() {
+        if (csAutoRotateInterval) {
+          window.clearInterval(csAutoRotateInterval);
+          csAutoRotateInterval = null;
+        }
+      }
+
+      function scheduleAutoRotateResume() {
+        stopMobileAutoRotate();
+        if (csResumeTimeout) {
+          window.clearTimeout(csResumeTimeout);
+        }
+        csResumeTimeout = window.setTimeout(function() {
+          startMobileAutoRotate();
+        }, 6000);
+      }
+
+      function updateMobileBehaviors() {
+        stopMobileAutoRotate();
+        if (!csMobileQuery.matches) {
+          csCards.forEach(function(card) {
+            var video = card.querySelector('video');
+            if (!video) return;
+            var playPromise = video.play();
+            if (playPromise && typeof playPromise.catch === 'function') {
+              playPromise.catch(function() {});
+            }
+          });
+          return;
+        }
+
+        syncMobileVideos();
+        startMobileAutoRotate();
+      }
+
+      normalizeCardVideos();
+
+      // Entrance animation
+      if ('IntersectionObserver' in window) {
+        var csIO = new IntersectionObserver(function(entries) {
+          entries.forEach(function(entry) {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('cs-visible');
+              csIO.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.15 });
+        csCards.forEach(function(c) { csIO.observe(c); });
+      } else {
+        csCards.forEach(function(c) { c.classList.add('cs-visible'); });
+      }
+
+      // Lightbox references
+      var lightbox      = document.getElementById('csLightbox');
+      var lightboxInner  = document.getElementById('csLightboxInner');
+      var lightboxClose  = document.getElementById('csLightboxClose');
+
+      function csOpenLightbox(index) {
+        var item = CS_ITEMS[index];
+        if (!item) return;
+
+        // Clear previous media
+        var prev = lightboxInner.querySelector('img, video');
+        if (prev) prev.remove();
+
+        var media;
+        if (item.type === 'video') {
+          media = document.createElement('video');
+          media.src = item.src;
+          media.controls = true;
+          media.playsInline = true;
+          media.style.maxWidth  = '100%';
+          media.style.maxHeight = '86vh';
+        } else {
+          media = document.createElement('img');
+          media.src = item.src;
+          media.alt = 'Campanha publicit\u00e1ria ampliada';
+        }
+        media.style.objectFit = 'contain';
+        lightboxInner.appendChild(media);
+
+        lightbox.classList.add('active');
+        document.body.classList.add('cs-no-scroll');
+        lightboxClose.focus();
+      }
+
+      function csCloseLightbox() {
+        lightbox.classList.remove('active');
+        document.body.classList.remove('cs-no-scroll');
+        var vid = lightboxInner.querySelector('video');
+        if (vid) { vid.pause(); vid.removeAttribute('src'); vid.load(); }
+        var m = lightboxInner.querySelector('img, video');
+        if (m) m.remove();
+      }
+
+      // Card click / keyboard
+      csCards.forEach(function(card) {
+        card.addEventListener('click', function() {
+          csOpenLightbox(parseInt(card.getAttribute('data-cs-index'), 10));
+        });
+        card.addEventListener('keydown', function(e) {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            csOpenLightbox(parseInt(card.getAttribute('data-cs-index'), 10));
+          }
+        });
+      });
+
+      // Close handlers
+      lightboxClose.addEventListener('click', csCloseLightbox);
+      lightbox.addEventListener('click', function(e) {
+        if (e.target === lightbox) csCloseLightbox();
+      });
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && lightbox.classList.contains('active')) {
+          csCloseLightbox();
+        }
+      });
+
+      if (csGrid) {
+        csGrid.addEventListener('scroll', function() {
+          if (csMobileQuery.matches) {
+            syncMobileVideos();
+          }
+        }, { passive: true });
+        csGrid.addEventListener('touchstart', scheduleAutoRotateResume, { passive: true });
+        csGrid.addEventListener('pointerdown', scheduleAutoRotateResume, { passive: true });
+        csGrid.addEventListener('wheel', scheduleAutoRotateResume, { passive: true });
+      }
+
+      if (typeof csMobileQuery.addEventListener === 'function') {
+        csMobileQuery.addEventListener('change', updateMobileBehaviors);
+      } else if (typeof csMobileQuery.addListener === 'function') {
+        csMobileQuery.addListener(updateMobileBehaviors);
+      }
+
+      updateMobileBehaviors();
+    })();
 
   </script>
 </body>
