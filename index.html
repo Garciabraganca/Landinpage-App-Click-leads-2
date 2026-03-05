@@ -2493,21 +2493,21 @@
             </div>
             <div class="cs-card" tabindex="0" role="button" aria-label="Abrir propaganda 4 – vídeo" data-cs-index="3">
               <div class="cs-card__frame">
-                <video src="propaganda_4.mp4" preload="metadata" muted playsinline></video>
+                <video src="propaganda_4.mp4" preload="metadata" muted playsinline autoplay loop></video>
                 <div class="cs-card__play"><div class="cs-card__play-icon"></div></div>
               </div>
               <span class="cs-card__label">Vídeo</span>
             </div>
             <div class="cs-card" tabindex="0" role="button" aria-label="Abrir propaganda 5 – vídeo" data-cs-index="4">
               <div class="cs-card__frame">
-                <video src="propaganda_5.mp4" preload="metadata" muted playsinline></video>
+                <video src="propaganda_5.mp4" preload="metadata" muted playsinline autoplay loop></video>
                 <div class="cs-card__play"><div class="cs-card__play-icon"></div></div>
               </div>
               <span class="cs-card__label">Vídeo</span>
             </div>
             <div class="cs-card" tabindex="0" role="button" aria-label="Abrir propaganda 6 – vídeo" data-cs-index="5">
               <div class="cs-card__frame">
-                <video src="propaganda_6.mp4" preload="metadata" muted playsinline></video>
+                <video src="propaganda_6.mp4" preload="metadata" muted playsinline autoplay loop></video>
                 <div class="cs-card__play"><div class="cs-card__play-icon"></div></div>
               </div>
               <span class="cs-card__label">Vídeo</span>
@@ -3465,6 +3465,119 @@
 
     (function initCampaignShowcase() {
       var csCards = document.querySelectorAll('.cs-card');
+      var csGrid = document.querySelector('.cs-grid');
+      var csMobileQuery = window.matchMedia('(max-width: 768px)');
+      var csAutoRotateInterval = null;
+      var csResumeTimeout = null;
+
+      function normalizeCardVideos() {
+        csCards.forEach(function(card) {
+          var video = card.querySelector('video');
+          if (!video) return;
+          video.muted = true;
+          video.loop = true;
+          video.playsInline = true;
+          video.setAttribute('muted', '');
+          video.setAttribute('loop', '');
+          video.setAttribute('playsinline', '');
+          video.setAttribute('autoplay', '');
+        });
+      }
+
+      function getActiveCardIndex() {
+        if (!csGrid) return 0;
+        var cards = Array.prototype.slice.call(csCards);
+        var current = csGrid.scrollLeft;
+        var closestIndex = 0;
+        var minDiff = Number.POSITIVE_INFINITY;
+
+        cards.forEach(function(card, idx) {
+          var diff = Math.abs(card.offsetLeft - current);
+          if (diff < minDiff) {
+            minDiff = diff;
+            closestIndex = idx;
+          }
+        });
+
+        return closestIndex;
+      }
+
+      function syncMobileVideos() {
+        if (!csMobileQuery.matches || !csGrid) return;
+        var gridRect = csGrid.getBoundingClientRect();
+
+        csCards.forEach(function(card) {
+          var video = card.querySelector('video');
+          if (!video) return;
+
+          var rect = card.getBoundingClientRect();
+          var visibleWidth = Math.max(0, Math.min(rect.right, gridRect.right) - Math.max(rect.left, gridRect.left));
+          var visibleRatio = visibleWidth / Math.max(rect.width, 1);
+
+          if (visibleRatio >= 0.55) {
+            var playPromise = video.play();
+            if (playPromise && typeof playPromise.catch === 'function') {
+              playPromise.catch(function() {});
+            }
+          } else {
+            video.pause();
+          }
+        });
+      }
+
+      function startMobileAutoRotate() {
+        if (!csMobileQuery.matches || !csGrid || csAutoRotateInterval) return;
+
+        csAutoRotateInterval = window.setInterval(function() {
+          var cards = Array.prototype.slice.call(csCards);
+          if (!cards.length) return;
+
+          var currentIndex = getActiveCardIndex();
+          var nextIndex = (currentIndex + 1) % cards.length;
+          var nextCard = cards[nextIndex];
+
+          if (!nextCard) return;
+          csGrid.scrollTo({ left: nextCard.offsetLeft, behavior: 'smooth' });
+          window.setTimeout(syncMobileVideos, 300);
+        }, 4000);
+      }
+
+      function stopMobileAutoRotate() {
+        if (csAutoRotateInterval) {
+          window.clearInterval(csAutoRotateInterval);
+          csAutoRotateInterval = null;
+        }
+      }
+
+      function scheduleAutoRotateResume() {
+        stopMobileAutoRotate();
+        if (csResumeTimeout) {
+          window.clearTimeout(csResumeTimeout);
+        }
+        csResumeTimeout = window.setTimeout(function() {
+          startMobileAutoRotate();
+        }, 6000);
+      }
+
+      function updateMobileBehaviors() {
+        stopMobileAutoRotate();
+        if (!csMobileQuery.matches) {
+          csCards.forEach(function(card) {
+            var video = card.querySelector('video');
+            if (!video) return;
+            var playPromise = video.play();
+            if (playPromise && typeof playPromise.catch === 'function') {
+              playPromise.catch(function() {});
+            }
+          });
+          return;
+        }
+
+        syncMobileVideos();
+        startMobileAutoRotate();
+      }
+
+      normalizeCardVideos();
 
       // Entrance animation
       if ('IntersectionObserver' in window) {
@@ -3547,6 +3660,25 @@
           csCloseLightbox();
         }
       });
+
+      if (csGrid) {
+        csGrid.addEventListener('scroll', function() {
+          if (csMobileQuery.matches) {
+            syncMobileVideos();
+          }
+        }, { passive: true });
+        csGrid.addEventListener('touchstart', scheduleAutoRotateResume, { passive: true });
+        csGrid.addEventListener('pointerdown', scheduleAutoRotateResume, { passive: true });
+        csGrid.addEventListener('wheel', scheduleAutoRotateResume, { passive: true });
+      }
+
+      if (typeof csMobileQuery.addEventListener === 'function') {
+        csMobileQuery.addEventListener('change', updateMobileBehaviors);
+      } else if (typeof csMobileQuery.addListener === 'function') {
+        csMobileQuery.addListener(updateMobileBehaviors);
+      }
+
+      updateMobileBehaviors();
     })();
 
   </script>
