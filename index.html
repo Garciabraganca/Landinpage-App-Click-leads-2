@@ -2366,6 +2366,44 @@
       letter-spacing: 0.3px;
     }
 
+    .cs-badge-btn {
+      appearance: none;
+      cursor: pointer;
+      transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+      font-family: inherit;
+    }
+
+    .cs-badge-btn:hover {
+      background: rgba(251,191,36,0.16);
+      border-color: rgba(251,191,36,0.45);
+      color: #fde68a;
+      transform: translateY(-1px);
+    }
+
+    .cs-badge-btn.is-active {
+      background: linear-gradient(135deg, rgba(245,158,11,0.30), rgba(249,115,22,0.24));
+      border-color: rgba(251,191,36,0.62);
+      color: #fffbeb;
+    }
+
+    .cs-incentive-message {
+      margin: 0 0 18px;
+      padding: 12px 14px;
+      border-left: 3px solid rgba(251,191,36,0.75);
+      border-radius: 0 10px 10px 0;
+      background: rgba(15, 23, 42, 0.48);
+      color: #e2e8f0;
+      font-size: 0.94rem;
+      line-height: 1.5;
+    }
+
+    .cs-cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+    }
+
     .cs-cta {
       display: inline-flex;
       align-items: center;
@@ -2384,6 +2422,16 @@
     .cs-cta:hover {
       background: rgba(251,191,36,0.1);
       border-color: rgba(251,191,36,0.5);
+    }
+
+    .cs-cta-secondary {
+      color: #e2e8f0;
+      border-color: rgba(148,163,184,0.4);
+    }
+
+    .cs-cta-secondary:hover {
+      background: rgba(148,163,184,0.12);
+      border-color: rgba(148,163,184,0.65);
     }
 
     .cs-grid {
@@ -2617,6 +2665,19 @@
 
       .cs-sub {
         font-size: 0.92rem;
+      }
+
+      .cs-incentive-message {
+        font-size: 0.88rem;
+      }
+
+      .cs-cta-row {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .cs-cta {
+        justify-content: center;
       }
 
       .cs-grid {
@@ -2895,16 +2956,20 @@
     <div class="cs-container" style="position: relative; z-index: 2;">
       <div class="cs-layout">
         <div class="cs-text">
-          <p class="cs-eyebrow">Campanhas reais</p>
-          <h2 class="cs-headline">Vitrine de propagandas</h2>
-          <p class="cs-sub">Criativos reais (foto e vídeo) que mostram o padrão visual das operações do Shopping das Plataformas.</p>
+          <p class="cs-eyebrow">Campanhas de incentivo ao corretor</p>
+          <h2 class="cs-headline">Venda mais. Pontue. Viaje.</h2>
+          <p class="cs-sub">Este espaço mostra campanhas ativas de viagens e premiações para corretores que batem meta com consistência.</p>
           <div class="cs-badges">
-            <span class="cs-badge">Criativos reais</span>
-            <span class="cs-badge">Performance</span>
-            <span class="cs-badge">Captação</span>
-            <span class="cs-badge">Estrutura comercial</span>
+            <button type="button" class="cs-badge cs-badge-btn is-active" data-cs-message="Campanhas mensais com ranking ativo: quem performa melhor acelera para experiências e viagens exclusivas.">Viagens por meta</button>
+            <button type="button" class="cs-badge cs-badge-btn" data-cs-message="Premiações progressivas por volume e qualidade: cada venda validada aumenta sua pontuação na campanha.">Premiação progressiva</button>
+            <button type="button" class="cs-badge cs-badge-btn" data-cs-message="Mecânica transparente para o corretor: meta clara, pontuação visível e recompensa definida antes da campanha começar.">Pontuação transparente</button>
+            <button type="button" class="cs-badge cs-badge-btn" data-cs-message="Além da comissão, você concorre a bônus extras para manter ritmo forte durante toda a campanha.">Bônus de consistência</button>
           </div>
-          <a href="#lojas" class="cs-cta">Conhecer as lojas &rarr;</a>
+          <p class="cs-incentive-message" id="csIncentiveMessage">Campanhas mensais com ranking ativo: quem performa melhor acelera para experiências e viagens exclusivas.</p>
+          <div class="cs-cta-row">
+            <a href="#como-entrar" class="cs-cta">Quero participar das campanhas &rarr;</a>
+            <a href="#lojas" class="cs-cta cs-cta-secondary">Ver lojas participantes</a>
+          </div>
         </div>
         <div class="cs-grid-wrap">
           <div class="cs-grid">
@@ -3978,9 +4043,30 @@
     (function initCampaignShowcase() {
       var csCards = document.querySelectorAll('.cs-card');
       var csGrid = document.querySelector('.cs-grid');
+      var csBadgeButtons = document.querySelectorAll('.cs-badge-btn[data-cs-message]');
+      var csIncentiveMessage = document.getElementById('csIncentiveMessage');
       var csMobileQuery = window.matchMedia('(max-width: 768px)');
       var csAutoRotateInterval = null;
       var csResumeTimeout = null;
+
+      function initIncentiveBadges() {
+        if (!csBadgeButtons.length || !csIncentiveMessage) return;
+
+        csBadgeButtons.forEach(function(btn) {
+          btn.setAttribute('aria-pressed', btn.classList.contains('is-active') ? 'true' : 'false');
+
+          btn.addEventListener('click', function() {
+            csBadgeButtons.forEach(function(otherBtn) {
+              otherBtn.classList.remove('is-active');
+              otherBtn.setAttribute('aria-pressed', 'false');
+            });
+
+            btn.classList.add('is-active');
+            btn.setAttribute('aria-pressed', 'true');
+            csIncentiveMessage.textContent = btn.getAttribute('data-cs-message') || '';
+          });
+        });
+      }
 
       function normalizeCardVideos() {
         csCards.forEach(function(card) {
@@ -4090,6 +4176,7 @@
       }
 
       normalizeCardVideos();
+      initIncentiveBadges();
 
       // Entrance animation
       if ('IntersectionObserver' in window) {
