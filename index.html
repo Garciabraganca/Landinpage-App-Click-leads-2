@@ -4213,7 +4213,7 @@
       // Add message to chat display
       function addMessageToChat(role, text) {
         const messageEl = document.createElement('div');
-        messageEl.className = \`agent-message \${role}\`;
+        messageEl.className = `agent-message ${role}`;
         
         const contentEl = document.createElement('div');
         contentEl.className = 'agent-message-content';

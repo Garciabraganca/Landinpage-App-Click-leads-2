@@ -29,7 +29,15 @@ if not api_key:
 client = OpenAI(api_key=api_key)
 
 # Configuration
-VECTOR_STORE_ID = "vs_69a983fd9a1c819198605bb91633aa36"
+VECTOR_STORE_ID = os.environ.get(
+    "VECTOR_STORE_ID",
+    "vs_69a983fd9a1c819198605bb91633aa36"
+)
+if not VECTOR_STORE_ID:
+    raise ValueError(
+        "VECTOR_STORE_ID environment variable is not set. "
+        "Provide it via VECTOR_STORE_ID env var or use the default."
+    )
 MODEL = "gpt-4o-mini"
 MAX_MESSAGE_LENGTH = 1500
 
@@ -114,13 +122,39 @@ def shopping_agent():
             }
         )
         
-        # Extract the assistant's response
+        # Extract the assistant's response with multiple fallback strategies
         assistant_message = ""
-        for block in response.content:
-            if hasattr(block, "text"):
-                assistant_message += block.text
+        
+        # Strategy 1: Try response.content (current structure)
+        if hasattr(response, "content"):
+            for block in response.content:
+                if hasattr(block, "text"):
+                    assistant_message += block.text
+        
+        # Strategy 2: Try response.choices[0].message.content
+        if not assistant_message and hasattr(response, "choices"):
+            try:
+                content = response.choices[0].message.content
+                if isinstance(content, str):
+                    assistant_message = content
+                elif isinstance(content, list):
+                    assistant_message = "".join(
+                        item.text if hasattr(item, "text") else str(item)
+                        for item in content
+                    )
+            except (IndexError, AttributeError):
+                pass
         
         if not assistant_message:
+            # Log the raw response for debugging
+            print(f"Warning: Could not extract assistant message from response:")
+            print(f"Response type: {type(response)}")
+            print(f"Response attributes: {dir(response)}")
+            if hasattr(response, "content"):
+                print(f"Response content: {response.content}")
+            if hasattr(response, "choices"):
+                print(f"Response choices: {response.choices}")
+            
             return jsonify({
                 "success": False,
                 "error": "Não consegui gerar uma resposta. Tente novamente."
