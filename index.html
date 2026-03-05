@@ -1064,20 +1064,7 @@
 
       /* Footer mobile */
       footer {
-        padding: 48px 0 24px;
-      }
-
-      .footer-main {
-        grid-template-columns: 1fr;
-        gap: 32px;
-      }
-
-      .footer-column {
-        text-align: center;
-      }
-
-      .footer-bottom {
-        padding-top: 24px;
+        padding: 32px 0;
       }
     }
 
@@ -1266,7 +1253,7 @@
     /* OPERADORES GRID */
     .operadores-grid {
       display: grid;
-      grid-template-columns: repeat(6, 1fr);
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
       gap: 24px;
       margin-bottom: 40px;
     }
@@ -1279,8 +1266,9 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 16px;
+      padding: 20px;
       transition: all 0.3s ease;
+      overflow: hidden;
     }
 
     .operador-item:hover {
@@ -1289,11 +1277,11 @@
       transform: translateY(-4px);
     }
 
-    .operador-logo-placeholder {
-      font-size: 0.875rem;
-      font-weight: 600;
-      color: #cbd5e1;
-      text-align: center;
+    .operador-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      object-position: center;
     }
 
     /* INFRASTRUCTURE GRID */
@@ -1394,26 +1382,26 @@
     footer {
       background: #0f172a;
       color: #cbd5e1;
-      padding: 64px 0 32px;
+      padding: 48px 0;
       border-top: 1px solid rgba(255, 255, 255, 0.05);
     }
 
     .footer-wrapper {
       display: flex;
       flex-direction: column;
-      gap: 48px;
+      align-items: center;
     }
 
     .footer-main {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 48px;
+      display: flex;
+      justify-content: center;
     }
 
     .footer-column {
       display: flex;
       flex-direction: column;
       gap: 16px;
+      text-align: center;
     }
 
     .footer-title {
@@ -1437,16 +1425,6 @@
       color: #cbd5e1;
     }
 
-    .footer-links a {
-      color: #cbd5e1;
-      text-decoration: none;
-      transition: color 0.3s ease;
-    }
-
-    .footer-links a:hover {
-      color: #f1f5f9;
-    }
-
     .footer-address {
       font-size: 0.875rem;
       line-height: 1.6;
@@ -1456,18 +1434,6 @@
     .footer-cnpj {
       font-size: 0.8125rem;
       color: #64748b;
-    }
-
-    .footer-bottom {
-      text-align: center;
-      padding-top: 32px;
-      border-top: 1px solid rgba(255, 255, 255, 0.05);
-      font-size: 0.875rem;
-      color: #64748b;
-    }
-
-    .footer-bottom p {
-      margin: 0;
     }
 
     @media (max-width: 768px) {
@@ -3074,22 +3040,25 @@
           <h3 class="block-title">Operadoras Parceiras</h3>
           <div class="operadores-grid">
             <div class="operador-item">
-              <div class="operador-logo-placeholder">Amil</div>
+              <img src="logo_amil.png" alt="Amil">
             </div>
             <div class="operador-item">
-              <div class="operador-logo-placeholder">Bradesco</div>
+              <img src="logo_bradesco.jpeg" alt="Bradesco">
             </div>
             <div class="operador-item">
-              <div class="operador-logo-placeholder">SulAmérica</div>
+              <img src="logo_sulamerica.jpeg" alt="SulAmérica">
             </div>
             <div class="operador-item">
-              <div class="operador-logo-placeholder">Porto</div>
+              <img src="logo_hapvida.jpeg" alt="Hapvida">
             </div>
             <div class="operador-item">
-              <div class="operador-logo-placeholder">Omint</div>
+              <img src="logo_omint.jpeg" alt="Omint">
             </div>
             <div class="operador-item">
-              <div class="operador-logo-placeholder">Seguros Unimed</div>
+              <img src="logo_unimed.jpeg" alt="Unimed">
+            </div>
+            <div class="operador-item">
+              <img src="logo_alice.jpeg" alt="Alice">
             </div>
           </div>
         </div>
@@ -3164,27 +3133,6 @@
             <li class="footer-cnpj">CNPJ: 53.050.940/0001-01</li>
           </ul>
         </div>
-        <div class="footer-column">
-          <h4 class="footer-title">Plataforma</h4>
-          <ul class="footer-links">
-            <li><a href="#ecossistema">Shopping das Plataformas</a></li>
-            <li><a href="#como-funciona">Como Entrar</a></li>
-            <li><a href="#lojas">Lojas Disponíveis</a></li>
-            <li><a href="#campaign-showcase">Vitrine de Campanhas</a></li>
-          </ul>
-        </div>
-        <div class="footer-column">
-          <h4 class="footer-title">Suporte</h4>
-          <ul class="footer-links">
-            <li><a href="mailto:suporte@clickleads.com.br">Contato de Suporte</a></li>
-            <li><a href="https://wa.me/551133334444" target="_blank" rel="noopener">WhatsApp</a></li>
-            <li><a href="#">Termos de Uso</a></li>
-            <li><a href="#">Política de Privacidade</a></li>
-          </ul>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        <p>&copy; 2026 Grupo Garcia — Click Leads. Todos os direitos reservados.</p>
       </div>
     </div>
   </footer>
