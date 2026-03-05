@@ -1063,10 +1063,21 @@
       }
 
       /* Footer mobile */
-      footer .footer-inner {
-        flex-direction: column;
+      footer {
+        padding: 48px 0 24px;
+      }
+
+      .footer-main {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+
+      .footer-column {
         text-align: center;
-        gap: 12px;
+      }
+
+      .footer-bottom {
+        padding-top: 24px;
       }
     }
 
@@ -1088,6 +1099,71 @@
 
       .modal-content {
         padding: 24px 16px 28px;
+      }
+
+      /* Authority section mobile */
+      .authority-section {
+        padding: 40px 0;
+      }
+
+      .authority-header h2 {
+        font-size: 1.35rem;
+      }
+
+      .authority-header p {
+        font-size: 1rem;
+      }
+
+      .block-title {
+        font-size: 1.25rem;
+        margin-bottom: 24px;
+      }
+
+      .operadores-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+      }
+
+      .infrastructure-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .infra-card {
+        padding: 20px 16px;
+      }
+
+      .infra-icon {
+        font-size: 2rem;
+      }
+
+      .infra-card h4 {
+        font-size: 1rem;
+      }
+
+      .infra-card p {
+        font-size: 0.875rem;
+      }
+
+      .social-proof-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+
+      .proof-metric {
+        padding: 24px 16px;
+      }
+
+      .metric-number {
+        font-size: 2rem;
+      }
+
+      .metric-label {
+        font-size: 0.875rem;
+      }
+
+      .authority-cta-btn {
+        padding: 14px 32px;
+        font-size: 0.95rem;
       }
     }
 
@@ -1116,30 +1192,282 @@
       margin-bottom: 24px;
     }
 
-
-
-    footer {
-      background: #020617;
-      color: #9ca3af;
-      font-size: 0.78rem;
-      padding: 18px 0 20px;
+    /* AUTHORITY SECTION */
+    .authority-section {
+      position: relative;
+      padding: 80px 0;
+      overflow: hidden;
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+      color: white;
     }
 
-    footer .footer-inner {
+    .authority-bg-video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+    }
+
+    .authority-bg-video video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    .authority-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(15, 23, 42, 0.85);
+      z-index: 2;
+    }
+
+    .authority-content {
+      position: relative;
+      z-index: 3;
+    }
+
+    .authority-header {
+      text-align: center;
+      margin-bottom: 64px;
+    }
+
+    .authority-header h2 {
+      font-size: clamp(1.75rem, 4vw, 2.5rem);
+      margin-bottom: 16px;
+      font-weight: 700;
+      color: #ffffff;
+    }
+
+    .authority-header p {
+      font-size: 1.125rem;
+      color: #cbd5e1;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .authority-section-block {
+      margin-bottom: 72px;
+    }
+
+    .block-title {
+      font-size: 1.75rem;
+      font-weight: 600;
+      margin-bottom: 40px;
+      text-align: center;
+      color: #f1f5f9;
+    }
+
+    /* OPERADORES GRID */
+    .operadores-grid {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 24px;
+      margin-bottom: 40px;
+    }
+
+    .operador-item {
+      aspect-ratio: 1 / 1;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
       display: flex;
-      flex-wrap: wrap;
       align-items: center;
-      justify-content: space-between;
-      gap: 8px;
+      justify-content: center;
+      padding: 16px;
+      transition: all 0.3s ease;
     }
 
-    footer a {
-      color: #e5e7eb;
+    .operador-item:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(255, 255, 255, 0.2);
+      transform: translateY(-4px);
+    }
+
+    .operador-logo-placeholder {
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: #cbd5e1;
+      text-align: center;
+    }
+
+    /* INFRASTRUCTURE GRID */
+    .infrastructure-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+    }
+
+    .infra-card {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      padding: 32px 24px;
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+
+    .infra-card:hover {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(255, 255, 255, 0.2);
+      transform: translateY(-6px);
+    }
+
+    .infra-icon {
+      font-size: 2.5rem;
+      margin-bottom: 16px;
+    }
+
+    .infra-card h4 {
+      font-size: 1.125rem;
+      font-weight: 600;
+      color: #f1f5f9;
+      margin-bottom: 12px;
+    }
+
+    .infra-card p {
+      font-size: 0.9375rem;
+      color: #cbd5e1;
+      line-height: 1.6;
+    }
+
+    /* SOCIAL PROOF GRID */
+    .social-proof-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 32px;
+    }
+
+    .proof-metric {
+      text-align: center;
+      padding: 32px 24px;
+      background: rgba(255, 255, 255, 0.03);
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .metric-number {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: #f97316;
+      margin-bottom: 8px;
+    }
+
+    .metric-label {
+      font-size: 0.9375rem;
+      color: #cbd5e1;
+      font-weight: 500;
+    }
+
+    /* AUTHORITY CTA */
+    .authority-cta {
+      text-align: center;
+      margin-top: 64px;
+    }
+
+    .authority-cta-btn {
+      display: inline-block;
+      padding: 16px 48px;
+      background: #f97316;
+      color: white;
       text-decoration: none;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+      border: 2px solid #f97316;
     }
 
-    footer a:hover {
-      text-decoration: underline;
+    .authority-cta-btn:hover {
+      background: #ea580c;
+      border-color: #ea580c;
+      transform: translateY(-2px);
+      box-shadow: 0 12px 24px rgba(249, 115, 22, 0.3);
+    }
+
+    /* FOOTER STYLES */
+    footer {
+      background: #0f172a;
+      color: #cbd5e1;
+      padding: 64px 0 32px;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .footer-wrapper {
+      display: flex;
+      flex-direction: column;
+      gap: 48px;
+    }
+
+    .footer-main {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 48px;
+    }
+
+    .footer-column {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .footer-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #f1f5f9;
+      margin: 0;
+    }
+
+    .footer-links {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      font-size: 0.9375rem;
+    }
+
+    .footer-links li {
+      color: #cbd5e1;
+    }
+
+    .footer-links a {
+      color: #cbd5e1;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .footer-links a:hover {
+      color: #f1f5f9;
+    }
+
+    .footer-address {
+      font-size: 0.875rem;
+      line-height: 1.6;
+      color: #94a3b8;
+    }
+
+    .footer-cnpj {
+      font-size: 0.8125rem;
+      color: #64748b;
+    }
+
+    .footer-bottom {
+      text-align: center;
+      padding-top: 32px;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      font-size: 0.875rem;
+      color: #64748b;
+    }
+
+    .footer-bottom p {
+      margin: 0;
     }
 
     @media (max-width: 768px) {
@@ -1149,6 +1477,38 @@
 
       .cta-button-item.boutique {
         max-width: 100%;
+      }
+
+      /* Authority section tablet */
+      .authority-section {
+        padding: 60px 0;
+      }
+
+      .authority-header {
+        margin-bottom: 48px;
+      }
+
+      .authority-header h2 {
+        font-size: 1.75rem;
+      }
+
+      .block-title {
+        font-size: 1.5rem;
+        margin-bottom: 32px;
+      }
+
+      .operadores-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 16px;
+      }
+
+      .infrastructure-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .social-proof-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 24px;
       }
     }
 
@@ -1653,6 +2013,34 @@
       background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
       padding: 80px 20px;
       color: #fff;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-final-bg-video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+    }
+
+    .cta-final-bg-video video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    .cta-final-bg-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(15, 23, 42, 0.85);
+      z-index: 1;
     }
 
     .cta-final-container {
@@ -1912,6 +2300,32 @@
       color: #fff;
       position: relative;
       overflow: hidden;
+    }
+
+    .cs-bg-video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+    }
+
+    .cs-bg-video video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    .cs-bg-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(13, 17, 23, 0.85);
+      z-index: 1;
     }
 
     .campaign-showcase::before {
@@ -2325,7 +2739,7 @@
     <div class="hero-fold-video">
       <video id="heroVideo" autoplay muted loop playsinline webkit-playsinline preload="auto" disablepictureinpicture
         disableremoteplayback>
-        <source src="video_entrada.mp4" type="video/mp4">
+        <source src="video_shopping.mp4" type="video/mp4">
       </video>
     </div>
 
@@ -2506,7 +2920,13 @@
 
   <!-- VITRINE DE PROPAGANDAS (5ª DOBRA) -->
   <section class="campaign-showcase" id="campaign-showcase">
-    <div class="cs-container">
+    <div class="cs-bg-video">
+      <video autoplay muted loop playsinline webkit-playsinline preload="metadata">
+        <source src="video_shopping.mp4" type="video/mp4">
+      </video>
+    </div>
+    <div class="cs-bg-overlay"></div>
+    <div class="cs-container" style="position: relative; z-index: 2;">
       <div class="cs-layout">
         <div class="cs-text">
           <p class="cs-eyebrow">Campanhas reais</p>
@@ -2576,7 +2996,13 @@
 
   <!-- CTA FINAL -->
   <section class="cta-final-section" id="entrar">
-    <div class="cta-final-container">
+    <div class="cta-final-bg-video">
+      <video autoplay muted loop playsinline webkit-playsinline preload="metadata">
+        <source src="video_shopping.mp4" type="video/mp4">
+      </video>
+    </div>
+    <div class="cta-final-bg-overlay"></div>
+    <div class="cta-final-container" style="position: relative; z-index: 2;">
       <div class="cta-final-header">
         <h2>Pronto para escolher sua loja?</h2>
         <p>Entre agora e comece a atuar com uma estrutura organizada.</p>
@@ -2628,14 +3054,137 @@
   <!-- TOAST CONTAINER -->
   <div class="toast-container" id="toastContainer"></div>
 
+  <!-- ECOSSISTEMA SECTION -->
+  <section class="authority-section" id="ecossistema">
+    <div class="authority-bg-video">
+      <video autoplay muted loop playsinline webkit-playsinline preload="metadata">
+        <source src="video_shopping.mp4" type="video/mp4">
+      </video>
+    </div>
+    <div class="authority-overlay"></div>
+    <div class="authority-content">
+      <div class="container">
+        <div class="authority-header">
+          <h2>O Ecossistema do Shopping das Plataformas</h2>
+          <p>Uma estrutura comercial completa para corretores que querem produzir mais.</p>
+        </div>
+        
+        <!-- BLOCO 1: OPERADORAS -->
+        <div class="authority-section-block">
+          <h3 class="block-title">Operadoras Parceiras</h3>
+          <div class="operadores-grid">
+            <div class="operador-item">
+              <div class="operador-logo-placeholder">Amil</div>
+            </div>
+            <div class="operador-item">
+              <div class="operador-logo-placeholder">Bradesco</div>
+            </div>
+            <div class="operador-item">
+              <div class="operador-logo-placeholder">SulAmérica</div>
+            </div>
+            <div class="operador-item">
+              <div class="operador-logo-placeholder">Porto</div>
+            </div>
+            <div class="operador-item">
+              <div class="operador-logo-placeholder">Omint</div>
+            </div>
+            <div class="operador-item">
+              <div class="operador-logo-placeholder">Seguros Unimed</div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- BLOCO 2: INFRAESTRUTURA -->
+        <div class="authority-section-block">
+          <h3 class="block-title">Infraestrutura Profissional</h3>
+          <div class="infrastructure-grid">
+            <div class="infra-card">
+              <div class="infra-icon">📊</div>
+              <h4>Geração de Leads</h4>
+              <p>Sistema inteligente de captação e qualificação de leads em tempo real.</p>
+            </div>
+            <div class="infra-card">
+              <div class="infra-icon">🎯</div>
+              <h4>CRM Comercial</h4>
+              <p>Plataforma completa para gestão de relacionamento e pipeline comercial.</p>
+            </div>
+            <div class="infra-card">
+              <div class="infra-icon">👥</div>
+              <h4>Estrutura de Supervisão</h4>
+              <p>Supervisores especializados para acompanhamento e desenvolvimento de equipes.</p>
+            </div>
+            <div class="infra-card">
+              <div class="infra-icon">📈</div>
+              <h4>Operação Escalável</h4>
+              <p>Processos prontos para crescimento exponencial e replicação em novos mercados.</p>
+            </div>
+          </div>
+        </div>
+        
+        <!-- BLOCO 3: PROVA SOCIAL -->
+        <div class="authority-section-block">
+          <h3 class="block-title">Escala da Operação</h3>
+          <div class="social-proof-grid">
+            <div class="proof-metric">
+              <div class="metric-number">150K+</div>
+              <div class="metric-label">Leads Gerados</div>
+            </div>
+            <div class="proof-metric">
+              <div class="metric-number">8</div>
+              <div class="metric-label">Operações Ativas</div>
+            </div>
+            <div class="proof-metric">
+              <div class="metric-number">2000+</div>
+              <div class="metric-label">Corretores</div>
+            </div>
+            <div class="proof-metric">
+              <div class="metric-number">12K</div>
+              <div class="metric-label">Clientes Ativos</div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- CTA -->
+        <div class="authority-cta">
+          <a href="#lojas" class="authority-cta-btn">Conhecer as Lojas</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- RODAPÉ -->
   <footer>
-    <div class="container footer-inner">
-      <div>Copyright &copy; Grupo Garcia – Click Leads.</div>
-      <div>
-        <a href="#">Termos de Uso</a> ·
-        <a href="#">Política de Privacidade</a> ·
-        <a href="#">Contato de Suporte</a>
+    <div class="container footer-wrapper">
+      <div class="footer-main">
+        <div class="footer-column">
+          <h4 class="footer-title">Grupo Garcia</h4>
+          <ul class="footer-links">
+            <li>Click Leads</li>
+            <li class="footer-address">Avenida José Herculano<br>Caraguatatuba — SP<br>11666-000 • Brasil</li>
+            <li class="footer-cnpj">CNPJ: 53.050.940/0001-01</li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h4 class="footer-title">Plataforma</h4>
+          <ul class="footer-links">
+            <li><a href="#ecossistema">Shopping das Plataformas</a></li>
+            <li><a href="#como-funciona">Como Entrar</a></li>
+            <li><a href="#lojas">Lojas Disponíveis</a></li>
+            <li><a href="#campaign-showcase">Vitrine de Campanhas</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h4 class="footer-title">Suporte</h4>
+          <ul class="footer-links">
+            <li><a href="mailto:suporte@clickleads.com.br">Contato de Suporte</a></li>
+            <li><a href="https://wa.me/551133334444" target="_blank" rel="noopener">WhatsApp</a></li>
+            <li><a href="#">Termos de Uso</a></li>
+            <li><a href="#">Política de Privacidade</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 Grupo Garcia — Click Leads. Todos os direitos reservados.</p>
       </div>
     </div>
   </footer>
