@@ -1,0 +1,24 @@
+{
+  "name": "landinpage-app-click-leads-2",
+  "version": "1.0.0",
+  "description": "Landing page institucional do **Click Leads**, criada para apresentar a solução de captação e entrega de leads em tempo real, destacando tecnologia, velocidade e o storytelling oficial da família do Grupo Garcia.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "convert:logos": "node scripts/convert-logos-to-png.mjs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Garciabraganca/Landinpage-App-Click-leads-2.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Garciabraganca/Landinpage-App-Click-leads-2/issues"
+  },
+  "homepage": "https://github.com/Garciabraganca/Landinpage-App-Click-leads-2#readme",
+  "devDependencies": {
+    "sharp": "^0.34.5"
+  }
+}
