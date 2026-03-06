@@ -2343,6 +2343,135 @@
       }
     }
 
+    /* ==================== DOBRA 7 (FOTO + VIDEO SHOPPING) ==================== */
+    .dobra7-section {
+      position: relative;
+      min-height: clamp(520px, 74vh, 840px);
+      overflow: hidden;
+      color: #f8fafc;
+      isolation: isolate;
+      display: flex;
+      align-items: center;
+      padding: 84px 20px;
+      background: #0f172a;
+    }
+
+    .dobra7-bg-video {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+    }
+
+    .dobra7-bg-video video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    .dobra7-overlay {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      background: linear-gradient(102deg, rgba(2, 6, 23, 0.82) 0%, rgba(2, 6, 23, 0.62) 44%, rgba(2, 6, 23, 0.34) 72%, rgba(2, 6, 23, 0.62) 100%);
+    }
+
+    .dobra7-container {
+      position: relative;
+      z-index: 2;
+      width: min(1120px, 100%);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 0.92fr 1.08fr;
+      gap: clamp(28px, 4vw, 56px);
+      align-items: center;
+    }
+
+    .dobra7-copy h2 {
+      margin: 0 0 12px;
+      font-size: clamp(1.8rem, 4vw, 3rem);
+      line-height: 1.14;
+      color: #ffffff;
+      text-wrap: balance;
+      max-width: 14ch;
+    }
+
+    .dobra7-copy p {
+      margin: 0;
+      color: #dbe3f0;
+      max-width: 45ch;
+      font-size: clamp(1rem, 1.8vw, 1.12rem);
+    }
+
+    .dobra7-copy .dobra7-eyebrow {
+      margin: 0 0 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      font-size: 0.76rem;
+      color: #fbbf24;
+      font-weight: 700;
+    }
+
+    .dobra7-copy .dobra7-cta {
+      display: inline-flex;
+      margin-top: 18px;
+      color: #ffffff;
+      text-decoration: none;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.65);
+      padding-bottom: 2px;
+      transition: opacity 180ms ease, border-color 180ms ease;
+    }
+
+    .dobra7-copy .dobra7-cta:hover {
+      opacity: 0.88;
+      border-color: rgba(251, 191, 36, 0.92);
+    }
+
+    .dobra7-photo-wrap {
+      margin: 0;
+      width: 100%;
+      border-radius: 18px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      box-shadow: 0 22px 52px rgba(0, 0, 0, 0.42);
+      max-width: 620px;
+      justify-self: end;
+      background: rgba(2, 6, 23, 0.42);
+    }
+
+    .dobra7-photo-wrap img {
+      width: 100%;
+      height: auto;
+      display: block;
+      object-fit: cover;
+    }
+
+    @media (max-width: 900px) {
+      .dobra7-section {
+        padding: 62px 16px;
+      }
+
+      .dobra7-container {
+        grid-template-columns: 1fr;
+      }
+
+      .dobra7-copy {
+        text-align: center;
+        justify-self: center;
+      }
+
+      .dobra7-copy p {
+        margin: 0 auto;
+      }
+
+      .dobra7-photo-wrap {
+        justify-self: center;
+        max-width: 560px;
+      }
+    }
+
     /* ==================== CAMPAIGN SHOWCASE (VITRINE DE PROPAGANDAS) ==================== */
     body.cs-no-scroll { overflow: hidden; }
 
@@ -3177,9 +3306,9 @@
   <!-- TOAST CONTAINER -->
   <div class="toast-container" id="toastContainer"></div>
 
-  <!-- ECOSSISTEMA SECTION -->
-  <section class="authority-section" id="ecossistema">
-    <div class="authority-bg-video">
+  <!-- 7a DOBRA: FOTO + VIDEO SHOPPING -->
+  <section class="dobra7-section" id="dobra-7">
+    <div class="dobra7-bg-video" aria-hidden="true">
       <video autoplay muted loop playsinline webkit-playsinline preload="metadata">
         <source src="video_shopping.mp4" type="video/mp4">
       </video>
@@ -3275,6 +3404,9 @@
           <a href="#lojas" class="authority-cta-btn">Conhecer as Lojas</a>
         </div>
       </div>
+      <figure class="dobra7-photo-wrap">
+        <img src="dobra7-focus-success-mindset.jpg" alt="Focus Discipline Execution Success Mindset" loading="lazy" decoding="async" fetchpriority="low">
+      </figure>
     </div>
   </section>
 
