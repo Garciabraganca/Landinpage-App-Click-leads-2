@@ -1109,17 +1109,23 @@
       .operadores-grid {
         grid-template-columns: repeat(2, 1fr);
         gap: 14px;
+        max-width: 340px;
       }
 
       .operador-item {
-        max-width: 100%;
-        padding: 14px;
+        width: min(100%, 160px);
+        min-height: 102px;
+        padding: 12px;
         border-radius: 16px;
       }
 
+      .logo-box {
+        height: 56px;
+      }
+
       .operador-item img {
-        max-width: 90px;
-        max-height: 90px;
+        max-width: 120px;
+        max-height: 56px;
       }
 
       .infrastructure-grid {
@@ -1261,88 +1267,76 @@
       color: #f1f5f9;
     }
 
-    /* OPERADORES GRID – Glassmorphism Premium */
+    /* OPERADORAS GRID – Compact glass cards with normalized logo weight */
     .operadores-grid {
       display: grid;
-      grid-template-columns: repeat(7, 1fr);
-      gap: 22px;
-      margin-bottom: 40px;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 20px;
+      max-width: 980px;
+      margin: 0 auto 40px;
       justify-items: center;
     }
 
     .operador-item {
       position: relative;
-      width: 100%;
-      aspect-ratio: 1 / 1;
-      max-width: 170px;
-      background: rgba(255, 255, 255, 0.10);
-      border: 1px solid rgba(255, 255, 255, 0.18);
-      border-radius: 20px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-      transition: transform 240ms ease, box-shadow 240ms ease, border-color 240ms ease, background 240ms ease;
+      width: min(100%, 196px);
+      min-height: 120px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      border-radius: 17px;
+      padding: 14px;
       overflow: hidden;
-      -webkit-backdrop-filter: blur(12px) saturate(140%);
-      backdrop-filter: blur(12px) saturate(140%);
-      box-shadow:
-        0 4px 24px rgba(0, 0, 0, 0.18),
-        0 1.5px 6px rgba(0, 0, 0, 0.10),
-        inset 0 1px 0 rgba(255, 255, 255, 0.12);
+      transition: transform 200ms ease, box-shadow 200ms ease, border-color 200ms ease, background-color 200ms ease;
+      -webkit-backdrop-filter: blur(10px) saturate(120%);
+      backdrop-filter: blur(10px) saturate(120%);
+      box-shadow: 0 5px 16px rgba(2, 6, 23, 0.22);
       isolation: isolate;
     }
 
-    /* Specular edge highlight */
     .operador-item::before {
       content: '';
       position: absolute;
-      inset: 0;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 46%;
       border-radius: inherit;
-      padding: 1px;
-      background: linear-gradient(135deg, rgba(255,255,255,0.22) 0%, rgba(255,255,255,0.04) 50%, rgba(255,255,255,0.0) 100%);
-      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-      mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-      -webkit-mask-composite: xor;
-      mask-composite: exclude;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.16) 0%, rgba(255, 255, 255, 0.03) 58%, rgba(255, 255, 255, 0) 100%);
+      opacity: 0.45;
       pointer-events: none;
       z-index: 1;
+      transition: opacity 200ms ease;
     }
 
-    /* Subtle noise overlay for glass realism */
-    .operador-item::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      border-radius: inherit;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
-      background-size: 128px 128px;
-      opacity: 0.5;
-      mix-blend-mode: overlay;
-      pointer-events: none;
+    .logo-box {
+      position: relative;
       z-index: 2;
+      width: 100%;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: transparent;
     }
 
     .operador-item img {
-      position: relative;
-      z-index: 3;
       width: 100%;
       height: 100%;
-      max-width: 110px;
-      max-height: 110px;
       object-fit: contain;
       object-position: center;
-      border-radius: 8px;
+      max-width: 140px;
+      max-height: 64px;
     }
 
     .operador-item:hover {
-      transform: translateY(-3px);
-      border-color: rgba(255, 255, 255, 0.28);
-      background: rgba(255, 255, 255, 0.14);
-      box-shadow:
-        0 8px 32px rgba(0, 0, 0, 0.28),
-        0 2px 8px rgba(0, 0, 0, 0.14),
-        inset 0 1px 0 rgba(255, 255, 255, 0.18);
+      transform: translateY(-2px);
+      border-color: rgba(255, 255, 255, 0.20);
+      background: rgba(255, 255, 255, 0.10);
+      box-shadow: 0 8px 20px rgba(2, 6, 23, 0.26);
+    }
+
+    .operador-item:hover::before {
+      opacity: 0.65;
     }
 
     .operador-item:focus-visible {
@@ -1360,14 +1354,9 @@
       }
     }
 
-    /* Operadoras grid: 4 columns on smaller desktops */
     @media (max-width: 1100px) and (min-width: 769px) {
       .operadores-grid {
-        grid-template-columns: repeat(4, 1fr);
-        gap: 18px;
-      }
-      .operador-item {
-        max-width: 150px;
+        max-width: 860px;
       }
     }
 
@@ -1551,13 +1540,25 @@
       }
 
       .operadores-grid {
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(2, minmax(150px, 1fr));
         gap: 16px;
+        max-width: 360px;
       }
 
       .operador-item {
-        max-width: 150px;
-        padding: 16px;
+        width: min(100%, 166px);
+        min-height: 106px;
+        padding: 12px;
+        border-radius: 16px;
+      }
+
+      .logo-box {
+        height: 56px;
+      }
+
+      .operador-item img {
+        max-width: 120px;
+        max-height: 56px;
       }
 
       .infrastructure-grid {
@@ -3197,25 +3198,39 @@
           <h3 class="block-title">Operadoras Parceiras</h3>
           <div class="operadores-grid">
             <div class="operador-item" tabindex="0">
-              <img src="logo_amil.png" alt="Amil" loading="lazy" decoding="async" fetchpriority="low">
+              <div class="logo-box">
+                <img src="logo_amil.png" alt="Amil" loading="lazy" decoding="async" fetchpriority="low">
+              </div>
             </div>
             <div class="operador-item" tabindex="0">
-              <img src="logo_bradesco.png" alt="Bradesco Saúde" loading="lazy" decoding="async" fetchpriority="low">
+              <div class="logo-box">
+                <img src="logo_bradesco.png" alt="Bradesco Saúde" loading="lazy" decoding="async" fetchpriority="low">
+              </div>
             </div>
             <div class="operador-item" tabindex="0">
-              <img src="logo_sulamerica.png" alt="SulAmérica" loading="lazy" decoding="async" fetchpriority="low">
+              <div class="logo-box">
+                <img src="logo_sulamerica.png" alt="SulAmérica" loading="lazy" decoding="async" fetchpriority="low">
+              </div>
             </div>
             <div class="operador-item" tabindex="0">
-              <img src="logo_hapvida.png" alt="Hapvida" loading="lazy" decoding="async" fetchpriority="low">
+              <div class="logo-box">
+                <img src="logo_hapvida.png" alt="Hapvida" loading="lazy" decoding="async" fetchpriority="low">
+              </div>
             </div>
             <div class="operador-item" tabindex="0">
-              <img src="logo_omint.png" alt="Omint" loading="lazy" decoding="async" fetchpriority="low">
+              <div class="logo-box">
+                <img src="logo_omint.png" alt="Omint" loading="lazy" decoding="async" fetchpriority="low">
+              </div>
             </div>
             <div class="operador-item" tabindex="0">
-              <img src="logo_unimed.png" alt="Unimed" loading="lazy" decoding="async" fetchpriority="low">
+              <div class="logo-box">
+                <img src="logo_unimed.png" alt="Unimed" loading="lazy" decoding="async" fetchpriority="low">
+              </div>
             </div>
             <div class="operador-item" tabindex="0">
-              <img src="logo_alice.png" alt="Alice" loading="lazy" decoding="async" fetchpriority="low">
+              <div class="logo-box">
+                <img src="logo_alice.png" alt="Alice" loading="lazy" decoding="async" fetchpriority="low">
+              </div>
             </div>
           </div>
         </div>
