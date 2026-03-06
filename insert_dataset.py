@@ -83,8 +83,8 @@ dataset_code = '''    // ==================== DATASET DE LOJAS (SINGLE SOURCE OF
       },
       {
         slug: 'assury',
-        nome: 'Assury',
-        imageSrc: 'Fachada Assury.jpeg',
+        nome: 'AS.SURE',
+        imageSrc: 'fachada_assure.jpeg',
         loginUrl: 'https://assury.grupogarciaseguradoras.com.br/login',
         isBoutique: false,
         chips: ['Segurança', 'Compliance', 'Monitoramento'],
