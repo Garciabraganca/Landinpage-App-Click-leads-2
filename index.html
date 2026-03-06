@@ -1994,42 +1994,11 @@
       width: min(1120px, 100%);
       margin: 0 auto;
       display: grid;
-      grid-template-columns: 0.92fr 1.08fr;
       grid-template-areas:
-        "copy action"
-        "copy photo";
-      gap: clamp(28px, 4vw, 56px);
-      align-items: center;
-    }
-
-    .dobra7-copy {
-      grid-area: copy;
-      align-self: center;
-    }
-
-    .dobra7-copy h2 {
-      margin: 0 0 12px;
-      font-size: clamp(1.8rem, 4vw, 3rem);
-      line-height: 1.14;
-      color: #ffffff;
-      text-wrap: balance;
-      max-width: 14ch;
-    }
-
-    .dobra7-copy p {
-      margin: 0;
-      color: #dbe3f0;
-      max-width: 45ch;
-      font-size: clamp(1rem, 1.8vw, 1.12rem);
-    }
-
-    .dobra7-copy .dobra7-eyebrow {
-      margin: 0 0 10px;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      font-size: 0.76rem;
-      color: #fbbf24;
-      font-weight: 700;
+        "action"
+        "photo";
+      gap: 22px;
+      justify-content: end;
     }
 
     .dobra7-action {
@@ -2038,7 +2007,6 @@
       align-self: end;
     }
 
-    .dobra7-copy .dobra7-cta,
     .dobra7-action .dobra7-cta {
       display: inline-flex;
       align-items: center;
@@ -2056,7 +2024,6 @@
       transition: transform 180ms ease, box-shadow 180ms ease, opacity 180ms ease;
     }
 
-    .dobra7-copy .dobra7-cta:hover,
     .dobra7-action .dobra7-cta:hover {
       opacity: 0.98;
       transform: translateY(-1px);
@@ -2091,18 +2058,9 @@
       .dobra7-container {
         grid-template-columns: 1fr;
         grid-template-areas:
-          "copy"
           "action"
           "photo";
-      }
-
-      .dobra7-copy {
-        text-align: center;
-        justify-self: center;
-      }
-
-      .dobra7-copy p {
-        margin: 0 auto;
+        justify-content: center;
       }
 
       .dobra7-action {
@@ -2964,11 +2922,6 @@
     </div>
     <div class="dobra7-overlay" aria-hidden="true"></div>
     <div class="dobra7-container">
-      <div class="dobra7-copy">
-        <p class="dobra7-eyebrow">Dobra 7</p>
-        <h2>Focus, Discipline, Execution.</h2>
-        <p>A foto solicitada foi posicionada na setima dobra da landing, com fundo em video_shopping para manter o impacto visual.</p>
-      </div>
       <div class="dobra7-action">
         <a class="dobra7-cta" href="#lojas">Conhecer as Lojas</a>
       </div>
