@@ -3449,14 +3449,14 @@
     // ==================== MAP DATA STORE SLUG TO CARD IMAGE FILE ====================
     function getCardImageName(dataStoreSlug) {
       const cardImageMap = {
-        'affinity': 'card_affinity.jpeg',
-        'alleman': 'card_alleman.png',
-        'assury': 'card_assure.png',  // Note: repo has card_assure.png
-        'bliss': 'card_bliss.png',
-        'diplan': 'card_diplan_2.png',  // Using card_diplan_2.png as primary
-        'serra': 'card_serra.png',
-        'valorize': 'card_valorize.jpeg',
-        'zentrix': 'card_zentrix.jpeg'
+        'affinity': '/assets/images/card_affinity.jpeg',
+        'alleman': '/assets/images/card_alleman.png',
+        'assury': '/assets/images/card_assure.png',
+        'bliss': '/assets/images/card_bliss.png',
+        'diplan': '/assets/images/card_diplan_2.png',
+        'serra': '/assets/images/card_serra.png',
+        'valorize': '/assets/images/card_valorize.jpeg',
+        'zentrix': '/assets/images/card_zentrix.jpeg'
       };
       return cardImageMap[dataStoreSlug] || null;
     }
