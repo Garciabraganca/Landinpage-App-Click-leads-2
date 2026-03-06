@@ -1795,6 +1795,275 @@
       }
     }
 
+    /* ==================== DOBRA 7: VAGAS LIMITADAS ==================== */
+    .limited-spots-section {
+      position: relative;
+      overflow: hidden;
+      min-height: clamp(560px, 88vh, 760px);
+      padding: 56px 0;
+      color: #fff;
+      isolation: isolate;
+    }
+
+    .limited-spots-bg {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      background: url('ampulheta.jpeg') center center / cover no-repeat;
+      transform: scale(1.01);
+    }
+
+    .limited-spots-overlay {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      background:
+        radial-gradient(circle at 76% 30%, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0) 38%),
+        linear-gradient(115deg, rgba(2, 6, 23, 0.80) 0%, rgba(2, 6, 23, 0.60) 50%, rgba(2, 6, 23, 0.76) 100%);
+    }
+
+    .limited-spots-container {
+      position: relative;
+      z-index: 2;
+      min-height: clamp(560px, 88vh, 760px);
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      padding-top: 20px;
+      padding-bottom: 20px;
+    }
+
+    .limited-spots-card {
+      width: min(620px, 100%);
+      border-radius: 24px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      background: rgba(15, 23, 42, 0.48);
+      -webkit-backdrop-filter: blur(14px) saturate(145%);
+      backdrop-filter: blur(14px) saturate(145%);
+      box-shadow:
+        0 24px 62px rgba(2, 6, 23, 0.42),
+        0 2px 10px rgba(2, 6, 23, 0.24),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+      padding: clamp(24px, 3vw, 36px);
+    }
+
+    .limited-spots-eyebrow {
+      margin: 0 0 12px;
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(226, 232, 240, 0.9);
+      font-weight: 700;
+    }
+
+    .limited-spots-card h2 {
+      margin: 0;
+      font-size: clamp(1.65rem, 3.2vw, 2.45rem);
+      line-height: 1.12;
+      color: #f8fafc;
+      text-wrap: balance;
+    }
+
+    .limited-spots-subheadline {
+      margin: 14px 0 0;
+      font-size: clamp(1rem, 2vw, 1.14rem);
+      line-height: 1.55;
+      color: #e2e8f0;
+    }
+
+    .limited-spots-authority {
+      margin: 14px 0 0;
+      font-size: 0.95rem;
+      line-height: 1.5;
+      color: #cbd5e1;
+      max-width: 54ch;
+    }
+
+    .limited-spots-countdown {
+      margin-top: 24px;
+      border-radius: 18px;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      background: rgba(15, 23, 42, 0.44);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
+      padding: 16px;
+    }
+
+    .limited-spots-countdown-head {
+      margin: 0 0 12px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #fbbf24;
+    }
+
+    .limited-spots-countdown-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .ls-count-part {
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      background: rgba(15, 23, 42, 0.65);
+      padding: 10px 6px;
+      text-align: center;
+    }
+
+    .ls-count-value {
+      display: block;
+      font-variant-numeric: tabular-nums;
+      font-size: clamp(1.3rem, 2.5vw, 1.9rem);
+      line-height: 1;
+      font-weight: 800;
+      color: #f8fafc;
+      transition: transform 0.24s ease, opacity 0.24s ease;
+    }
+
+    .ls-count-value.is-updating {
+      animation: limitedSpotsTick 240ms ease;
+    }
+
+    .ls-count-label {
+      display: block;
+      margin-top: 6px;
+      font-size: 0.68rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: #cbd5e1;
+      font-weight: 600;
+    }
+
+    .limited-spots-countdown-note {
+      margin: 10px 0 0;
+      font-size: 0.78rem;
+      color: rgba(226, 232, 240, 0.88);
+    }
+
+    .limited-spots-countdown-ended {
+      margin: 4px 0 0;
+      border-radius: 12px;
+      padding: 12px 14px;
+      background: rgba(248, 113, 113, 0.16);
+      border: 1px solid rgba(248, 113, 113, 0.35);
+      color: #fee2e2;
+      font-weight: 600;
+      line-height: 1.4;
+    }
+
+    .limited-spots-cta {
+      margin-top: 18px;
+      width: min(100%, 320px);
+      border: 0;
+      border-radius: 999px;
+      padding: 14px 24px;
+      background: linear-gradient(135deg, #f59e0b, #f97316);
+      color: #0f172a;
+      font-size: 1rem;
+      font-weight: 800;
+      cursor: pointer;
+      transition: transform 0.22s ease, box-shadow 0.22s ease, filter 0.22s ease;
+      box-shadow: 0 14px 34px rgba(15, 23, 42, 0.32);
+    }
+
+    .limited-spots-cta:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.4);
+      filter: brightness(1.03);
+    }
+
+    .limited-spots-cta:focus-visible {
+      outline: 2px solid #f8fafc;
+      outline-offset: 3px;
+    }
+
+    .limited-spots-microcopy {
+      margin: 8px 0 0;
+      font-size: 0.8rem;
+      color: #cbd5e1;
+      font-weight: 500;
+    }
+
+    @keyframes limitedSpotsTick {
+      0% {
+        transform: translateY(4px);
+        opacity: 0.72;
+      }
+      100% {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    @media (max-width: 1024px) {
+      .limited-spots-container {
+        justify-content: center;
+      }
+
+      .limited-spots-card {
+        width: min(640px, 100%);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .limited-spots-section {
+        min-height: 620px;
+        padding: 40px 0;
+      }
+
+      .limited-spots-container {
+        min-height: 620px;
+      }
+
+      .limited-spots-card {
+        border-radius: 20px;
+      }
+
+      .limited-spots-countdown-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .limited-spots-cta {
+        width: 100%;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .limited-spots-section {
+        min-height: 580px;
+      }
+
+      .limited-spots-container {
+        min-height: 580px;
+      }
+
+      .limited-spots-card {
+        padding: 22px 16px;
+      }
+
+      .limited-spots-subheadline {
+        font-size: 0.96rem;
+      }
+
+      .limited-spots-authority {
+        font-size: 0.86rem;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .ls-count-value,
+      .ls-count-value.is-updating,
+      .limited-spots-cta {
+        animation: none;
+        transition: none;
+      }
+
+      .limited-spots-cta:hover {
+        transform: none;
+      }
+    }
+
     /* ==================== COMO FUNCIONA SECTION ==================== */
     .como-entrar-section {
       position: relative;
