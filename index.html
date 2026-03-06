@@ -1420,7 +1420,7 @@
     .como-entrar-bg {
       position: absolute;
       inset: 0;
-      background: url('/public/assets/images/como_entrar.png') center center / cover no-repeat;
+      background: url('/public/assets/images/como_entrar.png') 50% 30% / cover no-repeat;
       z-index: 0;
     }
 
@@ -1575,6 +1575,10 @@
     }
 
     @media (max-width: 960px) {
+      .como-entrar-bg {
+        background-position: 58% 28%;
+      }
+
       .como-entrar-container {
         grid-template-columns: 1fr;
         gap: 22px;
@@ -2797,7 +2801,7 @@
 
           <label for="comoEntrarProfileUrl">Link do perfil</label>
           <input type="text" id="comoEntrarProfileUrl" name="profile_url"
-            placeholder="https://www.linkedin.com/in/seu-perfil" autocomplete="url" inputmode="url" required>
+            placeholder="https://www.instagram.com/seuperfil" autocomplete="url" inputmode="url" required>
 
           <p class="como-entrar-form-status" id="comoEntrarFormStatus" role="status" aria-live="polite"></p>
 
