@@ -31,6 +31,19 @@
 
     gtag('config', 'G-H4RPMD8731');
   </script>
+  <script>
+    (function (a, b, c, d) {
+      try {
+        var e = b.head || b.getElementsByTagName("head")[0];
+        var f = b.createElement("script");
+        f.setAttribute("src", c);
+        f.setAttribute("charset", "UTF-8");
+        f.defer = true;
+        a.neuroleadId = d;
+        e.appendChild(f)
+      } catch (g) { }
+    })(window, document, "https://cdn.leadster.com.br/neurolead/neurolead.min.js", "YnVqHSt4zJJiNDbvehaSssyUY")
+  </script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Click Leads – Chega de Correr Atrás de Cliente</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
@@ -1035,7 +1048,7 @@
         font-size: 0.95rem;
       }
 
-      .cta-buttons-grid {
+      .brand-tiles-grid {
         grid-template-columns: 1fr;
         gap: 12px;
       }
@@ -1050,10 +1063,8 @@
       }
 
       /* Footer mobile */
-      footer .footer-inner {
-        flex-direction: column;
-        text-align: center;
-        gap: 12px;
+      footer {
+        padding: 32px 0;
       }
     }
 
@@ -1103,30 +1114,62 @@
       margin-bottom: 24px;
     }
 
-
-
+    /* FOOTER STYLES */
     footer {
-      background: #020617;
-      color: #9ca3af;
-      font-size: 0.78rem;
-      padding: 18px 0 20px;
+      background: #0f172a;
+      color: #cbd5e1;
+      padding: 48px 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
     }
 
-    footer .footer-inner {
+    .footer-wrapper {
       display: flex;
-      flex-wrap: wrap;
+      flex-direction: column;
       align-items: center;
-      justify-content: space-between;
-      gap: 8px;
     }
 
-    footer a {
-      color: #e5e7eb;
-      text-decoration: none;
+    .footer-main {
+      display: flex;
+      justify-content: center;
     }
 
-    footer a:hover {
-      text-decoration: underline;
+    .footer-column {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      text-align: center;
+    }
+
+    .footer-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #f1f5f9;
+      margin: 0;
+    }
+
+    .footer-links {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      font-size: 0.9375rem;
+    }
+
+    .footer-links li {
+      color: #cbd5e1;
+    }
+
+    .footer-address {
+      font-size: 0.875rem;
+      line-height: 1.6;
+      color: #94a3b8;
+    }
+
+    .footer-cnpj {
+      font-size: 0.8125rem;
+      color: #64748b;
     }
 
     @media (max-width: 768px) {
@@ -1640,6 +1683,34 @@
       background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
       padding: 80px 20px;
       color: #fff;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-final-bg-video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+    }
+
+    .cta-final-bg-video video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    .cta-final-bg-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(15, 23, 42, 0.85);
+      z-index: 1;
     }
 
     .cta-final-container {
@@ -1668,69 +1739,169 @@
       margin-right: auto;
     }
 
-    .cta-buttons-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 16px;
+    /* ==================== PREMIUM BRAND TILE BUTTONS SYSTEM ==================== */
+    
+    /* Featured Boutique Card */
+    .brand-tile-featured {
       margin-bottom: 40px;
+      max-width: 680px;
+      margin-left: auto;
+      margin-right: auto;
     }
 
-    .cta-button-item {
+    .brand-tile-featured-btn {
+      display: block;
+      width: 100%;
+      height: 140px;
+      border-radius: 24px;
+      text-decoration: none;
+      cursor: not-allowed;
+      border: 1.5px solid rgba(251, 191, 36, 0.6);
+      background: #000;
+      box-shadow: 0 24px 50px rgba(0, 0, 0, 0.40), inset 0 1px 0 rgba(251, 191, 36, 0.15);
+      transition: transform 220ms ease, box-shadow 220ms ease, border-color 220ms ease;
       position: relative;
+      overflow: hidden;
     }
 
-    .cta-button-item.boutique {
-      grid-column: 1 / -1;
-      max-width: 200px;
-      margin: 0 auto;
-    }
-
-    .cta-button-item.boutique::before {
-      content: 'BOUTIQUE';
+    .brand-tile-featured-btn img {
       position: absolute;
-      top: -12px;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+    }
+
+    .brand-tile-featured-btn img.brand-tile-diplan-logo {
+      object-position: 43.8% 51.8%;
+    }
+
+    .brand-tile-featured-btn::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.1) 100%);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .brand-tile-featured-btn:hover {
+      transform: translateY(-2px);
+      border-color: rgba(251, 191, 36, 0.8);
+      box-shadow: 0 28px 60px rgba(251, 191, 36, 0.20), inset 0 1px 0 rgba(251, 191, 36, 0.25);
+    }
+
+    .brand-tile-featured-btn:hover::before {
+      background: linear-gradient(180deg, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.05) 100%);
+    }
+
+    .brand-tile-featured-content {
+      position: absolute;
+      top: 12px;
       left: 50%;
       transform: translateX(-50%);
-      background: linear-gradient(135deg, #f59e0b, #d97706);
-      color: #000;
-      font-size: 0.7rem;
-      font-weight: 700;
-      padding: 4px 10px;
-      border-radius: 999px;
-      letter-spacing: 0.5px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      z-index: 2;
     }
 
-    .cta-btn {
-      display: inline-block;
-      padding: 12px 24px;
-      border-radius: 8px;
+    .brand-tile-featured-badge {
+      font-size: 0.7rem;
+      font-weight: 900;
+      color: #fbbf24;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      background: rgba(0, 0, 0, 0.6);
+      padding: 4px 12px;
+      border-radius: 12px;
+      backdrop-filter: blur(4px);
+    }
+
+    .brand-tile-featured-text {
+      font-size: 0.75rem;
+      color: #e5e7eb;
       font-weight: 600;
+      letter-spacing: 0.4px;
+      background: rgba(0, 0, 0, 0.6);
+      padding: 3px 10px;
+      border-radius: 10px;
+      backdrop-filter: blur(4px);
+    }
+
+    /* Store Buttons Grid */
+    .brand-tiles-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 20px;
+      margin-bottom: 48px;
+      max-width: 1200px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* Individual Brand Tile Button - Full Bleed Design */
+    .brand-tile-btn {
+      display: block;
+      width: 100%;
+      height: 100px;
+      border-radius: 20px;
       text-decoration: none;
       cursor: pointer;
-      border: none;
-      text-align: center;
-      transition: all 0.2s ease;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: #000;
+      box-shadow: 0 18px 45px rgba(0, 0, 0, 0.35);
+      transition: transform 200ms ease, box-shadow 200ms ease, border-color 200ms ease, filter 200ms ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .brand-tile-btn img {
+      position: absolute;
+      top: 0;
+      left: 0;
       width: 100%;
-      font-size: 0.95rem;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
     }
 
-    .cta-btn-primary {
-      background: linear-gradient(to right, #f59e0b, #f97316);
-      color: #111827;
-      box-shadow: 0 4px 12px rgba(249, 115, 22, 0.3);
+    /* Sutil overlay para legibilidade premium */
+    .brand-tile-btn::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(0, 0, 0, 0.15) 0%, rgba(0, 0, 0, 0.05) 100%);
+      pointer-events: none;
+      transition: opacity 200ms ease;
+      opacity: 1;
     }
 
-    .cta-btn-primary:hover {
+    .brand-tile-btn:hover {
       transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(249, 115, 22, 0.5);
+      border-color: rgba(255, 255, 255, 0.18);
+      box-shadow: 0 24px 55px rgba(0, 0, 0, 0.45);
       filter: brightness(1.05);
     }
 
-    .cta-btn-disabled {
-      background: rgba(100, 116, 139, 0.3);
-      color: #94a3b8;
-      cursor: not-allowed;
-      border: 1px solid rgba(148, 163, 184, 0.3);
+    .brand-tile-btn:hover::after {
+      opacity: 0.7;
+    }
+
+    .brand-tile-btn:active {
+      transform: translateY(0);
+      box-shadow: 0 14px 35px rgba(0, 0, 0, 0.30);
+    }
+
+    .brand-tile-btn:focus-visible {
+      outline: 2px solid #f97316;
+      outline-offset: 2px;
+      border-color: rgba(249, 115, 22, 0.6);
     }
 
     .cta-main-btn {
@@ -1755,8 +1926,156 @@
     }
 
     @media (max-width: 768px) {
-      .cta-buttons-grid {
+      .brand-tile-featured {
+        margin-bottom: 24px;
+        max-width: 100%;
+      }
+
+      .brand-tile-featured-btn {
+        height: 110px;
+        border-radius: 20px;
+      }
+
+      .brand-tile-featured-badge {
+        font-size: 0.6rem;
+      }
+
+      .brand-tile-featured-text {
+        font-size: 0.68rem;
+      }
+
+      .brand-tiles-grid {
         grid-template-columns: 1fr;
+        gap: 16px;
+        margin-bottom: 40px;
+      }
+
+      .brand-tile-btn {
+        height: 80px;
+      }
+    }
+
+    /* ==================== DOBRA 7 (FOTO + VIDEO SHOPPING) ==================== */
+    .dobra7-section {
+      position: relative;
+      min-height: clamp(520px, 74vh, 840px);
+      overflow: hidden;
+      color: #f8fafc;
+      isolation: isolate;
+      display: flex;
+      align-items: center;
+      padding: 84px 20px;
+      background: #0f172a;
+    }
+
+    .dobra7-bg-video {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+    }
+
+    .dobra7-bg-video video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    .dobra7-overlay {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      background: linear-gradient(102deg, rgba(2, 6, 23, 0.82) 0%, rgba(2, 6, 23, 0.62) 44%, rgba(2, 6, 23, 0.34) 72%, rgba(2, 6, 23, 0.62) 100%);
+    }
+
+    .dobra7-container {
+      position: relative;
+      z-index: 2;
+      width: min(1120px, 100%);
+      margin: 0 auto;
+      display: grid;
+      grid-template-areas:
+        "action"
+        "photo";
+      gap: 22px;
+      justify-content: end;
+    }
+
+    .dobra7-action {
+      grid-area: action;
+      justify-self: start;
+      align-self: end;
+    }
+
+    .dobra7-action .dobra7-cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 76px;
+      padding: 0 32px;
+      color: #ffffff;
+      text-decoration: none;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      border-radius: 14px;
+      background: linear-gradient(180deg, #fb7b18 0%, #f97316 100%);
+      box-shadow: 0 18px 36px rgba(249, 115, 22, 0.28);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      transition: transform 180ms ease, box-shadow 180ms ease, opacity 180ms ease;
+    }
+
+    .dobra7-action .dobra7-cta:hover {
+      opacity: 0.98;
+      transform: translateY(-1px);
+      box-shadow: 0 22px 42px rgba(249, 115, 22, 0.34);
+    }
+
+    .dobra7-photo-wrap {
+      grid-area: photo;
+      margin: 0;
+      width: 100%;
+      border-radius: 18px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      box-shadow: 0 22px 52px rgba(0, 0, 0, 0.42);
+      max-width: 620px;
+      justify-self: end;
+      background: rgba(2, 6, 23, 0.42);
+    }
+
+    .dobra7-photo-wrap img {
+      width: 100%;
+      height: auto;
+      display: block;
+      object-fit: cover;
+    }
+
+    @media (max-width: 900px) {
+      .dobra7-section {
+        padding: 62px 16px;
+      }
+
+      .dobra7-container {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+          "action"
+          "photo";
+        justify-content: center;
+      }
+
+      .dobra7-action {
+        justify-self: center;
+        align-self: start;
+      }
+
+      .dobra7-action .dobra7-cta {
+        min-height: 64px;
+        padding: 0 28px;
+      }
+
+      .dobra7-photo-wrap {
+        justify-self: center;
+        max-width: 560px;
       }
     }
 
@@ -1775,6 +2094,32 @@
       color: #fff;
       position: relative;
       overflow: hidden;
+    }
+
+    .cs-bg-video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+    }
+
+    .cs-bg-video video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    .cs-bg-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(13, 17, 23, 0.85);
+      z-index: 1;
     }
 
     .campaign-showcase::before {
@@ -1849,6 +2194,44 @@
       letter-spacing: 0.3px;
     }
 
+    .cs-badge-btn {
+      appearance: none;
+      cursor: pointer;
+      transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+      font-family: inherit;
+    }
+
+    .cs-badge-btn:hover {
+      background: rgba(251,191,36,0.16);
+      border-color: rgba(251,191,36,0.45);
+      color: #fde68a;
+      transform: translateY(-1px);
+    }
+
+    .cs-badge-btn.is-active {
+      background: linear-gradient(135deg, rgba(245,158,11,0.30), rgba(249,115,22,0.24));
+      border-color: rgba(251,191,36,0.62);
+      color: #fffbeb;
+    }
+
+    .cs-incentive-message {
+      margin: 0 0 18px;
+      padding: 12px 14px;
+      border-left: 3px solid rgba(251,191,36,0.75);
+      border-radius: 0 10px 10px 0;
+      background: rgba(15, 23, 42, 0.48);
+      color: #e2e8f0;
+      font-size: 0.94rem;
+      line-height: 1.5;
+    }
+
+    .cs-cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+    }
+
     .cs-cta {
       display: inline-flex;
       align-items: center;
@@ -1867,6 +2250,16 @@
     .cs-cta:hover {
       background: rgba(251,191,36,0.1);
       border-color: rgba(251,191,36,0.5);
+    }
+
+    .cs-cta-secondary {
+      color: #e2e8f0;
+      border-color: rgba(148,163,184,0.4);
+    }
+
+    .cs-cta-secondary:hover {
+      background: rgba(148,163,184,0.12);
+      border-color: rgba(148,163,184,0.65);
     }
 
     .cs-grid {
@@ -2102,6 +2495,19 @@
         font-size: 0.92rem;
       }
 
+      .cs-incentive-message {
+        font-size: 0.88rem;
+      }
+
+      .cs-cta-row {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .cs-cta {
+        justify-content: center;
+      }
+
       .cs-grid {
         display: flex;
         overflow-x: auto;
@@ -2227,7 +2633,7 @@
     <div class="lojas-grid">
       <!-- ZENTRIX -->
       <div class="loja-card" data-store="zentrix">
-        <img src="Fachada Zentrix.png" alt="Zentrix">
+        <img src="Fachada Zentrix.png" alt="Zentrix" loading="lazy" decoding="async" fetchpriority="low">
         <div class="loja-card-content">
           <h2>Zentrix</h2>
           <h3>Plataforma de Gestão Empresarial</h3>
@@ -2237,7 +2643,7 @@
 
       <!-- SERRA -->
       <div class="loja-card" data-store="serra">
-        <img src="Fachada serra.png" alt="Serra">
+        <img src="Fachada serra.png" alt="Serra" loading="lazy" decoding="async" fetchpriority="low">
         <div class="loja-card-content">
           <h2>Serra</h2>
           <h3>Consultoria Estratégica</h3>
@@ -2247,7 +2653,7 @@
 
       <!-- BLISS -->
       <div class="loja-card" data-store="bliss">
-        <img src="Fachada Bliss.jpeg" alt="Bliss">
+        <img src="Fachada Bliss.jpeg" alt="Bliss" loading="lazy" decoding="async" fetchpriority="low">
         <div class="loja-card-content">
           <h2>Bliss</h2>
           <h3>Gestão Integrada</h3>
@@ -2257,7 +2663,7 @@
 
       <!-- ALLEMAN -->
       <div class="loja-card" data-store="alleman">
-        <img src="Fachada Alleman.jpeg" alt="Alleman">
+        <img src="Fachada Alleman.jpeg" alt="Alleman" loading="lazy" decoding="async" fetchpriority="low">
         <div class="loja-card-content">
           <h2>Alleman</h2>
           <h3>Consultoria Estratégica</h3>
@@ -2267,7 +2673,7 @@
 
       <!-- AFFINITY -->
       <div class="loja-card" data-store="affinity">
-        <img src="Fachada Affinity.jpeg" alt="Affinity">
+        <img src="Fachada Affinity.jpeg" alt="Affinity" loading="lazy" decoding="async" fetchpriority="low">
         <div class="loja-card-content">
           <h2>Affinity</h2>
           <h3>Rede de Profissionais</h3>
@@ -2277,7 +2683,7 @@
 
       <!-- VALORIZE -->
       <div class="loja-card" data-store="valorize">
-        <img src="Fachada Valorize.jpeg" alt="Valorize">
+        <img src="Fachada Valorize.jpeg" alt="Valorize" loading="lazy" decoding="async" fetchpriority="low">
         <div class="loja-card-content">
           <h2>Valorize</h2>
           <h3>Programa de Reconhecimento</h3>
@@ -2287,7 +2693,7 @@
 
       <!-- ASSURY -->
       <div class="loja-card" data-store="assury">
-        <img src="fachada-assury.jpeg" alt="Assury">
+        <img src="fachada-assury.jpeg" alt="Assury" loading="lazy" decoding="async" fetchpriority="low">
         <div class="loja-card-content">
           <h2>Assury</h2>
           <h3>Segurança e Compliance</h3>
@@ -2297,7 +2703,7 @@
 
       <!-- DIPLAN -->
       <div class="loja-card" data-store="diplan">
-        <img src="Fachada Diplan.png" alt="Diplan">
+        <img src="Fachada Diplan.png" alt="Diplan" loading="lazy" decoding="async" fetchpriority="low">
         <div class="loja-card-content">
           <span class="loja-card-badge">Boutique</span>
           <h2>Diplan</h2>
@@ -2370,19 +2776,29 @@
 
   <!-- VITRINE DE PROPAGANDAS (5ª DOBRA) -->
   <section class="campaign-showcase" id="campaign-showcase">
-    <div class="cs-container">
+    <div class="cs-bg-video">
+      <video autoplay muted loop playsinline webkit-playsinline preload="metadata">
+        <source src="video_shopping.mp4" type="video/mp4">
+      </video>
+    </div>
+    <div class="cs-bg-overlay"></div>
+    <div class="cs-container" style="position: relative; z-index: 2;">
       <div class="cs-layout">
         <div class="cs-text">
-          <p class="cs-eyebrow">Campanhas reais</p>
-          <h2 class="cs-headline">Vitrine de propagandas</h2>
-          <p class="cs-sub">Criativos reais (foto e vídeo) que mostram o padrão visual das operações do Shopping das Plataformas.</p>
+          <p class="cs-eyebrow">Campanhas de incentivo ao corretor</p>
+          <h2 class="cs-headline">Venda mais. Pontue. Viaje.</h2>
+          <p class="cs-sub">Este espaço mostra campanhas ativas de viagens e premiações para corretores que batem meta com consistência.</p>
           <div class="cs-badges">
-            <span class="cs-badge">Criativos reais</span>
-            <span class="cs-badge">Performance</span>
-            <span class="cs-badge">Captação</span>
-            <span class="cs-badge">Estrutura comercial</span>
+            <button type="button" class="cs-badge cs-badge-btn is-active" data-cs-message="Campanhas mensais com ranking ativo: quem performa melhor acelera para experiências e viagens exclusivas.">Viagens por meta</button>
+            <button type="button" class="cs-badge cs-badge-btn" data-cs-message="Premiações progressivas por volume e qualidade: cada venda validada aumenta sua pontuação na campanha.">Premiação progressiva</button>
+            <button type="button" class="cs-badge cs-badge-btn" data-cs-message="Mecânica transparente para o corretor: meta clara, pontuação visível e recompensa definida antes da campanha começar.">Pontuação transparente</button>
+            <button type="button" class="cs-badge cs-badge-btn" data-cs-message="Além da comissão, você concorre a bônus extras para manter ritmo forte durante toda a campanha.">Bônus de consistência</button>
           </div>
-          <a href="#lojas" class="cs-cta">Conhecer as lojas &rarr;</a>
+          <p class="cs-incentive-message" id="csIncentiveMessage">Campanhas mensais com ranking ativo: quem performa melhor acelera para experiências e viagens exclusivas.</p>
+          <div class="cs-cta-row">
+            <a href="#como-entrar" class="cs-cta">Quero participar das campanhas &rarr;</a>
+            <a href="#lojas" class="cs-cta cs-cta-secondary">Ver lojas participantes</a>
+          </div>
         </div>
         <div class="cs-grid-wrap">
           <div class="cs-grid">
@@ -2440,28 +2856,20 @@
 
   <!-- CTA FINAL -->
   <section class="cta-final-section" id="entrar">
-    <div class="cta-final-container">
+    <div class="cta-final-bg-video">
+      <video autoplay muted loop playsinline webkit-playsinline preload="metadata">
+        <source src="video_shopping.mp4" type="video/mp4">
+      </video>
+    </div>
+    <div class="cta-final-bg-overlay"></div>
+    <div class="cta-final-container" style="position: relative; z-index: 2;">
       <div class="cta-final-header">
         <h2>Pronto para escolher sua loja?</h2>
         <p>Entre agora e comece a atuar com uma estrutura organizada.</p>
       </div>
-      <div class="cta-buttons-grid" id="ctaButtonsGrid"></div>
+      <div class="brand-tiles-grid" id="ctaButtonsGrid"></div>
       <a href="#lojas" class="cta-main-btn">Ver lojas</a>
     </div>
-  </section>
-
-  <section class="section-diplan-ceo">
-    <img
-      src="/images/diplan-ceo-desktop.jpg"
-      class="ceo-desktop"
-      alt="CEO da Diplan"
-    />
-
-    <img
-      src="/images/diplan-ceo-mobile.jpg"
-      class="ceo-mobile"
-      alt="CEO da Diplan"
-    />
   </section>
 
 
@@ -2506,19 +2914,55 @@
   <!-- TOAST CONTAINER -->
   <div class="toast-container" id="toastContainer"></div>
 
+  <!-- 7a DOBRA: FOTO + VIDEO SHOPPING -->
+  <section class="dobra7-section" id="dobra-7">
+    <div class="dobra7-bg-video" aria-hidden="true">
+      <video autoplay muted loop playsinline webkit-playsinline preload="metadata">
+        <source src="video_shopping.mp4" type="video/mp4">
+      </video>
+    </div>
+    <div class="dobra7-overlay" aria-hidden="true"></div>
+    <div class="dobra7-container">
+      <div class="dobra7-action">
+        <a class="dobra7-cta" href="#lojas">Conhecer as Lojas</a>
+      </div>
+      <figure class="dobra7-photo-wrap">
+        <img src="dobra7-focus-success-mindset.jpg" alt="Focus Discipline Execution Success Mindset" loading="lazy" decoding="async" fetchpriority="low">
+      </figure>
+    </div>
+  </section>
+
   <!-- RODAPÉ -->
-  <footer class="footer">
-    <div class="container footer-inner">
+  <section class="section-diplan-ceo">
+    <img
+      src="/images/diplan-ceo-desktop.jpg"
+      class="ceo-desktop"
+      alt="CEO da Diplan"
+    />
+
+    <img
+      src="/images/diplan-ceo-mobile.jpg"
+      class="ceo-mobile"
+      alt="CEO da Diplan"
+    />
+  </section>
+
+  <footer>
+    <div class="container footer-wrapper">
       <img
         src="/images/logo-grupo-garcia.png"
         class="grupo-garcia-logo"
         alt="Logo Grupo Garcia"
       />
-      <div>Copyright &copy; Grupo Garcia – Click Leads.</div>
-      <div>
-        <a href="#">Termos de Uso</a> ·
-        <a href="#">Política de Privacidade</a> ·
-        <a href="#">Contato de Suporte</a>
+      <div class="footer-main">
+        <div class="footer-column">
+          <h4 class="footer-title">Grupo Garcia</h4>
+          <ul class="footer-links">
+            <li>Click Leads</li>
+            <li class="footer-address">Avenida José Herculano<br>Caraguatatuba — SP<br>11666-000 • Brasil</li>
+            <li class="footer-cnpj">CNPJ: 53.050.940/0001-01</li>
+          </ul>
+        </div>
       </div>
     </div>
   </footer>
@@ -2848,30 +3292,55 @@
       // ==================== RENDERIZAR CTA FINAL ====================
       const ctaButtonsGrid = document.getElementById('ctaButtonsGrid');
       if (ctaButtonsGrid && typeof STORES !== 'undefined') {
-        STORES.forEach(store => {
-          const buttonDiv = document.createElement('div');
-          buttonDiv.className = `cta-button-item ${store.isBoutique ? 'boutique' : ''}`;
+        // Mapa de slugs para nomes de logos de botões
+        const logoMap = {
+          'affinity': 'affinity',
+          'alleman': 'alleman',
+          'assury': 'assure',  // Logo file is named with 'assure' not 'assury'
+          'bliss': 'bliss',
+          'diplan': 'diplan',
+          'serra': 'serra',
+          'valorize': 'valorize',
+          'zentrix': 'zentrix'
+        };
 
-          if (store.isBoutique) {
-            buttonDiv.innerHTML = `
-              <button class="cta-btn cta-btn-disabled" disabled>
-                Acesso sob convite
-              </button>
-            `;
-          } else {
-            buttonDiv.innerHTML = `
-              <a href="${store.loginUrl}" target="_blank" rel="noopener noreferrer" class="cta-btn cta-btn-primary">
-                Entrar em ${store.nome}
-              </a>
-            `;
-          }
+        // Renderizar Diplan featured primeiro (separado do grid) - Full Bleed
+        const diplanStore = STORES.find(store => store.slug === 'diplan');
+        if (diplanStore) {
+          const featuredCard = document.createElement('div');
+          featuredCard.className = 'brand-tile-featured';
+          const logoName = logoMap[diplanStore.slug] || diplanStore.slug;
+          
+          featuredCard.innerHTML = `
+            <button class="brand-tile-featured-btn" disabled aria-label="Entrar em ${diplanStore.nome} (Acesso sob convite)">
+              <img src="./logo_botao_${logoName}.png" alt="${diplanStore.nome}" class="brand-tile-diplan-logo" loading="lazy" decoding="async" fetchpriority="low" />
+            </button>
+          `;
+          
+          ctaButtonsGrid.parentElement.insertBefore(featuredCard, ctaButtonsGrid);
+        }
+
+        // Renderizar outras lojas no grid (exceto Diplan) - Full Bleed
+        STORES.filter(store => !store.isBoutique).forEach(store => {
+          const buttonDiv = document.createElement('a');
+          buttonDiv.href = store.loginUrl;
+          buttonDiv.target = '_blank';
+          buttonDiv.rel = 'noopener noreferrer';
+          buttonDiv.className = 'brand-tile-btn';
+          buttonDiv.setAttribute('aria-label', `Entrar em ${store.nome}`);
+          
+          const logoName = logoMap[store.slug] || store.slug;
+
+          buttonDiv.innerHTML = `
+            <img src="./logo_botao_${logoName}.png" alt="${store.nome}" loading="lazy" decoding="async" fetchpriority="low" />
+          `;
 
           ctaButtonsGrid.appendChild(buttonDiv);
         });
       }
 
       // Meta Pixel Lead event - dispara quando usuário clica nos botões CTA das lojas
-      const ctaButtons = document.querySelectorAll('.loja-card-cta-primary, .cta-btn-primary, .enter-btn');
+      const ctaButtons = document.querySelectorAll('.loja-card-cta-primary, .cta-btn-primary, .brand-tile-btn, .enter-btn');
       ctaButtons.forEach(function (button) {
         button.addEventListener('click', function () {
           if (typeof fbq !== 'undefined') {
@@ -2903,6 +3372,8 @@
         const img = document.createElement('img');
         img.className = 'platform-card__img';
         img.setAttribute('loading', 'lazy');
+        img.setAttribute('decoding', 'async');
+        img.setAttribute('fetchpriority', 'low');
         img.setAttribute('alt', `${store.nome} - Loja`);
 
         // Use card images from repo root (card_*.jpeg, card_*.png, card_*.webp)
@@ -3339,9 +3810,30 @@
     (function initCampaignShowcase() {
       var csCards = document.querySelectorAll('.cs-card');
       var csGrid = document.querySelector('.cs-grid');
+      var csBadgeButtons = document.querySelectorAll('.cs-badge-btn[data-cs-message]');
+      var csIncentiveMessage = document.getElementById('csIncentiveMessage');
       var csMobileQuery = window.matchMedia('(max-width: 768px)');
       var csAutoRotateInterval = null;
       var csResumeTimeout = null;
+
+      function initIncentiveBadges() {
+        if (!csBadgeButtons.length || !csIncentiveMessage) return;
+
+        csBadgeButtons.forEach(function(btn) {
+          btn.setAttribute('aria-pressed', btn.classList.contains('is-active') ? 'true' : 'false');
+
+          btn.addEventListener('click', function() {
+            csBadgeButtons.forEach(function(otherBtn) {
+              otherBtn.classList.remove('is-active');
+              otherBtn.setAttribute('aria-pressed', 'false');
+            });
+
+            btn.classList.add('is-active');
+            btn.setAttribute('aria-pressed', 'true');
+            csIncentiveMessage.textContent = btn.getAttribute('data-cs-message') || '';
+          });
+        });
+      }
 
       function normalizeCardVideos() {
         csCards.forEach(function(card) {
@@ -3451,6 +3943,7 @@
       }
 
       normalizeCardVideos();
+      initIncentiveBadges();
 
       // Entrance animation
       if ('IntersectionObserver' in window) {
