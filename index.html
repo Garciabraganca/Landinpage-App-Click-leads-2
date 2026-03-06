@@ -1087,82 +1087,6 @@
       .modal-content {
         padding: 24px 16px 28px;
       }
-
-      /* Authority section mobile */
-      .authority-section {
-        padding: 40px 0;
-      }
-
-      .authority-header h2 {
-        font-size: 1.35rem;
-      }
-
-      .authority-header p {
-        font-size: 1rem;
-      }
-
-      .block-title {
-        font-size: 1.25rem;
-        margin-bottom: 24px;
-      }
-
-      .operadores-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 14px;
-      }
-
-      .operador-item {
-        max-width: 100%;
-        padding: 14px;
-        border-radius: 16px;
-      }
-
-      .operador-item img {
-        max-width: 90px;
-        max-height: 90px;
-      }
-
-      .infrastructure-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .infra-card {
-        padding: 20px 16px;
-      }
-
-      .infra-icon {
-        font-size: 2rem;
-      }
-
-      .infra-card h4 {
-        font-size: 1rem;
-      }
-
-      .infra-card p {
-        font-size: 0.875rem;
-      }
-
-      .social-proof-grid {
-        grid-template-columns: 1fr;
-        gap: 16px;
-      }
-
-      .proof-metric {
-        padding: 24px 16px;
-      }
-
-      .metric-number {
-        font-size: 2rem;
-      }
-
-      .metric-label {
-        font-size: 0.875rem;
-      }
-
-      .authority-cta-btn {
-        padding: 14px 32px;
-        font-size: 0.95rem;
-      }
     }
 
     /* Safe area para dispositivos com notch */
@@ -1188,281 +1112,6 @@
       text-align: center;
       font-size: 1.5rem;
       margin-bottom: 24px;
-    }
-
-    /* AUTHORITY SECTION */
-    .authority-section {
-      position: relative;
-      padding: 80px 0;
-      overflow: hidden;
-      background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-      color: white;
-    }
-
-    .authority-bg-video {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 1;
-    }
-
-    .authority-bg-video video {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center;
-    }
-
-    .authority-overlay {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(15, 23, 42, 0.85);
-      z-index: 2;
-    }
-
-    .authority-content {
-      position: relative;
-      z-index: 3;
-    }
-
-    .authority-header {
-      text-align: center;
-      margin-bottom: 64px;
-    }
-
-    .authority-header h2 {
-      font-size: clamp(1.75rem, 4vw, 2.5rem);
-      margin-bottom: 16px;
-      font-weight: 700;
-      color: #ffffff;
-    }
-
-    .authority-header p {
-      font-size: 1.125rem;
-      color: #cbd5e1;
-      max-width: 600px;
-      margin: 0 auto;
-    }
-
-    .authority-section-block {
-      margin-bottom: 72px;
-    }
-
-    .block-title {
-      font-size: 1.75rem;
-      font-weight: 600;
-      margin-bottom: 40px;
-      text-align: center;
-      color: #f1f5f9;
-    }
-
-    /* OPERADORES GRID – Glassmorphism Premium */
-    .operadores-grid {
-      display: grid;
-      grid-template-columns: repeat(7, 1fr);
-      gap: 22px;
-      margin-bottom: 40px;
-      justify-items: center;
-    }
-
-    .operador-item {
-      position: relative;
-      width: 100%;
-      aspect-ratio: 1 / 1;
-      max-width: 170px;
-      background: rgba(255, 255, 255, 0.10);
-      border: 1px solid rgba(255, 255, 255, 0.18);
-      border-radius: 20px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-      transition: transform 240ms ease, box-shadow 240ms ease, border-color 240ms ease, background 240ms ease;
-      overflow: hidden;
-      -webkit-backdrop-filter: blur(12px) saturate(140%);
-      backdrop-filter: blur(12px) saturate(140%);
-      box-shadow:
-        0 4px 24px rgba(0, 0, 0, 0.18),
-        0 1.5px 6px rgba(0, 0, 0, 0.10),
-        inset 0 1px 0 rgba(255, 255, 255, 0.12);
-      isolation: isolate;
-    }
-
-    /* Specular edge highlight */
-    .operador-item::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      border-radius: inherit;
-      padding: 1px;
-      background: linear-gradient(135deg, rgba(255,255,255,0.22) 0%, rgba(255,255,255,0.04) 50%, rgba(255,255,255,0.0) 100%);
-      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-      mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-      -webkit-mask-composite: xor;
-      mask-composite: exclude;
-      pointer-events: none;
-      z-index: 1;
-    }
-
-    /* Subtle noise overlay for glass realism */
-    .operador-item::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      border-radius: inherit;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
-      background-size: 128px 128px;
-      opacity: 0.5;
-      mix-blend-mode: overlay;
-      pointer-events: none;
-      z-index: 2;
-    }
-
-    .operador-item img {
-      position: relative;
-      z-index: 3;
-      width: 100%;
-      height: 100%;
-      max-width: 110px;
-      max-height: 110px;
-      object-fit: contain;
-      object-position: center;
-      border-radius: 8px;
-    }
-
-    .operador-item:hover {
-      transform: translateY(-3px);
-      border-color: rgba(255, 255, 255, 0.28);
-      background: rgba(255, 255, 255, 0.14);
-      box-shadow:
-        0 8px 32px rgba(0, 0, 0, 0.28),
-        0 2px 8px rgba(0, 0, 0, 0.14),
-        inset 0 1px 0 rgba(255, 255, 255, 0.18);
-    }
-
-    .operador-item:focus-visible {
-      outline: 2px solid #f97316;
-      outline-offset: 3px;
-    }
-
-    /* Reduced motion preference */
-    @media (prefers-reduced-motion: reduce) {
-      .operador-item {
-        transition: none;
-      }
-      .operador-item:hover {
-        transform: none;
-      }
-    }
-
-    /* Operadoras grid: 4 columns on smaller desktops */
-    @media (max-width: 1100px) and (min-width: 769px) {
-      .operadores-grid {
-        grid-template-columns: repeat(4, 1fr);
-        gap: 18px;
-      }
-      .operador-item {
-        max-width: 150px;
-      }
-    }
-
-    /* INFRASTRUCTURE GRID */
-    .infrastructure-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 24px;
-    }
-
-    .infra-card {
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 12px;
-      padding: 32px 24px;
-      text-align: center;
-      transition: all 0.3s ease;
-    }
-
-    .infra-card:hover {
-      background: rgba(255, 255, 255, 0.08);
-      border-color: rgba(255, 255, 255, 0.2);
-      transform: translateY(-6px);
-    }
-
-    .infra-icon {
-      font-size: 2.5rem;
-      margin-bottom: 16px;
-    }
-
-    .infra-card h4 {
-      font-size: 1.125rem;
-      font-weight: 600;
-      color: #f1f5f9;
-      margin-bottom: 12px;
-    }
-
-    .infra-card p {
-      font-size: 0.9375rem;
-      color: #cbd5e1;
-      line-height: 1.6;
-    }
-
-    /* SOCIAL PROOF GRID */
-    .social-proof-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 32px;
-    }
-
-    .proof-metric {
-      text-align: center;
-      padding: 32px 24px;
-      background: rgba(255, 255, 255, 0.03);
-      border-radius: 12px;
-      border: 1px solid rgba(255, 255, 255, 0.1);
-    }
-
-    .metric-number {
-      font-size: 2.5rem;
-      font-weight: 700;
-      color: #f97316;
-      margin-bottom: 8px;
-    }
-
-    .metric-label {
-      font-size: 0.9375rem;
-      color: #cbd5e1;
-      font-weight: 500;
-    }
-
-    /* AUTHORITY CTA */
-    .authority-cta {
-      text-align: center;
-      margin-top: 64px;
-    }
-
-    .authority-cta-btn {
-      display: inline-block;
-      padding: 16px 48px;
-      background: #f97316;
-      color: white;
-      text-decoration: none;
-      border-radius: 8px;
-      font-weight: 600;
-      font-size: 1rem;
-      transition: all 0.3s ease;
-      border: 2px solid #f97316;
-    }
-
-    .authority-cta-btn:hover {
-      background: #ea580c;
-      border-color: #ea580c;
-      transform: translateY(-2px);
-      box-shadow: 0 12px 24px rgba(249, 115, 22, 0.3);
     }
 
     /* FOOTER STYLES */
@@ -1530,43 +1179,6 @@
 
       .cta-button-item.boutique {
         max-width: 100%;
-      }
-
-      /* Authority section tablet */
-      .authority-section {
-        padding: 60px 0;
-      }
-
-      .authority-header {
-        margin-bottom: 48px;
-      }
-
-      .authority-header h2 {
-        font-size: 1.75rem;
-      }
-
-      .block-title {
-        font-size: 1.5rem;
-        margin-bottom: 32px;
-      }
-
-      .operadores-grid {
-        grid-template-columns: repeat(3, 1fr);
-        gap: 16px;
-      }
-
-      .operador-item {
-        max-width: 150px;
-        padding: 16px;
-      }
-
-      .infrastructure-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .social-proof-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 24px;
       }
     }
 
@@ -2383,8 +1995,16 @@
       margin: 0 auto;
       display: grid;
       grid-template-columns: 0.92fr 1.08fr;
+      grid-template-areas:
+        "copy action"
+        "copy photo";
       gap: clamp(28px, 4vw, 56px);
       align-items: center;
+    }
+
+    .dobra7-copy {
+      grid-area: copy;
+      align-self: center;
     }
 
     .dobra7-copy h2 {
@@ -2412,24 +2032,39 @@
       font-weight: 700;
     }
 
-    .dobra7-copy .dobra7-cta {
-      display: inline-flex;
-      margin-top: 18px;
-      color: #ffffff;
-      text-decoration: none;
-      font-weight: 600;
-      letter-spacing: 0.02em;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.65);
-      padding-bottom: 2px;
-      transition: opacity 180ms ease, border-color 180ms ease;
+    .dobra7-action {
+      grid-area: action;
+      justify-self: start;
+      align-self: end;
     }
 
-    .dobra7-copy .dobra7-cta:hover {
-      opacity: 0.88;
-      border-color: rgba(251, 191, 36, 0.92);
+    .dobra7-copy .dobra7-cta,
+    .dobra7-action .dobra7-cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 76px;
+      padding: 0 32px;
+      color: #ffffff;
+      text-decoration: none;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      border-radius: 14px;
+      background: linear-gradient(180deg, #fb7b18 0%, #f97316 100%);
+      box-shadow: 0 18px 36px rgba(249, 115, 22, 0.28);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      transition: transform 180ms ease, box-shadow 180ms ease, opacity 180ms ease;
+    }
+
+    .dobra7-copy .dobra7-cta:hover,
+    .dobra7-action .dobra7-cta:hover {
+      opacity: 0.98;
+      transform: translateY(-1px);
+      box-shadow: 0 22px 42px rgba(249, 115, 22, 0.34);
     }
 
     .dobra7-photo-wrap {
+      grid-area: photo;
       margin: 0;
       width: 100%;
       border-radius: 18px;
@@ -2455,6 +2090,10 @@
 
       .dobra7-container {
         grid-template-columns: 1fr;
+        grid-template-areas:
+          "copy"
+          "action"
+          "photo";
       }
 
       .dobra7-copy {
@@ -2464,6 +2103,16 @@
 
       .dobra7-copy p {
         margin: 0 auto;
+      }
+
+      .dobra7-action {
+        justify-self: center;
+        align-self: start;
+      }
+
+      .dobra7-action .dobra7-cta {
+        min-height: 64px;
+        padding: 0 28px;
       }
 
       .dobra7-photo-wrap {
@@ -3313,96 +2962,15 @@
         <source src="video_shopping.mp4" type="video/mp4">
       </video>
     </div>
-    <div class="authority-overlay"></div>
-    <div class="authority-content">
-      <div class="container">
-        <div class="authority-header">
-          <h2>O Ecossistema do Shopping das Plataformas</h2>
-          <p>Uma estrutura comercial completa para corretores que querem produzir mais.</p>
-        </div>
-        
-        <!-- BLOCO 1: OPERADORAS -->
-        <div class="authority-section-block">
-          <h3 class="block-title">Operadoras Parceiras</h3>
-          <div class="operadores-grid">
-            <div class="operador-item" tabindex="0">
-              <img src="logo_amil.png" alt="Amil" loading="lazy" decoding="async" fetchpriority="low">
-            </div>
-            <div class="operador-item" tabindex="0">
-              <img src="logo_bradesco.png" alt="Bradesco Saúde" loading="lazy" decoding="async" fetchpriority="low">
-            </div>
-            <div class="operador-item" tabindex="0">
-              <img src="logo_sulamerica.png" alt="SulAmérica" loading="lazy" decoding="async" fetchpriority="low">
-            </div>
-            <div class="operador-item" tabindex="0">
-              <img src="logo_hapvida.png" alt="Hapvida" loading="lazy" decoding="async" fetchpriority="low">
-            </div>
-            <div class="operador-item" tabindex="0">
-              <img src="logo_omint.png" alt="Omint" loading="lazy" decoding="async" fetchpriority="low">
-            </div>
-            <div class="operador-item" tabindex="0">
-              <img src="logo_unimed.png" alt="Unimed" loading="lazy" decoding="async" fetchpriority="low">
-            </div>
-            <div class="operador-item" tabindex="0">
-              <img src="logo_alice.png" alt="Alice" loading="lazy" decoding="async" fetchpriority="low">
-            </div>
-          </div>
-        </div>
-        
-        <!-- BLOCO 2: INFRAESTRUTURA -->
-        <div class="authority-section-block">
-          <h3 class="block-title">Infraestrutura Profissional</h3>
-          <div class="infrastructure-grid">
-            <div class="infra-card">
-              <div class="infra-icon">📊</div>
-              <h4>Geração de Leads</h4>
-              <p>Sistema inteligente de captação e qualificação de leads em tempo real.</p>
-            </div>
-            <div class="infra-card">
-              <div class="infra-icon">🎯</div>
-              <h4>CRM Comercial</h4>
-              <p>Plataforma completa para gestão de relacionamento e pipeline comercial.</p>
-            </div>
-            <div class="infra-card">
-              <div class="infra-icon">👥</div>
-              <h4>Estrutura de Supervisão</h4>
-              <p>Supervisores especializados para acompanhamento e desenvolvimento de equipes.</p>
-            </div>
-            <div class="infra-card">
-              <div class="infra-icon">📈</div>
-              <h4>Operação Escalável</h4>
-              <p>Processos prontos para crescimento exponencial e replicação em novos mercados.</p>
-            </div>
-          </div>
-        </div>
-        
-        <!-- BLOCO 3: PROVA SOCIAL -->
-        <div class="authority-section-block">
-          <h3 class="block-title">Escala da Operação</h3>
-          <div class="social-proof-grid">
-            <div class="proof-metric">
-              <div class="metric-number">150K+</div>
-              <div class="metric-label">Leads Gerados</div>
-            </div>
-            <div class="proof-metric">
-              <div class="metric-number">8</div>
-              <div class="metric-label">Operações Ativas</div>
-            </div>
-            <div class="proof-metric">
-              <div class="metric-number">2000+</div>
-              <div class="metric-label">Corretores</div>
-            </div>
-            <div class="proof-metric">
-              <div class="metric-number">12K</div>
-              <div class="metric-label">Clientes Ativos</div>
-            </div>
-          </div>
-        </div>
-        
-        <!-- CTA -->
-        <div class="authority-cta">
-          <a href="#lojas" class="authority-cta-btn">Conhecer as Lojas</a>
-        </div>
+    <div class="dobra7-overlay" aria-hidden="true"></div>
+    <div class="dobra7-container">
+      <div class="dobra7-copy">
+        <p class="dobra7-eyebrow">Dobra 7</p>
+        <h2>Focus, Discipline, Execution.</h2>
+        <p>A foto solicitada foi posicionada na setima dobra da landing, com fundo em video_shopping para manter o impacto visual.</p>
+      </div>
+      <div class="dobra7-action">
+        <a class="dobra7-cta" href="#lojas">Conhecer as Lojas</a>
       </div>
       <figure class="dobra7-photo-wrap">
         <img src="dobra7-focus-success-mindset.jpg" alt="Focus Discipline Execution Success Mindset" loading="lazy" decoding="async" fetchpriority="low">
