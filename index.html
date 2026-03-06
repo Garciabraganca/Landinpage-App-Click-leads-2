@@ -3574,6 +3574,8 @@
     document.addEventListener('DOMContentLoaded', function () {
       renderCoverflowSlides();
       initComoEntrarForm();
+      initLimitedSpotsCountdown();
+      initLimitedSpotsCta();
 
       // ==================== FORÇAR PLAY DO VÍDEO HERO ====================
       var heroVideo = document.getElementById('heroVideo');
@@ -3697,6 +3699,160 @@
 
       initStoresSwiper();
     });
+
+    // ==================== LIMITED SPOTS COUNTDOWN ====================
+    function LimitedSpotsCountdown(rootElement, options) {
+      this.rootElement = rootElement;
+      this.storageKey = (options && options.storageKey) || 'limitedSpotsDeadlineV1';
+      this.durationMs = (options && options.durationMs) || (72 * 60 * 60 * 1000);
+      this.timer = null;
+      this.parts = { days: null, hours: null, minutes: null, seconds: null };
+      this.labels = {
+        days: 'Dias',
+        hours: 'Horas',
+        minutes: 'Min',
+        seconds: 'Seg'
+      };
+    }
+
+    LimitedSpotsCountdown.prototype.getDeadline = function () {
+      var now = Date.now();
+
+      try {
+        var stored = window.localStorage.getItem(this.storageKey);
+        var parsed = Number(stored);
+        if (Number.isFinite(parsed) && parsed > now) {
+          return parsed;
+        }
+
+        var created = now + this.durationMs;
+        window.localStorage.setItem(this.storageKey, String(created));
+        return created;
+      } catch (error) {
+        // localStorage can be unavailable in private mode/security policies.
+        return now + this.durationMs;
+      }
+    };
+
+    LimitedSpotsCountdown.prototype.buildMarkup = function () {
+      this.rootElement.innerHTML = [
+        '<div class="limited-spots-countdown-head">Vagas Limitadas</div>',
+        '<div class="limited-spots-countdown-grid">',
+        this.renderPart('days'),
+        this.renderPart('hours'),
+        this.renderPart('minutes'),
+        this.renderPart('seconds'),
+        '</div>',
+        '<p class="limited-spots-countdown-note">Prazo individual reservado no seu primeiro acesso.</p>'
+      ].join('');
+
+      this.parts.days = this.rootElement.querySelector('[data-ls-value="days"]');
+      this.parts.hours = this.rootElement.querySelector('[data-ls-value="hours"]');
+      this.parts.minutes = this.rootElement.querySelector('[data-ls-value="minutes"]');
+      this.parts.seconds = this.rootElement.querySelector('[data-ls-value="seconds"]');
+    };
+
+    LimitedSpotsCountdown.prototype.renderPart = function (key) {
+      return [
+        '<div class="ls-count-part">',
+        '<span class="ls-count-value" data-ls-value="', key, '">00</span>',
+        '<span class="ls-count-label">', this.labels[key], '</span>',
+        '</div>'
+      ].join('');
+    };
+
+    LimitedSpotsCountdown.prototype.setValue = function (key, value) {
+      var target = this.parts[key];
+      if (!target) return;
+
+      var next = String(value).padStart(2, '0');
+      if (target.textContent === next) return;
+
+      target.textContent = next;
+      target.classList.remove('is-updating');
+      window.requestAnimationFrame(function () {
+        target.classList.add('is-updating');
+      });
+    };
+
+    LimitedSpotsCountdown.prototype.renderEndedState = function () {
+      this.rootElement.classList.add('is-ended');
+      this.rootElement.innerHTML = [
+        '<div class="limited-spots-countdown-head">Vagas Limitadas</div>',
+        '<p class="limited-spots-countdown-ended">Inscrições encerrando - novas vagas em breve.</p>'
+      ].join('');
+    };
+
+    LimitedSpotsCountdown.prototype.tick = function () {
+      var remaining = this.deadline - Date.now();
+      if (remaining <= 0) {
+        window.clearInterval(this.timer);
+        this.renderEndedState();
+        return;
+      }
+
+      var totalSeconds = Math.floor(remaining / 1000);
+      var days = Math.floor(totalSeconds / 86400);
+      var hours = Math.floor((totalSeconds % 86400) / 3600);
+      var minutes = Math.floor((totalSeconds % 3600) / 60);
+      var seconds = totalSeconds % 60;
+
+      this.setValue('days', days);
+      this.setValue('hours', hours);
+      this.setValue('minutes', minutes);
+      this.setValue('seconds', seconds);
+    };
+
+    LimitedSpotsCountdown.prototype.start = function () {
+      this.deadline = this.getDeadline();
+      this.buildMarkup();
+      this.tick();
+      this.timer = window.setInterval(this.tick.bind(this), 1000);
+    };
+
+    function initLimitedSpotsCountdown() {
+      var countdownRoot = document.getElementById('limitedSpotsCountdown');
+      if (!countdownRoot) return;
+
+      var countdown = new LimitedSpotsCountdown(countdownRoot, {
+        storageKey: 'limitedSpotsDeadlineV1',
+        durationMs: 72 * 60 * 60 * 1000
+      });
+
+      countdown.start();
+    }
+
+    function initLimitedSpotsCta() {
+      var ctaButton = document.getElementById('limitedSpotsCta');
+      if (!ctaButton) return;
+
+      ctaButton.addEventListener('click', function () {
+        if (typeof window.openStoreModal === 'function') {
+          window.openStoreModal();
+          return;
+        }
+
+        if (typeof window.openModal === 'function') {
+          var firstStoreCard = document.querySelector('.loja-card[data-store]');
+          if (firstStoreCard) {
+            window.openModal(firstStoreCard.getAttribute('data-store'));
+            return;
+          }
+        }
+
+        var targetSection = document.getElementById('como-entrar');
+        if (targetSection) {
+          targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        var storeSelect = document.getElementById('comoEntrarStore');
+        if (storeSelect) {
+          window.setTimeout(function () {
+            storeSelect.focus({ preventScroll: true });
+          }, 420);
+        }
+      });
+    }
 
     // ==================== BASE PATH FOR CAROUSEL CARD IMAGES ====================
     const CAROUSEL_CARD_BASE_PATH = './card/';
