@@ -1420,7 +1420,7 @@
     .como-entrar-bg {
       position: absolute;
       inset: 0;
-      background: url('como_entrar.png') center center / cover no-repeat;
+      background: url('/assets/images/como_entrar.png') center center / cover no-repeat;
       z-index: 0;
     }
 
@@ -1740,7 +1740,7 @@
     }
 
     /* ==================== PREMIUM BRAND TILE BUTTONS SYSTEM ==================== */
-    
+
     /* Featured Boutique Card */
     .brand-tile-featured {
       margin-bottom: 40px;
@@ -2080,15 +2080,17 @@
     }
 
     /* ==================== CAMPAIGN SHOWCASE (VITRINE DE PROPAGANDAS) ==================== */
-    body.cs-no-scroll { overflow: hidden; }
+    body.cs-no-scroll {
+      overflow: hidden;
+    }
 
     .campaign-showcase {
       --cs-radius: 16px;
       --cs-gap: 18px;
-      --cs-border: rgba(255,255,255,0.10);
-      --cs-bg: rgba(255,255,255,0.04);
-      --cs-shadow: 0 20px 50px rgba(0,0,0,0.35);
-      --cs-card-bg: rgba(15,20,30,0.6);
+      --cs-border: rgba(255, 255, 255, 0.10);
+      --cs-bg: rgba(255, 255, 255, 0.04);
+      --cs-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
+      --cs-card-bg: rgba(15, 20, 30, 0.6);
       background: linear-gradient(180deg, #0d1117 0%, #161b22 50%, #0d1117 100%);
       padding: 72px 0;
       color: #fff;
@@ -2126,7 +2128,7 @@
       content: '';
       position: absolute;
       inset: 0;
-      background: radial-gradient(ellipse at center, transparent 50%, rgba(0,0,0,0.4) 100%);
+      background: radial-gradient(ellipse at center, transparent 50%, rgba(0, 0, 0, 0.4) 100%);
       pointer-events: none;
       z-index: 0;
     }
@@ -2188,8 +2190,8 @@
       font-size: 0.75rem;
       font-weight: 600;
       border-radius: 999px;
-      border: 1px solid rgba(251,191,36,0.25);
-      background: rgba(251,191,36,0.08);
+      border: 1px solid rgba(251, 191, 36, 0.25);
+      background: rgba(251, 191, 36, 0.08);
       color: #fbbf24;
       letter-spacing: 0.3px;
     }
@@ -2202,22 +2204,22 @@
     }
 
     .cs-badge-btn:hover {
-      background: rgba(251,191,36,0.16);
-      border-color: rgba(251,191,36,0.45);
+      background: rgba(251, 191, 36, 0.16);
+      border-color: rgba(251, 191, 36, 0.45);
       color: #fde68a;
       transform: translateY(-1px);
     }
 
     .cs-badge-btn.is-active {
-      background: linear-gradient(135deg, rgba(245,158,11,0.30), rgba(249,115,22,0.24));
-      border-color: rgba(251,191,36,0.62);
+      background: linear-gradient(135deg, rgba(245, 158, 11, 0.30), rgba(249, 115, 22, 0.24));
+      border-color: rgba(251, 191, 36, 0.62);
       color: #fffbeb;
     }
 
     .cs-incentive-message {
       margin: 0 0 18px;
       padding: 12px 14px;
-      border-left: 3px solid rgba(251,191,36,0.75);
+      border-left: 3px solid rgba(251, 191, 36, 0.75);
       border-radius: 0 10px 10px 0;
       background: rgba(15, 23, 42, 0.48);
       color: #e2e8f0;
@@ -2238,7 +2240,7 @@
       gap: 6px;
       padding: 10px 22px;
       border-radius: 8px;
-      border: 1px solid rgba(251,191,36,0.3);
+      border: 1px solid rgba(251, 191, 36, 0.3);
       background: transparent;
       color: #fbbf24;
       font-size: 0.88rem;
@@ -2248,18 +2250,18 @@
     }
 
     .cs-cta:hover {
-      background: rgba(251,191,36,0.1);
-      border-color: rgba(251,191,36,0.5);
+      background: rgba(251, 191, 36, 0.1);
+      border-color: rgba(251, 191, 36, 0.5);
     }
 
     .cs-cta-secondary {
       color: #e2e8f0;
-      border-color: rgba(148,163,184,0.4);
+      border-color: rgba(148, 163, 184, 0.4);
     }
 
     .cs-cta-secondary:hover {
-      background: rgba(148,163,184,0.12);
-      border-color: rgba(148,163,184,0.65);
+      background: rgba(148, 163, 184, 0.12);
+      border-color: rgba(148, 163, 184, 0.65);
     }
 
     .cs-grid {
@@ -2277,7 +2279,7 @@
       overflow: hidden;
       cursor: pointer;
       transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
       opacity: 0;
       transform: translateY(10px);
     }
@@ -2285,7 +2287,7 @@
     .cs-card:hover {
       transform: translateY(-2px);
       box-shadow: var(--cs-shadow);
-      border-color: rgba(255,255,255,0.18);
+      border-color: rgba(255, 255, 255, 0.18);
     }
 
     .cs-card:focus-visible {
@@ -2329,25 +2331,25 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      background: rgba(0,0,0,0.25);
+      background: rgba(0, 0, 0, 0.25);
       transition: background 0.2s;
       pointer-events: none;
       z-index: 2;
     }
 
     .cs-card:hover .cs-card__play {
-      background: rgba(0,0,0,0.15);
+      background: rgba(0, 0, 0, 0.15);
     }
 
     .cs-card__play-icon {
       width: 52px;
       height: 52px;
       border-radius: 50%;
-      background: rgba(255,255,255,0.92);
+      background: rgba(255, 255, 255, 0.92);
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
       transition: transform 0.2s;
     }
 
@@ -2373,7 +2375,7 @@
       z-index: 3;
       padding: 4px 10px;
       border-radius: 6px;
-      background: rgba(0,0,0,0.55);
+      background: rgba(0, 0, 0, 0.55);
       backdrop-filter: blur(4px);
       font-size: 0.7rem;
       font-weight: 600;
@@ -2388,12 +2390,29 @@
       transition: opacity 0.55s ease, transform 0.55s ease, box-shadow 0.25s ease, border-color 0.25s ease;
     }
 
-    .cs-card:nth-child(1).cs-visible { transition-delay: 0s; }
-    .cs-card:nth-child(2).cs-visible { transition-delay: 0.07s; }
-    .cs-card:nth-child(3).cs-visible { transition-delay: 0.07s; }
-    .cs-card:nth-child(4).cs-visible { transition-delay: 0.14s; }
-    .cs-card:nth-child(5).cs-visible { transition-delay: 0.21s; }
-    .cs-card:nth-child(6).cs-visible { transition-delay: 0.28s; }
+    .cs-card:nth-child(1).cs-visible {
+      transition-delay: 0s;
+    }
+
+    .cs-card:nth-child(2).cs-visible {
+      transition-delay: 0.07s;
+    }
+
+    .cs-card:nth-child(3).cs-visible {
+      transition-delay: 0.07s;
+    }
+
+    .cs-card:nth-child(4).cs-visible {
+      transition-delay: 0.14s;
+    }
+
+    .cs-card:nth-child(5).cs-visible {
+      transition-delay: 0.21s;
+    }
+
+    .cs-card:nth-child(6).cs-visible {
+      transition-delay: 0.28s;
+    }
 
     /* ==================== CAMPAIGN LIGHTBOX ==================== */
     .cs-lightbox {
@@ -2401,7 +2420,7 @@
       position: fixed;
       inset: 0;
       z-index: 10000;
-      background: rgba(0,0,0,0.75);
+      background: rgba(0, 0, 0, 0.75);
       align-items: center;
       justify-content: center;
       padding: 20px;
@@ -2420,8 +2439,13 @@
     }
 
     @keyframes csLbFadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
     }
 
     .cs-lightbox__inner {
@@ -2440,7 +2464,7 @@
       max-height: 86vh;
       object-fit: contain;
       border-radius: 12px;
-      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
     }
 
     .cs-lightbox__close {
@@ -2451,7 +2475,7 @@
       height: 36px;
       border-radius: 50%;
       border: none;
-      background: rgba(255,255,255,0.12);
+      background: rgba(255, 255, 255, 0.12);
       color: #fff;
       font-size: 1.3rem;
       cursor: pointer;
@@ -2462,7 +2486,7 @@
     }
 
     .cs-lightbox__close:hover {
-      background: rgba(249,115,22,0.4);
+      background: rgba(249, 115, 22, 0.4);
     }
 
     .cs-lightbox__close:focus-visible {
@@ -2554,7 +2578,7 @@
         right: 0;
         bottom: 16px;
         width: 40px;
-        background: linear-gradient(to right, transparent, rgba(13,17,23,0.8));
+        background: linear-gradient(to right, transparent, rgba(13, 17, 23, 0.8));
         pointer-events: none;
         z-index: 2;
       }
@@ -2584,7 +2608,6 @@
         animation: none;
       }
     }
-
   </style>
   <link rel="stylesheet" href="styles.css" />
 </head>
@@ -2594,8 +2617,8 @@
   <section class="hero-fold" id="topo">
     <div class="hero-fold-video">
       <video id="heroVideo" autoplay muted loop playsinline webkit-playsinline preload="auto" disablepictureinpicture
-        disableremoteplayback>
-        <source src="video_entrada.mp4" type="video/mp4">
+        disableremoteplayback onerror="this.style.display='none'">
+        <source src="/assets/videos/video_entrada.mp4" type="video/mp4">
       </video>
     </div>
 
@@ -2621,7 +2644,7 @@
   <section class="lojas-section" id="lojas">
     <div class="lojas-section-video">
       <video autoplay muted loop playsinline webkit-playsinline preload="none" disablepictureinpicture
-        disableremoteplayback data-lazy-src="video_entrada.mp4">
+        disableremoteplayback data-lazy-src="/assets/videos/video_entrada.mp4" onerror="this.style.display='none'">
       </video>
     </div>
     <div class="lojas-section-overlay"></div>
@@ -2633,7 +2656,7 @@
     <div class="lojas-grid">
       <!-- ZENTRIX -->
       <div class="loja-card" data-store="zentrix">
-        <img src="Fachada Zentrix.png" alt="Zentrix" loading="lazy" decoding="async" fetchpriority="low">
+        <img src="/assets/images/fachada-zentrix.png" alt="Zentrix" loading="lazy" decoding="async" fetchpriority="low">
         <div class="loja-card-content">
           <h2>Zentrix</h2>
           <h3>Plataforma de Gestão Empresarial</h3>
@@ -2643,7 +2666,7 @@
 
       <!-- SERRA -->
       <div class="loja-card" data-store="serra">
-        <img src="Fachada serra.png" alt="Serra" loading="lazy" decoding="async" fetchpriority="low">
+        <img src="/assets/images/fachada-serra.png" alt="Serra" loading="lazy" decoding="async" fetchpriority="low">
         <div class="loja-card-content">
           <h2>Serra</h2>
           <h3>Consultoria Estratégica</h3>
@@ -2653,7 +2676,7 @@
 
       <!-- BLISS -->
       <div class="loja-card" data-store="bliss">
-        <img src="Fachada Bliss.jpeg" alt="Bliss" loading="lazy" decoding="async" fetchpriority="low">
+        <img src="/assets/images/fachada-bliss.jpeg" alt="Bliss" loading="lazy" decoding="async" fetchpriority="low">
         <div class="loja-card-content">
           <h2>Bliss</h2>
           <h3>Gestão Integrada</h3>
@@ -2663,7 +2686,8 @@
 
       <!-- ALLEMAN -->
       <div class="loja-card" data-store="alleman">
-        <img src="Fachada Alleman.jpeg" alt="Alleman" loading="lazy" decoding="async" fetchpriority="low">
+        <img src="/assets/images/fachada-alleman.jpeg" alt="Alleman" loading="lazy" decoding="async"
+          fetchpriority="low">
         <div class="loja-card-content">
           <h2>Alleman</h2>
           <h3>Consultoria Estratégica</h3>
@@ -2673,7 +2697,8 @@
 
       <!-- AFFINITY -->
       <div class="loja-card" data-store="affinity">
-        <img src="Fachada Affinity.jpeg" alt="Affinity" loading="lazy" decoding="async" fetchpriority="low">
+        <img src="/assets/images/fachada-affinity.jpeg" alt="Affinity" loading="lazy" decoding="async"
+          fetchpriority="low">
         <div class="loja-card-content">
           <h2>Affinity</h2>
           <h3>Rede de Profissionais</h3>
@@ -2683,7 +2708,8 @@
 
       <!-- VALORIZE -->
       <div class="loja-card" data-store="valorize">
-        <img src="Fachada Valorize.jpeg" alt="Valorize" loading="lazy" decoding="async" fetchpriority="low">
+        <img src="/assets/images/fachada-valorize.jpeg" alt="Valorize" loading="lazy" decoding="async"
+          fetchpriority="low">
         <div class="loja-card-content">
           <h2>Valorize</h2>
           <h3>Programa de Reconhecimento</h3>
@@ -2693,7 +2719,7 @@
 
       <!-- ASSURY -->
       <div class="loja-card" data-store="assury">
-        <img src="fachada-assury.jpeg" alt="Assury" loading="lazy" decoding="async" fetchpriority="low">
+        <img src="/assets/images/fachada-assury.jpeg" alt="Assury" loading="lazy" decoding="async" fetchpriority="low">
         <div class="loja-card-content">
           <h2>Assury</h2>
           <h3>Segurança e Compliance</h3>
@@ -2703,7 +2729,7 @@
 
       <!-- DIPLAN -->
       <div class="loja-card" data-store="diplan">
-        <img src="Fachada Diplan.png" alt="Diplan" loading="lazy" decoding="async" fetchpriority="low">
+        <img src="/assets/images/fachada-diplan.png" alt="Diplan" loading="lazy" decoding="async" fetchpriority="low">
         <div class="loja-card-content">
           <span class="loja-card-badge">Boutique</span>
           <h2>Diplan</h2>
@@ -2717,7 +2743,7 @@
   <section class="stores-swiper-section" id="shopping-tour">
     <div class="stores-swiper-video">
       <video autoplay muted loop playsinline webkit-playsinline preload="none" disablepictureinpicture
-        disableremoteplayback data-lazy-src="video_entrada.mp4">
+        disableremoteplayback data-lazy-src="/assets/videos/video_entrada.mp4" onerror="this.style.display='none'">
       </video>
     </div>
     <div class="stores-swiper-overlay"></div>
@@ -2777,8 +2803,8 @@
   <!-- VITRINE DE PROPAGANDAS (5ª DOBRA) -->
   <section class="campaign-showcase" id="campaign-showcase">
     <div class="cs-bg-video">
-      <video autoplay muted loop playsinline webkit-playsinline preload="metadata">
-        <source src="video_shopping.mp4" type="video/mp4">
+      <video autoplay muted loop playsinline webkit-playsinline preload="metadata" onerror="this.style.display='none'">
+        <source src="/assets/videos/video_shopping.mp4" type="video/mp4">
       </video>
     </div>
     <div class="cs-bg-overlay"></div>
@@ -2787,14 +2813,24 @@
         <div class="cs-text">
           <p class="cs-eyebrow">Campanhas de incentivo ao corretor</p>
           <h2 class="cs-headline">Venda mais. Pontue. Viaje.</h2>
-          <p class="cs-sub">Este espaço mostra campanhas ativas de viagens e premiações para corretores que batem meta com consistência.</p>
+          <p class="cs-sub">Este espaço mostra campanhas ativas de viagens e premiações para corretores que batem meta
+            com consistência.</p>
           <div class="cs-badges">
-            <button type="button" class="cs-badge cs-badge-btn is-active" data-cs-message="Campanhas mensais com ranking ativo: quem performa melhor acelera para experiências e viagens exclusivas.">Viagens por meta</button>
-            <button type="button" class="cs-badge cs-badge-btn" data-cs-message="Premiações progressivas por volume e qualidade: cada venda validada aumenta sua pontuação na campanha.">Premiação progressiva</button>
-            <button type="button" class="cs-badge cs-badge-btn" data-cs-message="Mecânica transparente para o corretor: meta clara, pontuação visível e recompensa definida antes da campanha começar.">Pontuação transparente</button>
-            <button type="button" class="cs-badge cs-badge-btn" data-cs-message="Além da comissão, você concorre a bônus extras para manter ritmo forte durante toda a campanha.">Bônus de consistência</button>
+            <button type="button" class="cs-badge cs-badge-btn is-active"
+              data-cs-message="Campanhas mensais com ranking ativo: quem performa melhor acelera para experiências e viagens exclusivas.">Viagens
+              por meta</button>
+            <button type="button" class="cs-badge cs-badge-btn"
+              data-cs-message="Premiações progressivas por volume e qualidade: cada venda validada aumenta sua pontuação na campanha.">Premiação
+              progressiva</button>
+            <button type="button" class="cs-badge cs-badge-btn"
+              data-cs-message="Mecânica transparente para o corretor: meta clara, pontuação visível e recompensa definida antes da campanha começar.">Pontuação
+              transparente</button>
+            <button type="button" class="cs-badge cs-badge-btn"
+              data-cs-message="Além da comissão, você concorre a bônus extras para manter ritmo forte durante toda a campanha.">Bônus
+              de consistência</button>
           </div>
-          <p class="cs-incentive-message" id="csIncentiveMessage">Campanhas mensais com ranking ativo: quem performa melhor acelera para experiências e viagens exclusivas.</p>
+          <p class="cs-incentive-message" id="csIncentiveMessage">Campanhas mensais com ranking ativo: quem performa
+            melhor acelera para experiências e viagens exclusivas.</p>
           <div class="cs-cta-row">
             <a href="#como-entrar" class="cs-cta">Quero participar das campanhas &rarr;</a>
             <a href="#lojas" class="cs-cta cs-cta-secondary">Ver lojas participantes</a>
@@ -2802,42 +2838,55 @@
         </div>
         <div class="cs-grid-wrap">
           <div class="cs-grid">
-            <div class="cs-card cs-card--feature" tabindex="0" role="button" aria-label="Abrir propaganda 1" data-cs-index="0">
+            <div class="cs-card cs-card--feature" tabindex="0" role="button" aria-label="Abrir propaganda 1"
+              data-cs-index="0">
               <div class="cs-card__frame">
-                <img src="propaganda_1.jpeg" alt="Campanha publicitária 1" loading="lazy" decoding="async">
+                <img src="/assets/images/propaganda_1.jpeg" alt="Campanha publicitária 1" loading="lazy"
+                  decoding="async">
               </div>
               <span class="cs-card__label">Foto</span>
             </div>
             <div class="cs-card" tabindex="0" role="button" aria-label="Abrir propaganda 2" data-cs-index="1">
               <div class="cs-card__frame">
-                <img src="propaganda_2.jpeg" alt="Campanha publicitária 2" loading="lazy" decoding="async">
+                <img src="/assets/images/propaganda_2.jpeg" alt="Campanha publicitária 2" loading="lazy"
+                  decoding="async">
               </div>
               <span class="cs-card__label">Foto</span>
             </div>
             <div class="cs-card" tabindex="0" role="button" aria-label="Abrir propaganda 3" data-cs-index="2">
               <div class="cs-card__frame">
-                <img src="propaganda_3.jpeg" alt="Campanha publicitária 3" loading="lazy" decoding="async">
+                <img src="/assets/images/propaganda_3.jpeg" alt="Campanha publicitária 3" loading="lazy"
+                  decoding="async">
               </div>
               <span class="cs-card__label">Foto</span>
             </div>
             <div class="cs-card" tabindex="0" role="button" aria-label="Abrir propaganda 4 – vídeo" data-cs-index="3">
               <div class="cs-card__frame">
-                <video src="propaganda_4.mp4" preload="metadata" muted playsinline autoplay loop></video>
-                <div class="cs-card__play"><div class="cs-card__play-icon"></div></div>
+                <video src="/assets/videos/propaganda_4.mp4" preload="metadata" muted playsinline autoplay loop
+                  onerror="this.style.display='none'"></video>
+                <div class="cs-card__play">
+                  <div class="cs-card__play-icon"></div>
+                </div>
               </div>
               <span class="cs-card__label">Vídeo</span>
             </div>
             <div class="cs-card" tabindex="0" role="button" aria-label="Abrir propaganda 5 – vídeo" data-cs-index="4">
               <div class="cs-card__frame">
-                <video src="propaganda_5.mp4" preload="metadata" muted playsinline autoplay loop></video>
-                <div class="cs-card__play"><div class="cs-card__play-icon"></div></div>
+                <video src="/assets/videos/propaganda_5.mp4" preload="metadata" muted playsinline autoplay loop
+                  onerror="this.style.display='none'"></video>
+                <div class="cs-card__play">
+                  <div class="cs-card__play-icon"></div>
+                </div>
               </div>
               <span class="cs-card__label">Vídeo</span>
             </div>
             <div class="cs-card" tabindex="0" role="button" aria-label="Abrir propaganda 6 – vídeo" data-cs-index="5">
               <div class="cs-card__frame">
-                <video src="propaganda_6.mp4" preload="metadata" muted playsinline autoplay loop></video>
-                <div class="cs-card__play"><div class="cs-card__play-icon"></div></div>
+                <video src="/assets/videos/propaganda_6.mp4" preload="metadata" muted playsinline autoplay loop
+                  onerror="this.style.display='none'"></video>
+                <div class="cs-card__play">
+                  <div class="cs-card__play-icon"></div>
+                </div>
               </div>
               <span class="cs-card__label">Vídeo</span>
             </div>
@@ -2857,8 +2906,8 @@
   <!-- CTA FINAL -->
   <section class="cta-final-section" id="entrar">
     <div class="cta-final-bg-video">
-      <video autoplay muted loop playsinline webkit-playsinline preload="metadata">
-        <source src="video_shopping.mp4" type="video/mp4">
+      <video autoplay muted loop playsinline webkit-playsinline preload="metadata" onerror="this.style.display='none'">
+        <source src="/assets/videos/video_shopping.mp4" type="video/mp4">
       </video>
     </div>
     <div class="cta-final-bg-overlay"></div>
@@ -2917,8 +2966,8 @@
   <!-- 7a DOBRA: FOTO + VIDEO SHOPPING -->
   <section class="dobra7-section" id="dobra-7">
     <div class="dobra7-bg-video" aria-hidden="true">
-      <video autoplay muted loop playsinline webkit-playsinline preload="metadata">
-        <source src="video_shopping.mp4" type="video/mp4">
+      <video autoplay muted loop playsinline webkit-playsinline preload="metadata" onerror="this.style.display='none'">
+        <source src="/assets/videos/video_shopping.mp4" type="video/mp4">
       </video>
     </div>
     <div class="dobra7-overlay" aria-hidden="true"></div>
@@ -2927,33 +2976,22 @@
         <a class="dobra7-cta" href="#lojas">Conhecer as Lojas</a>
       </div>
       <figure class="dobra7-photo-wrap">
-        <img src="dobra7-focus-success-mindset.jpg" alt="Focus Discipline Execution Success Mindset" loading="lazy" decoding="async" fetchpriority="low">
+        <img src="/assets/images/dobra7-focus-success-mindset.jpg" alt="Focus Discipline Execution Success Mindset"
+          loading="lazy" decoding="async" fetchpriority="low">
       </figure>
     </div>
   </section>
 
   <!-- RODAPÉ -->
   <section class="section-diplan-ceo">
-    <img
-      src="public/images/diplan-ceo-desktop.jpg"
-      class="ceo-desktop"
-      alt="CEO da Diplan"
-    />
+    <img src="/assets/images/diplan-ceo-desktop.jpg" class="ceo-desktop" alt="CEO da Diplan" />
 
-    <img
-      src="public/images/diplan-ceo-mobile.jpg"
-      class="ceo-mobile"
-      alt="CEO da Diplan"
-    />
+    <img src="/assets/images/diplan-ceo-mobile.jpg" class="ceo-mobile" alt="CEO da Diplan" />
   </section>
 
   <footer>
     <div class="container footer-wrapper">
-      <img
-        src="public/images/logo-grupo-garcia.png"
-        class="grupo-garcia-logo"
-        alt="Logo Grupo Garcia"
-      />
+      <img src="/assets/images/logo-grupo-garcia.png" class="grupo-garcia-logo" alt="Logo Grupo Garcia" />
       <div class="footer-main">
         <div class="footer-column">
           <h4 class="footer-title">Grupo Garcia</h4>
@@ -3310,13 +3348,13 @@
           const featuredCard = document.createElement('div');
           featuredCard.className = 'brand-tile-featured';
           const logoName = logoMap[diplanStore.slug] || diplanStore.slug;
-          
+
           featuredCard.innerHTML = `
             <button class="brand-tile-featured-btn" disabled aria-label="Entrar em ${diplanStore.nome} (Acesso sob convite)">
-              <img src="./logo_botao_${logoName}.png" alt="${diplanStore.nome}" class="brand-tile-diplan-logo" loading="lazy" decoding="async" fetchpriority="low" />
+              <img src="/assets/images/logo_botao_${logoName}.png" alt="${diplanStore.nome}" class="brand-tile-diplan-logo" loading="lazy" decoding="async" fetchpriority="low" />
             </button>
           `;
-          
+
           ctaButtonsGrid.parentElement.insertBefore(featuredCard, ctaButtonsGrid);
         }
 
@@ -3328,11 +3366,11 @@
           buttonDiv.rel = 'noopener noreferrer';
           buttonDiv.className = 'brand-tile-btn';
           buttonDiv.setAttribute('aria-label', `Entrar em ${store.nome}`);
-          
+
           const logoName = logoMap[store.slug] || store.slug;
 
           buttonDiv.innerHTML = `
-            <img src="./logo_botao_${logoName}.png" alt="${store.nome}" loading="lazy" decoding="async" fetchpriority="low" />
+            <img src="/assets/images/logo_botao_${logoName}.png" alt="${store.nome}" loading="lazy" decoding="async" fetchpriority="low" />
           `;
 
           ctaButtonsGrid.appendChild(buttonDiv);
@@ -3799,12 +3837,12 @@
     // ==================== CAMPAIGN SHOWCASE (VITRINE DE PROPAGANDAS) ====================
     // Para adicionar novo asset, inclua no array abaixo
     const CS_ITEMS = [
-      { src: 'propaganda_1.jpeg', type: 'image' },
-      { src: 'propaganda_2.jpeg', type: 'image' },
-      { src: 'propaganda_3.jpeg', type: 'image' },
-      { src: 'propaganda_4.mp4',  type: 'video' },
-      { src: 'propaganda_5.mp4',  type: 'video' },
-      { src: 'propaganda_6.mp4',  type: 'video' }
+      { src: '/assets/images/propaganda_1.jpeg', type: 'image' },
+      { src: '/assets/images/propaganda_2.jpeg', type: 'image' },
+      { src: '/assets/images/propaganda_3.jpeg', type: 'image' },
+      { src: '/assets/videos/propaganda_4.mp4', type: 'video' },
+      { src: '/assets/videos/propaganda_5.mp4', type: 'video' },
+      { src: '/assets/videos/propaganda_6.mp4', type: 'video' }
     ];
 
     (function initCampaignShowcase() {
@@ -3819,11 +3857,11 @@
       function initIncentiveBadges() {
         if (!csBadgeButtons.length || !csIncentiveMessage) return;
 
-        csBadgeButtons.forEach(function(btn) {
+        csBadgeButtons.forEach(function (btn) {
           btn.setAttribute('aria-pressed', btn.classList.contains('is-active') ? 'true' : 'false');
 
-          btn.addEventListener('click', function() {
-            csBadgeButtons.forEach(function(otherBtn) {
+          btn.addEventListener('click', function () {
+            csBadgeButtons.forEach(function (otherBtn) {
               otherBtn.classList.remove('is-active');
               otherBtn.setAttribute('aria-pressed', 'false');
             });
@@ -3836,7 +3874,7 @@
       }
 
       function normalizeCardVideos() {
-        csCards.forEach(function(card) {
+        csCards.forEach(function (card) {
           var video = card.querySelector('video');
           if (!video) return;
           video.muted = true;
@@ -3856,7 +3894,7 @@
         var closestIndex = 0;
         var minDiff = Number.POSITIVE_INFINITY;
 
-        cards.forEach(function(card, idx) {
+        cards.forEach(function (card, idx) {
           var diff = Math.abs(card.offsetLeft - current);
           if (diff < minDiff) {
             minDiff = diff;
@@ -3871,7 +3909,7 @@
         if (!csMobileQuery.matches || !csGrid) return;
         var gridRect = csGrid.getBoundingClientRect();
 
-        csCards.forEach(function(card) {
+        csCards.forEach(function (card) {
           var video = card.querySelector('video');
           if (!video) return;
 
@@ -3882,7 +3920,7 @@
           if (visibleRatio >= 0.55) {
             var playPromise = video.play();
             if (playPromise && typeof playPromise.catch === 'function') {
-              playPromise.catch(function() {});
+              playPromise.catch(function () { });
             }
           } else {
             video.pause();
@@ -3893,7 +3931,7 @@
       function startMobileAutoRotate() {
         if (!csMobileQuery.matches || !csGrid || csAutoRotateInterval) return;
 
-        csAutoRotateInterval = window.setInterval(function() {
+        csAutoRotateInterval = window.setInterval(function () {
           var cards = Array.prototype.slice.call(csCards);
           if (!cards.length) return;
 
@@ -3919,7 +3957,7 @@
         if (csResumeTimeout) {
           window.clearTimeout(csResumeTimeout);
         }
-        csResumeTimeout = window.setTimeout(function() {
+        csResumeTimeout = window.setTimeout(function () {
           startMobileAutoRotate();
         }, 6000);
       }
@@ -3927,12 +3965,12 @@
       function updateMobileBehaviors() {
         stopMobileAutoRotate();
         if (!csMobileQuery.matches) {
-          csCards.forEach(function(card) {
+          csCards.forEach(function (card) {
             var video = card.querySelector('video');
             if (!video) return;
             var playPromise = video.play();
             if (playPromise && typeof playPromise.catch === 'function') {
-              playPromise.catch(function() {});
+              playPromise.catch(function () { });
             }
           });
           return;
@@ -3947,23 +3985,23 @@
 
       // Entrance animation
       if ('IntersectionObserver' in window) {
-        var csIO = new IntersectionObserver(function(entries) {
-          entries.forEach(function(entry) {
+        var csIO = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
             if (entry.isIntersecting) {
               entry.target.classList.add('cs-visible');
               csIO.unobserve(entry.target);
             }
           });
         }, { threshold: 0.15 });
-        csCards.forEach(function(c) { csIO.observe(c); });
+        csCards.forEach(function (c) { csIO.observe(c); });
       } else {
-        csCards.forEach(function(c) { c.classList.add('cs-visible'); });
+        csCards.forEach(function (c) { c.classList.add('cs-visible'); });
       }
 
       // Lightbox references
-      var lightbox      = document.getElementById('csLightbox');
-      var lightboxInner  = document.getElementById('csLightboxInner');
-      var lightboxClose  = document.getElementById('csLightboxClose');
+      var lightbox = document.getElementById('csLightbox');
+      var lightboxInner = document.getElementById('csLightboxInner');
+      var lightboxClose = document.getElementById('csLightboxClose');
 
       function csOpenLightbox(index) {
         var item = CS_ITEMS[index];
@@ -3979,7 +4017,7 @@
           media.src = item.src;
           media.controls = true;
           media.playsInline = true;
-          media.style.maxWidth  = '100%';
+          media.style.maxWidth = '100%';
           media.style.maxHeight = '86vh';
         } else {
           media = document.createElement('img');
@@ -4004,11 +4042,11 @@
       }
 
       // Card click / keyboard
-      csCards.forEach(function(card) {
-        card.addEventListener('click', function() {
+      csCards.forEach(function (card) {
+        card.addEventListener('click', function () {
           csOpenLightbox(parseInt(card.getAttribute('data-cs-index'), 10));
         });
-        card.addEventListener('keydown', function(e) {
+        card.addEventListener('keydown', function (e) {
           if (e.key === 'Enter' || e.key === ' ') {
             e.preventDefault();
             csOpenLightbox(parseInt(card.getAttribute('data-cs-index'), 10));
@@ -4018,17 +4056,17 @@
 
       // Close handlers
       lightboxClose.addEventListener('click', csCloseLightbox);
-      lightbox.addEventListener('click', function(e) {
+      lightbox.addEventListener('click', function (e) {
         if (e.target === lightbox) csCloseLightbox();
       });
-      document.addEventListener('keydown', function(e) {
+      document.addEventListener('keydown', function (e) {
         if (e.key === 'Escape' && lightbox.classList.contains('active')) {
           csCloseLightbox();
         }
       });
 
       if (csGrid) {
-        csGrid.addEventListener('scroll', function() {
+        csGrid.addEventListener('scroll', function () {
           if (csMobileQuery.matches) {
             syncMobileVideos();
           }
