@@ -33,7 +33,7 @@ dataset_code = '''    // ==================== DATASET DE LOJAS (SINGLE SOURCE OF
         slug: 'bliss',
         nome: 'Bliss',
         imageSrc: 'Fachada Bliss.jpeg',
-        loginUrl: 'http://bliss.grupogarciaseguradoras.com.br/login',
+        loginUrl: 'https://bliss.grupogarciaseguradoras.com.br/login',
         isBoutique: false,
         chips: ['Gestão', 'Integrada', 'Automação'],
         diferenciais: [
@@ -59,7 +59,7 @@ dataset_code = '''    // ==================== DATASET DE LOJAS (SINGLE SOURCE OF
         slug: 'affinity',
         nome: 'Affinity',
         imageSrc: 'Fachada Affinity.jpeg',
-        loginUrl: 'http://affinity.grupogarciaseguradoras.com.br/login',
+        loginUrl: 'https://affinity.grupogarciaseguradoras.com.br/login',
         isBoutique: false,
         chips: ['Conexão', 'Oportunidades', 'Comunidade'],
         diferenciais: [
@@ -82,7 +82,7 @@ dataset_code = '''    // ==================== DATASET DE LOJAS (SINGLE SOURCE OF
         ]
       },
       {
-        slug: 'assury',
+        slug: 'as-sure',
         nome: 'AS.SURE',
         imageSrc: 'fachada_assure.jpeg',
         loginUrl: 'https://assury.grupogarciaseguradoras.com.br/login',
