@@ -27,39 +27,183 @@ video {
   z-index: -1;
 }
 
+/* ── Diplan CEO Authority Section ── */
 .section-diplan-ceo {
+  position: relative;
+  overflow: hidden;
   width: 100%;
-  background: #0b0b0d;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 0;
+  background:
+    radial-gradient(circle at center, rgba(212, 167, 74, 0.12) 0%, rgba(212, 167, 74, 0.04) 28%, rgba(11, 11, 13, 0) 58%),
+    linear-gradient(180deg, #0b0b0d 0%, #09090b 100%);
+  padding: 96px 20px 88px;
   margin: 0;
 }
 
-.section-diplan-ceo img {
-  max-width: 100%;
-  height: auto;
-  display: block;
+.section-diplan-ceo::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 50% 18%, rgba(255, 255, 255, 0.04), transparent 32%),
+    linear-gradient(90deg, rgba(0, 0, 0, 0.22), transparent 18%, transparent 82%, rgba(0, 0, 0, 0.22));
 }
 
-.ceo-mobile {
+.diplan-ceo-shell {
+  position: relative;
+  z-index: 1;
+  max-width: 1240px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 34px;
+}
+
+.diplan-ceo-copy {
+  max-width: 760px;
+  text-align: center;
+}
+
+.diplan-eyebrow {
+  display: inline-block;
+  margin-bottom: 14px;
+  font-size: 12px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(212, 167, 74, 0.9);
+}
+
+.diplan-ceo-copy h2 {
+  margin: 0;
+  font-size: clamp(2rem, 3.8vw, 3.4rem);
+  line-height: 1.05;
+  font-weight: 700;
+  color: #f7f3ea;
+}
+
+.diplan-ceo-copy p {
+  margin: 18px auto 0;
+  max-width: 700px;
+  font-size: clamp(1rem, 1.4vw, 1.1rem);
+  line-height: 1.75;
+  color: rgba(255, 255, 255, 0.74);
+}
+
+.diplan-ceo-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 54px;
+  padding: 0 28px;
+  margin-top: 28px;
+  border-radius: 999px;
+  text-decoration: none;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: #0b0b0d;
+  background: linear-gradient(180deg, #f2d27a 0%, #d4a74a 100%);
+  box-shadow: 0 10px 30px rgba(212, 167, 74, 0.22);
+  transition: transform 180ms ease, box-shadow 180ms ease, filter 180ms ease;
+}
+
+.diplan-ceo-cta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 40px rgba(212, 167, 74, 0.28);
+  filter: brightness(1.03);
+}
+
+.diplan-ceo-art {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.diplan-ceo-art img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-width: 1180px;
+}
+
+.section-diplan-ceo .ceo-mobile {
   display: none;
 }
 
+/* ── Scroll Reveal ── */
+.reveal-up {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 700ms ease, transform 700ms ease;
+}
+
+.reveal-up.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── Footer ── */
+.footer {
+  background: #09090b;
+  padding: 28px 20px 42px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.footer-divider {
+  width: min(1180px, 100%);
+  height: 1px;
+  margin-bottom: 22px;
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0), rgba(212, 167, 74, 0.35), rgba(255, 255, 255, 0));
+}
+
+.footer .footer-main {
+  display: flex;
+  justify-content: center;
+  margin-top: 18px;
+}
+
 .grupo-garcia-logo {
-  width: 160px;
-  margin-top: 20px;
-  opacity: 0.85;
+  width: min(190px, 46vw);
+  height: auto;
+  opacity: 0.88;
 }
 
 @media (max-width: 768px) {
-  .ceo-desktop {
+  .section-diplan-ceo {
+    padding: 72px 16px 64px;
+  }
+
+  .diplan-ceo-shell {
+    gap: 24px;
+  }
+
+  .diplan-eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.18em;
+  }
+
+  .diplan-ceo-copy p {
+    line-height: 1.65;
+  }
+
+  .diplan-ceo-cta {
+    width: 100%;
+    max-width: 340px;
+    min-height: 52px;
+    padding: 0 20px;
+  }
+
+  .section-diplan-ceo .ceo-desktop {
     display: none;
   }
 
-  .ceo-mobile {
+  .section-diplan-ceo .ceo-mobile {
     display: block;
+  }
+
+  .grupo-garcia-logo {
+    width: min(170px, 54vw);
   }
 }
