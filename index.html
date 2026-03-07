@@ -2961,7 +2961,8 @@
       </form>
       <div class="modal-success" id="modalSuccess" style="display:none;">
         <div class="modal-success-icon">✅</div>
-        <h3>Cadastro enviado para análise. Você será contatado em breve.</h3>
+        <h3>Cadastro enviado para análise!</h3>
+        <p>O supervisor da loja receberá seu perfil e entrará em contato em breve.</p>
       </div>
     </div>
   </div>
@@ -3276,7 +3277,7 @@
     const BACKEND_BASE_URL = (
       window.NEXT_PUBLIC_CRM_API_BASE_URL ||
       window.CRM_API_BASE_URL ||
-      'http://localhost:3000'
+      window.location.origin
     ).replace(/\/$/, '');
 
 
