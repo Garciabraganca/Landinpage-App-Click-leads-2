@@ -3273,16 +3273,56 @@
     // Expose globally for DevTools diagnostics
     window.COVERFLOW_STORES = COVERFLOW_STORES;
 
-    const BACKEND_BASE_URL = (
-      window.NEXT_PUBLIC_CRM_API_BASE_URL ||
-      window.CRM_API_BASE_URL ||
-      'http://localhost:3000'
-    ).replace(/\/$/, '');
+    function getEnvironment() {
+      const hostname = (window.location.hostname || '').toLowerCase();
+      if (window.location.protocol === 'file:' || hostname === 'localhost' || hostname === '127.0.0.1') {
+        return 'local';
+      }
+
+      if (hostname.endsWith('.vercel.app') || hostname.includes('preview')) {
+        return 'preview';
+      }
+
+      return 'production';
+    }
+
+    function resolveBackendBaseUrl() {
+      const explicitBaseUrl = window.NEXT_PUBLIC_CRM_API_BASE_URL || window.CRM_API_BASE_URL;
+      if (explicitBaseUrl) {
+        return explicitBaseUrl.replace(/\/$/, '');
+      }
+
+      if (window.location.protocol === 'file:') {
+        return 'http://localhost:5501';
+      }
+
+      const hostname = window.location.hostname;
+      const isLocalHost = hostname === 'localhost' || hostname === '127.0.0.1';
+      if (isLocalHost) {
+        if (window.location.port === '5501') {
+          return window.location.origin.replace(/\/$/, '');
+        }
+
+        return `${window.location.protocol}//${hostname}:5501`;
+      }
+
+      return window.location.origin.replace(/\/$/, '');
+    }
+
+    const BACKEND_BASE_URL = resolveBackendBaseUrl();
+    const UTM_STORAGE_KEY = 'clickleads.utm.v1';
+    const ANALYTICS_DEDUPE_WINDOW_MS = 1500;
+    const analyticsEventTimestamps = new Map();
+    const ANALYTICS_DEBUG = getEnvironment() !== 'production' || getUrlParams().get('analytics_debug') === '1';
 
 
     document.addEventListener('DOMContentLoaded', function () {
+      persistAttributionParams();
+      populateTrackingFields();
       renderCoverflowSlides();
+      initProfileSubmissionStepTracking();
       initComoEntrarForm();
+      initModalForm();
 
       // ==================== FORÇAR PLAY DO VÍDEO HERO ====================
       var heroVideo = document.getElementById('heroVideo');
@@ -3697,10 +3737,669 @@
       });
     }
 
+    function cleanAnalyticsPayload(payload) {
+      return Object.entries(payload || {}).reduce(function (accumulator, entry) {
+        const key = entry[0];
+        const value = entry[1];
+
+        if (value === undefined || value === null) {
+          return accumulator;
+        }
+
+        if (typeof value === 'string') {
+          const trimmedValue = value.trim();
+          if (!trimmedValue) {
+            return accumulator;
+          }
+
+          accumulator[key] = trimmedValue;
+          return accumulator;
+        }
+
+        if (typeof value === 'number' && Number.isNaN(value)) {
+          return accumulator;
+        }
+
+        accumulator[key] = value;
+        return accumulator;
+      }, {});
+    }
+
+    function getAvailableStorage(storageName) {
+      try {
+        const storage = window[storageName];
+        const probeKey = `${UTM_STORAGE_KEY}.probe`;
+        storage.setItem(probeKey, '1');
+        storage.removeItem(probeKey);
+        return storage;
+      } catch (_) {
+        return null;
+      }
+    }
+
+    function getAttributionStorage() {
+      return getAvailableStorage('sessionStorage') || getAvailableStorage('localStorage');
+    }
+
+    function readPersistedAttribution() {
+      const storage = getAttributionStorage();
+      if (!storage) {
+        return {};
+      }
+
+      try {
+        const rawValue = storage.getItem(UTM_STORAGE_KEY);
+        if (!rawValue) {
+          return {};
+        }
+
+        const parsed = JSON.parse(rawValue);
+        return parsed && typeof parsed === 'object' ? parsed : {};
+      } catch (_) {
+        return {};
+      }
+    }
+
+    function persistAttributionParams() {
+      const params = getUrlParams();
+      const persisted = readPersistedAttribution();
+      const updated = { ...persisted };
+      let hasChanges = false;
+
+      [
+        ['utm_source', 'source'],
+        ['utm_medium', 'medium'],
+        ['utm_campaign', 'campaign'],
+        ['utm_content', 'content'],
+        ['utm_term', 'term']
+      ].forEach(function (mapping) {
+        const queryKey = mapping[0];
+        const payloadKey = mapping[1];
+        const value = (params.get(queryKey) || '').trim();
+        if (!value) {
+          return;
+        }
+
+        if (updated[payloadKey] !== value) {
+          updated[payloadKey] = value;
+          hasChanges = true;
+        }
+      });
+
+      const storage = getAttributionStorage();
+      if (hasChanges && storage) {
+        try {
+          storage.setItem(UTM_STORAGE_KEY, JSON.stringify(updated));
+        } catch (_) {
+          // Ignore storage failures and continue without breaking the page.
+        }
+      }
+
+      return cleanAnalyticsPayload(updated);
+    }
+
+    function getAttributionData() {
+      return persistAttributionParams();
+    }
+
+    function populateTrackingFields() {
+      const attribution = getAttributionData();
+      const fieldMap = {
+        utmSource: attribution.source || '',
+        utmCampaign: attribution.campaign || '',
+        utmMedium: attribution.medium || '',
+        utmContent: attribution.content || '',
+        utmTerm: attribution.term || ''
+      };
+
+      Object.keys(fieldMap).forEach(function (fieldId) {
+        const field = document.getElementById(fieldId);
+        if (field) {
+          field.value = fieldMap[fieldId];
+        }
+      });
+
+      const pageUrlField = document.getElementById('pageUrlField');
+      if (pageUrlField) {
+        pageUrlField.value = window.location.href;
+      }
+    }
+
+    function resolveTenantSlug() {
+      const knownSlugs = Array.from(new Set(
+        STORES.map(store => store.slug).concat(BROKER_APPLICATION_STORES.map(store => store.slug))
+      ));
+      const segments = window.location.pathname
+        .split('/')
+        .map(part => part.trim().toLowerCase())
+        .filter(Boolean)
+        .filter(part => part !== 'index.html');
+
+      const routeSlug = segments.length ? segments[segments.length - 1] : '';
+      return knownSlugs.includes(routeSlug) ? routeSlug : 'default';
+    }
+
+    function buildBaseAnalyticsPayload() {
+      const attribution = getAttributionData();
+      return cleanAnalyticsPayload({
+        tenant: resolveTenantSlug(),
+        page_location: window.location.href,
+        page_title: document.title,
+        source: attribution.source,
+        medium: attribution.medium,
+        campaign: attribution.campaign,
+        content: attribution.content,
+        term: attribution.term,
+        environment: getEnvironment()
+      });
+    }
+
+    function normalizeErrorMessage(value) {
+      const message = (value || '').toString().trim();
+      if (!message) {
+        return '';
+      }
+
+      return message.slice(0, 180);
+    }
+
+    function getResponseValue(responseData) {
+      const keys = Array.prototype.slice.call(arguments, 1);
+      for (let index = 0; index < keys.length; index += 1) {
+        const key = keys[index];
+        if (responseData && responseData[key] !== undefined && responseData[key] !== null && responseData[key] !== '') {
+          return responseData[key];
+        }
+      }
+
+      return '';
+    }
+
+    function buildSubmissionAnalyticsPayload(options) {
+      const settings = options || {};
+      const store = settings.store || null;
+      const responseData = settings.responseData || {};
+      return cleanAnalyticsPayload({
+        loja: settings.loja || (store ? (store.name || store.nome || '') : ''),
+        filialSlug: settings.filialSlug || getResponseValue(responseData, 'filialSlug', 'filial_slug'),
+        supervisor: settings.supervisor || getResponseValue(responseData, 'supervisor'),
+        profile_type: settings.profile_type || getResponseValue(responseData, 'profile_type', 'profileType'),
+        destination_channel: settings.destination_channel || getResponseValue(responseData, 'destination_channel'),
+        city: settings.city || getResponseValue(responseData, 'city'),
+        state: settings.state || getResponseValue(responseData, 'state'),
+        success: settings.success,
+        error_message: normalizeErrorMessage(settings.error_message)
+      });
+    }
+
+    function debugLog(label, payload, level) {
+      if (!ANALYTICS_DEBUG) {
+        return;
+      }
+
+      const logLevel = level || 'info';
+      const logger = typeof console[logLevel] === 'function' ? console[logLevel] : console.log;
+      logger.call(console, `[Analytics] ${label}`, payload || {});
+    }
+
+    function sendAnalyticsEvent(eventName, payload, options) {
+      const settings = options || {};
+      const finalPayload = cleanAnalyticsPayload({
+        ...buildBaseAnalyticsPayload(),
+        ...(payload || {})
+      });
+
+      const dedupeKey = settings.dedupeKey || `${eventName}:${JSON.stringify(finalPayload)}`;
+      const now = Date.now();
+      const dedupeWindow = settings.windowMs || ANALYTICS_DEDUPE_WINDOW_MS;
+      const previousTimestamp = analyticsEventTimestamps.get(dedupeKey);
+      if (previousTimestamp && (settings.once || now - previousTimestamp < dedupeWindow)) {
+        debugLog(`Skipping duplicate ${eventName}`, { dedupeKey, payload: finalPayload });
+        return false;
+      }
+
+      analyticsEventTimestamps.set(dedupeKey, now);
+      debugLog(`Sending ${eventName}`, finalPayload);
+
+      if (typeof window.gtag === 'function') {
+        window.gtag('event', eventName, finalPayload);
+        return true;
+      }
+
+      if (Array.isArray(window.dataLayer)) {
+        window.dataLayer.push({ event: eventName, ...finalPayload });
+        return true;
+      }
+
+      debugLog(`GA4 unavailable for ${eventName}`, finalPayload, 'warn');
+      return false;
+    }
+
+    function inferProfileType(rawValue) {
+      const trimmed = (rawValue || '').trim();
+      if (!trimmed) {
+        return '';
+      }
+
+      const prefixed = /^https?:\/\//i.test(trimmed) ? trimmed : `https://${trimmed}`;
+      try {
+        const parsed = new URL(prefixed);
+        const hostname = parsed.hostname.toLowerCase();
+
+        if (hostname === 'linkedin.com' || hostname.endsWith('.linkedin.com')) {
+          return 'linkedin';
+        }
+
+        if (hostname === 'instagram.com' || hostname.endsWith('.instagram.com')) {
+          return 'instagram';
+        }
+
+        if (
+          hostname === 'facebook.com' ||
+          hostname.endsWith('.facebook.com') ||
+          hostname === 'fb.com' ||
+          hostname.endsWith('.fb.com')
+        ) {
+          return 'facebook';
+        }
+
+        return 'other';
+      } catch (_) {
+        return '';
+      }
+    }
+
+    function initProfileSubmissionStepTracking() {
+      const stepSection = document.getElementById('como-entrar');
+      if (!stepSection) {
+        return;
+      }
+
+      const fireViewEvent = function () {
+        debugLog('Profile submission step viewed', { section: 'como-entrar' });
+        sendAnalyticsEvent('view_profile_submission_step', {}, {
+          dedupeKey: 'view_profile_submission_step:como-entrar',
+          once: true
+        });
+      };
+
+      if ('IntersectionObserver' in window) {
+        const observer = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (!entry.isIntersecting) {
+              return;
+            }
+
+            observer.unobserve(entry.target);
+            fireViewEvent();
+          });
+        }, { threshold: 0.35 });
+
+        observer.observe(stepSection);
+        return;
+      }
+
+      fireViewEvent();
+    }
+
+    function trackStoreSelection(store, surface) {
+      if (!store || !store.slug) {
+        return;
+      }
+
+      debugLog('Store selected', { surface, store: store.slug });
+      sendAnalyticsEvent('select_store', buildSubmissionAnalyticsPayload({ store }), {
+        dedupeKey: `select_store:${surface}:${store.slug}`
+      });
+    }
+
+    function trackProfileTypeSelection(rawValue, options) {
+      const profileType = inferProfileType(rawValue);
+      if (!profileType) {
+        return '';
+      }
+
+      const settings = options || {};
+      const store = settings.store || null;
+      debugLog('Profile type informed', {
+        surface: settings.surface,
+        profile_type: profileType,
+        store: store ? store.slug : ''
+      });
+
+      sendAnalyticsEvent('select_profile_type', buildSubmissionAnalyticsPayload({
+        store,
+        profile_type: profileType
+      }), {
+        dedupeKey: `select_profile_type:${settings.surface}:${store ? store.slug : 'unknown'}:${profileType}`
+      });
+
+      return profileType;
+    }
+
+    function emitLegacyLeadSuccess(payload) {
+      const tenantLabel = payload.tenant || resolveTenantSlug();
+
+      if (typeof fbq !== 'undefined') {
+        fbq('track', 'Lead', { content_name: tenantLabel });
+      }
+
+      if (typeof window.gtag === 'function') {
+        window.gtag('event', 'generate_lead', cleanAnalyticsPayload({
+          event_category: 'formulario',
+          event_label: tenantLabel,
+          loja: payload.loja
+        }));
+      }
+    }
+
+    function emitSubmissionSuccess(options) {
+      const settings = options || {};
+      const analyticsPayload = buildSubmissionAnalyticsPayload({
+        store: settings.store,
+        responseData: settings.responseData,
+        profile_type: settings.profile_type,
+        success: true
+      });
+      const finalPayload = cleanAnalyticsPayload({
+        ...buildBaseAnalyticsPayload(),
+        ...analyticsPayload
+      });
+      const requestId = getResponseValue(settings.responseData || {}, 'request_id') || `${settings.surface}:${settings.store ? settings.store.slug : 'unknown'}`;
+
+      debugLog('Backend returned success', {
+        surface: settings.surface,
+        payload: finalPayload,
+        response: settings.responseData || {}
+      });
+
+      sendAnalyticsEvent('profile_submission_success', analyticsPayload, {
+        dedupeKey: `profile_submission_success:${requestId}`
+      });
+      emitLegacyLeadSuccess(finalPayload);
+    }
+
+    function emitSubmissionError(options) {
+      const settings = options || {};
+      const analyticsPayload = buildSubmissionAnalyticsPayload({
+        store: settings.store,
+        responseData: settings.responseData,
+        profile_type: settings.profile_type,
+        success: false,
+        error_message: settings.error_message
+      });
+      const finalPayload = cleanAnalyticsPayload({
+        ...buildBaseAnalyticsPayload(),
+        ...analyticsPayload
+      });
+
+      debugLog('Backend returned error', {
+        surface: settings.surface,
+        payload: finalPayload,
+        response: settings.responseData || {}
+      }, 'warn');
+
+      sendAnalyticsEvent('profile_submission_error', analyticsPayload, {
+        dedupeKey: settings.dedupeKey || `profile_submission_error:${settings.surface}:${settings.store ? settings.store.slug : 'unknown'}:${normalizeErrorMessage(settings.error_message)}`
+      });
+    }
+
+    function getSubmissionErrorMessage(error) {
+      if (!error) {
+        return 'unexpected_error';
+      }
+
+      if (error.code === 'timeout') {
+        return 'timeout';
+      }
+
+      if (error.status) {
+        return `${error.message || 'http_error'} (status ${error.status})`;
+      }
+
+      return normalizeErrorMessage(error.message) || 'unexpected_error';
+    }
+
+    function isValidHttpUrl(value) {
+      try {
+        const parsed = new URL(value);
+        return parsed.protocol === 'http:' || parsed.protocol === 'https:';
+      } catch (_) {
+        return false;
+      }
+    }
+
+    function normalizeProfileUrl(rawValue) {
+      const trimmed = (rawValue || '').trim();
+      if (!trimmed) {
+        return { ok: false, reason: 'empty' };
+      }
+
+      const prefixed = /^https?:\/\//i.test(trimmed) ? trimmed : `https://${trimmed}`;
+      if (!isValidHttpUrl(prefixed)) {
+        return { ok: false, reason: 'invalid_url' };
+      }
+
+      const parsed = new URL(prefixed);
+      const hostname = parsed.hostname.toLowerCase();
+      const isAllowedDomain = ALLOWED_PROFILE_DOMAINS.some(domain => hostname === domain || hostname.endsWith(`.${domain}`));
+
+      if (!isAllowedDomain) {
+        return { ok: false, reason: 'invalid_domain' };
+      }
+
+      return { ok: true, normalized: parsed.toString() };
+    }
+
+    function findBrokerStoreBySlug(slug) {
+      return BROKER_APPLICATION_STORES.find(store => store.slug === slug) || null;
+    }
+
+    function isAllowedStoreSlug(slug) {
+      return BROKER_APPLICATION_STORES.some(store => store.slug === slug)
+        || STORES.some(store => store.slug === slug);
+    }
+
+    function tryParseJson(rawValue) {
+      if (!rawValue) {
+        return null;
+      }
+
+      try {
+        return JSON.parse(rawValue);
+      } catch (_) {
+        return null;
+      }
+    }
+
+    async function sendBrokerApplication(payload) {
+      const controller = new AbortController();
+      const timeoutId = window.setTimeout(function () {
+        controller.abort();
+      }, 10000);
+
+      try {
+        const response = await fetch(`${BACKEND_BASE_URL}/api/broker-applications`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(payload),
+          signal: controller.signal
+        });
+        const rawBody = await response.text();
+        const responseData = tryParseJson(rawBody) || {};
+
+        if (!response.ok || responseData.success === false) {
+          const error = new Error(responseData.error || responseData.message || `HTTP ${response.status}`);
+          error.status = response.status;
+          error.responseData = responseData;
+          throw error;
+        }
+
+        return {
+          success: true,
+          status: response.status,
+          ...responseData
+        };
+      } catch (error) {
+        if (error.name === 'AbortError') {
+          const timeoutError = new Error('Request timeout');
+          timeoutError.code = 'timeout';
+          throw timeoutError;
+        }
+
+        throw error;
+      } finally {
+        window.clearTimeout(timeoutId);
+      }
+    }
+
+    function buildBrokerApplicationPayload(options) {
+      return {
+        event_type: 'broker_application',
+        store_slug: options.store.slug,
+        store_name: options.store.name,
+        profile_url: options.profileUrl,
+        submitted_at: new Date().toISOString(),
+        page: options.page,
+        tenantSlug: resolveTenantSlug(),
+        utm: getAttributionData(),
+        pageUrl: window.location.href
+      };
+    }
+
+    function initComoEntrarForm() {
+      const form = document.getElementById('comoEntrarForm');
+      if (!form) {
+        return;
+      }
+
+      const surface = 'como_entrar';
+      const storeField = document.getElementById('comoEntrarStore');
+      const profileField = document.getElementById('comoEntrarProfileUrl');
+      const submitBtn = document.getElementById('comoEntrarSubmitBtn');
+      const statusEl = document.getElementById('comoEntrarFormStatus');
+
+      storeField.addEventListener('change', function () {
+        const selectedStore = findBrokerStoreBySlug(storeField.value);
+        if (selectedStore) {
+          trackStoreSelection(selectedStore, surface);
+        }
+      });
+
+      profileField.addEventListener('change', function () {
+        const selectedStore = findBrokerStoreBySlug(storeField.value);
+        trackProfileTypeSelection(profileField.value, {
+          surface,
+          store: selectedStore
+        });
+      });
+
+      submitBtn.addEventListener('click', function () {
+        const selectedStore = findBrokerStoreBySlug(storeField.value);
+        const profileType = inferProfileType(profileField.value);
+        debugLog('Profile submit clicked', {
+          surface,
+          store: selectedStore ? selectedStore.slug : '',
+          profile_type: profileType
+        });
+
+        sendAnalyticsEvent('click_profile_submit', buildSubmissionAnalyticsPayload({
+          store: selectedStore,
+          profile_type: profileType
+        }), {
+          dedupeKey: `click_profile_submit:${surface}:${selectedStore ? selectedStore.slug : 'unknown'}:${profileType || 'unknown'}`
+        });
+      });
+
+      form.addEventListener('submit', async function (e) {
+        e.preventDefault();
+        statusEl.classList.remove('success');
+        statusEl.textContent = '';
+
+        const selectedOption = storeField.selectedOptions && storeField.selectedOptions[0] ? storeField.selectedOptions[0] : null;
+        const fallbackStore = storeField.value ? {
+          slug: storeField.value,
+          name: selectedOption ? (selectedOption.dataset.storeName || selectedOption.textContent || storeField.value) : storeField.value
+        } : null;
+        const selectedStore = findBrokerStoreBySlug(storeField.value) || fallbackStore;
+        if (!selectedStore || !selectedStore.slug || !findBrokerStoreBySlug(selectedStore.slug)) {
+          statusEl.textContent = 'Selecione uma loja para continuar.';
+          emitSubmissionError({
+            surface,
+            store: fallbackStore,
+            profile_type: inferProfileType(profileField.value),
+            error_message: 'validation_error: store_required',
+            dedupeKey: `profile_submission_error:${surface}:store_required`
+          });
+          return;
+        }
+
+        const normalized = normalizeProfileUrl(profileField.value);
+        if (!normalized.ok) {
+          const validationMessage = normalized.reason === 'invalid_domain'
+            ? 'Use um link de LinkedIn, Instagram, Facebook ou fb.com.'
+            : 'Informe um link de perfil valido.';
+          statusEl.textContent = validationMessage;
+          emitSubmissionError({
+            surface,
+            store: selectedStore,
+            profile_type: inferProfileType(profileField.value),
+            error_message: `validation_error: ${normalized.reason}`
+          });
+          return;
+        }
+
+        trackStoreSelection(selectedStore, surface);
+        const profileType = trackProfileTypeSelection(normalized.normalized, {
+          surface,
+          store: selectedStore
+        });
+
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Enviando...';
+
+        const payload = buildBrokerApplicationPayload({
+          store: selectedStore,
+          profileUrl: normalized.normalized,
+          page: 'landing_dobra4_como_entrar'
+        });
+
+        try {
+          const responseData = await sendBrokerApplication(payload);
+          statusEl.classList.add('success');
+          statusEl.textContent = responseData.user_message || 'Perfil enviado. O supervisor da loja sera notificado.';
+          emitSubmissionSuccess({
+            surface,
+            store: selectedStore,
+            profile_type: profileType,
+            responseData
+          });
+          form.reset();
+        } catch (err) {
+          const errorMessage = getSubmissionErrorMessage(err);
+          statusEl.textContent = 'Nao foi possivel enviar agora. Tente novamente em instantes.';
+          emitSubmissionError({
+            surface,
+            store: selectedStore,
+            profile_type: profileType || inferProfileType(profileField.value),
+            responseData: err.responseData || {},
+            error_message: errorMessage
+          });
+        } finally {
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Enviar para analise';
+        }
+      });
+    }
+
     // Abre modal com diferenciais da loja
-    function openModal(slug) {
+    function openModal(slug, options) {
       const data = getStoreData(slug);
       if (!data) return;
+      const settings = options || {};
+      const storeForTracking = { slug: data.slug, name: data.nome };
 
       document.getElementById('modalStoreName').textContent = data.nome;
       document.getElementById('modalStoreRole').textContent = data.role;
@@ -3725,6 +4424,154 @@
 
       document.getElementById('modalDiferenciais').classList.add('active');
       document.body.style.overflow = 'hidden';
+
+      sendAnalyticsEvent('view_profile_submission_step', buildSubmissionAnalyticsPayload({
+        store: storeForTracking
+      }), {
+        dedupeKey: `view_profile_submission_step:modal:${data.slug}`,
+        once: true
+      });
+
+      if (settings.trackSelection) {
+        trackStoreSelection(storeForTracking, settings.surface || 'modal');
+      }
+    }
+
+    function initModalForm() {
+      const existingForm = document.getElementById('modalForm');
+      if (!existingForm || !existingForm.parentNode) {
+        return;
+      }
+
+      const clonedForm = existingForm.cloneNode(true);
+      existingForm.parentNode.replaceChild(clonedForm, existingForm);
+
+      const surface = 'modal';
+      const btn = document.getElementById('formSubmitBtn');
+      const statusEl = document.getElementById('modalFormStatus');
+      const storeNameField = document.getElementById('formStoreName');
+      const storeSlugField = document.getElementById('formStoreSlug');
+      const profileField = document.getElementById('formProfileUrl');
+      const successText = document.querySelector('#modalSuccess h3');
+
+      profileField.addEventListener('change', function () {
+        const storeSlug = (storeSlugField.value || '').trim();
+        const storeName = (storeNameField.value || '').trim();
+        const store = storeSlug ? { slug: storeSlug, name: storeName || storeSlug } : null;
+        trackProfileTypeSelection(profileField.value, {
+          surface,
+          store
+        });
+      });
+
+      btn.addEventListener('click', function () {
+        const storeSlug = (storeSlugField.value || '').trim();
+        const storeName = (storeNameField.value || '').trim();
+        const store = storeSlug ? { slug: storeSlug, name: storeName || storeSlug } : null;
+        const profileType = inferProfileType(profileField.value);
+
+        debugLog('Profile submit clicked', {
+          surface,
+          store: store ? store.slug : '',
+          profile_type: profileType
+        });
+
+        sendAnalyticsEvent('click_profile_submit', buildSubmissionAnalyticsPayload({
+          store,
+          profile_type: profileType
+        }), {
+          dedupeKey: `click_profile_submit:${surface}:${store ? store.slug : 'unknown'}:${profileType || 'unknown'}`
+        });
+      });
+
+      clonedForm.addEventListener('submit', async function (e) {
+        e.preventDefault();
+
+        const storeName = (storeNameField.value || '').trim();
+        const storeSlug = (storeSlugField.value || '').trim();
+        const store = storeSlug ? { slug: storeSlug, name: storeName || storeSlug } : null;
+        const normalizedProfile = normalizeProfileUrl(profileField.value);
+
+        statusEl.classList.remove('success');
+        statusEl.textContent = '';
+
+        if (!isAllowedStoreSlug(storeSlug)) {
+          statusEl.textContent = 'Loja invalida. Reabra o card e tente novamente.';
+          emitSubmissionError({
+            surface,
+            store,
+            profile_type: inferProfileType(profileField.value),
+            error_message: 'validation_error: invalid_store'
+          });
+          return;
+        }
+
+        if (!normalizedProfile.ok) {
+          statusEl.textContent = normalizedProfile.reason === 'invalid_domain'
+            ? 'Use um link de LinkedIn, Instagram, Facebook ou fb.com.'
+            : 'Informe um link de perfil valido.';
+          emitSubmissionError({
+            surface,
+            store,
+            profile_type: inferProfileType(profileField.value),
+            error_message: `validation_error: ${normalizedProfile.reason}`
+          });
+          return;
+        }
+
+        if (!storeName || !storeSlug) {
+          statusEl.textContent = 'Selecione uma loja e tente novamente.';
+          emitSubmissionError({
+            surface,
+            store,
+            profile_type: inferProfileType(profileField.value),
+            error_message: 'validation_error: store_missing'
+          });
+          return;
+        }
+
+        trackStoreSelection(store, surface);
+        const profileType = trackProfileTypeSelection(normalizedProfile.normalized, {
+          surface,
+          store
+        });
+
+        btn.disabled = true;
+        btn.textContent = 'Enviando...';
+
+        const payload = buildBrokerApplicationPayload({
+          store,
+          profileUrl: normalizedProfile.normalized,
+          page: 'landing_modal_diferenciais'
+        });
+
+        try {
+          const responseData = await sendBrokerApplication(payload);
+          document.getElementById('modalForm').style.display = 'none';
+          document.getElementById('modalSuccess').style.display = '';
+          if (successText) {
+            successText.textContent = responseData.user_message || 'Cadastro enviado para analise. Voce sera contatado em breve.';
+          }
+
+          emitSubmissionSuccess({
+            surface,
+            store,
+            profile_type: profileType,
+            responseData
+          });
+        } catch (err) {
+          btn.disabled = false;
+          btn.textContent = 'Enviar cadastro';
+          statusEl.textContent = 'Nao foi possivel enviar agora. Tente novamente em instantes.';
+          emitSubmissionError({
+            surface,
+            store,
+            profile_type: profileType || inferProfileType(profileField.value),
+            responseData: err.responseData || {},
+            error_message: getSubmissionErrorMessage(err)
+          });
+        }
+      });
     }
 
     function closeModal() {
@@ -3847,7 +4694,10 @@
       // Também abre no click para mobile
       card.addEventListener('click', (e) => {
         if (e.target.closest('.loja-card-socials')) return;
-        openModal(card.getAttribute('data-store'));
+        openModal(card.getAttribute('data-store'), {
+          trackSelection: true,
+          surface: 'modal'
+        });
       });
     });
 

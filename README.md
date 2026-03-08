@@ -125,3 +125,24 @@ Payload enviado:
 }
 ```
 
+## Analytics e broker applications
+
+- Fallback local do frontend: `http://localhost:5501`
+- Fallback sem variavel explicita em preview/producao: `window.location.origin`
+- Eventos GA4 implementados:
+  - `view_profile_submission_step`
+  - `select_store`
+  - `select_profile_type`
+  - `click_profile_submit`
+  - `profile_submission_success`
+  - `profile_submission_error`
+- UTMs persistidas na sessao: `utm_source`, `utm_medium`, `utm_campaign`, `utm_content`, `utm_term`
+- Proxy opcional do backend:
+  - `BROKER_APPLICATIONS_TARGET_URL=https://seu-backend.com/api/broker-applications`
+  - `BROKER_APPLICATIONS_DESTINATION_URLS=https://destino-1.com/hook,https://destino-2.com/hook`
+  - `BROKER_APPLICATIONS_TIMEOUT_MS=10000`
+- Regra de sucesso:
+  - com destino configurado, todos os destinos precisam retornar sucesso
+  - sem destino configurado, `local` e `preview` aceitam apenas para teste com `destination_channel: "local_log"`
+  - sem destino configurado em `production`, a rota retorna `503` para evitar falso positivo
+
