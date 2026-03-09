@@ -127,6 +127,11 @@ Payload enviado:
 
 ## Analytics e broker applications
 
+
+- Variável de Assistant suportada:
+  - `ASSISTANT_ID_OPENAI` (canônica)
+  - `OPENAI_ASSISTANT_ID` (legado)
+
 - Fallback local do frontend: `http://localhost:5501`
 - Fallback sem variavel explicita em preview/producao: `window.location.origin`
 - Eventos GA4 implementados:
@@ -144,5 +149,5 @@ Payload enviado:
 - Regra de sucesso:
   - com destino configurado, todos os destinos precisam retornar sucesso
   - sem destino configurado, `local` e `preview` aceitam apenas para teste com `destination_channel: "local_log"`
-  - sem destino configurado em `production`, a rota retorna `503` para evitar falso positivo
+  - sem destino configurado em `production`, a rota retorna `503` para evitar falso positivo (pode ser sobrescrito com `BROKER_APPLICATIONS_ALLOW_UNCONFIGURED=true` em cenários controlados)
 

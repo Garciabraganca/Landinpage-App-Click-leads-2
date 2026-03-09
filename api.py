@@ -31,20 +31,12 @@ def _load_openai_key():
     return api_key
 
 def _load_assistant_id():
-    """Load Assistant ID with fallback for common typos."""
+    """Load Assistant ID using canonical env names."""
     assistant_id = (
-        os.environ.get("ASSISTANT_ID_OPENAI") or
-        os.environ.get("ASSISTENT_ID_OPENAI") or
-        os.environ.get("OPENAI_ASSISTANT_ID")
+        os.environ.get("ASSISTANT_ID_OPENAI")
+        or os.environ.get("OPENAI_ASSISTANT_ID")
     )
-    
-    # Log warning if typo variant is used
-    if not os.environ.get("ASSISTANT_ID_OPENAI") and os.environ.get("ASSISTENT_ID_OPENAI"):
-        app.logger.warning(
-            "[ASSISTANT_ID_TYPO] Using ASSISTENT_ID_OPENAI (typo). "
-            "Please rename to ASSISTANT_ID_OPENAI in environment."
-        )
-    
+
     if assistant_id:
         assistant_id = assistant_id.strip()
     return assistant_id
@@ -204,6 +196,12 @@ def _load_broker_destination_urls():
                 urls.append(url)
 
     return urls
+
+
+def _allow_unconfigured_broker_destination():
+    """Allow local-style acceptance without destinations when explicitly enabled."""
+    raw_value = (os.environ.get("BROKER_APPLICATIONS_ALLOW_UNCONFIGURED") or "").strip().lower()
+    return raw_value in {"1", "true", "yes", "on"}
 
 
 def _broker_timeout_seconds():
@@ -575,7 +573,7 @@ def broker_applications():
             })
             return jsonify(response_payload), 200
 
-        if normalized_payload["environment"] == "production":
+        if normalized_payload["environment"] == "production" and not _allow_unconfigured_broker_destination():
             app.logger.error(
                 "[BROKER_APPLICATION_UNCONFIGURED] request_id=%s store=%s",
                 request_id,
@@ -588,6 +586,13 @@ def broker_applications():
                 "configuration_error",
                 destination_channel="unconfigured",
                 profile_type=normalized_payload["profile_type"],
+            )
+
+        if normalized_payload["environment"] == "production":
+            app.logger.warning(
+                "[BROKER_APPLICATION_UNCONFIGURED_BYPASS] request_id=%s store=%s",
+                request_id,
+                store_slug,
             )
 
         app.logger.info(
