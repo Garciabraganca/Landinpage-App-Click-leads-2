@@ -127,6 +127,9 @@ Payload enviado:
 
 ## Analytics e broker applications
 
+> Nota: o endpoint de envio de perfil para CRM (`/api/broker-applications`) **não depende de OpenAI**.
+> As variáveis `OPENAI_API_KEY`/`ASSISTANT_ID_OPENAI` são usadas apenas no endpoint do chat (`/api/shopping-agent`).
+
 
 - Variável de Assistant suportada:
   - `ASSISTANT_ID_OPENAI` (canônica)

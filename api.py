@@ -41,21 +41,31 @@ def _load_assistant_id():
         assistant_id = assistant_id.strip()
     return assistant_id
 
-def _load_openai_client():
-    """Return an OpenAI client only when OPENAI_API_KEY is valid."""
+_openai_client = None
+_openai_client_ready = False
+
+
+def _get_openai_client(log_missing=False):
+    """Lazy-load OpenAI client only for endpoints that need it."""
+    global _openai_client, _openai_client_ready
+
+    if _openai_client_ready:
+        return _openai_client
+
     api_key = _load_openai_key()
     if not api_key or api_key == "local-dev-placeholder":
-        app.logger.error(
-            "[OPENAI_ENV_MISSING] OPENAI_API_KEY is missing or invalid. "
-            "Set a real key via environment variable."
-        )
+        if log_missing:
+            app.logger.error(
+                "[OPENAI_ENV_MISSING] OPENAI_API_KEY is missing or invalid. "
+                "Set a real key via environment variable."
+            )
+        _openai_client_ready = True
+        _openai_client = None
         return None
 
-    return OpenAI(api_key=api_key)
-
-
-client = _load_openai_client()
-assistant_id = _load_assistant_id()
+    _openai_client = OpenAI(api_key=api_key)
+    _openai_client_ready = True
+    return _openai_client
 
 # Configuration
 VECTOR_STORE_ID = os.environ.get(
@@ -296,6 +306,7 @@ def shopping_agent():
     }
     """
     try:
+        client = _get_openai_client(log_missing=True)
         if client is None:
             app.logger.error("[OPENAI_ENV_MISSING] Shopping Agent called without valid OpenAI client")
             return jsonify({
@@ -641,6 +652,8 @@ def health_openai():
     has_key = bool(api_key and api_key != "local-dev-placeholder")
     has_assistant = bool(assistant)
     
+    client = _get_openai_client(log_missing=False)
+
     return jsonify({
         "ok": has_key and client is not None,
         "hasOpenAIKey": has_key,
