@@ -3965,8 +3965,10 @@
       const settings = options || {};
       const store = settings.store || null;
       const responseData = settings.responseData || {};
+      const storeName = settings.loja || (store ? (store.name || store.nome || '') : '');
       return cleanAnalyticsPayload({
-        loja: settings.loja || (store ? (store.name || store.nome || '') : ''),
+        platform_name: storeName,
+        loja: storeName,
         filialSlug: settings.filialSlug || getResponseValue(responseData, 'filialSlug', 'filial_slug'),
         supervisor: settings.supervisor || getResponseValue(responseData, 'supervisor'),
         profile_type: settings.profile_type || getResponseValue(responseData, 'profile_type', 'profileType'),
@@ -4082,10 +4084,28 @@
         }, { threshold: 0.35 });
 
         observer.observe(stepSection);
-        return;
+      } else {
+        fireViewEvent();
       }
 
-      fireViewEvent();
+      // ==================== PLATFORM CARD VIEW ====================
+      const lojasSection = document.getElementById('lojas');
+      if (lojasSection && 'IntersectionObserver' in window) {
+        const lojasObserver = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (!entry.isIntersecting) return;
+            lojasObserver.unobserve(entry.target);
+            debugLog('Platforms section viewed', { section: 'lojas' });
+            sendAnalyticsEvent('platform_card_view', {
+              section_name: 'shopping_platforms'
+            }, {
+              dedupeKey: 'platform_card_view:lojas',
+              once: true
+            });
+          });
+        }, { threshold: 0.25 });
+        lojasObserver.observe(lojasSection);
+      }
     }
 
     function trackStoreSelection(store, surface) {
@@ -4159,7 +4179,10 @@
         response: settings.responseData || {}
       });
 
-      sendAnalyticsEvent('profile_submission_success', analyticsPayload, {
+      sendAnalyticsEvent('profile_submission_success', {
+        ...analyticsPayload,
+        profile_link_present: true
+      }, {
         dedupeKey: `profile_submission_success:${requestId}`
       });
       emitLegacyLeadSuccess(finalPayload);
@@ -4471,6 +4494,13 @@
       document.getElementById('modalDiferenciais').classList.add('active');
       document.body.style.overflow = 'hidden';
 
+      sendAnalyticsEvent('platform_card_open', {
+        platform_name: data.nome,
+        interaction_type: settings.interactionType || 'click'
+      }, {
+        dedupeKey: `platform_card_open:${data.slug}:${settings.interactionType || 'click'}`
+      });
+
       sendAnalyticsEvent('view_profile_submission_step', buildSubmissionAnalyticsPayload({
         store: storeForTracking
       }), {
@@ -4499,6 +4529,19 @@
       const storeSlugField = document.getElementById('formStoreSlug');
       const profileField = document.getElementById('formProfileUrl');
       const successText = document.querySelector('#modalSuccess h3');
+
+      profileField.addEventListener('focus', function () {
+        const storeSlug = (storeSlugField.value || '').trim();
+        const storeName = (storeNameField.value || '').trim();
+        const store = storeSlug ? { slug: storeSlug, name: storeName || storeSlug } : null;
+        debugLog('Profile submission start', { surface, store: storeSlug });
+        sendAnalyticsEvent('profile_submission_start', buildSubmissionAnalyticsPayload({
+          store
+        }), {
+          dedupeKey: `profile_submission_start:${surface}:${storeSlug || 'unknown'}`,
+          once: true
+        });
+      });
 
       profileField.addEventListener('change', function () {
         const storeSlug = (storeSlugField.value || '').trim();
@@ -4729,7 +4772,7 @@
 
       card.addEventListener('mouseenter', () => {
         hoverTimer = setTimeout(() => {
-          openModal(card.getAttribute('data-store'));
+          openModal(card.getAttribute('data-store'), { interactionType: 'hover' });
         }, 600); // 600ms de hover para abrir
       });
 
@@ -4742,7 +4785,8 @@
         if (e.target.closest('.loja-card-socials')) return;
         openModal(card.getAttribute('data-store'), {
           trackSelection: true,
-          surface: 'modal'
+          surface: 'modal',
+          interactionType: 'click'
         });
       });
     });
