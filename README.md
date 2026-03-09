@@ -11,8 +11,7 @@ Esta é a **versão 2025**, inspirada no layout ilustrado utilizado nas peças d
 - **CSS3** com layout responsivo
 - **Grid Layout + Flexbox**
 - **Imagens otimizadas** em /img
-- **Python/Flask** (para Shopping Agent API)
-- **OpenAI API** (Assistants com File Search)
+- **Python/Flask** (API de envio para CRM)
 - **Arquitetura de página estática + API backend** pronta para Vercel
 
 ---
@@ -23,69 +22,11 @@ Esta é a **versão 2025**, inspirada no layout ilustrado utilizado nas peças d
 .
 ├── index.html                 # Landing page principal
 ├── sections.html              # Seções reutilizáveis
-├── api.py                     # Shopping Agent API (Flask)
+├── api.py                     # API de broker applications (Flask)
 ├── README.md
 ├── requirements.txt           # Dependências Python
 └── .vscode/tasks.json
 ```
-
----
-
-## 🤖 Shopping Agent SAC (Novidade!)
-
-A landing possui um **Agente de Atendimento (SAC)** que responde perguntas sobre as plataformas do Shopping das Plataformas.
-
-### Features
-
-- ✅ Chat interativo com histórico
-- ✅ 8 perguntas pré-configuradas (chips/botões)
-- ✅ Integração com **OpenAI Assistants API** (File Search)
-- ✅ Responsivo (desktop + mobile)
-- ✅ Rate-limit básico e validação de entrada
-- ✅ Loading state e error handling
-
-### Setup Local
-
-1. **Instalar dependências Python:**
-```bash
-pip install -r requirements.txt
-```
-
-2. **Configurar variável de ambiente:**
-```bash
-export OPENAI_API_KEY="sua-chave-aqui"
-# ou no Windows:
-set OPENAI_API_KEY=sua-chave-aqui
-```
-
-3. **Rodar o servidor Flask (local):**
-```bash
-python api.py
-# Roda em http://localhost:5501 por padrão
-```
-
-4. **Rodar o servidor HTTP da landing (em outro terminal):**
-```bash
-python -m http.server 5500
-# Acesse em http://localhost:5500
-```
-
-5. **Testar no navegador:**
-Vá para `http://localhost:5500` e procure pela seção "Tire suas dúvidas agora"
-
-### Deployment (Vercel)
-
-1. **Variáveis de ambiente:**
-   - `OPENAI_API_KEY` (já configurada)
-   - `PORT` (opcional, padrão 5501)
-
-2. **Vector Store ID:**
-   - `vs_69a983fd9a1c819198605bb91633aa36` (hardcoded no `api.py`)
-
-3. **Notas:**
-   - O arquivo da base de conhecimento está associado ao Vector Store ID
-   - O modelo usado é `gpt-4o-mini`
-   - System prompt está em português brasileiro
 
 ---
 
@@ -144,5 +85,5 @@ Payload enviado:
 - Regra de sucesso:
   - com destino configurado, todos os destinos precisam retornar sucesso
   - sem destino configurado, `local` e `preview` aceitam apenas para teste com `destination_channel: "local_log"`
-  - sem destino configurado em `production`, a rota retorna `503` para evitar falso positivo
+  - sem destino configurado em `production`, a rota retorna `503` para evitar falso positivo (pode ser sobrescrito com `BROKER_APPLICATIONS_ALLOW_UNCONFIGURED=true` em cenários controlados)
 
