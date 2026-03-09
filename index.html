@@ -2748,6 +2748,17 @@
           <p>Atendimento VIP, estratégias para alto padrão, acesso antecipado e gerente dedicado.</p>
         </div>
       </div>
+
+      <!-- UNITED -->
+      <div class="loja-card" data-store="united">
+        <img src="/public/assets/images/card_united.png" alt="United" loading="lazy" decoding="async"
+          fetchpriority="low">
+        <div class="loja-card-content">
+          <h2>UNITED</h2>
+          <h3>Campanhas de Alto Valor</h3>
+          <p>Pagamento todo dia, premiações fortes e uma operação pensada para corretores que querem escala, presença e ganho recorrente.</p>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -3129,6 +3140,24 @@
           'Atendimento VIP com dedicação exclusiva',
           'Estratégias customizadas para alto padrão',
           'Consultoria estratégica premium'
+        ]
+      },
+      {
+        slug: 'united',
+        nome: 'United',
+        imageSrc: 'card_united.png',
+        loginUrl: 'https://united.grupogarciaseguradoras.com.br/login',
+        isBoutique: false,
+        chips: ['Pagamento Diário', 'Premiações', 'Escala'],
+        diferenciais: [
+          'Pagamento todo dia',
+          'Campanhas de alto valor para corretores',
+          'Premiações fortes e recorrentes',
+          'Operação pensada para escala comercial',
+          'Posicionamento de marca com presença',
+          'Estratégia para corretores que querem vender mais',
+          'Comunicação popular com alto poder de atração',
+          'Liderança comercial com identidade própria'
         ]
       }
     ];
@@ -3608,7 +3637,8 @@
         affinity: 'Rede de Profissionais',
         valorize: 'Programa de Reconhecimento',
         'as-sure': 'Segurança e Compliance',
-        diplan: 'Boutique Exclusiva'
+        diplan: 'Boutique Exclusiva',
+        united: 'Campanhas de Alto Valor'
       };
       return roles[slug] || '';
     }
