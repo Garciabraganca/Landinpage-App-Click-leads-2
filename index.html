@@ -3967,6 +3967,10 @@
       const responseData = settings.responseData || {};
       return cleanAnalyticsPayload({
         loja: settings.loja || (store ? (store.name || store.nome || '') : ''),
+        platform_name: settings.platform_name || (store ? (store.slug || store.name || store.nome || '') : ''),
+        page_location: settings.page_location || window.location.href,
+        page_title: settings.page_title || document.title,
+        profile_link_present: settings.profile_link_present,
         filialSlug: settings.filialSlug || getResponseValue(responseData, 'filialSlug', 'filial_slug'),
         supervisor: settings.supervisor || getResponseValue(responseData, 'supervisor'),
         profile_type: settings.profile_type || getResponseValue(responseData, 'profile_type', 'profileType'),
@@ -4145,7 +4149,8 @@
         store: settings.store,
         responseData: settings.responseData,
         profile_type: settings.profile_type,
-        success: true
+        success: true,
+        profile_link_present: true
       });
       const finalPayload = cleanAnalyticsPayload({
         ...buildBaseAnalyticsPayload(),
@@ -4715,6 +4720,15 @@
             event_label: tenantSlug
           });
         }
+
+        sendAnalyticsEvent('profile_submission_success', buildSubmissionAnalyticsPayload({
+          store: { slug: storeSlug, name: storeName },
+          success: true,
+          profile_link_present: true,
+          page_location: pageUrl
+        }), {
+          dedupeKey: `profile_submission_success:legacy:${storeSlug}:${tenantSlug}`
+        });
       } catch (err) {
         console.error('[BrokerApplication] Erro:', err);
         btn.disabled = false;
