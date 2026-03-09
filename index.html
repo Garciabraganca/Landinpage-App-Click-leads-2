@@ -44,7 +44,7 @@
       } catch (g) { }
     })(window, document, "https://cdn.leadster.com.br/neurolead/neurolead.min.js", "YnVqHSt4zJJiNDbvehaSssyUY")
   </script>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Click Leads – Chega de Correr Atrás de Cliente</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 
@@ -68,6 +68,7 @@
     body {
       overflow-x: hidden;
       -webkit-overflow-scrolling: touch;
+      width: 100%;
     }
 
     html {
@@ -81,6 +82,7 @@
       color: var(--text);
       background: var(--bg);
       line-height: 1.6;
+      -webkit-text-size-adjust: 100%;
     }
 
     img {
@@ -191,6 +193,8 @@
       box-shadow: 0 14px 30px rgba(0, 0, 0, 0.35);
       -webkit-tap-highlight-color: transparent;
       touch-action: manipulation;
+      white-space: nowrap;
+      text-align: center;
     }
 
     .hero-fold-cta-primary {
@@ -272,6 +276,36 @@
 
       .hero-fold-cta {
         width: 100%;
+        white-space: normal;
+      }
+    }
+
+    @media (max-width: 1024px) {
+      .hero-fold-content {
+        max-width: 680px;
+      }
+
+      .hero-fold-content h1 {
+        font-size: clamp(1.45rem, 4.6vw, 2.6rem);
+      }
+
+      .hero-fold-content p {
+        font-size: clamp(0.95rem, 2.1vw, 1.1rem);
+      }
+
+      .lojas-grid {
+        gap: 24px;
+        padding: 0 16px;
+      }
+
+      .loja-card {
+        padding: 26px 18px;
+      }
+
+      .loja-card img {
+        width: clamp(120px, 16vw, 150px);
+        height: clamp(150px, 18vw, 172px);
+        margin-right: 18px;
       }
     }
 
@@ -1069,6 +1103,10 @@
     }
 
     @media (max-width: 440px) {
+      .hero-fold-content {
+        padding: 20px 14px;
+      }
+
       .loja-card img {
         width: min(86vw, 300px);
         height: auto;
