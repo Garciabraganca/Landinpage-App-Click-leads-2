@@ -56,19 +56,6 @@ dataset_code = '''    // ==================== DATASET DE LOJAS (SINGLE SOURCE OF
         ]
       },
       {
-        slug: 'affinity',
-        nome: 'Affinity',
-        imageSrc: 'Fachada Affinity.jpeg',
-        loginUrl: 'https://affinity.grupogarciaseguradoras.com.br/login',
-        isBoutique: false,
-        chips: ['Conexão', 'Oportunidades', 'Comunidade'],
-        diferenciais: [
-          'Conexão e rede de profissionais',
-          'Oportunidades de negócio qualificadas',
-          'Comunidade ativa de especialistas'
-        ]
-      },
-      {
         slug: 'valorize',
         nome: 'Valorize',
         imageSrc: 'Fachada Valorize.jpeg',
