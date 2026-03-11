@@ -2789,7 +2789,7 @@
 
       <!-- UNITED -->
       <div class="loja-card" data-store="united">
-        <img src="/public/assets/images/card_united.png" alt="United" loading="lazy" decoding="async"
+        <img src="/united card.png" alt="United" loading="lazy" decoding="async"
           fetchpriority="low">
         <div class="loja-card-content">
           <h2>UNITED</h2>
@@ -3183,7 +3183,7 @@
       {
         slug: 'united',
         nome: 'United',
-        imageSrc: 'card_united.png',
+        imageSrc: 'united card.png',
         loginUrl: 'https://united.grupogarciaseguradoras.com.br/login',
         isBoutique: false,
         chips: ['Pagamento Diário', 'Premiações', 'Escala'],
@@ -3477,8 +3477,18 @@
           'bliss': 'bliss',
           'diplan': 'diplan',
           'serra': 'serra',
+          'united': 'united',
           'valorize': 'valorize',
           'zentrix': 'zentrix'
+        };
+
+        const attachLogoFallback = (buttonElement, storeName) => {
+          const logoImg = buttonElement.querySelector('img');
+          if (!logoImg) return;
+          logoImg.addEventListener('error', () => {
+            logoImg.remove();
+            buttonElement.textContent = storeName;
+          }, { once: true });
         };
 
         // Renderizar Diplan featured primeiro (separado do grid) - Full Bleed
@@ -3495,6 +3505,7 @@
           `;
 
           ctaButtonsGrid.parentElement.insertBefore(featuredCard, ctaButtonsGrid);
+          attachLogoFallback(featuredCard.querySelector('.brand-tile-featured-btn'), diplanStore.nome);
         }
 
         // Renderizar outras lojas no grid (exceto Diplan) - Full Bleed
@@ -3513,6 +3524,7 @@
           `;
 
           ctaButtonsGrid.appendChild(buttonDiv);
+          attachLogoFallback(buttonDiv, store.nome);
         });
       }
 
@@ -3594,7 +3606,7 @@
         'bliss': '/public/assets/images/card_bliss.png',
         'diplan': '/public/assets/images/card_diplan_2.png',
         'serra': '/public/assets/images/card_serra.png',
-        'united': '/public/assets/images/card_united.png',
+        'united': '/united card.png',
         'valorize': '/public/assets/images/card_valorize.jpeg',
         'zentrix': '/public/assets/images/card_zentrix.jpeg'
       };
