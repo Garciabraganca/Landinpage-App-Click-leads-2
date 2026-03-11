@@ -1421,7 +1421,9 @@
       width: 100%;
       height: 100%;
       display: block;
-      object-fit: cover;
+      object-fit: contain;
+      object-position: center;
+      background: rgba(15, 23, 42, 0.92);
     }
 
     .swiper-slide.store-slide {
@@ -1911,6 +1913,19 @@
       object-fit: cover;
       object-position: center;
       display: block;
+    }
+
+    .brand-tile-btn__label {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      color: #f8fafc;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-size: 0.9rem;
+      z-index: 1;
     }
 
     /* Sutil overlay para legibilidade premium */
@@ -3280,7 +3295,7 @@
       },
       {
         nome: 'United',
-        imageSrc: 'public/assets/images/card_united.png',
+        imageSrc: 'card_united.png',
         loginUrl: 'https://united.grupogarciaseguradoras.com.br/login',
         dataStore: 'united',
         back: {
@@ -3475,11 +3490,15 @@
           buttonDiv.className = 'brand-tile-btn';
           buttonDiv.setAttribute('aria-label', `Entrar em ${store.nome}`);
 
-          const logoName = logoMap[store.slug] || store.slug;
+          const logoName = logoMap[store.slug];
 
-          buttonDiv.innerHTML = `
+          if (logoName) {
+            buttonDiv.innerHTML = `
             <img src="/public/assets/images/logo_botao_${logoName}.png" alt="${store.nome}" loading="lazy" decoding="async" fetchpriority="low" />
           `;
+          } else {
+            buttonDiv.innerHTML = `<span class="brand-tile-btn__label">${store.nome}</span>`;
+          }
 
           ctaButtonsGrid.appendChild(buttonDiv);
           attachLogoFallback(buttonDiv, store.nome);
