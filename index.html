@@ -3173,7 +3173,7 @@
       {
         slug: 'united',
         nome: 'United',
-        imageSrc: 'card_united.png',
+        imageSrc: 'public/assets/images/card_united.png',
         loginUrl: 'https://united.grupogarciaseguradoras.com.br/login',
         isBoutique: false,
         chips: ['Pagamento Diário', 'Premiações', 'Escala'],
@@ -3450,8 +3450,18 @@
           'bliss': 'bliss',
           'diplan': 'diplan',
           'serra': 'serra',
+          'united': 'united',
           'valorize': 'valorize',
           'zentrix': 'zentrix'
+        };
+
+        const attachLogoFallback = (buttonElement, storeName) => {
+          const logoImg = buttonElement.querySelector('img');
+          if (!logoImg) return;
+          logoImg.addEventListener('error', () => {
+            logoImg.remove();
+            buttonElement.textContent = storeName;
+          }, { once: true });
         };
 
         // Renderizar Diplan featured primeiro (separado do grid) - Full Bleed
@@ -3468,6 +3478,7 @@
           `;
 
           ctaButtonsGrid.parentElement.insertBefore(featuredCard, ctaButtonsGrid);
+          attachLogoFallback(featuredCard.querySelector('.brand-tile-featured-btn'), diplanStore.nome);
         }
 
         // Renderizar outras lojas no grid (exceto Diplan) - Full Bleed
@@ -3490,6 +3501,7 @@
           }
 
           ctaButtonsGrid.appendChild(buttonDiv);
+          attachLogoFallback(buttonDiv, store.nome);
         });
       }
 
