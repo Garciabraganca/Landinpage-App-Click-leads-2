@@ -2742,17 +2742,6 @@
         </div>
       </div>
 
-      <!-- AFFINITY -->
-      <div class="loja-card" data-store="affinity">
-        <img src="/public/assets/images/fachada-affinity.jpeg" alt="Affinity" loading="lazy" decoding="async"
-          fetchpriority="low">
-        <div class="loja-card-content">
-          <h2>Affinity</h2>
-          <h3>Rede de Profissionais</h3>
-          <p>Oportunidades qualificadas, ferramentas colaborativas e comunidade ativa de especialistas.</p>
-        </div>
-      </div>
-
       <!-- VALORIZE -->
       <div class="loja-card" data-store="valorize">
         <img src="/public/assets/images/fachada-valorize.jpeg" alt="Valorize" loading="lazy" decoding="async"
@@ -2844,7 +2833,6 @@
             <option value="as-sure" data-store-name="AS.SURE">AS.SURE</option>
             <option value="bliss" data-store-name="Bliss">Bliss</option>
             <option value="alleman" data-store-name="Alleman">Alleman</option>
-            <option value="affinity" data-store-name="Affinity">Affinity</option>
             <option value="serra" data-store-name="Serra">Serra</option>
             <option value="valorize" data-store-name="Valorize">Valorize</option>
           </select>
@@ -3129,19 +3117,6 @@
         ]
       },
       {
-        slug: 'affinity',
-        nome: 'Affinity',
-        imageSrc: 'Fachada Affinity.jpeg',
-        loginUrl: 'https://affinity.grupogarciaseguradoras.com.br/login',
-        isBoutique: false,
-        chips: ['Conexão', 'Oportunidades', 'Comunidade'],
-        diferenciais: [
-          'Conexão e rede de profissionais',
-          'Oportunidades de negócio qualificadas',
-          'Comunidade ativa de especialistas'
-        ]
-      },
-      {
         slug: 'valorize',
         nome: 'Valorize',
         imageSrc: 'Fachada Valorize.jpeg',
@@ -3304,21 +3279,6 @@
         }
       },
       {
-        nome: 'Affinity',
-        imageSrc: 'Fachada Affinity.jpeg',
-        loginUrl: 'https://affinity.grupogarciaseguradoras.com.br/login',
-        dataStore: 'affinity',
-        back: {
-          bullets: [
-            'Grade completa: PME / Adesão / PF',
-            'Estrutura comercial pronta para rodar',
-            'Bradesco: 300%',
-            'SulAmérica: 240%',
-            'Mix de produtos com suporte operacional'
-          ]
-        }
-      },
-      {
         nome: 'United',
         imageSrc: 'united card.png',
         loginUrl: 'https://united.grupogarciaseguradoras.com.br/login',
@@ -3340,7 +3300,6 @@
       { slug: 'as-sure', name: 'AS.SURE' },
       { slug: 'bliss', name: 'Bliss' },
       { slug: 'alleman', name: 'Alleman' },
-      { slug: 'affinity', name: 'Affinity' },
       { slug: 'serra', name: 'Serra' },
       { slug: 'valorize', name: 'Valorize' }
     ];
@@ -3471,7 +3430,6 @@
       if (ctaButtonsGrid && typeof STORES !== 'undefined') {
         // Mapa de slugs para nomes de logos de botões
         const logoMap = {
-          'affinity': 'affinity',
           'alleman': 'alleman',
           'as-sure': 'assure',  // Asset filename still uses 'assure'
           'bliss': 'bliss',
@@ -3600,7 +3558,6 @@
     // ==================== MAP DATA STORE SLUG TO CARD IMAGE FILE ====================
     function getCardImageName(dataStoreSlug) {
       const cardImageMap = {
-        'affinity': '/public/assets/images/card_affinity.jpeg',
         'alleman': '/public/assets/images/card_alleman.png',
         'as-sure': '/public/assets/images/card_assure.png',
         'bliss': '/public/assets/images/card_bliss.png',
@@ -3684,7 +3641,6 @@
         serra: 'Consultoria Estratégica',
         bliss: 'Gestão Integrada',
         alleman: 'Consultoria Estratégica',
-        affinity: 'Rede de Profissionais',
         valorize: 'Programa de Reconhecimento',
         'as-sure': 'Segurança e Compliance',
         diplan: 'Boutique Exclusiva',

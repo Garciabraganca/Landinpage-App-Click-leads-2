@@ -35,7 +35,6 @@ BROKER_ALLOWED_STORE_SLUGS = {
     "as-sure",
     "bliss",
     "alleman",
-    "affinity",
     "serra",
     "valorize",
 }
