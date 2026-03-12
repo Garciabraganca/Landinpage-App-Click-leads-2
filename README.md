@@ -79,7 +79,7 @@ Payload enviado:
   - `profile_submission_error`
 - UTMs persistidas na sessao: `utm_source`, `utm_medium`, `utm_campaign`, `utm_content`, `utm_term`
 - Proxy opcional do backend:
-  - `BROKER_APPLICATIONS_TARGET_URL=https://seu-backend.com/api/broker-applications`
+  - `BROKER_APPLICATIONS_TARGET_URL=https://clickleads.grupogarciaseguradoras.com.br/api/broker-applications`
   - `BROKER_APPLICATIONS_DESTINATION_URLS=https://destino-1.com/hook,https://destino-2.com/hook`
   - aliases aceitos: `SUPERVISOR_DESTINATION_URL` e `SUPERVISOR_DESTINATION_URLS`
   - overrides por tenant/profile (precedencia: `<TENANT>_<PROFILE_TYPE>` > `<TENANT>` > `<PROFILE_TYPE>` > global):

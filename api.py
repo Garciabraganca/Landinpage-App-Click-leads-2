@@ -38,6 +38,24 @@ BROKER_ALLOWED_STORE_SLUGS = {
     "serra",
     "valorize",
 }
+BROKER_STORE_TENANT_SLUGS = {
+    "diplan": "diplan",
+    "zentrix": "zentrix",
+    "zentrix-prime": "zentrix",
+    "assury": "assury",
+    "as-sure": "assury",
+    "bliss": "bliss",
+    "alleman": "alleman",
+    "affinity": "affinity",
+    "serra": "serra",
+    "valorize": "valorize",
+}
+BROKER_SHARED_TENANT_SLUGS = {
+    "",
+    "default",
+    "clickleads",
+    "www",
+}
 
 
 def _runtime_environment():
@@ -68,6 +86,28 @@ def _safe_json_loads(raw_value):
         return {}
 
     return parsed if isinstance(parsed, dict) else {}
+
+
+def _resolve_broker_tenant_slug(store_slug, tenant_slug_hint=""):
+    """Resolve the final tenant slug from the selected store with alias support."""
+    normalized_store_slug = (store_slug or "").strip().lower()
+    normalized_tenant_hint = (tenant_slug_hint or "").strip().lower()
+
+    resolved_from_store = BROKER_STORE_TENANT_SLUGS.get(normalized_store_slug)
+    if not resolved_from_store:
+        return None, "invalid_store_slug"
+
+    if normalized_tenant_hint in BROKER_SHARED_TENANT_SLUGS:
+        return resolved_from_store, None
+
+    resolved_from_hint = (
+        BROKER_STORE_TENANT_SLUGS.get(normalized_tenant_hint)
+        or normalized_tenant_hint
+    )
+    if resolved_from_hint != resolved_from_store:
+        return None, "tenant_store_mismatch"
+
+    return resolved_from_store, None
 
 
 def _clean_utm_payload(raw_utm):
@@ -318,6 +358,25 @@ def broker_applications():
                 destination_channel="validation_error",
             )
 
+        requested_tenant_slug = (
+            data.get("tenantSlug")
+            or data.get("tenant")
+            or data.get("tenant_slug")
+            or ""
+        ).strip()
+        resolved_tenant_slug, tenant_error = _resolve_broker_tenant_slug(
+            store_slug,
+            requested_tenant_slug,
+        )
+        if tenant_error == "tenant_store_mismatch":
+            return _json_error(
+                400,
+                request_id,
+                "tenantSlug does not match the selected store_slug.",
+                "validation_error",
+                destination_channel="validation_error",
+            )
+
         normalized_profile_url, profile_error = _normalize_profile_url(profile_url_raw)
         if profile_error:
             return _json_error(
@@ -328,18 +387,25 @@ def broker_applications():
                 destination_channel="validation_error",
             )
 
+        submitted_at = (
+            data.get("submitted_at")
+            or data.get("submittedAt")
+            or datetime.now(timezone.utc).isoformat()
+        )
+        event_type = data.get("event_type") or data.get("eventType") or "broker_application"
         normalized_payload = {
-            "event_type": (data.get("event_type") or "broker_application"),
+            "event_type": event_type,
+            "eventType": event_type,
             "store_slug": store_slug,
+            "storeSlug": store_slug,
             "store_name": store_name,
+            "storeName": store_name,
             "profile_url": normalized_profile_url,
-            "submitted_at": (
-                data.get("submitted_at")
-                or data.get("submittedAt")
-                or datetime.now(timezone.utc).isoformat()
-            ),
+            "profileUrl": normalized_profile_url,
+            "submitted_at": submitted_at,
+            "submittedAt": submitted_at,
             "page": (data.get("page") or "").strip(),
-            "tenantSlug": (data.get("tenantSlug") or data.get("tenant") or "default").strip(),
+            "tenantSlug": resolved_tenant_slug,
             "utm": _clean_utm_payload(data.get("utm")),
             "pageUrl": (data.get("pageUrl") or data.get("page_url") or "").strip(),
             "environment": _runtime_environment(),
@@ -416,6 +482,7 @@ def broker_applications():
                 "environment": normalized_payload["environment"],
                 "profile_type": normalized_payload["profile_type"],
                 "tenant": normalized_payload["tenantSlug"],
+                "tenantSlug": normalized_payload["tenantSlug"],
                 "loja": normalized_payload["store_name"],
                 "success_rule": "all_configured_destinations_succeeded",
             }
@@ -461,6 +528,7 @@ def broker_applications():
             "environment": normalized_payload["environment"],
             "profile_type": normalized_payload["profile_type"],
             "tenant": normalized_payload["tenantSlug"],
+            "tenantSlug": normalized_payload["tenantSlug"],
             "loja": normalized_payload["store_name"],
             "success_rule": "validated_and_logged_locally",
         }), 200

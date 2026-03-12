@@ -3318,6 +3318,18 @@
       { slug: 'serra', name: 'Serra' },
       { slug: 'valorize', name: 'Valorize' }
     ];
+    const BROKER_APPLICATION_TENANT_SLUGS = {
+      diplan: 'diplan',
+      zentrix: 'zentrix',
+      'zentrix-prime': 'zentrix',
+      assury: 'assury',
+      'as-sure': 'assury',
+      bliss: 'bliss',
+      alleman: 'alleman',
+      affinity: 'affinity',
+      serra: 'serra',
+      valorize: 'valorize'
+    };
 
     const ALLOWED_PROFILE_DOMAINS = [
       'linkedin.com',
@@ -3991,7 +4003,11 @@
       const store = settings.store || null;
       const responseData = settings.responseData || {};
       return cleanAnalyticsPayload({
+        tenant: settings.tenant
+          || getResponseValue(responseData, 'tenantSlug', 'tenant')
+          || resolveBrokerApplicationTenantSlug(store ? store.slug : ''),
         loja: settings.loja || (store ? (store.name || store.nome || '') : ''),
+        store_slug: store ? store.slug : '',
         platform_name: settings.platform_name || (store ? (store.slug || store.name || store.nome || '') : ''),
         page_location: settings.page_location || window.location.href,
         page_title: settings.page_title || document.title,
@@ -4271,6 +4287,11 @@
       return BROKER_APPLICATION_STORES.find(store => store.slug === slug) || null;
     }
 
+    function resolveBrokerApplicationTenantSlug(storeSlug) {
+      const normalizedStoreSlug = (storeSlug || '').trim().toLowerCase();
+      return BROKER_APPLICATION_TENANT_SLUGS[normalizedStoreSlug] || resolveTenantSlug();
+    }
+
     function isAllowedStoreSlug(slug) {
       return BROKER_APPLICATION_STORES.some(store => store.slug === slug)
         || STORES.some(store => store.slug === slug);
@@ -4332,6 +4353,7 @@
     }
 
     function buildBrokerApplicationPayload(options) {
+      const tenantSlug = resolveBrokerApplicationTenantSlug(options.store && options.store.slug);
       return {
         event_type: 'broker_application',
         store_slug: options.store.slug,
@@ -4339,7 +4361,7 @@
         profile_url: options.profileUrl,
         submitted_at: new Date().toISOString(),
         page: options.page,
-        tenantSlug: resolveTenantSlug(),
+        tenantSlug,
         utm: getAttributionData(),
         pageUrl: window.location.href
       };
