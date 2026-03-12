@@ -368,6 +368,14 @@ def broker_applications():
             store_slug,
             requested_tenant_slug,
         )
+        if tenant_error == "invalid_store_slug":
+            return _json_error(
+                400,
+                request_id,
+                "store_slug is not mapped to a tenant.",
+                "validation_error",
+                destination_channel="validation_error",
+            )
         if tenant_error == "tenant_store_mismatch":
             return _json_error(
                 400,
