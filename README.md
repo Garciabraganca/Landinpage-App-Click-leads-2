@@ -81,9 +81,11 @@ Payload enviado:
 - Proxy opcional do backend:
   - `BROKER_APPLICATIONS_TARGET_URL=https://seu-backend.com/api/broker-applications`
   - `BROKER_APPLICATIONS_DESTINATION_URLS=https://destino-1.com/hook,https://destino-2.com/hook`
+  - aliases aceitos: `SUPERVISOR_DESTINATION_URL` e `SUPERVISOR_DESTINATION_URLS`
+  - overrides por tenant/profile (precedencia: `<TENANT>_<PROFILE_TYPE>` > `<TENANT>` > `<PROFILE_TYPE>` > global):
+    - `BROKER_APPLICATIONS_DESTINATION_URLS_DEFAULT_INSTAGRAM=https://seu-backend.com/api/broker-applications/instagram`
   - `BROKER_APPLICATIONS_TIMEOUT_MS=10000`
 - Regra de sucesso:
   - com destino configurado, todos os destinos precisam retornar sucesso
   - sem destino configurado, `local` e `preview` aceitam apenas para teste com `destination_channel: "local_log"`
   - sem destino configurado em `production`, a rota retorna `503` para evitar falso positivo (pode ser sobrescrito com `BROKER_APPLICATIONS_ALLOW_UNCONFIGURED=true` em cenários controlados)
-

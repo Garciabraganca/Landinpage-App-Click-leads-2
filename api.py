@@ -134,15 +134,48 @@ def _infer_profile_type(profile_url):
     return "other"
 
 
-def _load_broker_destination_urls():
+def _env_name_suffixes(profile_type, tenant_slug):
+    """Return relevant env var suffixes ordered by specificity."""
+    suffixes = [""]
+
+    normalized_profile_type = (profile_type or "").strip().lower()
+    normalized_tenant = (tenant_slug or "").strip().lower().replace("-", "_")
+
+    if normalized_profile_type:
+        suffixes.insert(0, f"_{normalized_profile_type.upper()}")
+
+    if normalized_tenant:
+        suffixes.insert(0, f"_{normalized_tenant.upper()}")
+        if normalized_profile_type:
+            suffixes.insert(
+                0,
+                f"_{normalized_tenant.upper()}_{normalized_profile_type.upper()}",
+            )
+
+    return suffixes
+
+
+def _load_broker_destination_urls(profile_type="", tenant_slug=""):
     """Load one or many destination URLs for broker applications."""
-    raw_values = [
-        os.environ.get("BROKER_APPLICATIONS_DESTINATION_URLS", ""),
-        os.environ.get("BROKER_APPLICATIONS_TARGET_URL", ""),
-    ]
+    base_env_names = (
+        "BROKER_APPLICATIONS_DESTINATION_URLS",
+        "BROKER_APPLICATIONS_DESTINATION_URL",
+        "BROKER_APPLICATIONS_TARGET_URL",
+        "SUPERVISOR_DESTINATION_URLS",
+        "SUPERVISOR_DESTINATION_URL",
+        "SUPERVISOR_DESTINATION",
+    )
+
+    raw_values = []
+    for suffix in _env_name_suffixes(profile_type, tenant_slug):
+        for base_name in base_env_names:
+            value = os.environ.get(f"{base_name}{suffix}", "")
+            if value:
+                raw_values.append(value)
+
     urls = []
     for raw_value in raw_values:
-        for item in raw_value.split(","):
+        for item in raw_value.replace("\n", ",").split(","):
             url = item.strip()
             if url and url not in urls:
                 urls.append(url)
@@ -313,7 +346,10 @@ def broker_applications():
             "profile_type": _infer_profile_type(normalized_profile_url),
         }
 
-        destination_urls = _load_broker_destination_urls()
+        destination_urls = _load_broker_destination_urls(
+            profile_type=normalized_payload["profile_type"],
+            tenant_slug=normalized_payload["tenantSlug"],
+        )
         if destination_urls:
             downstream_results = [
                 _forward_broker_application(url, normalized_payload)
